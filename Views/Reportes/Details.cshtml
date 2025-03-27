@@ -1,0 +1,228 @@
+@model RSQR.Models.Reporte
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Reporte</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProblemRank)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProblemRank)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Linea)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Linea)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TituloProblema)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TituloProblema)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CincoM)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CincoM)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumParteAfectado)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumParteAfectado)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DescripcionProblema)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DescripcionProblema)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.QueP)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.QueP)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PorqueP)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PorqueP)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DondeP)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DondeP)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.QuienP)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.QuienP)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CuandoP)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CuandoP)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CuantosP)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CuantosP)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ComoP)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ComoP)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Lote)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Lote)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerClaimNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CustomerClaimNumber)
+        </dd>
+        
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.ContencionItems)</th>
+                    <th>@Html.DisplayNameFor(model => model.ContencionActividades)</th>
+                    <th>@Html.DisplayNameFor(model => model.ContencionResponsables)</th>
+                    <th>@Html.DisplayNameFor(model => model.ContencionFechasInicio)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.ContencionItems.Count; i++)
+                {
+                    <tr>
+                        <td>@Model.ContencionItems[i]</td>
+                        <td>@(Model.ContencionActividades.Count > i ? Model.ContencionActividades[i] : "")</td>
+                        <td>@(Model.ContencionResponsables.Count > i ? Model.ContencionResponsables[i] : "")</td>
+                        <td>@(Model.ContencionFechasInicio.Count > i ? Model.ContencionFechasInicio[i].ToString("dd/MM/yyyy") : "")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AlertaCalidad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AlertaCalidad)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Disposicion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Disposicion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EntrevistaInvolucrados)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EntrevistaInvolucrados)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Comentarios)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Comentarios)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Severidad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Severidad)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ocurrencia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ocurrencia)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Deteccion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Deteccion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AP_NPR)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AP_NPR)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ModoFalla)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ModoFalla)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ControlesEstablecidos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ControlesEstablecidos)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EvidenciaFotografica)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EvidenciaFotografica)
+        </dd>
+    </dl>
+
+    
+
+</div>
+<div>
+    <a asp-controller="Reportes" asp-action="ExportToExcel" class="btn btn-primary">Descargar Reporte en Excel</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RSQR</name>
+    </assembly>
+    <members>
+        <member name="T:RSQR.Controllers.AccountController">
+            <summary>
+            Controlador para gestionar la autenticación de usuarios.
+            </summary>
+        </member>
+        <member name="M:RSQR.Controllers.AccountController.#ctor(RSQR.Services.ActiveDirectoryService)">
+            <summary>
+            Constructor del controlador AccountController.
+            </summary>
+            <param name="adService">Servicio de Active Directory para autenticación.</param>
+        </member>
+        <member name="M:RSQR.Controllers.AccountController.Login">
+            <summary>
+            Muestra la vista de inicio de sesión.
+            </summary>
+            <returns>La vista de inicio de sesión.</returns>
+        </member>
+        <member name="M:RSQR.Controllers.AccountController.Login(System.String,System.String)">
+            <summary>
+            Procesa el formulario de inicio de sesión.
+            </summary>
+            <param name="username">Nombre de usuario.</param>
+            <param name="password">Contraseña del usuario.</param>
+            <returns>
+            Redirige al usuario a la página de inicio si la autenticación es exitosa.
+            Muestra un mensaje de error en la vista de inicio de sesión si la autenticación falla.
+            </returns>
+        </member>
+        <member name="M:RSQR.Controllers.AccountController.Logout">
+            <summary>
+            Cierra la sesión del usuario actual.
+            </summary>
+            <returns>Redirige al usuario a la vista de inicio de sesión.</returns>
+        </member>
+        <member name="T:RSQR.Controllers.HomeController">
+            <summary>
+            Controlador principal de la aplicación. Gestiona las vistas de inicio, privacidad y errores.
+            </summary>
+            <remarks>
+            Este controlador está protegido con autorización, por lo que solo los usuarios autenticados pueden acceder a sus acciones.
+            </remarks>
+        </member>
+        <member name="M:RSQR.Controllers.HomeController.#ctor(Microsoft.Extensions.Logging.ILogger{RSQR.Controllers.HomeController})">
+            <summary>
+            Constructor del controlador HomeController.
+            </summary>
+            <param name="logger">Instancia de ILogger para registrar eventos y errores.</param>
+        </member>
+        <member name="M:RSQR.Controllers.HomeController.Index">
+            <summary>
+            Muestra la vista de inicio (Index).
+            </summary>
+            <returns>La vista de inicio.</returns>
+        </member>
+        <member name="M:RSQR.Controllers.HomeController.Error">
+            <summary>
+            Muestra la vista de error.
+            </summary>
+            <returns>La vista de error con detalles del error ocurrido.</returns>
+        </member>
+        <member name="T:RSQR.Controllers.ReportesController">
+            <summary>
+            Controlador para gestionar los reportes del sistema.
+            </summary>
+            <remarks>
+            Este controlador está protegido con autorización, por lo que solo los usuarios autenticados pueden acceder a sus acciones.
+            </remarks>
+        </member>
+        <member name="M:RSQR.Controllers.ReportesController.#ctor(RSQR.Data.ApplicationDbContext,RSQR.Services.IEmailService)">
+            <summary>
+            Constructor del controlador ReportesController.
+            </summary>
+            <param name="context">Contexto de la base de datos.</param>
+        </member>
+        <member name="M:RSQR.Controllers.ReportesController.Index">
+            <summary>
+            Muestra la lista de todos los reportes.
+            </summary>
+            <returns>Una vista con la lista de reportes.</returns>
+        </member>
+        <member name="M:RSQR.Controllers.ReportesController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Muestra los detalles de un reporte específico.
+            </summary>
+            <param name="id">El ID del reporte.</param>
+            <returns>Una vista con los detalles del reporte.</returns>
+        </member>
+        <member name="M:RSQR.Controllers.ReportesController.Create">
+            <summary>
+            Muestra el formulario para crear un nuevo reporte.
+            </summary>
+            <returns>Una vista con el formulario de creación.</returns>
+        </member>
+        <member name="M:RSQR.Controllers.ReportesController.Create(RSQR.Models.Reporte,System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})">
+            <summary>
+            Procesa el formulario de creación de un nuevo reporte.
+            </summary>
+            <param name="reporte">El objeto Reporte con los datos del formulario.</param>
+            <param name="EvidenciaFotografica">Lista de archivos de evidencia fotográfica.</param>
+            <returns>Redirige a la lista de reportes si el modelo es válido; de lo contrario, muestra el formulario con errores.</returns>
+        </member>
+        <member name="M:RSQR.Controllers.ReportesController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            Muestra el formulario para editar un reporte existente.
+            </summary>
+            <param name="id">El ID del reporte a editar.</param>
+            <returns>Una vista con el formulario de edición.</returns>
+        </member>
+        <member name="M:RSQR.Controllers.ReportesController.Edit(System.Int32,RSQR.Models.Reporte)">
+            <summary>
+            Procesa el formulario de edición de un reporte existente.
+            </summary>
+            <param name="id">El ID del reporte a editar.</param>
+            <param name="reporte">El objeto Reporte con los datos actualizados.</param>
+            <returns>Redirige a la lista de reportes si el modelo es válido; de lo contrario, muestra el formulario con errores.</returns>
+        </member>
+        <member name="M:RSQR.Controllers.ReportesController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Muestra el formulario para confirmar la eliminación de un reporte.
+            </summary>
+            <param name="id">El ID del reporte a eliminar.</param>
+            <returns>Una vista con el formulario de confirmación.</returns>
+        </member>
+        <member name="M:RSQR.Controllers.ReportesController.DeleteConfirmed(System.Int32)">
+            <summary>
+            Procesa la eliminación de un reporte.
+            </summary>
+            <param name="id">El ID del reporte a eliminar.</param>
+            <returns>Redirige a la lista de reportes.</returns>
+        </member>
+        <member name="M:RSQR.Controllers.ReportesController.ReporteExists(System.Int32)">
+            <summary>
+            Verifica si un reporte existe en la base de datos.
+            </summary>
+            <param name="id">El ID del reporte.</param>
+            <returns>True si el reporte existe; de lo contrario, False.</returns>
+        </member>
+        <member name="M:RSQR.Controllers.ReportesController.ExportToExcel">
+            <summary>
+            Exporta los reportes a un archivo Excel.
+            </summary>
+            <returns>Un archivo Excel con los datos de los reportes.</returns>
+        </member>
+        <member name="T:RSQR.Migrations.NewMigration">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.NewMigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.NewMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.NewMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RSQR.Migrations.UpdateImpactoPPMType">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.UpdateImpactoPPMType.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.UpdateImpactoPPMType.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.UpdateImpactoPPMType.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RSQR.Migrations.UpdateTipoField">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.UpdateTipoField.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.UpdateTipoField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.UpdateTipoField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RSQR.Migrations.UpdateCincoMField">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.UpdateCincoMField.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.UpdateCincoMField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.UpdateCincoMField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RSQR.Migrations.UpdateResponsabilidadField">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.UpdateResponsabilidadField.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.UpdateResponsabilidadField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.UpdateResponsabilidadField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:PPMController">
+            <summary>
+            Controlador para gestionar operaciones relacionadas con PPM (Planificación de Producción y Mantenimiento).
+            </summary>
+            <remarks>
+            Este controlador está protegido con autorización, por lo que solo los usuarios autenticados pueden acceder a sus acciones.
+            </remarks>
+        </member>
+        <member name="M:PPMController.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Constructor del controlador PPMController.
+            </summary>
+            <param name="configuration">Instancia de IConfiguration para acceder a las cadenas de conexión.</param> 
+        </member>
+        <member name="M:PPMController.Ppm">
+            <summary>
+            Muestra la vista principal de PPM.
+            </summary>
+            <returns>La vista de PPM.</returns>
+        </member>
+        <member name="M:PPMController.SumarCajas(System.String,System.String,System.String)">
+            <summary>
+            Suma las cajas y realiza una división basada en los parámetros proporcionados.
+            </summary>
+            <param name="fechaInicio">Fecha de inicio en formato yyyy-MM-dd.</param>
+            <param name="fechaFin">Fecha de fin en formato yyyy-MM-dd.</param>
+            <param name="descripcion">Descripción de la línea de producción.</param>
+            <returns>
+            Un objeto JSON con el total de cajas, el resultado de la división y un mensaje de error en caso de fallo.
+            </returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,99 @@
+@model IEnumerable<RSQR.Models.Reporte>
+
+@{
+    ViewData["Title"] = "Reportes";
+}
+
+
+
+<h1>REPORTES</h1>
+
+<p>
+    <button class="btn btn-primary" onclick="location.href='@Url.Action("Create")'">Nuevo Reporte</button>
+</p>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+<div style="overflow-x: auto; margin-left: -20px;">
+    <table id="myDataTable" class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Nivel del Problema</th>
+                <th>Nombre de Usuario</th>
+                <th>Línea</th>
+                <th>Tipo</th>
+                <th>Título del Problema</th>
+                <th>5M</th>
+                <th>Número de Parte Afectado</th>
+                <th>Descripción</th>
+                <th>Descripción del Problema</th>
+                <th>Qué</th>
+                <th>Por qué</th>
+                <th>Dónde</th>
+                <th>Quién</th>
+                <th>Cuándo</th>
+                <th>Cuántos</th>
+                <th>Cómo</th>
+                <th>Lote</th>
+                <th>Evidencia Fotográfica</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ProblemRank)</td>
+                    <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Linea)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Tipo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TituloProblema)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CincoM)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NumParteAfectado)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DescripcionProblema)</td>
+                    <td>@Html.DisplayFor(modelItem => item.QueP)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PorqueP)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DondeP)</td>
+                    <td>@Html.DisplayFor(modelItem => item.QuienP)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CuandoP)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CuantosP)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ComoP)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Lote)</td>
+                    <td>
+                        @if (item.EvidenciaFotografica != null && item.EvidenciaFotografica.Count > 0)
+                        {
+                            <span>Con evidencia</span>
+                        }
+                        else
+                        {
+                            <span>Sin evidencia</span>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-pencil" aria-hidden="true"></i>Editar</a>
+                        <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-info-circle" aria-hidden="true"></i>Detalles</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-eraser" aria-hidden="true"></i>Borrar</a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#myDataTable').DataTable({
+            "autoWidth": true, // Ajusta el ancho de las columnas automáticamente
+            "responsive": true, // Habilita el modo responsivo
+            "scrollX": true, // Permite el desplazamiento horizontal si la tabla es más ancha que la pantalla
+        });
+    });
+</script>

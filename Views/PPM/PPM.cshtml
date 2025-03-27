@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "PPM";
+}
+
+<h2>PPM</h2>
+
+<form id="fechasForm">
+    <div class="form-group">
+        <label for="fechaInicio">Fecha de Inicio:</label>
+        <input type="date" id="fechaInicio" name="fechaInicio" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="fechaFin">Fecha de Fin:</label>
+        <input type="date" id="fechaFin" name="fechaFin" class="form-control" required />
+    </div>
+    <div class="form-group">
+        <label for="descripcion">Descripción:</label>
+        <select id="descripcion" name="descripcion" class="form-control" required>
+            <option value="">-- Seleccione una opción --</option>
+            <option value="STARTER">STARTER</option>
+            <option value="ALTERNATOR">ALTERNATOR</option>
+            <option value="EPS_GROUP">EPS (Todos los tipos)</option>
+            <option value="CM_GROUP">CM (Todos los tipos)</option>
+            <option value="BCM_GROUP">BCM (Todos los tipos)</option>
+        </select>
+    </div>
+    <button type="button" id="btnSumar" class="btn btn-primary">Calcular</button>
+</form>
+
+<div id="resultado" style="margin-top: 20px;">
+    <!-- Aquí se mostrará el resultado de la consulta -->
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#btnSumar').click(function () {
+                // Obtener las fechas y la descripción del formulario
+                const fechaInicio = $('#fechaInicio').val();
+                const fechaFin = $('#fechaFin').val();
+                const descripcion = $('#descripcion').val();
+
+                // Validar que las fechas y la descripción no estén vacías
+                if (!fechaInicio || !fechaFin || !descripcion) {
+                    alert('Por favor, completa todos los campos.');
+                    return;
+                }
+
+                // Enviar los datos al controlador mediante AJAX
+                $.ajax({
+                    url: '@Url.Action("SumarCajas", "PPM")',
+                    type: 'GET',
+                    data: {
+                        fechaInicio: fechaInicio,
+                        fechaFin: fechaFin,
+                        descripcion: descripcion
+                    },
+                    success: function (result) {
+                        $('#resultado').html('<p>Total de cajas: ' + result.totalCajas + '</p>' +
+                            '<p>División: ' + result.division + '</p>');
+                    },
+                    error: function () {
+                        $('#resultado').html('<p>Error al realizar el cálculo.</p>');
+                    }
+                });
+            });
+        });
+    </script>
+}
