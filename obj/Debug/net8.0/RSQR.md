@@ -8,6 +8,14 @@
   - [Login()](#M-RSQR-Controllers-AccountController-Login 'RSQR.Controllers.AccountController.Login')
   - [Login(username,password)](#M-RSQR-Controllers-AccountController-Login-System-String,System-String- 'RSQR.Controllers.AccountController.Login(System.String,System.String)')
   - [Logout()](#M-RSQR-Controllers-AccountController-Logout 'RSQR.Controllers.AccountController.Logout')
+- [AddConsecutivoArchivoTable](#T-RSQR-Migrations-AddConsecutivoArchivoTable 'RSQR.Migrations.AddConsecutivoArchivoTable')
+  - [BuildTargetModel()](#M-RSQR-Migrations-AddConsecutivoArchivoTable-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.AddConsecutivoArchivoTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
+  - [Down()](#M-RSQR-Migrations-AddConsecutivoArchivoTable-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.AddConsecutivoArchivoTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+  - [Up()](#M-RSQR-Migrations-AddConsecutivoArchivoTable-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.AddConsecutivoArchivoTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+- [BusinessUnitMapping](#T-RSQR-Utilities-BusinessUnitMapping 'RSQR.Utilities.BusinessUnitMapping')
+  - [GetAllMappings()](#M-RSQR-Utilities-BusinessUnitMapping-GetAllMappings 'RSQR.Utilities.BusinessUnitMapping.GetAllMappings')
+  - [GetBusinessUnitCode(unitName)](#M-RSQR-Utilities-BusinessUnitMapping-GetBusinessUnitCode-System-String- 'RSQR.Utilities.BusinessUnitMapping.GetBusinessUnitCode(System.String)')
+  - [IsValidBusinessUnit()](#M-RSQR-Utilities-BusinessUnitMapping-IsValidBusinessUnit-System-String- 'RSQR.Utilities.BusinessUnitMapping.IsValidBusinessUnit(System.String)')
 - [HomeController](#T-RSQR-Controllers-HomeController 'RSQR.Controllers.HomeController')
   - [#ctor(logger)](#M-RSQR-Controllers-HomeController-#ctor-Microsoft-Extensions-Logging-ILogger{RSQR-Controllers-HomeController}- 'RSQR.Controllers.HomeController.#ctor(Microsoft.Extensions.Logging.ILogger{RSQR.Controllers.HomeController})')
   - [Error()](#M-RSQR-Controllers-HomeController-Error 'RSQR.Controllers.HomeController.Error')
@@ -25,7 +33,7 @@
   - [Details(id)](#M-RSQR-Controllers-ReportesController-Details-System-Nullable{System-Int32}- 'RSQR.Controllers.ReportesController.Details(System.Nullable{System.Int32})')
   - [Edit(id)](#M-RSQR-Controllers-ReportesController-Edit-System-Nullable{System-Int32}- 'RSQR.Controllers.ReportesController.Edit(System.Nullable{System.Int32})')
   - [Edit(id,reporte)](#M-RSQR-Controllers-ReportesController-Edit-System-Int32,RSQR-Models-Reporte- 'RSQR.Controllers.ReportesController.Edit(System.Int32,RSQR.Models.Reporte)')
-  - [ExportToExcel()](#M-RSQR-Controllers-ReportesController-ExportToExcel 'RSQR.Controllers.ReportesController.ExportToExcel')
+  - [ExportToExcel()](#M-RSQR-Controllers-ReportesController-ExportToExcel-System-String- 'RSQR.Controllers.ReportesController.ExportToExcel(System.String)')
   - [Index()](#M-RSQR-Controllers-ReportesController-Index 'RSQR.Controllers.ReportesController.Index')
   - [ReporteExists(id)](#M-RSQR-Controllers-ReportesController-ReporteExists-System-Int32- 'RSQR.Controllers.ReportesController.ReporteExists(System.Int32)')
 - [UpdateCincoMField](#T-RSQR-Migrations-UpdateCincoMField 'RSQR.Migrations.UpdateCincoMField')
@@ -113,6 +121,96 @@ Cierra la sesión del usuario actual.
 ##### Returns
 
 Redirige al usuario a la vista de inicio de sesión.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-RSQR-Migrations-AddConsecutivoArchivoTable'></a>
+## AddConsecutivoArchivoTable `type`
+
+##### Namespace
+
+RSQR.Migrations
+
+##### Summary
+
+*Inherit from parent.*
+
+<a name='M-RSQR-Migrations-AddConsecutivoArchivoTable-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder-'></a>
+### BuildTargetModel() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-AddConsecutivoArchivoTable-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Down() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-AddConsecutivoArchivoTable-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Up() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-RSQR-Utilities-BusinessUnitMapping'></a>
+## BusinessUnitMapping `type`
+
+##### Namespace
+
+RSQR.Utilities
+
+<a name='M-RSQR-Utilities-BusinessUnitMapping-GetAllMappings'></a>
+### GetAllMappings() `method`
+
+##### Summary
+
+Devuelve todos los mapeos disponibles (solo lectura).
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Utilities-BusinessUnitMapping-GetBusinessUnitCode-System-String-'></a>
+### GetBusinessUnitCode(unitName) `method`
+
+##### Summary
+
+Obtiene el código abreviado de una unidad de negocio.
+
+##### Returns
+
+Código abreviado (ej. "ST"). Si no existe, devuelve las primeras 4 letras en mayúsculas.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| unitName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Nombre de la unidad de negocio (ej. "STARTER"). |
+
+<a name='M-RSQR-Utilities-BusinessUnitMapping-IsValidBusinessUnit-System-String-'></a>
+### IsValidBusinessUnit() `method`
+
+##### Summary
+
+Verifica si una unidad de negocio existe en el mapeo.
 
 ##### Parameters
 
@@ -367,7 +465,7 @@ Redirige a la lista de reportes si el modelo es válido; de lo contrario, muestr
 | id | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | El ID del reporte a editar. |
 | reporte | [RSQR.Models.Reporte](#T-RSQR-Models-Reporte 'RSQR.Models.Reporte') | El objeto Reporte con los datos actualizados. |
 
-<a name='M-RSQR-Controllers-ReportesController-ExportToExcel'></a>
+<a name='M-RSQR-Controllers-ReportesController-ExportToExcel-System-String-'></a>
 ### ExportToExcel() `method`
 
 ##### Summary

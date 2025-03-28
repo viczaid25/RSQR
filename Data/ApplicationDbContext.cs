@@ -11,6 +11,7 @@ namespace RSQR.Data
         {
         }
         public DbSet<Reporte> Reportes { get; set; }
+        public DbSet<ConsecutivoArchivo> ConsecutivosArchivos { get; set; }
 
         public DbSet<PpmReport> PpmReports { get; set; }
 

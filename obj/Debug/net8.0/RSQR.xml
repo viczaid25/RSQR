@@ -141,7 +141,7 @@
             <param name="id">El ID del reporte.</param>
             <returns>True si el reporte existe; de lo contrario, False.</returns>
         </member>
-        <member name="M:RSQR.Controllers.ReportesController.ExportToExcel">
+        <member name="M:RSQR.Controllers.ReportesController.ExportToExcel(System.String)">
             <summary>
             Exporta los reportes a un archivo Excel.
             </summary>
@@ -206,6 +206,35 @@
         </member>
         <member name="M:RSQR.Migrations.UpdateResponsabilidadField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
+        </member>
+        <member name="T:RSQR.Migrations.AddConsecutivoArchivoTable">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.AddConsecutivoArchivoTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.AddConsecutivoArchivoTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.AddConsecutivoArchivoTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Utilities.BusinessUnitMapping.GetBusinessUnitCode(System.String)">
+            <summary>
+            Obtiene el código abreviado de una unidad de negocio.
+            </summary>
+            <param name="unitName">Nombre de la unidad de negocio (ej. "STARTER").</param>
+            <returns>Código abreviado (ej. "ST"). Si no existe, devuelve las primeras 4 letras en mayúsculas.</returns>
+        </member>
+        <member name="M:RSQR.Utilities.BusinessUnitMapping.IsValidBusinessUnit(System.String)">
+            <summary>
+            Verifica si una unidad de negocio existe en el mapeo.
+            </summary>
+        </member>
+        <member name="M:RSQR.Utilities.BusinessUnitMapping.GetAllMappings">
+            <summary>
+            Devuelve todos los mapeos disponibles (solo lectura).
+            </summary>
         </member>
     </members>
 </doc>

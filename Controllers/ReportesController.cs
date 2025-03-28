@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using RSQR.Data;
 using RSQR.Models;
 using RSQR.Services;
+using RSQR.Utilities;
 using OfficeOpenXml;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
@@ -330,10 +331,17 @@ namespace RSQR.Controllers
         /// </summary>
         /// <returns>Un archivo Excel con los datos de los reportes.</returns>
         [HttpGet]
-        public IActionResult ExportToExcel()
+        public IActionResult ExportToExcel(string linea)
         {
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            // Obtener el código de negocio basado en la línea
+            string codigoNegocio = BusinessUnitMapping.GetBusinessUnitCode(linea);
+            int anioActual = DateTime.Now.Year % 100; // Obtiene los últimos 2 dígitos del año
+
+            // Obtener el consecutivo
+            int consecutivo = ObtenerSiguienteConsecutivo(codigoNegocio, DateTime.Now.Year);
 
             var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/templates/template.xlsx");
 
@@ -368,6 +376,7 @@ namespace RSQR.Controllers
                     Debug.WriteLine($"ComoP: {reporte.ComoP}");
                     Debug.WriteLine($"CuantosP: {reporte.CuantosP}");
 
+
                     worksheet.Cells["W6"].Value = reporte.Fecha; // Primer dato en S11
                     worksheet.Cells["F6"].Value = reporte.ProblemRank; // Segundo dato en E6
                     worksheet.Cells["C11"].Value = reporte.NumParteAfectado;
@@ -384,20 +393,52 @@ namespace RSQR.Controllers
                     worksheet.Cells["H30"].Value = reporte.PorqueP;
                     worksheet.Cells["I31"].Value = reporte.ComoP;
                     worksheet.Cells["M32"].Value = reporte.CuantosP;
+
+                    var stream = new MemoryStream();
+                    package.SaveAs(stream);
+                    stream.Position = 0;
+
+                    // Generar nombre del archivo con el formato: CAR-CODIGO-CONSECUTIVO-AÑO
+                    string nombreArchivo = $"CAR-{codigoNegocio}-{consecutivo:D2}-{anioActual:D2}.xlsx";
+
+                    return File(stream,
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        nombreArchivo);
                 }
                 else
                 {
                     // Debug: Si no hay datos, imprime un mensaje
                     Debug.WriteLine("No se encontraron datos en la base de datos.");
+                    return NotFound("No hay datos para exportar.");
                 }
-
-                var stream = new MemoryStream();
-                package.SaveAs(stream);
-                stream.Position = 0;
-
-                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Reporte.xlsx");
-
             }
         }
+
+        private int ObtenerSiguienteConsecutivo(string codigoNegocio, int anio)
+        {
+            var registro = _context.ConsecutivosArchivos
+                .FirstOrDefault(c => c.CodigoNegocio == codigoNegocio && c.Anio == anio);
+
+            if (registro == null)
+            {
+                registro = new ConsecutivoArchivo
+                {
+                    CodigoNegocio = codigoNegocio,
+                    UnidadNegocio = codigoNegocio, // O usa BusinessUnitMapping.GetNombreCompleto si lo implementaste
+                    Anio = anio,
+                    Consecutivo = 1
+                };
+                _context.ConsecutivosArchivos.Add(registro);
+            }
+            else
+            {
+                registro.Consecutivo++;
+            }
+
+            _context.SaveChanges();
+            return registro.Consecutivo;
+        }
+
+
     }
 }

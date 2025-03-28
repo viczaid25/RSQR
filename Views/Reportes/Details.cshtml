@@ -221,7 +221,12 @@
 
 </div>
 <div>
-    <a asp-controller="Reportes" asp-action="ExportToExcel" class="btn btn-primary">Descargar Reporte en Excel</a>
+    <a asp-controller="Reportes" 
+       asp-action="ExportToExcel" 
+       asp-route-linea="@Model.Linea" 
+       class="btn btn-primary">
+        Descargar Reporte en Excel
+    </a>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

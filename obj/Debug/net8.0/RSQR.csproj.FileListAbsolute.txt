@@ -576,3 +576,4 @@ C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\obj\Debug\net8.0\RSQR.xml
 C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
 C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\bin\Debug\net8.0\MailKit.dll
 C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\bin\Debug\net8.0\MimeKit.dll
+C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\obj\Debug\net8.0\RSQR.sourcelink.json

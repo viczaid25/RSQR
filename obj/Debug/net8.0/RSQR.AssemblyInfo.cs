@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RSQR")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+75d61f6d603b97823ccdc725c2e0c83ab5722d39")]
 [assembly: System.Reflection.AssemblyProductAttribute("RSQR")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RSQR")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
