@@ -13,6 +13,7 @@ using OfficeOpenXml;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
+using Microsoft.IdentityModel.Tokens;
 
 namespace RSQR.Controllers
 {
@@ -27,6 +28,7 @@ namespace RSQR.Controllers
     {
         private readonly IEmailService _emailService;
         private readonly ApplicationDbContext _context;
+        private readonly ILogger<ReportesController> _logger;
 
         /// <summary>
         /// Constructor del controlador ReportesController.
@@ -153,6 +155,13 @@ namespace RSQR.Controllers
                     }
                 }
 
+                // 2. Validar y asegurar el número de reclamo
+                if (reporte.CustomerClaimNumber <= 0)
+                {
+                    // Obtener el siguiente número válido si no se proporcionó uno
+                    reporte.CustomerClaimNumber = await GetNextClaimNumberForCustomer(reporte.Customer);
+                }
+
                 // Guardar el reporte en la base de datos
                 _context.Add(reporte);
                 await _context.SaveChangesAsync();
@@ -210,6 +219,20 @@ namespace RSQR.Controllers
 
             return View(reporte);
         }
+
+        private async Task<int> GetNextClaimNumberForCustomer(string customer)
+        {
+            if (string.IsNullOrEmpty(customer))
+                return 1; // Valor por defecto si no hay cliente
+
+            var lastNumber = await _context.Reportes
+                .Where(r => r.Customer == customer)
+                .MaxAsync(r => (int?)r.CustomerClaimNumber) ?? 0;
+
+            return lastNumber + 1;
+        }
+
+
 
         /// <summary>
         /// Muestra el formulario para editar un reporte existente.
@@ -437,6 +460,28 @@ namespace RSQR.Controllers
 
             _context.SaveChanges();
             return registro.Consecutivo;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetNextClaimNumber(string customer)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(customer))
+                    return BadRequest(new { error = "Se requiere un cliente" });
+
+                int nextNumber = await _context.Reportes
+                    .Where(r => r.Customer == customer)
+                    .MaxAsync(r => (int?)r.CustomerClaimNumber) ?? 0;
+                nextNumber++;
+
+                return Json(new { nextNumber });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al generar número de reclamo");
+                return StatusCode(500, new { error = "Error interno al generar número" });
+            }
         }
 
 

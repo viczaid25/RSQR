@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RSQR.Models
 {
@@ -59,7 +60,17 @@ namespace RSQR.Models
         public string? CuantosP { get; set; }
         public string? ComoP { get; set; }
         public string? Lote { get; set; }
+
+        [Display(Name = "Número de Reclamo (BD)")]
         public int CustomerClaimNumber { get; set; }
+
+        [NotMapped]
+        [Display(Name = "Número de Reclamo")]
+        public string CustomerClaimDisplayNumber { get; set; }
+
+        [NotMapped]
+        public string CustomerClaimPrefix { get; set; } // Para manejar el prefijo del cliente
+
         //public string? PreguntasAdicionales { get; set; }
 
         // Listas para los campos de Contención
