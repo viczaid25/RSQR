@@ -1,0 +1,51 @@
+### YamlMime:ManagedReference
+items:
+- uid: RSQR.Migrations
+  commentId: N:RSQR.Migrations
+  id: RSQR.Migrations
+  children:
+  - RSQR.Migrations.NewMigration
+  - RSQR.Migrations.UpdateCincoMField
+  - RSQR.Migrations.UpdateImpactoPPMType
+  - RSQR.Migrations.UpdateResponsabilidadField
+  - RSQR.Migrations.UpdateTipoField
+  langs:
+  - csharp
+  - vb
+  name: RSQR.Migrations
+  nameWithType: RSQR.Migrations
+  fullName: RSQR.Migrations
+  type: Namespace
+  assemblies:
+  - RSQR
+references:
+- uid: RSQR.Migrations.NewMigration
+  commentId: T:RSQR.Migrations.NewMigration
+  href: RSQR.Migrations.NewMigration.html
+  name: NewMigration
+  nameWithType: NewMigration
+  fullName: RSQR.Migrations.NewMigration
+- uid: RSQR.Migrations.UpdateImpactoPPMType
+  commentId: T:RSQR.Migrations.UpdateImpactoPPMType
+  href: RSQR.Migrations.UpdateImpactoPPMType.html
+  name: UpdateImpactoPPMType
+  nameWithType: UpdateImpactoPPMType
+  fullName: RSQR.Migrations.UpdateImpactoPPMType
+- uid: RSQR.Migrations.UpdateTipoField
+  commentId: T:RSQR.Migrations.UpdateTipoField
+  href: RSQR.Migrations.UpdateTipoField.html
+  name: UpdateTipoField
+  nameWithType: UpdateTipoField
+  fullName: RSQR.Migrations.UpdateTipoField
+- uid: RSQR.Migrations.UpdateCincoMField
+  commentId: T:RSQR.Migrations.UpdateCincoMField
+  href: RSQR.Migrations.UpdateCincoMField.html
+  name: UpdateCincoMField
+  nameWithType: UpdateCincoMField
+  fullName: RSQR.Migrations.UpdateCincoMField
+- uid: RSQR.Migrations.UpdateResponsabilidadField
+  commentId: T:RSQR.Migrations.UpdateResponsabilidadField
+  href: RSQR.Migrations.UpdateResponsabilidadField.html
+  name: UpdateResponsabilidadField
+  nameWithType: UpdateResponsabilidadField
+  fullName: RSQR.Migrations.UpdateResponsabilidadField

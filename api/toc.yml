@@ -1,0 +1,74 @@
+### YamlMime:TableOfContent
+items:
+- uid: RSQR.Controllers
+  name: RSQR.Controllers
+  type: Namespace
+  items:
+  - uid: RSQR.Controllers.AccountController
+    name: AccountController
+    type: Class
+  - uid: RSQR.Controllers.HomeController
+    name: HomeController
+    type: Class
+  - uid: RSQR.Controllers.ReportesController
+    name: ReportesController
+    type: Class
+- uid: RSQR.Data
+  name: RSQR.Data
+  type: Namespace
+  items:
+  - uid: RSQR.Data.ApplicationDbContext
+    name: ApplicationDbContext
+    type: Class
+- uid: RSQR.Migrations
+  name: RSQR.Migrations
+  type: Namespace
+  items:
+  - uid: RSQR.Migrations.NewMigration
+    name: NewMigration
+    type: Class
+  - uid: RSQR.Migrations.UpdateCincoMField
+    name: UpdateCincoMField
+    type: Class
+  - uid: RSQR.Migrations.UpdateImpactoPPMType
+    name: UpdateImpactoPPMType
+    type: Class
+  - uid: RSQR.Migrations.UpdateResponsabilidadField
+    name: UpdateResponsabilidadField
+    type: Class
+  - uid: RSQR.Migrations.UpdateTipoField
+    name: UpdateTipoField
+    type: Class
+- uid: RSQR.Models
+  name: RSQR.Models
+  type: Namespace
+  items:
+  - uid: RSQR.Models.CincoMOpciones
+    name: CincoMOpciones
+    type: Enum
+  - uid: RSQR.Models.ErrorViewModel
+    name: ErrorViewModel
+    type: Class
+  - uid: RSQR.Models.PpmReport
+    name: PpmReport
+    type: Class
+  - uid: RSQR.Models.Reporte
+    name: Reporte
+    type: Class
+  - uid: RSQR.Models.ReporteViewModel
+    name: ReporteViewModel
+    type: Class
+  - uid: RSQR.Models.ResponsabilidadOpciones
+    name: ResponsabilidadOpciones
+    type: Enum
+  - uid: RSQR.Models.TipoReporte
+    name: TipoReporte
+    type: Enum
+- uid: RSQR.Services
+  name: RSQR.Services
+  type: Namespace
+  items:
+  - uid: RSQR.Services.ActiveDirectoryService
+    name: ActiveDirectoryService
+    type: Class
+memberLayout: SamePage

@@ -1,0 +1,332 @@
+{
+  "source_base_path": "C:/Users/dm45207/source/repos/RSQR - Copy",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Controllers.AccountController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Controllers.AccountController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Controllers.AccountController",
+      "Summary": "<p sourcefile=\"api/RSQR.Controllers.AccountController.yml\" sourcestartlinenumber=\"1\">Controlador para gestionar la autenticación de usuarios.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Controllers.HomeController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Controllers.HomeController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Controllers.HomeController",
+      "Summary": "<p sourcefile=\"api/RSQR.Controllers.HomeController.yml\" sourcestartlinenumber=\"1\">Controlador principal de la aplicación. Gestiona las vistas de inicio, privacidad y errores.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Controllers.ReportesController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Controllers.ReportesController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Controllers.ReportesController",
+      "Summary": "<p sourcefile=\"api/RSQR.Controllers.ReportesController.yml\" sourcestartlinenumber=\"1\">Controlador para gestionar los reportes del sistema.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Controllers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Controllers.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Controllers",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Data.ApplicationDbContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Data.ApplicationDbContext.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Data.ApplicationDbContext",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Data.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Data",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Migrations.NewMigration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Migrations.NewMigration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Migrations.NewMigration",
+      "Summary": "<p sourcefile=\"api/RSQR.Migrations.NewMigration.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Migrations.UpdateCincoMField.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Migrations.UpdateCincoMField.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Migrations.UpdateCincoMField",
+      "Summary": "<p sourcefile=\"api/RSQR.Migrations.UpdateCincoMField.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Migrations.UpdateImpactoPPMType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Migrations.UpdateImpactoPPMType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Migrations.UpdateImpactoPPMType",
+      "Summary": "<p sourcefile=\"api/RSQR.Migrations.UpdateImpactoPPMType.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Migrations.UpdateResponsabilidadField.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Migrations.UpdateResponsabilidadField.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Migrations.UpdateResponsabilidadField",
+      "Summary": "<p sourcefile=\"api/RSQR.Migrations.UpdateResponsabilidadField.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Migrations.UpdateTipoField.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Migrations.UpdateTipoField.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Migrations.UpdateTipoField",
+      "Summary": "<p sourcefile=\"api/RSQR.Migrations.UpdateTipoField.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Migrations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Migrations.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Migrations",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Models.CincoMOpciones.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Models.CincoMOpciones.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Models.CincoMOpciones",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Models.ErrorViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Models.ErrorViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Models.ErrorViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Models.PpmReport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Models.PpmReport.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Models.PpmReport",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Models.Reporte.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Models.Reporte.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Models.Reporte",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Models.ReporteViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Models.ReporteViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Models.ReporteViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Models.ResponsabilidadOpciones.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Models.ResponsabilidadOpciones.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Models.ResponsabilidadOpciones",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Models.TipoReporte.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Models.TipoReporte.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Models.TipoReporte",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Models.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Models",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Services.ActiveDirectoryService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Services.ActiveDirectoryService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Services.ActiveDirectoryService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RSQR.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RSQR.Services.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RSQR.Services",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

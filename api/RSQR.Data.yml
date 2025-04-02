@@ -1,0 +1,46 @@
+### YamlMime:ManagedReference
+items:
+- uid: RSQR.Data
+  commentId: N:RSQR.Data
+  id: RSQR.Data
+  children:
+  - RSQR.Data.ApplicationDbContext
+  langs:
+  - csharp
+  - vb
+  name: RSQR.Data
+  nameWithType: RSQR.Data
+  fullName: RSQR.Data
+  type: Namespace
+  assemblies:
+  - RSQR
+references:
+- uid: RSQR.Data.ApplicationDbContext
+  commentId: T:RSQR.Data.ApplicationDbContext
+  parent: RSQR.Data
+  href: RSQR.Data.ApplicationDbContext.html
+  name: ApplicationDbContext
+  nameWithType: ApplicationDbContext
+  fullName: RSQR.Data.ApplicationDbContext
+- uid: RSQR.Data
+  commentId: N:RSQR.Data
+  href: RSQR.html
+  name: RSQR.Data
+  nameWithType: RSQR.Data
+  fullName: RSQR.Data
+  spec.csharp:
+  - uid: RSQR
+    name: RSQR
+    href: RSQR.html
+  - name: .
+  - uid: RSQR.Data
+    name: Data
+    href: RSQR.Data.html
+  spec.vb:
+  - uid: RSQR
+    name: RSQR
+    href: RSQR.html
+  - name: .
+  - uid: RSQR.Data
+    name: Data
+    href: RSQR.Data.html

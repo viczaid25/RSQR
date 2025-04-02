@@ -1,0 +1,1978 @@
+### YamlMime:ManagedReference
+items:
+- uid: RSQR.Models.Reporte
+  commentId: T:RSQR.Models.Reporte
+  id: Reporte
+  parent: RSQR.Models
+  children:
+  - RSQR.Models.Reporte.AP_NPR
+  - RSQR.Models.Reporte.AlertaCalidad
+  - RSQR.Models.Reporte.CincoM
+  - RSQR.Models.Reporte.Comentarios
+  - RSQR.Models.Reporte.ComoP
+  - RSQR.Models.Reporte.ContencionActividades
+  - RSQR.Models.Reporte.ContencionFechasInicio
+  - RSQR.Models.Reporte.ContencionItems
+  - RSQR.Models.Reporte.ContencionResponsables
+  - RSQR.Models.Reporte.ControlesEstablecidos
+  - RSQR.Models.Reporte.CuandoP
+  - RSQR.Models.Reporte.CuantosP
+  - RSQR.Models.Reporte.Customer
+  - RSQR.Models.Reporte.CustomerClaimNumber
+  - RSQR.Models.Reporte.CustomerPartNumber
+  - RSQR.Models.Reporte.DateOfClose
+  - RSQR.Models.Reporte.Descripcion
+  - RSQR.Models.Reporte.DescripcionProblema
+  - RSQR.Models.Reporte.Deteccion
+  - RSQR.Models.Reporte.Disposicion
+  - RSQR.Models.Reporte.DondeP
+  - RSQR.Models.Reporte.EntrevistaInvolucrados
+  - RSQR.Models.Reporte.EvidenciaFotografica
+  - RSQR.Models.Reporte.Fecha
+  - RSQR.Models.Reporte.Id
+  - RSQR.Models.Reporte.ImpactoPPM
+  - RSQR.Models.Reporte.InvestigationReport
+  - RSQR.Models.Reporte.Linea
+  - RSQR.Models.Reporte.Lote
+  - RSQR.Models.Reporte.Mileage
+  - RSQR.Models.Reporte.ModoFalla
+  - RSQR.Models.Reporte.MotherFactory
+  - RSQR.Models.Reporte.NumParteAfectado
+  - RSQR.Models.Reporte.Ocurrencia
+  - RSQR.Models.Reporte.PorqueP
+  - RSQR.Models.Reporte.PreguntasAdicionales
+  - RSQR.Models.Reporte.ProblemRank
+  - RSQR.Models.Reporte.QueP
+  - RSQR.Models.Reporte.QuienP
+  - RSQR.Models.Reporte.Responsabilidad
+  - RSQR.Models.Reporte.Severidad
+  - RSQR.Models.Reporte.Tipo
+  - RSQR.Models.Reporte.TituloProblema
+  - RSQR.Models.Reporte.UserName
+  langs:
+  - csharp
+  - vb
+  name: Reporte
+  nameWithType: Reporte
+  fullName: RSQR.Models.Reporte
+  type: Class
+  source:
+    id: Reporte
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 37
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public class Reporte
+    content.vb: Public Class Reporte
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: RSQR.Models.Reporte.Id
+  commentId: P:RSQR.Models.Reporte.Id
+  id: Id
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: Reporte.Id
+  fullName: RSQR.Models.Reporte.Id
+  type: Property
+  source:
+    id: Id
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 39
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: >-
+      [Key]
+
+      public int Id { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: >-
+      <Key>
+
+      Public Property Id As Integer
+  overload: RSQR.Models.Reporte.Id*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.KeyAttribute
+    ctor: System.ComponentModel.DataAnnotations.KeyAttribute.#ctor
+    arguments: []
+- uid: RSQR.Models.Reporte.Fecha
+  commentId: P:RSQR.Models.Reporte.Fecha
+  id: Fecha
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: Fecha
+  nameWithType: Reporte.Fecha
+  fullName: RSQR.Models.Reporte.Fecha
+  type: Property
+  source:
+    id: Fecha
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 41
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public DateTime Fecha { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property Fecha As Date
+  overload: RSQR.Models.Reporte.Fecha*
+- uid: RSQR.Models.Reporte.ProblemRank
+  commentId: P:RSQR.Models.Reporte.ProblemRank
+  id: ProblemRank
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: ProblemRank
+  nameWithType: Reporte.ProblemRank
+  fullName: RSQR.Models.Reporte.ProblemRank
+  type: Property
+  source:
+    id: ProblemRank
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 42
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: >-
+      [Required(ErrorMessage = "Debe seleccionar un valor para el campo ProblemRank.")]
+
+      [RegularExpression("^(?!-Seleccionar-).*$", ErrorMessage = "Debe seleccionar una opción válida.")]
+
+      public string? ProblemRank { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <Required(ErrorMessage:="Debe seleccionar un valor para el campo ProblemRank.")>
+
+      <RegularExpression("^(?!-Seleccionar-).*$", ErrorMessage:="Debe seleccionar una opción válida.")>
+
+      Public Property ProblemRank As String
+  overload: RSQR.Models.Reporte.ProblemRank*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.RequiredAttribute
+    ctor: System.ComponentModel.DataAnnotations.RequiredAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: ErrorMessage
+      type: System.String
+      value: Debe seleccionar un valor para el campo ProblemRank.
+  - type: System.ComponentModel.DataAnnotations.RegularExpressionAttribute
+    ctor: System.ComponentModel.DataAnnotations.RegularExpressionAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: ^(?!-Seleccionar-).*$
+    namedArguments:
+    - name: ErrorMessage
+      type: System.String
+      value: Debe seleccionar una opción válida.
+- uid: RSQR.Models.Reporte.UserName
+  commentId: P:RSQR.Models.Reporte.UserName
+  id: UserName
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: UserName
+  nameWithType: Reporte.UserName
+  fullName: RSQR.Models.Reporte.UserName
+  type: Property
+  source:
+    id: UserName
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 45
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? UserName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property UserName As String
+  overload: RSQR.Models.Reporte.UserName*
+- uid: RSQR.Models.Reporte.Linea
+  commentId: P:RSQR.Models.Reporte.Linea
+  id: Linea
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: Linea
+  nameWithType: Reporte.Linea
+  fullName: RSQR.Models.Reporte.Linea
+  type: Property
+  source:
+    id: Linea
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 46
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? Linea { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Linea As String
+  overload: RSQR.Models.Reporte.Linea*
+- uid: RSQR.Models.Reporte.Tipo
+  commentId: P:RSQR.Models.Reporte.Tipo
+  id: Tipo
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: Tipo
+  nameWithType: Reporte.Tipo
+  fullName: RSQR.Models.Reporte.Tipo
+  type: Property
+  source:
+    id: Tipo
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 47
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public TipoReporte Tipo { get; set; }
+    parameters: []
+    return:
+      type: RSQR.Models.TipoReporte
+    content.vb: Public Property Tipo As TipoReporte
+  overload: RSQR.Models.Reporte.Tipo*
+- uid: RSQR.Models.Reporte.TituloProblema
+  commentId: P:RSQR.Models.Reporte.TituloProblema
+  id: TituloProblema
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: TituloProblema
+  nameWithType: Reporte.TituloProblema
+  fullName: RSQR.Models.Reporte.TituloProblema
+  type: Property
+  source:
+    id: TituloProblema
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 48
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? TituloProblema { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property TituloProblema As String
+  overload: RSQR.Models.Reporte.TituloProblema*
+- uid: RSQR.Models.Reporte.CincoM
+  commentId: P:RSQR.Models.Reporte.CincoM
+  id: CincoM
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: CincoM
+  nameWithType: Reporte.CincoM
+  fullName: RSQR.Models.Reporte.CincoM
+  type: Property
+  source:
+    id: CincoM
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 49
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public CincoMOpciones CincoM { get; set; }
+    parameters: []
+    return:
+      type: RSQR.Models.CincoMOpciones
+    content.vb: Public Property CincoM As CincoMOpciones
+  overload: RSQR.Models.Reporte.CincoM*
+- uid: RSQR.Models.Reporte.NumParteAfectado
+  commentId: P:RSQR.Models.Reporte.NumParteAfectado
+  id: NumParteAfectado
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: NumParteAfectado
+  nameWithType: Reporte.NumParteAfectado
+  fullName: RSQR.Models.Reporte.NumParteAfectado
+  type: Property
+  source:
+    id: NumParteAfectado
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 50
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? NumParteAfectado { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property NumParteAfectado As String
+  overload: RSQR.Models.Reporte.NumParteAfectado*
+- uid: RSQR.Models.Reporte.Descripcion
+  commentId: P:RSQR.Models.Reporte.Descripcion
+  id: Descripcion
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: Descripcion
+  nameWithType: Reporte.Descripcion
+  fullName: RSQR.Models.Reporte.Descripcion
+  type: Property
+  source:
+    id: Descripcion
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 51
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? Descripcion { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Descripcion As String
+  overload: RSQR.Models.Reporte.Descripcion*
+- uid: RSQR.Models.Reporte.DescripcionProblema
+  commentId: P:RSQR.Models.Reporte.DescripcionProblema
+  id: DescripcionProblema
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: DescripcionProblema
+  nameWithType: Reporte.DescripcionProblema
+  fullName: RSQR.Models.Reporte.DescripcionProblema
+  type: Property
+  source:
+    id: DescripcionProblema
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 52
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? DescripcionProblema { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DescripcionProblema As String
+  overload: RSQR.Models.Reporte.DescripcionProblema*
+- uid: RSQR.Models.Reporte.QueP
+  commentId: P:RSQR.Models.Reporte.QueP
+  id: QueP
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: QueP
+  nameWithType: Reporte.QueP
+  fullName: RSQR.Models.Reporte.QueP
+  type: Property
+  source:
+    id: QueP
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 53
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? QueP { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property QueP As String
+  overload: RSQR.Models.Reporte.QueP*
+- uid: RSQR.Models.Reporte.PorqueP
+  commentId: P:RSQR.Models.Reporte.PorqueP
+  id: PorqueP
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: PorqueP
+  nameWithType: Reporte.PorqueP
+  fullName: RSQR.Models.Reporte.PorqueP
+  type: Property
+  source:
+    id: PorqueP
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 54
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? PorqueP { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PorqueP As String
+  overload: RSQR.Models.Reporte.PorqueP*
+- uid: RSQR.Models.Reporte.DondeP
+  commentId: P:RSQR.Models.Reporte.DondeP
+  id: DondeP
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: DondeP
+  nameWithType: Reporte.DondeP
+  fullName: RSQR.Models.Reporte.DondeP
+  type: Property
+  source:
+    id: DondeP
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 55
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? DondeP { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DondeP As String
+  overload: RSQR.Models.Reporte.DondeP*
+- uid: RSQR.Models.Reporte.QuienP
+  commentId: P:RSQR.Models.Reporte.QuienP
+  id: QuienP
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: QuienP
+  nameWithType: Reporte.QuienP
+  fullName: RSQR.Models.Reporte.QuienP
+  type: Property
+  source:
+    id: QuienP
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 56
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? QuienP { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property QuienP As String
+  overload: RSQR.Models.Reporte.QuienP*
+- uid: RSQR.Models.Reporte.CuandoP
+  commentId: P:RSQR.Models.Reporte.CuandoP
+  id: CuandoP
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: CuandoP
+  nameWithType: Reporte.CuandoP
+  fullName: RSQR.Models.Reporte.CuandoP
+  type: Property
+  source:
+    id: CuandoP
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 57
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? CuandoP { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CuandoP As String
+  overload: RSQR.Models.Reporte.CuandoP*
+- uid: RSQR.Models.Reporte.CuantosP
+  commentId: P:RSQR.Models.Reporte.CuantosP
+  id: CuantosP
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: CuantosP
+  nameWithType: Reporte.CuantosP
+  fullName: RSQR.Models.Reporte.CuantosP
+  type: Property
+  source:
+    id: CuantosP
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 58
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? CuantosP { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CuantosP As String
+  overload: RSQR.Models.Reporte.CuantosP*
+- uid: RSQR.Models.Reporte.ComoP
+  commentId: P:RSQR.Models.Reporte.ComoP
+  id: ComoP
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: ComoP
+  nameWithType: Reporte.ComoP
+  fullName: RSQR.Models.Reporte.ComoP
+  type: Property
+  source:
+    id: ComoP
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 59
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? ComoP { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ComoP As String
+  overload: RSQR.Models.Reporte.ComoP*
+- uid: RSQR.Models.Reporte.Lote
+  commentId: P:RSQR.Models.Reporte.Lote
+  id: Lote
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: Lote
+  nameWithType: Reporte.Lote
+  fullName: RSQR.Models.Reporte.Lote
+  type: Property
+  source:
+    id: Lote
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 60
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? Lote { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Lote As String
+  overload: RSQR.Models.Reporte.Lote*
+- uid: RSQR.Models.Reporte.CustomerClaimNumber
+  commentId: P:RSQR.Models.Reporte.CustomerClaimNumber
+  id: CustomerClaimNumber
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: CustomerClaimNumber
+  nameWithType: Reporte.CustomerClaimNumber
+  fullName: RSQR.Models.Reporte.CustomerClaimNumber
+  type: Property
+  source:
+    id: CustomerClaimNumber
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 61
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public int CustomerClaimNumber { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property CustomerClaimNumber As Integer
+  overload: RSQR.Models.Reporte.CustomerClaimNumber*
+- uid: RSQR.Models.Reporte.PreguntasAdicionales
+  commentId: P:RSQR.Models.Reporte.PreguntasAdicionales
+  id: PreguntasAdicionales
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: PreguntasAdicionales
+  nameWithType: Reporte.PreguntasAdicionales
+  fullName: RSQR.Models.Reporte.PreguntasAdicionales
+  type: Property
+  source:
+    id: PreguntasAdicionales
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 62
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? PreguntasAdicionales { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PreguntasAdicionales As String
+  overload: RSQR.Models.Reporte.PreguntasAdicionales*
+- uid: RSQR.Models.Reporte.ContencionItems
+  commentId: P:RSQR.Models.Reporte.ContencionItems
+  id: ContencionItems
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: ContencionItems
+  nameWithType: Reporte.ContencionItems
+  fullName: RSQR.Models.Reporte.ContencionItems
+  type: Property
+  source:
+    id: ContencionItems
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 65
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public List<string>? ContencionItems { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{System.String}
+    content.vb: Public Property ContencionItems As List(Of String)
+  overload: RSQR.Models.Reporte.ContencionItems*
+- uid: RSQR.Models.Reporte.ContencionActividades
+  commentId: P:RSQR.Models.Reporte.ContencionActividades
+  id: ContencionActividades
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: ContencionActividades
+  nameWithType: Reporte.ContencionActividades
+  fullName: RSQR.Models.Reporte.ContencionActividades
+  type: Property
+  source:
+    id: ContencionActividades
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 66
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public List<string>? ContencionActividades { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{System.String}
+    content.vb: Public Property ContencionActividades As List(Of String)
+  overload: RSQR.Models.Reporte.ContencionActividades*
+- uid: RSQR.Models.Reporte.ContencionResponsables
+  commentId: P:RSQR.Models.Reporte.ContencionResponsables
+  id: ContencionResponsables
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: ContencionResponsables
+  nameWithType: Reporte.ContencionResponsables
+  fullName: RSQR.Models.Reporte.ContencionResponsables
+  type: Property
+  source:
+    id: ContencionResponsables
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 67
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public List<string>? ContencionResponsables { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{System.String}
+    content.vb: Public Property ContencionResponsables As List(Of String)
+  overload: RSQR.Models.Reporte.ContencionResponsables*
+- uid: RSQR.Models.Reporte.ContencionFechasInicio
+  commentId: P:RSQR.Models.Reporte.ContencionFechasInicio
+  id: ContencionFechasInicio
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: ContencionFechasInicio
+  nameWithType: Reporte.ContencionFechasInicio
+  fullName: RSQR.Models.Reporte.ContencionFechasInicio
+  type: Property
+  source:
+    id: ContencionFechasInicio
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 68
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public List<DateTime>? ContencionFechasInicio { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{System.DateTime}
+    content.vb: Public Property ContencionFechasInicio As List(Of Date)
+  overload: RSQR.Models.Reporte.ContencionFechasInicio*
+- uid: RSQR.Models.Reporte.AlertaCalidad
+  commentId: P:RSQR.Models.Reporte.AlertaCalidad
+  id: AlertaCalidad
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: AlertaCalidad
+  nameWithType: Reporte.AlertaCalidad
+  fullName: RSQR.Models.Reporte.AlertaCalidad
+  type: Property
+  source:
+    id: AlertaCalidad
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 70
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public bool AlertaCalidad { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property AlertaCalidad As Boolean
+  overload: RSQR.Models.Reporte.AlertaCalidad*
+- uid: RSQR.Models.Reporte.Disposicion
+  commentId: P:RSQR.Models.Reporte.Disposicion
+  id: Disposicion
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: Disposicion
+  nameWithType: Reporte.Disposicion
+  fullName: RSQR.Models.Reporte.Disposicion
+  type: Property
+  source:
+    id: Disposicion
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 71
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? Disposicion { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Disposicion As String
+  overload: RSQR.Models.Reporte.Disposicion*
+- uid: RSQR.Models.Reporte.EntrevistaInvolucrados
+  commentId: P:RSQR.Models.Reporte.EntrevistaInvolucrados
+  id: EntrevistaInvolucrados
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: EntrevistaInvolucrados
+  nameWithType: Reporte.EntrevistaInvolucrados
+  fullName: RSQR.Models.Reporte.EntrevistaInvolucrados
+  type: Property
+  source:
+    id: EntrevistaInvolucrados
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 72
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public bool EntrevistaInvolucrados { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property EntrevistaInvolucrados As Boolean
+  overload: RSQR.Models.Reporte.EntrevistaInvolucrados*
+- uid: RSQR.Models.Reporte.Comentarios
+  commentId: P:RSQR.Models.Reporte.Comentarios
+  id: Comentarios
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: Comentarios
+  nameWithType: Reporte.Comentarios
+  fullName: RSQR.Models.Reporte.Comentarios
+  type: Property
+  source:
+    id: Comentarios
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 73
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? Comentarios { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Comentarios As String
+  overload: RSQR.Models.Reporte.Comentarios*
+- uid: RSQR.Models.Reporte.Severidad
+  commentId: P:RSQR.Models.Reporte.Severidad
+  id: Severidad
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: Severidad
+  nameWithType: Reporte.Severidad
+  fullName: RSQR.Models.Reporte.Severidad
+  type: Property
+  source:
+    id: Severidad
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 74
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? Severidad { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Severidad As String
+  overload: RSQR.Models.Reporte.Severidad*
+- uid: RSQR.Models.Reporte.Ocurrencia
+  commentId: P:RSQR.Models.Reporte.Ocurrencia
+  id: Ocurrencia
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: Ocurrencia
+  nameWithType: Reporte.Ocurrencia
+  fullName: RSQR.Models.Reporte.Ocurrencia
+  type: Property
+  source:
+    id: Ocurrencia
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 75
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? Ocurrencia { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Ocurrencia As String
+  overload: RSQR.Models.Reporte.Ocurrencia*
+- uid: RSQR.Models.Reporte.Deteccion
+  commentId: P:RSQR.Models.Reporte.Deteccion
+  id: Deteccion
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: Deteccion
+  nameWithType: Reporte.Deteccion
+  fullName: RSQR.Models.Reporte.Deteccion
+  type: Property
+  source:
+    id: Deteccion
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 76
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? Deteccion { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Deteccion As String
+  overload: RSQR.Models.Reporte.Deteccion*
+- uid: RSQR.Models.Reporte.AP_NPR
+  commentId: P:RSQR.Models.Reporte.AP_NPR
+  id: AP_NPR
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: AP_NPR
+  nameWithType: Reporte.AP_NPR
+  fullName: RSQR.Models.Reporte.AP_NPR
+  type: Property
+  source:
+    id: AP_NPR
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 77
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? AP_NPR { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property AP_NPR As String
+  overload: RSQR.Models.Reporte.AP_NPR*
+- uid: RSQR.Models.Reporte.ModoFalla
+  commentId: P:RSQR.Models.Reporte.ModoFalla
+  id: ModoFalla
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: ModoFalla
+  nameWithType: Reporte.ModoFalla
+  fullName: RSQR.Models.Reporte.ModoFalla
+  type: Property
+  source:
+    id: ModoFalla
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 78
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? ModoFalla { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ModoFalla As String
+  overload: RSQR.Models.Reporte.ModoFalla*
+- uid: RSQR.Models.Reporte.ControlesEstablecidos
+  commentId: P:RSQR.Models.Reporte.ControlesEstablecidos
+  id: ControlesEstablecidos
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: ControlesEstablecidos
+  nameWithType: Reporte.ControlesEstablecidos
+  fullName: RSQR.Models.Reporte.ControlesEstablecidos
+  type: Property
+  source:
+    id: ControlesEstablecidos
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 79
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? ControlesEstablecidos { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ControlesEstablecidos As String
+  overload: RSQR.Models.Reporte.ControlesEstablecidos*
+- uid: RSQR.Models.Reporte.EvidenciaFotografica
+  commentId: P:RSQR.Models.Reporte.EvidenciaFotografica
+  id: EvidenciaFotografica
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: EvidenciaFotografica
+  nameWithType: Reporte.EvidenciaFotografica
+  fullName: RSQR.Models.Reporte.EvidenciaFotografica
+  type: Property
+  source:
+    id: EvidenciaFotografica
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 80
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public List<byte[]>? EvidenciaFotografica { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{System.Byte[]}
+    content.vb: Public Property EvidenciaFotografica As List(Of Byte())
+  overload: RSQR.Models.Reporte.EvidenciaFotografica*
+- uid: RSQR.Models.Reporte.Customer
+  commentId: P:RSQR.Models.Reporte.Customer
+  id: Customer
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: Customer
+  nameWithType: Reporte.Customer
+  fullName: RSQR.Models.Reporte.Customer
+  type: Property
+  source:
+    id: Customer
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 81
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? Customer { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Customer As String
+  overload: RSQR.Models.Reporte.Customer*
+- uid: RSQR.Models.Reporte.MotherFactory
+  commentId: P:RSQR.Models.Reporte.MotherFactory
+  id: MotherFactory
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: MotherFactory
+  nameWithType: Reporte.MotherFactory
+  fullName: RSQR.Models.Reporte.MotherFactory
+  type: Property
+  source:
+    id: MotherFactory
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 82
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? MotherFactory { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property MotherFactory As String
+  overload: RSQR.Models.Reporte.MotherFactory*
+- uid: RSQR.Models.Reporte.CustomerPartNumber
+  commentId: P:RSQR.Models.Reporte.CustomerPartNumber
+  id: CustomerPartNumber
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: CustomerPartNumber
+  nameWithType: Reporte.CustomerPartNumber
+  fullName: RSQR.Models.Reporte.CustomerPartNumber
+  type: Property
+  source:
+    id: CustomerPartNumber
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 83
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? CustomerPartNumber { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CustomerPartNumber As String
+  overload: RSQR.Models.Reporte.CustomerPartNumber*
+- uid: RSQR.Models.Reporte.Mileage
+  commentId: P:RSQR.Models.Reporte.Mileage
+  id: Mileage
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: Mileage
+  nameWithType: Reporte.Mileage
+  fullName: RSQR.Models.Reporte.Mileage
+  type: Property
+  source:
+    id: Mileage
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 84
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? Mileage { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Mileage As String
+  overload: RSQR.Models.Reporte.Mileage*
+- uid: RSQR.Models.Reporte.InvestigationReport
+  commentId: P:RSQR.Models.Reporte.InvestigationReport
+  id: InvestigationReport
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: InvestigationReport
+  nameWithType: Reporte.InvestigationReport
+  fullName: RSQR.Models.Reporte.InvestigationReport
+  type: Property
+  source:
+    id: InvestigationReport
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 85
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public string? InvestigationReport { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property InvestigationReport As String
+  overload: RSQR.Models.Reporte.InvestigationReport*
+- uid: RSQR.Models.Reporte.DateOfClose
+  commentId: P:RSQR.Models.Reporte.DateOfClose
+  id: DateOfClose
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: DateOfClose
+  nameWithType: Reporte.DateOfClose
+  fullName: RSQR.Models.Reporte.DateOfClose
+  type: Property
+  source:
+    id: DateOfClose
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 86
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public DateTime DateOfClose { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property DateOfClose As Date
+  overload: RSQR.Models.Reporte.DateOfClose*
+- uid: RSQR.Models.Reporte.ImpactoPPM
+  commentId: P:RSQR.Models.Reporte.ImpactoPPM
+  id: ImpactoPPM
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: ImpactoPPM
+  nameWithType: Reporte.ImpactoPPM
+  fullName: RSQR.Models.Reporte.ImpactoPPM
+  type: Property
+  source:
+    id: ImpactoPPM
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 87
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public bool ImpactoPPM { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property ImpactoPPM As Boolean
+  overload: RSQR.Models.Reporte.ImpactoPPM*
+- uid: RSQR.Models.Reporte.Responsabilidad
+  commentId: P:RSQR.Models.Reporte.Responsabilidad
+  id: Responsabilidad
+  parent: RSQR.Models.Reporte
+  langs:
+  - csharp
+  - vb
+  name: Responsabilidad
+  nameWithType: Reporte.Responsabilidad
+  fullName: RSQR.Models.Reporte.Responsabilidad
+  type: Property
+  source:
+    id: Responsabilidad
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 88
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public ResponsabilidadOpciones Responsabilidad { get; set; }
+    parameters: []
+    return:
+      type: RSQR.Models.ResponsabilidadOpciones
+    content.vb: Public Property Responsabilidad As ResponsabilidadOpciones
+  overload: RSQR.Models.Reporte.Responsabilidad*
+references:
+- uid: RSQR.Models
+  commentId: N:RSQR.Models
+  href: RSQR.html
+  name: RSQR.Models
+  nameWithType: RSQR.Models
+  fullName: RSQR.Models
+  spec.csharp:
+  - uid: RSQR
+    name: RSQR
+    href: RSQR.html
+  - name: .
+  - uid: RSQR.Models
+    name: Models
+    href: RSQR.Models.html
+  spec.vb:
+  - uid: RSQR
+    name: RSQR
+    href: RSQR.html
+  - name: .
+  - uid: RSQR.Models
+    name: Models
+    href: RSQR.Models.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: RSQR.Models.Reporte.Id*
+  commentId: Overload:RSQR.Models.Reporte.Id
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_Id
+  name: Id
+  nameWithType: Reporte.Id
+  fullName: RSQR.Models.Reporte.Id
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: RSQR.Models.Reporte.Fecha*
+  commentId: Overload:RSQR.Models.Reporte.Fecha
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_Fecha
+  name: Fecha
+  nameWithType: Reporte.Fecha
+  fullName: RSQR.Models.Reporte.Fecha
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.datetime
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+  nameWithType.vb: Date
+  fullName.vb: Date
+  name.vb: Date
+- uid: RSQR.Models.Reporte.ProblemRank*
+  commentId: Overload:RSQR.Models.Reporte.ProblemRank
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_ProblemRank
+  name: ProblemRank
+  nameWithType: Reporte.ProblemRank
+  fullName: RSQR.Models.Reporte.ProblemRank
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: RSQR.Models.Reporte.UserName*
+  commentId: Overload:RSQR.Models.Reporte.UserName
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_UserName
+  name: UserName
+  nameWithType: Reporte.UserName
+  fullName: RSQR.Models.Reporte.UserName
+- uid: RSQR.Models.Reporte.Linea*
+  commentId: Overload:RSQR.Models.Reporte.Linea
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_Linea
+  name: Linea
+  nameWithType: Reporte.Linea
+  fullName: RSQR.Models.Reporte.Linea
+- uid: RSQR.Models.Reporte.Tipo*
+  commentId: Overload:RSQR.Models.Reporte.Tipo
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_Tipo
+  name: Tipo
+  nameWithType: Reporte.Tipo
+  fullName: RSQR.Models.Reporte.Tipo
+- uid: RSQR.Models.TipoReporte
+  commentId: T:RSQR.Models.TipoReporte
+  parent: RSQR.Models
+  href: RSQR.Models.TipoReporte.html
+  name: TipoReporte
+  nameWithType: TipoReporte
+  fullName: RSQR.Models.TipoReporte
+- uid: RSQR.Models.Reporte.TituloProblema*
+  commentId: Overload:RSQR.Models.Reporte.TituloProblema
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_TituloProblema
+  name: TituloProblema
+  nameWithType: Reporte.TituloProblema
+  fullName: RSQR.Models.Reporte.TituloProblema
+- uid: RSQR.Models.Reporte.CincoM*
+  commentId: Overload:RSQR.Models.Reporte.CincoM
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_CincoM
+  name: CincoM
+  nameWithType: Reporte.CincoM
+  fullName: RSQR.Models.Reporte.CincoM
+- uid: RSQR.Models.CincoMOpciones
+  commentId: T:RSQR.Models.CincoMOpciones
+  parent: RSQR.Models
+  href: RSQR.Models.CincoMOpciones.html
+  name: CincoMOpciones
+  nameWithType: CincoMOpciones
+  fullName: RSQR.Models.CincoMOpciones
+- uid: RSQR.Models.Reporte.NumParteAfectado*
+  commentId: Overload:RSQR.Models.Reporte.NumParteAfectado
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_NumParteAfectado
+  name: NumParteAfectado
+  nameWithType: Reporte.NumParteAfectado
+  fullName: RSQR.Models.Reporte.NumParteAfectado
+- uid: RSQR.Models.Reporte.Descripcion*
+  commentId: Overload:RSQR.Models.Reporte.Descripcion
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_Descripcion
+  name: Descripcion
+  nameWithType: Reporte.Descripcion
+  fullName: RSQR.Models.Reporte.Descripcion
+- uid: RSQR.Models.Reporte.DescripcionProblema*
+  commentId: Overload:RSQR.Models.Reporte.DescripcionProblema
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_DescripcionProblema
+  name: DescripcionProblema
+  nameWithType: Reporte.DescripcionProblema
+  fullName: RSQR.Models.Reporte.DescripcionProblema
+- uid: RSQR.Models.Reporte.QueP*
+  commentId: Overload:RSQR.Models.Reporte.QueP
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_QueP
+  name: QueP
+  nameWithType: Reporte.QueP
+  fullName: RSQR.Models.Reporte.QueP
+- uid: RSQR.Models.Reporte.PorqueP*
+  commentId: Overload:RSQR.Models.Reporte.PorqueP
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_PorqueP
+  name: PorqueP
+  nameWithType: Reporte.PorqueP
+  fullName: RSQR.Models.Reporte.PorqueP
+- uid: RSQR.Models.Reporte.DondeP*
+  commentId: Overload:RSQR.Models.Reporte.DondeP
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_DondeP
+  name: DondeP
+  nameWithType: Reporte.DondeP
+  fullName: RSQR.Models.Reporte.DondeP
+- uid: RSQR.Models.Reporte.QuienP*
+  commentId: Overload:RSQR.Models.Reporte.QuienP
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_QuienP
+  name: QuienP
+  nameWithType: Reporte.QuienP
+  fullName: RSQR.Models.Reporte.QuienP
+- uid: RSQR.Models.Reporte.CuandoP*
+  commentId: Overload:RSQR.Models.Reporte.CuandoP
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_CuandoP
+  name: CuandoP
+  nameWithType: Reporte.CuandoP
+  fullName: RSQR.Models.Reporte.CuandoP
+- uid: RSQR.Models.Reporte.CuantosP*
+  commentId: Overload:RSQR.Models.Reporte.CuantosP
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_CuantosP
+  name: CuantosP
+  nameWithType: Reporte.CuantosP
+  fullName: RSQR.Models.Reporte.CuantosP
+- uid: RSQR.Models.Reporte.ComoP*
+  commentId: Overload:RSQR.Models.Reporte.ComoP
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_ComoP
+  name: ComoP
+  nameWithType: Reporte.ComoP
+  fullName: RSQR.Models.Reporte.ComoP
+- uid: RSQR.Models.Reporte.Lote*
+  commentId: Overload:RSQR.Models.Reporte.Lote
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_Lote
+  name: Lote
+  nameWithType: Reporte.Lote
+  fullName: RSQR.Models.Reporte.Lote
+- uid: RSQR.Models.Reporte.CustomerClaimNumber*
+  commentId: Overload:RSQR.Models.Reporte.CustomerClaimNumber
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_CustomerClaimNumber
+  name: CustomerClaimNumber
+  nameWithType: Reporte.CustomerClaimNumber
+  fullName: RSQR.Models.Reporte.CustomerClaimNumber
+- uid: RSQR.Models.Reporte.PreguntasAdicionales*
+  commentId: Overload:RSQR.Models.Reporte.PreguntasAdicionales
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_PreguntasAdicionales
+  name: PreguntasAdicionales
+  nameWithType: Reporte.PreguntasAdicionales
+  fullName: RSQR.Models.Reporte.PreguntasAdicionales
+- uid: RSQR.Models.Reporte.ContencionItems*
+  commentId: Overload:RSQR.Models.Reporte.ContencionItems
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_ContencionItems
+  name: ContencionItems
+  nameWithType: Reporte.ContencionItems
+  fullName: RSQR.Models.Reporte.ContencionItems
+- uid: System.Collections.Generic.List{System.String}
+  commentId: T:System.Collections.Generic.List{System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<string>
+  nameWithType: List<string>
+  fullName: System.Collections.Generic.List<string>
+  nameWithType.vb: List(Of String)
+  fullName.vb: System.Collections.Generic.List(Of String)
+  name.vb: List(Of String)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: RSQR.Models.Reporte.ContencionActividades*
+  commentId: Overload:RSQR.Models.Reporte.ContencionActividades
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_ContencionActividades
+  name: ContencionActividades
+  nameWithType: Reporte.ContencionActividades
+  fullName: RSQR.Models.Reporte.ContencionActividades
+- uid: RSQR.Models.Reporte.ContencionResponsables*
+  commentId: Overload:RSQR.Models.Reporte.ContencionResponsables
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_ContencionResponsables
+  name: ContencionResponsables
+  nameWithType: Reporte.ContencionResponsables
+  fullName: RSQR.Models.Reporte.ContencionResponsables
+- uid: RSQR.Models.Reporte.ContencionFechasInicio*
+  commentId: Overload:RSQR.Models.Reporte.ContencionFechasInicio
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_ContencionFechasInicio
+  name: ContencionFechasInicio
+  nameWithType: Reporte.ContencionFechasInicio
+  fullName: RSQR.Models.Reporte.ContencionFechasInicio
+- uid: System.Collections.Generic.List{System.DateTime}
+  commentId: T:System.Collections.Generic.List{System.DateTime}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<DateTime>
+  nameWithType: List<DateTime>
+  fullName: System.Collections.Generic.List<System.DateTime>
+  nameWithType.vb: List(Of Date)
+  fullName.vb: System.Collections.Generic.List(Of Date)
+  name.vb: List(Of Date)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: System.DateTime
+    name: DateTime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.DateTime
+    name: Date
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.datetime
+  - name: )
+- uid: RSQR.Models.Reporte.AlertaCalidad*
+  commentId: Overload:RSQR.Models.Reporte.AlertaCalidad
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_AlertaCalidad
+  name: AlertaCalidad
+  nameWithType: Reporte.AlertaCalidad
+  fullName: RSQR.Models.Reporte.AlertaCalidad
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: RSQR.Models.Reporte.Disposicion*
+  commentId: Overload:RSQR.Models.Reporte.Disposicion
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_Disposicion
+  name: Disposicion
+  nameWithType: Reporte.Disposicion
+  fullName: RSQR.Models.Reporte.Disposicion
+- uid: RSQR.Models.Reporte.EntrevistaInvolucrados*
+  commentId: Overload:RSQR.Models.Reporte.EntrevistaInvolucrados
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_EntrevistaInvolucrados
+  name: EntrevistaInvolucrados
+  nameWithType: Reporte.EntrevistaInvolucrados
+  fullName: RSQR.Models.Reporte.EntrevistaInvolucrados
+- uid: RSQR.Models.Reporte.Comentarios*
+  commentId: Overload:RSQR.Models.Reporte.Comentarios
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_Comentarios
+  name: Comentarios
+  nameWithType: Reporte.Comentarios
+  fullName: RSQR.Models.Reporte.Comentarios
+- uid: RSQR.Models.Reporte.Severidad*
+  commentId: Overload:RSQR.Models.Reporte.Severidad
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_Severidad
+  name: Severidad
+  nameWithType: Reporte.Severidad
+  fullName: RSQR.Models.Reporte.Severidad
+- uid: RSQR.Models.Reporte.Ocurrencia*
+  commentId: Overload:RSQR.Models.Reporte.Ocurrencia
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_Ocurrencia
+  name: Ocurrencia
+  nameWithType: Reporte.Ocurrencia
+  fullName: RSQR.Models.Reporte.Ocurrencia
+- uid: RSQR.Models.Reporte.Deteccion*
+  commentId: Overload:RSQR.Models.Reporte.Deteccion
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_Deteccion
+  name: Deteccion
+  nameWithType: Reporte.Deteccion
+  fullName: RSQR.Models.Reporte.Deteccion
+- uid: RSQR.Models.Reporte.AP_NPR*
+  commentId: Overload:RSQR.Models.Reporte.AP_NPR
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_AP_NPR
+  name: AP_NPR
+  nameWithType: Reporte.AP_NPR
+  fullName: RSQR.Models.Reporte.AP_NPR
+- uid: RSQR.Models.Reporte.ModoFalla*
+  commentId: Overload:RSQR.Models.Reporte.ModoFalla
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_ModoFalla
+  name: ModoFalla
+  nameWithType: Reporte.ModoFalla
+  fullName: RSQR.Models.Reporte.ModoFalla
+- uid: RSQR.Models.Reporte.ControlesEstablecidos*
+  commentId: Overload:RSQR.Models.Reporte.ControlesEstablecidos
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_ControlesEstablecidos
+  name: ControlesEstablecidos
+  nameWithType: Reporte.ControlesEstablecidos
+  fullName: RSQR.Models.Reporte.ControlesEstablecidos
+- uid: RSQR.Models.Reporte.EvidenciaFotografica*
+  commentId: Overload:RSQR.Models.Reporte.EvidenciaFotografica
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_EvidenciaFotografica
+  name: EvidenciaFotografica
+  nameWithType: Reporte.EvidenciaFotografica
+  fullName: RSQR.Models.Reporte.EvidenciaFotografica
+- uid: System.Collections.Generic.List{System.Byte[]}
+  commentId: T:System.Collections.Generic.List{System.Byte[]}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<byte[]>
+  nameWithType: List<byte[]>
+  fullName: System.Collections.Generic.List<byte[]>
+  nameWithType.vb: List(Of Byte())
+  fullName.vb: System.Collections.Generic.List(Of Byte())
+  name.vb: List(Of Byte())
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+  - name: )
+- uid: RSQR.Models.Reporte.Customer*
+  commentId: Overload:RSQR.Models.Reporte.Customer
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_Customer
+  name: Customer
+  nameWithType: Reporte.Customer
+  fullName: RSQR.Models.Reporte.Customer
+- uid: RSQR.Models.Reporte.MotherFactory*
+  commentId: Overload:RSQR.Models.Reporte.MotherFactory
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_MotherFactory
+  name: MotherFactory
+  nameWithType: Reporte.MotherFactory
+  fullName: RSQR.Models.Reporte.MotherFactory
+- uid: RSQR.Models.Reporte.CustomerPartNumber*
+  commentId: Overload:RSQR.Models.Reporte.CustomerPartNumber
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_CustomerPartNumber
+  name: CustomerPartNumber
+  nameWithType: Reporte.CustomerPartNumber
+  fullName: RSQR.Models.Reporte.CustomerPartNumber
+- uid: RSQR.Models.Reporte.Mileage*
+  commentId: Overload:RSQR.Models.Reporte.Mileage
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_Mileage
+  name: Mileage
+  nameWithType: Reporte.Mileage
+  fullName: RSQR.Models.Reporte.Mileage
+- uid: RSQR.Models.Reporte.InvestigationReport*
+  commentId: Overload:RSQR.Models.Reporte.InvestigationReport
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_InvestigationReport
+  name: InvestigationReport
+  nameWithType: Reporte.InvestigationReport
+  fullName: RSQR.Models.Reporte.InvestigationReport
+- uid: RSQR.Models.Reporte.DateOfClose*
+  commentId: Overload:RSQR.Models.Reporte.DateOfClose
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_DateOfClose
+  name: DateOfClose
+  nameWithType: Reporte.DateOfClose
+  fullName: RSQR.Models.Reporte.DateOfClose
+- uid: RSQR.Models.Reporte.ImpactoPPM*
+  commentId: Overload:RSQR.Models.Reporte.ImpactoPPM
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_ImpactoPPM
+  name: ImpactoPPM
+  nameWithType: Reporte.ImpactoPPM
+  fullName: RSQR.Models.Reporte.ImpactoPPM
+- uid: RSQR.Models.Reporte.Responsabilidad*
+  commentId: Overload:RSQR.Models.Reporte.Responsabilidad
+  href: RSQR.Models.Reporte.html#RSQR_Models_Reporte_Responsabilidad
+  name: Responsabilidad
+  nameWithType: Reporte.Responsabilidad
+  fullName: RSQR.Models.Reporte.Responsabilidad
+- uid: RSQR.Models.ResponsabilidadOpciones
+  commentId: T:RSQR.Models.ResponsabilidadOpciones
+  parent: RSQR.Models
+  href: RSQR.Models.ResponsabilidadOpciones.html
+  name: ResponsabilidadOpciones
+  nameWithType: ResponsabilidadOpciones
+  fullName: RSQR.Models.ResponsabilidadOpciones

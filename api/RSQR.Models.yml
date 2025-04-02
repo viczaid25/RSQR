@@ -1,0 +1,91 @@
+### YamlMime:ManagedReference
+items:
+- uid: RSQR.Models
+  commentId: N:RSQR.Models
+  id: RSQR.Models
+  children:
+  - RSQR.Models.CincoMOpciones
+  - RSQR.Models.ErrorViewModel
+  - RSQR.Models.PpmReport
+  - RSQR.Models.Reporte
+  - RSQR.Models.ReporteViewModel
+  - RSQR.Models.ResponsabilidadOpciones
+  - RSQR.Models.TipoReporte
+  langs:
+  - csharp
+  - vb
+  name: RSQR.Models
+  nameWithType: RSQR.Models
+  fullName: RSQR.Models
+  type: Namespace
+  assemblies:
+  - RSQR
+references:
+- uid: RSQR.Models.ErrorViewModel
+  commentId: T:RSQR.Models.ErrorViewModel
+  href: RSQR.Models.ErrorViewModel.html
+  name: ErrorViewModel
+  nameWithType: ErrorViewModel
+  fullName: RSQR.Models.ErrorViewModel
+- uid: RSQR.Models.PpmReport
+  commentId: T:RSQR.Models.PpmReport
+  href: RSQR.Models.PpmReport.html
+  name: PpmReport
+  nameWithType: PpmReport
+  fullName: RSQR.Models.PpmReport
+- uid: RSQR.Models.TipoReporte
+  commentId: T:RSQR.Models.TipoReporte
+  parent: RSQR.Models
+  href: RSQR.Models.TipoReporte.html
+  name: TipoReporte
+  nameWithType: TipoReporte
+  fullName: RSQR.Models.TipoReporte
+- uid: RSQR.Models.CincoMOpciones
+  commentId: T:RSQR.Models.CincoMOpciones
+  parent: RSQR.Models
+  href: RSQR.Models.CincoMOpciones.html
+  name: CincoMOpciones
+  nameWithType: CincoMOpciones
+  fullName: RSQR.Models.CincoMOpciones
+- uid: RSQR.Models.ResponsabilidadOpciones
+  commentId: T:RSQR.Models.ResponsabilidadOpciones
+  parent: RSQR.Models
+  href: RSQR.Models.ResponsabilidadOpciones.html
+  name: ResponsabilidadOpciones
+  nameWithType: ResponsabilidadOpciones
+  fullName: RSQR.Models.ResponsabilidadOpciones
+- uid: RSQR.Models.Reporte
+  commentId: T:RSQR.Models.Reporte
+  parent: RSQR.Models
+  href: RSQR.Models.Reporte.html
+  name: Reporte
+  nameWithType: Reporte
+  fullName: RSQR.Models.Reporte
+- uid: RSQR.Models.ReporteViewModel
+  commentId: T:RSQR.Models.ReporteViewModel
+  href: RSQR.Models.ReporteViewModel.html
+  name: ReporteViewModel
+  nameWithType: ReporteViewModel
+  fullName: RSQR.Models.ReporteViewModel
+- uid: RSQR.Models
+  commentId: N:RSQR.Models
+  href: RSQR.html
+  name: RSQR.Models
+  nameWithType: RSQR.Models
+  fullName: RSQR.Models
+  spec.csharp:
+  - uid: RSQR
+    name: RSQR
+    href: RSQR.html
+  - name: .
+  - uid: RSQR.Models
+    name: Models
+    href: RSQR.Models.html
+  spec.vb:
+  - uid: RSQR
+    name: RSQR
+    href: RSQR.html
+  - name: .
+  - uid: RSQR.Models
+    name: Models
+    href: RSQR.Models.html

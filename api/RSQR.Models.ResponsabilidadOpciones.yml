@@ -1,0 +1,130 @@
+### YamlMime:ManagedReference
+items:
+- uid: RSQR.Models.ResponsabilidadOpciones
+  commentId: T:RSQR.Models.ResponsabilidadOpciones
+  id: ResponsabilidadOpciones
+  parent: RSQR.Models
+  children:
+  - RSQR.Models.ResponsabilidadOpciones.Meax
+  - RSQR.Models.ResponsabilidadOpciones.Proveedor
+  langs:
+  - csharp
+  - vb
+  name: ResponsabilidadOpciones
+  nameWithType: ResponsabilidadOpciones
+  fullName: RSQR.Models.ResponsabilidadOpciones
+  type: Enum
+  source:
+    id: ResponsabilidadOpciones
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 29
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public enum ResponsabilidadOpciones
+    content.vb: Public Enum ResponsabilidadOpciones
+- uid: RSQR.Models.ResponsabilidadOpciones.Meax
+  commentId: F:RSQR.Models.ResponsabilidadOpciones.Meax
+  id: Meax
+  parent: RSQR.Models.ResponsabilidadOpciones
+  langs:
+  - csharp
+  - vb
+  name: Meax
+  nameWithType: ResponsabilidadOpciones.Meax
+  fullName: RSQR.Models.ResponsabilidadOpciones.Meax
+  type: Field
+  source:
+    id: Meax
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 31
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: >-
+      [Display(Name = "MEAX")]
+
+      Meax = 0
+    return:
+      type: RSQR.Models.ResponsabilidadOpciones
+    content.vb: >-
+      <Display(Name:="MEAX")>
+
+      Meax = 0
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.DisplayAttribute
+    ctor: System.ComponentModel.DataAnnotations.DisplayAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: MEAX
+- uid: RSQR.Models.ResponsabilidadOpciones.Proveedor
+  commentId: F:RSQR.Models.ResponsabilidadOpciones.Proveedor
+  id: Proveedor
+  parent: RSQR.Models.ResponsabilidadOpciones
+  langs:
+  - csharp
+  - vb
+  name: Proveedor
+  nameWithType: ResponsabilidadOpciones.Proveedor
+  fullName: RSQR.Models.ResponsabilidadOpciones.Proveedor
+  type: Field
+  source:
+    id: Proveedor
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 34
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: >-
+      [Display(Name = "Proveedor")]
+
+      Proveedor = 1
+    return:
+      type: RSQR.Models.ResponsabilidadOpciones
+    content.vb: >-
+      <Display(Name:="Proveedor")>
+
+      Proveedor = 1
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.DisplayAttribute
+    ctor: System.ComponentModel.DataAnnotations.DisplayAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: Proveedor
+references:
+- uid: RSQR.Models
+  commentId: N:RSQR.Models
+  href: RSQR.html
+  name: RSQR.Models
+  nameWithType: RSQR.Models
+  fullName: RSQR.Models
+  spec.csharp:
+  - uid: RSQR
+    name: RSQR
+    href: RSQR.html
+  - name: .
+  - uid: RSQR.Models
+    name: Models
+    href: RSQR.Models.html
+  spec.vb:
+  - uid: RSQR
+    name: RSQR
+    href: RSQR.html
+  - name: .
+  - uid: RSQR.Models
+    name: Models
+    href: RSQR.Models.html
+- uid: RSQR.Models.ResponsabilidadOpciones
+  commentId: T:RSQR.Models.ResponsabilidadOpciones
+  parent: RSQR.Models
+  href: RSQR.Models.ResponsabilidadOpciones.html
+  name: ResponsabilidadOpciones
+  nameWithType: ResponsabilidadOpciones
+  fullName: RSQR.Models.ResponsabilidadOpciones

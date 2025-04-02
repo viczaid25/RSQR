@@ -1,0 +1,46 @@
+### YamlMime:ManagedReference
+items:
+- uid: RSQR.Services
+  commentId: N:RSQR.Services
+  id: RSQR.Services
+  children:
+  - RSQR.Services.ActiveDirectoryService
+  langs:
+  - csharp
+  - vb
+  name: RSQR.Services
+  nameWithType: RSQR.Services
+  fullName: RSQR.Services
+  type: Namespace
+  assemblies:
+  - RSQR
+references:
+- uid: RSQR.Services.ActiveDirectoryService
+  commentId: T:RSQR.Services.ActiveDirectoryService
+  parent: RSQR.Services
+  href: RSQR.Services.ActiveDirectoryService.html
+  name: ActiveDirectoryService
+  nameWithType: ActiveDirectoryService
+  fullName: RSQR.Services.ActiveDirectoryService
+- uid: RSQR.Services
+  commentId: N:RSQR.Services
+  href: RSQR.html
+  name: RSQR.Services
+  nameWithType: RSQR.Services
+  fullName: RSQR.Services
+  spec.csharp:
+  - uid: RSQR
+    name: RSQR
+    href: RSQR.html
+  - name: .
+  - uid: RSQR.Services
+    name: Services
+    href: RSQR.Services.html
+  spec.vb:
+  - uid: RSQR
+    name: RSQR
+    href: RSQR.html
+  - name: .
+  - uid: RSQR.Services
+    name: Services
+    href: RSQR.Services.html

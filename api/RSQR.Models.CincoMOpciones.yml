@@ -1,0 +1,244 @@
+### YamlMime:ManagedReference
+items:
+- uid: RSQR.Models.CincoMOpciones
+  commentId: T:RSQR.Models.CincoMOpciones
+  id: CincoMOpciones
+  parent: RSQR.Models
+  children:
+  - RSQR.Models.CincoMOpciones.ManoDeObra
+  - RSQR.Models.CincoMOpciones.Maquina
+  - RSQR.Models.CincoMOpciones.Material
+  - RSQR.Models.CincoMOpciones.Medicion
+  - RSQR.Models.CincoMOpciones.MedioAmbiente
+  langs:
+  - csharp
+  - vb
+  name: CincoMOpciones
+  nameWithType: CincoMOpciones
+  fullName: RSQR.Models.CincoMOpciones
+  type: Enum
+  source:
+    id: CincoMOpciones
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 11
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public enum CincoMOpciones
+    content.vb: Public Enum CincoMOpciones
+- uid: RSQR.Models.CincoMOpciones.Maquina
+  commentId: F:RSQR.Models.CincoMOpciones.Maquina
+  id: Maquina
+  parent: RSQR.Models.CincoMOpciones
+  langs:
+  - csharp
+  - vb
+  name: Maquina
+  nameWithType: CincoMOpciones.Maquina
+  fullName: RSQR.Models.CincoMOpciones.Maquina
+  type: Field
+  source:
+    id: Maquina
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 13
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: >-
+      [Display(Name = "Maquina/Machine")]
+
+      Maquina = 0
+    return:
+      type: RSQR.Models.CincoMOpciones
+    content.vb: >-
+      <Display(Name:="Maquina/Machine")>
+
+      Maquina = 0
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.DisplayAttribute
+    ctor: System.ComponentModel.DataAnnotations.DisplayAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: Maquina/Machine
+- uid: RSQR.Models.CincoMOpciones.MedioAmbiente
+  commentId: F:RSQR.Models.CincoMOpciones.MedioAmbiente
+  id: MedioAmbiente
+  parent: RSQR.Models.CincoMOpciones
+  langs:
+  - csharp
+  - vb
+  name: MedioAmbiente
+  nameWithType: CincoMOpciones.MedioAmbiente
+  fullName: RSQR.Models.CincoMOpciones.MedioAmbiente
+  type: Field
+  source:
+    id: MedioAmbiente
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 16
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: >-
+      [Display(Name = "Medio ambiente/Environment")]
+
+      MedioAmbiente = 1
+    return:
+      type: RSQR.Models.CincoMOpciones
+    content.vb: >-
+      <Display(Name:="Medio ambiente/Environment")>
+
+      MedioAmbiente = 1
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.DisplayAttribute
+    ctor: System.ComponentModel.DataAnnotations.DisplayAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: Medio ambiente/Environment
+- uid: RSQR.Models.CincoMOpciones.ManoDeObra
+  commentId: F:RSQR.Models.CincoMOpciones.ManoDeObra
+  id: ManoDeObra
+  parent: RSQR.Models.CincoMOpciones
+  langs:
+  - csharp
+  - vb
+  name: ManoDeObra
+  nameWithType: CincoMOpciones.ManoDeObra
+  fullName: RSQR.Models.CincoMOpciones.ManoDeObra
+  type: Field
+  source:
+    id: ManoDeObra
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 19
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: >-
+      [Display(Name = "Mano de obra/Workforce")]
+
+      ManoDeObra = 2
+    return:
+      type: RSQR.Models.CincoMOpciones
+    content.vb: >-
+      <Display(Name:="Mano de obra/Workforce")>
+
+      ManoDeObra = 2
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.DisplayAttribute
+    ctor: System.ComponentModel.DataAnnotations.DisplayAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: Mano de obra/Workforce
+- uid: RSQR.Models.CincoMOpciones.Medicion
+  commentId: F:RSQR.Models.CincoMOpciones.Medicion
+  id: Medicion
+  parent: RSQR.Models.CincoMOpciones
+  langs:
+  - csharp
+  - vb
+  name: Medicion
+  nameWithType: CincoMOpciones.Medicion
+  fullName: RSQR.Models.CincoMOpciones.Medicion
+  type: Field
+  source:
+    id: Medicion
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 22
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: >-
+      [Display(Name = "Medición/Measurement")]
+
+      Medicion = 3
+    return:
+      type: RSQR.Models.CincoMOpciones
+    content.vb: >-
+      <Display(Name:="Medición/Measurement")>
+
+      Medicion = 3
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.DisplayAttribute
+    ctor: System.ComponentModel.DataAnnotations.DisplayAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: Medición/Measurement
+- uid: RSQR.Models.CincoMOpciones.Material
+  commentId: F:RSQR.Models.CincoMOpciones.Material
+  id: Material
+  parent: RSQR.Models.CincoMOpciones
+  langs:
+  - csharp
+  - vb
+  name: Material
+  nameWithType: CincoMOpciones.Material
+  fullName: RSQR.Models.CincoMOpciones.Material
+  type: Field
+  source:
+    id: Material
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 25
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: >-
+      [Display(Name = "Material")]
+
+      Material = 4
+    return:
+      type: RSQR.Models.CincoMOpciones
+    content.vb: >-
+      <Display(Name:="Material")>
+
+      Material = 4
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.DisplayAttribute
+    ctor: System.ComponentModel.DataAnnotations.DisplayAttribute.#ctor
+    arguments: []
+    namedArguments:
+    - name: Name
+      type: System.String
+      value: Material
+references:
+- uid: RSQR.Models
+  commentId: N:RSQR.Models
+  href: RSQR.html
+  name: RSQR.Models
+  nameWithType: RSQR.Models
+  fullName: RSQR.Models
+  spec.csharp:
+  - uid: RSQR
+    name: RSQR
+    href: RSQR.html
+  - name: .
+  - uid: RSQR.Models
+    name: Models
+    href: RSQR.Models.html
+  spec.vb:
+  - uid: RSQR
+    name: RSQR
+    href: RSQR.html
+  - name: .
+  - uid: RSQR.Models
+    name: Models
+    href: RSQR.Models.html
+- uid: RSQR.Models.CincoMOpciones
+  commentId: T:RSQR.Models.CincoMOpciones
+  parent: RSQR.Models
+  href: RSQR.Models.CincoMOpciones.html
+  name: CincoMOpciones
+  nameWithType: CincoMOpciones
+  fullName: RSQR.Models.CincoMOpciones

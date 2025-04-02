@@ -1,0 +1,123 @@
+### YamlMime:ManagedReference
+items:
+- uid: RSQR.Models.TipoReporte
+  commentId: T:RSQR.Models.TipoReporte
+  id: TipoReporte
+  parent: RSQR.Models
+  children:
+  - RSQR.Models.TipoReporte.CeroKm
+  - RSQR.Models.TipoReporte.Field
+  - RSQR.Models.TipoReporte.Interno
+  langs:
+  - csharp
+  - vb
+  name: TipoReporte
+  nameWithType: TipoReporte
+  fullName: RSQR.Models.TipoReporte
+  type: Enum
+  source:
+    id: TipoReporte
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 4
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: public enum TipoReporte
+    content.vb: Public Enum TipoReporte
+- uid: RSQR.Models.TipoReporte.Interno
+  commentId: F:RSQR.Models.TipoReporte.Interno
+  id: Interno
+  parent: RSQR.Models.TipoReporte
+  langs:
+  - csharp
+  - vb
+  name: Interno
+  nameWithType: TipoReporte.Interno
+  fullName: RSQR.Models.TipoReporte.Interno
+  type: Field
+  source:
+    id: Interno
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 6
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: Interno = 0
+    return:
+      type: RSQR.Models.TipoReporte
+- uid: RSQR.Models.TipoReporte.CeroKm
+  commentId: F:RSQR.Models.TipoReporte.CeroKm
+  id: CeroKm
+  parent: RSQR.Models.TipoReporte
+  langs:
+  - csharp
+  - vb
+  name: CeroKm
+  nameWithType: TipoReporte.CeroKm
+  fullName: RSQR.Models.TipoReporte.CeroKm
+  type: Field
+  source:
+    id: CeroKm
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 7
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: CeroKm = 1
+    return:
+      type: RSQR.Models.TipoReporte
+- uid: RSQR.Models.TipoReporte.Field
+  commentId: F:RSQR.Models.TipoReporte.Field
+  id: Field
+  parent: RSQR.Models.TipoReporte
+  langs:
+  - csharp
+  - vb
+  name: Field
+  nameWithType: TipoReporte.Field
+  fullName: RSQR.Models.TipoReporte.Field
+  type: Field
+  source:
+    id: Field
+    path: C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\Models\Reporte.cs
+    startLine: 8
+  assemblies:
+  - RSQR
+  namespace: RSQR.Models
+  syntax:
+    content: Field = 2
+    return:
+      type: RSQR.Models.TipoReporte
+references:
+- uid: RSQR.Models
+  commentId: N:RSQR.Models
+  href: RSQR.html
+  name: RSQR.Models
+  nameWithType: RSQR.Models
+  fullName: RSQR.Models
+  spec.csharp:
+  - uid: RSQR
+    name: RSQR
+    href: RSQR.html
+  - name: .
+  - uid: RSQR.Models
+    name: Models
+    href: RSQR.Models.html
+  spec.vb:
+  - uid: RSQR
+    name: RSQR
+    href: RSQR.html
+  - name: .
+  - uid: RSQR.Models
+    name: Models
+    href: RSQR.Models.html
+- uid: RSQR.Models.TipoReporte
+  commentId: T:RSQR.Models.TipoReporte
+  parent: RSQR.Models
+  href: RSQR.Models.TipoReporte.html
+  name: TipoReporte
+  nameWithType: TipoReporte
+  fullName: RSQR.Models.TipoReporte

@@ -1,0 +1,37 @@
+### YamlMime:ManagedReference
+items:
+- uid: RSQR.Controllers
+  commentId: N:RSQR.Controllers
+  id: RSQR.Controllers
+  children:
+  - RSQR.Controllers.AccountController
+  - RSQR.Controllers.HomeController
+  - RSQR.Controllers.ReportesController
+  langs:
+  - csharp
+  - vb
+  name: RSQR.Controllers
+  nameWithType: RSQR.Controllers
+  fullName: RSQR.Controllers
+  type: Namespace
+  assemblies:
+  - RSQR
+references:
+- uid: RSQR.Controllers.AccountController
+  commentId: T:RSQR.Controllers.AccountController
+  href: RSQR.Controllers.AccountController.html
+  name: AccountController
+  nameWithType: AccountController
+  fullName: RSQR.Controllers.AccountController
+- uid: RSQR.Controllers.HomeController
+  commentId: T:RSQR.Controllers.HomeController
+  href: RSQR.Controllers.HomeController.html
+  name: HomeController
+  nameWithType: HomeController
+  fullName: RSQR.Controllers.HomeController
+- uid: RSQR.Controllers.ReportesController
+  commentId: T:RSQR.Controllers.ReportesController
+  href: RSQR.Controllers.ReportesController.html
+  name: ReportesController
+  nameWithType: ReportesController
+  fullName: RSQR.Controllers.ReportesController
