@@ -1,0 +1,109 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\dm45207\\source\\repos\\RSQR\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|c:\\users\\dm45207\\source\\repos\\rsqr\\rsqr\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|solutionrelative:rsqr\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|c:\\users\\dm45207\\source\\repos\\rsqr\\rsqr\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|solutionrelative:rsqr\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|c:\\users\\dm45207\\source\\repos\\rsqr\\rsqr\\views\\reportes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|solutionrelative:rsqr\\views\\reportes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|c:\\users\\dm45207\\source\\repos\\rsqr\\rsqr\\views\\reportes\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|solutionrelative:rsqr\\views\\reportes\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|c:\\users\\dm45207\\source\\repos\\rsqr\\rsqr\\views\\reportes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|solutionrelative:rsqr\\views\\reportes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Views\\Reportes\\Create.cshtml",
+              "RelativeDocumentMoniker": "RSQR\\Views\\Reportes\\Create.cshtml",
+              "ToolTip": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Views\\Reportes\\Create.cshtml",
+              "RelativeToolTip": "RSQR\\Views\\Reportes\\Create.cshtml",
+              "ViewState": "AgIAAIwBAAAAAAAAAAAAAIwBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-03T21:22:06.918Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Views\\Reportes\\Details.cshtml",
+              "RelativeDocumentMoniker": "RSQR\\Views\\Reportes\\Details.cshtml",
+              "ToolTip": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Views\\Reportes\\Details.cshtml",
+              "RelativeToolTip": "RSQR\\Views\\Reportes\\Details.cshtml",
+              "ViewState": "AgIAAM4AAAAAAAAAAAAowOkAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-03T21:15:58.772Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "RSQR\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "RSQR\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAAAHMAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-03T20:42:59.313Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Views\\Reportes\\Index.cshtml",
+              "RelativeDocumentMoniker": "RSQR\\Views\\Reportes\\Index.cshtml",
+              "ToolTip": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Views\\Reportes\\Index.cshtml",
+              "RelativeToolTip": "RSQR\\Views\\Reportes\\Index.cshtml",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAFwAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-03T20:40:03.039Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "RSQR\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "RSQR\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAADoAAAAAAAAAAAAYwE0AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-04-03T20:37:11.63Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

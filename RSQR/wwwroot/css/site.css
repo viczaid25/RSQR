@@ -1,22 +1,127 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+/* Estilos Generales */
 body {
-  margin-bottom: 60px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
 }
+/* Barra Superior */
+.top-navbar {
+    background-color: #0076df;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1030;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    height: 60px;
+}
+
+/* Resto de tus estilos... */
+
+/* Barra Superior */
+header.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1030;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+/* Barra Lateral */
+.sidebar {
+    width: 180px;
+    background-color: #333d46;
+    min-height: 100vh;
+    position: fixed;
+    top: 60px; /* Para que no se solape con la barra superior */
+    left: 0;
+    transition: all 0.3s;
+    z-index: 1020;
+    overflow-y: auto;
+}
+
+.sidebar-menu .nav-link {
+    padding: 0.6rem 1rem; /* Más compacto */
+    color: #ffffff;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+    .sidebar-menu .nav-link:hover,
+    .sidebar-menu .nav-link.active {
+        background-color: rgba(0, 118, 223, 0.2);
+        border-left: 3px solid #0076df;
+    }
+
+    .sidebar-menu .nav-link i {
+        width: 18px;
+        text-align: center;
+        margin-right: 0.5rem;
+    }
+
+.sidebar-footer {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    background-color: #2a323a;
+    color: #ffffff !important; /* Fuerza color blanco */
+}
+
+    .sidebar-footer .user-info,
+    .sidebar-footer .user-info span,
+    .sidebar-footer .user-info i {
+        color: #ffffff !important;
+        margin-bottom: 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .sidebar-footer .btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    /* Opcional: si los botones también necesitan ajuste */
+.sidebar-footer .btn-outline-light {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.sidebar-footer .btn-outline-light:hover {
+    color: #333d46;
+    background-color: #ffffff;
+}
+
+/* Contenido Principal */
+.content-wrapper {
+    margin-left: 180px;
+    margin-top: 60px; /* Compensar barra superior */
+    padding: 1.5rem;
+    min-height: calc(100vh - 60px);
+    transition: all 0.3s;
+    width: calc(100% - 180px);
+}
+
+/* Responsividad */
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(-180px);
+    }
+
+        .sidebar.active {
+            transform: translateX(0);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+        }
+
+    .content-wrapper {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    body.sidebar-active {
+        overflow: hidden;
+    }
+
+        body.sidebar-active .content-wrapper {
+            transform: translateX(180px);
+        }
+}
+
+/* Resto de tus estilos... */

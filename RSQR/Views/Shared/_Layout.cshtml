@@ -1,90 +1,116 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - RSQR</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/RSQR.styles.css" asp-append-version="true" />
-
-    <!--Css pluggins-->
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap5.min.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RSQR</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Reportes" asp-action="Index">Reporte</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav">
-                            <li class="navbar-nav">
-                                <a class="nav-link" asp-controller="PPM" asp-action="Ppm">PPM</a>
-                            </li>
-                        </ul>
-                    </ul>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <span class="nav-link text-dark">
-                                    👤 @User.FindFirst("DisplayName")?.Value
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Cerrar Sesión</a>
-                            </li>
-                        </ul>
-                    }
-                    else
-                    {
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Iniciar Sesión</a>
-                            </li>
-                        </ul>
-                    }
-
-                </div>
-            </div>
-        </nav>
+    <!-- Barra Superior Azul -->
+    <header class="navbar navbar-dark top-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">RSQR</a>
+            <button class="navbar-toggler" type="button" id="sidebarToggle">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+    <!-- Barra Lateral -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-menu p-2">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-home me-2"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-controller="Reportes" asp-action="Index">
+                        <i class="fas fa-file-alt me-2"></i> Reportes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" asp-controller="PPM" asp-action="Ppm">
+                        <i class="fas fa-chart-line me-2"></i> PPM
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="sidebar-footer p-2">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="user-info">
+                    <i class="fas fa-user-circle me-2"></i>
+                    <span>@User.FindFirst("DisplayName")?.Value</span>
+                </div>
+                <a class="btn btn-sm btn-outline-light w-100" asp-controller="Account" asp-action="Logout">
+                    <i class="fas fa-sign-out-alt me-1"></i> Cerrar Sesión
+                </a>
+            }
+            else
+            {
+                <a class="btn btn-sm btn-primary w-100" asp-controller="Account" asp-action="Login">
+                    <i class="fas fa-sign-in-alt me-1"></i> Iniciar Sesión
+                </a>
+            }
+        </div>
     </div>
 
+    <!-- Contenido Principal -->
+    <div class="content-wrapper">
+        @RenderBody()
+    </div>
+
+    <!-- Footer -->
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - RSQR - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; @DateTime.Now.Year - RSQR
         </div>
     </footer>
+
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!--Js Pluggins-->
-    <script src="https://cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
-
-
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap5.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        // Toggle para mostrar/ocultar sidebar en móviles
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+            document.body.classList.toggle('sidebar-active');
+
+            // Cerrar el menú al hacer clic fuera de él
+            if (sidebar.classList.contains('active')) {
+                document.addEventListener('click', closeSidebarOnClickOutside);
+            } else {
+                document.removeEventListener('click', closeSidebarOnClickOutside);
+            }
+        });
+
+        function closeSidebarOnClickOutside(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('sidebarToggle');
+
+            if (!sidebar.contains(event.target) && event.target !== toggleBtn && !toggleBtn.contains(event.target)) {
+                sidebar.classList.remove('active');
+                document.body.classList.remove('sidebar-active');
+                document.removeEventListener('click', closeSidebarOnClickOutside);
+            }
+        }
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

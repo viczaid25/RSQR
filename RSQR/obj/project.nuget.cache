@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IUY63faqdWQ=",
+  "dgSpecHash": "c3G6fnb+xCA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\dm45207\\source\\repos\\RSQR - Copy\\RSQR\\RSQR.csproj",
+  "projectFilePath": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\RSQR.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dm45207\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\dm45207\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
