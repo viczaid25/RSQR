@@ -2,15 +2,34 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Servicio para sincronizar usuarios de Active Directory con el sistema de Identity.
+/// </summary>
 public class AdUserManagerService
 {
     private readonly UserManager<IdentityUser> _userManager;
 
+    /// <summary>
+    /// Inicializa una nueva instancia del servicio AdUserManagerService.
+    /// </summary>
+    /// <param name="userManager">El UserManager de ASP.NET Core Identity para gestionar usuarios.</param>
     public AdUserManagerService(UserManager<IdentityUser> userManager)
     {
         _userManager = userManager;
     }
 
+    /// <summary>
+    /// Sincroniza un usuario de Active Directory con el sistema de Identity.
+    /// </summary>
+    /// <param name="principal">ClaimsPrincipal que representa al usuario autenticado.</param>
+    /// <returns>Una tarea que representa la operación asíncrona.</returns>
+    /// <exception cref="System.Exception">
+    /// Se lanza cuando no se puede crear el usuario en el sistema de Identity.
+    /// </exception>
+    /// <remarks>
+    /// Este método verifica si el usuario existe en Identity. Si no existe, crea un nuevo usuario
+    /// utilizando el nombre de usuario de AD y genera un correo electrónico predeterminado.
+    /// </remarks>
     public async Task SyncAdUserAsync(ClaimsPrincipal principal)
     {
         var userName = principal.Identity.Name; // Obtiene el nombre de usuario de AD
