@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\Users\\dm45207\\source\\repos\\RSQR\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|c:\\users\\dm45207\\source\\repos\\rsqr\\rsqr\\services\\iemailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|solutionrelative:rsqr\\services\\iemailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|c:\\users\\dm45207\\source\\repos\\rsqr\\rsqr\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|solutionrelative:rsqr\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|c:\\users\\dm45207\\source\\repos\\rsqr\\rsqr\\services\\adusermanagerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|solutionrelative:rsqr\\services\\adusermanagerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|c:\\users\\dm45207\\source\\repos\\rsqr\\rsqr\\services\\activedirectoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C5A17325-37F9-4885-A34F-B77479DAB574}|RSQR\\RSQR.csproj|solutionrelative:rsqr\\services\\activedirectoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -39,19 +51,58 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "IEmailService.cs",
+              "DocumentMoniker": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Services\\IEmailService.cs",
+              "RelativeDocumentMoniker": "RSQR\\Services\\IEmailService.cs",
+              "ToolTip": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Services\\IEmailService.cs",
+              "RelativeToolTip": "RSQR\\Services\\IEmailService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-04T18:53:20.035Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Services\\EmailService.cs",
+              "RelativeDocumentMoniker": "RSQR\\Services\\EmailService.cs",
+              "ToolTip": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Services\\EmailService.cs",
+              "RelativeToolTip": "RSQR\\Services\\EmailService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-04T18:48:44.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AdUserManagerService.cs",
+              "DocumentMoniker": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Services\\AdUserManagerService.cs",
+              "RelativeDocumentMoniker": "RSQR\\Services\\AdUserManagerService.cs",
+              "ToolTip": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Services\\AdUserManagerService.cs",
+              "RelativeToolTip": "RSQR\\Services\\AdUserManagerService.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAQwCYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-04T18:47:25.895Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "ActiveDirectoryService.cs",
               "DocumentMoniker": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Services\\ActiveDirectoryService.cs",
               "RelativeDocumentMoniker": "RSQR\\Services\\ActiveDirectoryService.cs",
-              "ToolTip": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Services\\ActiveDirectoryService.cs*",
-              "RelativeToolTip": "RSQR\\Services\\ActiveDirectoryService.cs*",
-              "ViewState": "AgIAABkAAAAAAAAAAAAQwCQAAAAPAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Services\\ActiveDirectoryService.cs",
+              "RelativeToolTip": "RSQR\\Services\\ActiveDirectoryService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-04T18:42:19.88Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Views\\Reportes\\Create.cshtml",
               "RelativeDocumentMoniker": "RSQR\\Views\\Reportes\\Create.cshtml",
@@ -63,7 +114,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Views\\Reportes\\Details.cshtml",
               "RelativeDocumentMoniker": "RSQR\\Views\\Reportes\\Details.cshtml",
@@ -71,11 +122,12 @@
               "RelativeToolTip": "RSQR\\Views\\Reportes\\Details.cshtml",
               "ViewState": "AgIAAM4AAAAAAAAAAAAowOkAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-03T21:15:58.772Z"
+              "WhenOpened": "2025-04-03T21:15:58.772Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "RSQR\\Views\\Shared\\_Layout.cshtml",
@@ -83,11 +135,12 @@
               "RelativeToolTip": "RSQR\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAHMAAAAAAAAAAAAAAHMAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-03T20:42:59.313Z"
+              "WhenOpened": "2025-04-03T20:42:59.313Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\Views\\Reportes\\Index.cshtml",
               "RelativeDocumentMoniker": "RSQR\\Views\\Reportes\\Index.cshtml",
@@ -99,7 +152,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "site.css",
               "DocumentMoniker": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\wwwroot\\css\\site.css",
               "RelativeDocumentMoniker": "RSQR\\wwwroot\\css\\site.css",

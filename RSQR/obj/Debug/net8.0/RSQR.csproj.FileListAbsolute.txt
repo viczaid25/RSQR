@@ -608,5 +608,4 @@ C:\Users\dm45207\source\repos\RSQR\RSQR\bin\Debug\net8.0\runtimes\win\lib\net8.0
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.sourcelink.json
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\staticwebassets\msbuild.RSQR.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.xml

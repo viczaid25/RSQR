@@ -141,7 +141,7 @@
             <param name="id">El ID del reporte.</param>
             <returns>True si el reporte existe; de lo contrario, False.</returns>
         </member>
-        <member name="M:RSQR.Controllers.ReportesController.ExportToExcel">
+        <member name="M:RSQR.Controllers.ReportesController.ExportToExcel(System.String)">
             <summary>
             Exporta los reportes a un archivo Excel.
             </summary>
@@ -207,36 +207,146 @@
         <member name="M:RSQR.Migrations.UpdateResponsabilidadField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:PPMController">
+        <member name="T:RSQR.Migrations.AddConsecutivoArchivoTable">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.AddConsecutivoArchivoTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.AddConsecutivoArchivoTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.AddConsecutivoArchivoTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RSQR.Services.ActiveDirectoryService">
             <summary>
-            Controlador para gestionar operaciones relacionadas con PPM (Planificación de Producción y Mantenimiento).
+            Proporciona servicios para interactuar con Active Directory, incluyendo validación de credenciales
+            y recuperación de información de usuario.
             </summary>
+        </member>
+        <member name="M:RSQR.Services.ActiveDirectoryService.#ctor(System.String)">
+            <summary>
+            Inicializa una nueva instancia del servicio de Active Directory.
+            </summary>
+            <param name="domain">El nombre de dominio del Active Directory al que conectarse.</param>
+        </member>
+        <member name="M:RSQR.Services.ActiveDirectoryService.ValidateCredentials(System.String,System.String)">
+            <summary>
+            Valida las credenciales de un usuario contra el Active Directory.
+            </summary>
+            <param name="username">Nombre de usuario (sAMAccountName) a validar.</param>
+            <param name="password">Contraseña del usuario.</param>
+            <returns>
+            True si las credenciales son válidas y el usuario existe en el directorio,
+            False en caso contrario o si ocurre un error.
+            </returns>
             <remarks>
-            Este controlador está protegido con autorización, por lo que solo los usuarios autenticados pueden acceder a sus acciones.
+            Este método intenta autenticarse con el dominio usando las credenciales proporcionadas
+            y busca el usuario por su sAMAccountName.
             </remarks>
         </member>
-        <member name="M:PPMController.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:RSQR.Services.ActiveDirectoryService.GetDisplayName(System.String,System.String)">
             <summary>
-            Constructor del controlador PPMController.
+            Obtiene el nombre para mostrar (displayName) de un usuario desde Active Directory.
             </summary>
-            <param name="configuration">Instancia de IConfiguration para acceder a las cadenas de conexión.</param> 
-        </member>
-        <member name="M:PPMController.Ppm">
-            <summary>
-            Muestra la vista principal de PPM.
-            </summary>
-            <returns>La vista de PPM.</returns>
-        </member>
-        <member name="M:PPMController.SumarCajas(System.String,System.String,System.String)">
-            <summary>
-            Suma las cajas y realiza una división basada en los parámetros proporcionados.
-            </summary>
-            <param name="fechaInicio">Fecha de inicio en formato yyyy-MM-dd.</param>
-            <param name="fechaFin">Fecha de fin en formato yyyy-MM-dd.</param>
-            <param name="descripcion">Descripción de la línea de producción.</param>
+            <param name="username">Nombre de usuario (sAMAccountName).</param>
+            <param name="password">Contraseña del usuario.</param>
             <returns>
-            Un objeto JSON con el total de cajas, el resultado de la división y un mensaje de error en caso de fallo.
+            El nombre para mostrar del usuario si existe y las credenciales son válidas,
+            o string.Empty si no se encuentra, no tiene displayName o ocurre un error.
             </returns>
+            <remarks>
+            Requiere credenciales válidas para realizar la consulta.
+            </remarks>
+        </member>
+        <member name="T:RSQR.Services.EmailService">
+            <summary>
+            Servicio para el envío de correos electrónicos utilizando SMTP a través de MailKit.
+            </summary>
+        </member>
+        <member name="M:RSQR.Services.EmailService.#ctor(Microsoft.Extensions.Options.IOptions{RSQR.Models.EmailSettings})">
+            <summary>
+            Inicializa una nueva instancia del servicio de correo electrónico.
+            </summary>
+            <param name="emailSettings">Configuración de correo electrónico inyectada mediante IOptions.</param>
+        </member>
+        <member name="M:RSQR.Services.EmailService.SendEmailAsync(System.String,System.String,System.String)">
+            <summary>
+            Envía un correo electrónico de forma asíncrona.
+            </summary>
+            <param name="toEmail">Dirección de correo electrónico del destinatario.</param>
+            <param name="subject">Asunto del correo electrónico.</param>
+            <param name="body">Cuerpo del mensaje en formato HTML.</param>
+            <returns>Una tarea que representa la operación asíncrona de envío de correo.</returns>
+            <exception cref="T:System.Exception">
+            Se puede lanzar cuando ocurre un error durante la conexión SMTP o el envío del correo.
+            </exception>
+            <remarks>
+            Este método establece una conexión SMTP con el servidor configurado, envía el correo
+            y luego cierra la conexión. Utiliza SecureSocketOptions.Auto para negociar automáticamente
+            la seguridad de la conexión (SSL/TLS).
+            </remarks>
+        </member>
+        <member name="T:RSQR.Services.IEmailService">
+            <summary>
+            Interfaz que define el contrato para el servicio de envío de correos electrónicos.
+            </summary>
+        </member>
+        <member name="M:RSQR.Services.IEmailService.SendEmailAsync(System.String,System.String,System.String)">
+            <summary>
+            Envía un correo electrónico de forma asíncrona.
+            </summary>
+            <param name="toEmail">Dirección de correo electrónico del destinatario.</param>
+            <param name="subject">Asunto del mensaje.</param>
+            <param name="body">Contenido del mensaje en formato HTML.</param>
+            <returns>Tarea que representa la operación asíncrona.</returns>
+            <remarks>
+            Las implementaciones de esta interfaz deben proporcionar la lógica concreta
+            para enviar correos electrónicos utilizando algún proveedor de servicios SMTP.
+            </remarks>
+        </member>
+        <member name="M:RSQR.Utilities.BusinessUnitMapping.GetBusinessUnitCode(System.String)">
+            <summary>
+            Obtiene el código abreviado de una unidad de negocio.
+            </summary>
+            <param name="unitName">Nombre de la unidad de negocio (ej. "STARTER").</param>
+            <returns>Código abreviado (ej. "ST"). Si no existe, devuelve las primeras 4 letras en mayúsculas.</returns>
+        </member>
+        <member name="M:RSQR.Utilities.BusinessUnitMapping.IsValidBusinessUnit(System.String)">
+            <summary>
+            Verifica si una unidad de negocio existe en el mapeo.
+            </summary>
+        </member>
+        <member name="M:RSQR.Utilities.BusinessUnitMapping.GetAllMappings">
+            <summary>
+            Devuelve todos los mapeos disponibles (solo lectura).
+            </summary>
+        </member>
+        <member name="T:AdUserManagerService">
+            <summary>
+            Servicio para sincronizar usuarios de Active Directory con el sistema de Identity.
+            </summary>
+        </member>
+        <member name="M:AdUserManagerService.#ctor(Microsoft.AspNetCore.Identity.UserManager{Microsoft.AspNetCore.Identity.IdentityUser})">
+            <summary>
+            Inicializa una nueva instancia del servicio AdUserManagerService.
+            </summary>
+            <param name="userManager">El UserManager de ASP.NET Core Identity para gestionar usuarios.</param>
+        </member>
+        <member name="M:AdUserManagerService.SyncAdUserAsync(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            Sincroniza un usuario de Active Directory con el sistema de Identity.
+            </summary>
+            <param name="principal">ClaimsPrincipal que representa al usuario autenticado.</param>
+            <returns>Una tarea que representa la operación asíncrona.</returns>
+            <exception cref="T:System.Exception">
+            Se lanza cuando no se puede crear el usuario en el sistema de Identity.
+            </exception>
+            <remarks>
+            Este método verifica si el usuario existe en Identity. Si no existe, crea un nuevo usuario
+            utilizando el nombre de usuario de AD y genera un correo electrónico predeterminado.
+            </remarks>
         </member>
     </members>
 </doc>
