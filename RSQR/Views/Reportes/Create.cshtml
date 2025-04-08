@@ -334,7 +334,59 @@
 
 @section Styles {
     <style>
-        /* Efecto ripple para botones */
+
+        /* Fuente SF Pro (si está disponible, sino usa fuentes alternativas) */
+        body, h1, h2, h3, h4, h5, h6, .form-floating > label {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-weight: 600; /* Semi-bold */
+        }
+
+            /* Estilo específico para el título principal */
+        h1.display-6 {
+            color: #000 !important; /* Negro puro */
+            font-weight: 700 !important; /* Bold */
+            letter-spacing: -0.5px;
+            margin-bottom: 1rem;
+        }
+
+
+        /* Color primario más profesional */
+        :root {
+            --color-primary: #2c5fa8; /* Azul corporativo */
+        }
+
+        .bg-primary {
+            background-color: var(--color-primary) !important;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+            .btn-primary:hover {
+                background-color: var(--color-primary-light);
+                border-color: var(--color-primary-light);
+            }
+
+        .btn-outline-primary {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+            .btn-outline-primary:hover {
+                background-color: var(--color-primary);
+                border-color: var(--color-primary);
+            }
+
+        /* Color para los labels activos */
+        .form-floating > .form-control:focus ~ label,
+        .form-floating > .form-control:not(:placeholder-shown) ~ label,
+        .form-floating > .form-select ~ label {
+            color: var(--color-primary);
+        }
+
+        /* Resto de tus estilos... */
         .btn {
             position: relative;
             overflow: hidden;
@@ -356,27 +408,32 @@
             }
         }
 
-        /* Estilos modificados para los campos flotantes - SIN FONDO */
+        /* Labels de formulario */
         .form-floating > label {
-            color: #6c757d;
-            transition: all 0.2s ease;
-            background-color: transparent !important; /* Elimina el fondo */
-            padding: 0 !important; /* Elimina el padding que causaba el efecto */
+            color: #000 !important;
+            font-weight: 600 !important;
+            font-size: 0.95rem;
         }
 
+        /* Estado activo/focus */
         .form-floating > .form-control:focus ~ label,
         .form-floating > .form-control:not(:placeholder-shown) ~ label,
         .form-floating > .form-select ~ label {
+            color: #000 !important; /* Mantener negro al activarse */
+            font-weight: 600 !important;
             transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
-            color: #0076df;
-            background-color: transparent !important; /* Fondo transparente */
-            padding: 0 !important; /* Sin padding */
         }
 
-        /* Asegurar que los inputs sean claramente visibles */
+        /* Asegurar visibilidad de los inputs */
         .form-control, .form-select {
             background-color: #fff !important;
-            z-index: 1; /* Asegura que esté sobre el label */
+            border: 1px solid #ced4da;
+            padding: 0.5rem 1rem;
+        }
+
+        .form-control::placeholder {
+                color: #9e9e9e;
+                font-weight: normal;
         }
 
         /* Estilo para los switches */
@@ -395,6 +452,14 @@
             .card:hover {
                 box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
             }
+
+        /* Estilo para subtítulos/tarjetas */
+        .card-header h5 {
+            color: #fff !important; /* Blanco para contraste con fondo azul */
+            font-weight: 700 !important;
+            font-size: 1.1rem;
+            letter-spacing: 0.2px;
+        }
 
         /* Bordes redondeados */
         .rounded-lg {

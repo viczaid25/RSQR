@@ -147,6 +147,47 @@
             </summary>
             <returns>Un archivo Excel con los datos de los reportes.</returns>
         </member>
+        <member name="T:RSQR.Data.ApplicationDbContext">
+            <summary>
+            Representa el contexto de la base de datos para la aplicación, incluyendo
+            las tablas de Identity y los modelos personalizados.
+            </summary>
+            <remarks>
+            Hereda de IdentityDbContext para integrar el sistema de autenticación ASP.NET Core Identity.
+            </remarks>
+        </member>
+        <member name="M:RSQR.Data.ApplicationDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{RSQR.Data.ApplicationDbContext})">
+            <summary>
+            Inicializa una nueva instancia del contexto de la base de datos.
+            </summary>
+            <param name="options">Las opciones de configuración para este contexto.</param>
+        </member>
+        <member name="P:RSQR.Data.ApplicationDbContext.Reportes">
+            <summary>
+            Obtiene o establece el DbSet para la entidad Reporte.
+            </summary>
+        </member>
+        <member name="P:RSQR.Data.ApplicationDbContext.ConsecutivosArchivos">
+            <summary>
+            Obtiene o establece el DbSet para la entidad ConsecutivoArchivo.
+            </summary>
+        </member>
+        <member name="P:RSQR.Data.ApplicationDbContext.PpmReports">
+            <summary>
+            Obtiene o establece el DbSet para la entidad PpmReport.
+            </summary>
+        </member>
+        <member name="M:RSQR.Data.ApplicationDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Configura el modelo de la base de datos, incluyendo las relaciones y restricciones.
+            </summary>
+            <param name="modelBuilder">El constructor usado para crear el modelo.</param>
+            <remarks>
+            Este método se llama cuando el modelo para un contexto derivado se inicializa.
+            Puede usarse para configurar el modelo descubierto por convención antes de que
+            se bloquee y se use para inicializar el contexto.
+            </remarks>
+        </member>
         <member name="T:RSQR.Migrations.NewMigration">
             <inheritdoc />
         </member>
@@ -218,6 +259,454 @@
         </member>
         <member name="M:RSQR.Migrations.AddConsecutivoArchivoTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
+        </member>
+        <member name="T:RSQR.Models.ConsecutivoArchivo">
+            <summary>
+            Representa un consecutivo numérico para archivos, asociado a unidades de negocio.
+            </summary>
+            <remarks>
+            Esta entidad se utiliza para generar números consecutivos únicos por combinación
+            de unidad de negocio, código de negocio y año.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.ConsecutivoArchivo.Id">
+            <summary>
+            Identificador único del registro en la base de datos.
+            </summary>
+        </member>
+        <member name="P:RSQR.Models.ConsecutivoArchivo.UnidadNegocio">
+            <summary>
+            Nombre de la unidad de negocio asociada.
+            </summary>
+            <remarks>
+            Requerido, con longitud máxima de 50 caracteres.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.ConsecutivoArchivo.CodigoNegocio">
+            <summary>
+            Código identificador del negocio.
+            </summary>
+            <remarks>
+            Requerido, con longitud máxima de 10 caracteres.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.ConsecutivoArchivo.Anio">
+            <summary>
+            Año al que pertenece el consecutivo.
+            </summary>
+        </member>
+        <member name="P:RSQR.Models.ConsecutivoArchivo.Consecutivo">
+            <summary>
+            Número consecutivo actual.
+            </summary>
+            <remarks>
+            Valor por defecto: 1. Se incrementa automáticamente con cada nuevo uso.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.ConsecutivoArchivo.FechaActualizacion">
+            <summary>
+            Fecha y hora de la última actualización del registro.
+            </summary>
+            <remarks>
+            Se establece automáticamente a la fecha/hora actual al crearse o modificarse.
+            </remarks>
+        </member>
+        <member name="T:RSQR.Models.EmailSettings">
+            <summary>
+            Clase de configuración para los parámetros de envío de correos electrónicos.
+            </summary>
+            <remarks>
+            Esta clase se utiliza normalmente para ser inyectada mediante IOptions&lt;EmailSettings&gt;
+            y configurada desde appsettings.json.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.EmailSettings.SmtpServer">
+            <summary>
+            Dirección del servidor SMTP para el envío de correos.
+            </summary>
+            <example>smtp.midominio.com</example>
+        </member>
+        <member name="P:RSQR.Models.EmailSettings.SmtpPort">
+            <summary>
+            Puerto del servidor SMTP.
+            </summary>
+            <example>587</example>
+        </member>
+        <member name="P:RSQR.Models.EmailSettings.FromEmail">
+            <summary>
+            Dirección de correo electrónico que aparecerá como remitente.
+            </summary>
+            <example>notificaciones@midominio.com</example>
+        </member>
+        <member name="T:RSQR.Models.ErrorViewModel">
+            <summary>
+            Modelo de vista para representar información de errores en la aplicación.
+            </summary>
+            <remarks>
+            Este modelo se utiliza típicamente en páginas de error para mostrar detalles
+            sobre la solicitud fallida.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.ErrorViewModel.RequestId">
+            <summary>
+            Obtiene o establece el ID único de la solicitud que generó el error.
+            </summary>
+            <remarks>
+            Puede ser nulo si no hay un ID de solicitud disponible.
+            Este valor se usa comúnmente para rastrear errores en los logs.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.ErrorViewModel.ShowRequestId">
+            <summary>
+            Indica si se debe mostrar el ID de solicitud en la vista.
+            </summary>
+            <value>
+            <c>true</c> si el RequestId no es nulo ni vacío; de lo contrario, <c>false</c>.
+            </value>
+            <remarks>
+            Esta propiedad calculada se usa para controlar condicionalmente la visualización
+            del ID de solicitud en las vistas de error.
+            </remarks>
+        </member>
+        <member name="T:RSQR.Models.PpmReport">
+            <summary>
+            Representa un reporte PPM (Parts Per Million) para el control de calidad y gestión de reclamos de clientes.
+            </summary>
+            <remarks>
+            Este modelo almacena información detallada sobre problemas de calidad reportados por clientes,
+            incluyendo investigación, responsabilidad y métricas de impacto.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.Id">
+            <summary>
+            Identificador único del reporte en la base de datos.
+            </summary>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.Fecha">
+            <summary>
+            Fecha de creación del reporte.
+            </summary>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.Linea">
+            <summary>
+            Línea de producción o área relacionada con el problema.
+            </summary>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.Customer">
+            <summary>
+            Nombre del cliente que reporta el problema.
+            </summary>
+            <remarks>
+            Campo obligatorio con longitud máxima de 100 caracteres.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.CustomerClaimNumber">
+            <summary>
+            Número de reclamo asignado por el cliente.
+            </summary>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.MotherFactory">
+            <summary>
+            Fábrica de origen del producto con problema.
+            </summary>
+            <remarks>
+            Longitud máxima de 100 caracteres.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.NumParteAfectado">
+            <summary>
+            Número de parte afectado (opcional).
+            </summary>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.CustomerPartNumber">
+            <summary>
+            Número de parte según el cliente.
+            </summary>
+            <remarks>
+            Longitud máxima de 100 caracteres.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.CuantosP">
+            <summary>
+            Cantidad de partes afectadas (opcional).
+            </summary>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.Lote">
+            <summary>
+            Lote o batch del producto con problema (opcional).
+            </summary>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.Tipo">
+            <summary>
+            Tipo de reporte según la clasificación interna.
+            </summary>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.Mileage">
+            <summary>
+            Kilometraje o horas de uso (para productos en servicio).
+            </summary>
+            <remarks>
+            Debe ser un valor positivo.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.TituloProblema">
+            <summary>
+            Título descriptivo del problema (opcional).
+            </summary>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.InvestigationReport">
+            <summary>
+            Reporte detallado de la investigación del problema.
+            </summary>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.DateOfClose">
+            <summary>
+            Fecha de cierre del reporte (opcional).
+            </summary>
+            <remarks>
+            Solo se completa cuando el caso está resuelto.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.ImpactoPPM">
+            <summary>
+            Indica si el problema impacta en las métricas PPM de la organización.
+            </summary>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.Comentarios">
+            <summary>
+            Comentarios adicionales sobre el caso (opcional).
+            </summary>
+        </member>
+        <member name="P:RSQR.Models.PpmReport.Responsabilidad">
+            <summary>
+            Determina la responsabilidad asignada por el análisis de calidad.
+            </summary>
+        </member>
+        <member name="T:RSQR.Models.TipoReporte">
+            <summary>
+            Enumeración que define los tipos de reportes disponibles en el sistema.
+            </summary>
+        </member>
+        <member name="F:RSQR.Models.TipoReporte.Interno">
+            <summary>Reporte interno de calidad</summary>
+        </member>
+        <member name="F:RSQR.Models.TipoReporte.CeroKm">
+            <summary>Reporte de problema en vehículo nuevo (0km)</summary>
+        </member>
+        <member name="F:RSQR.Models.TipoReporte.Field">
+            <summary>Reporte de problema en campo (vehículo en uso)</summary>
+        </member>
+        <member name="T:RSQR.Models.CincoMOpciones">
+            <summary>
+            Enumeración que representa las 5M's utilizadas en análisis de causa raíz.
+            </summary>
+        </member>
+        <member name="F:RSQR.Models.CincoMOpciones.Maquina">
+            <summary>Problema relacionado con máquinas/equipos</summary>
+        </member>
+        <member name="F:RSQR.Models.CincoMOpciones.MedioAmbiente">
+            <summary>Problema relacionado con condiciones ambientales</summary>
+        </member>
+        <member name="F:RSQR.Models.CincoMOpciones.ManoDeObra">
+            <summary>Problema relacionado con personal/operadores</summary>
+        </member>
+        <member name="F:RSQR.Models.CincoMOpciones.Medicion">
+            <summary>Problema relacionado con mediciones/calibraciones</summary>
+        </member>
+        <member name="F:RSQR.Models.CincoMOpciones.Material">
+            <summary>Problema relacionado con materiales/materia prima</summary>
+        </member>
+        <member name="T:RSQR.Models.ResponsabilidadOpciones">
+            <summary>
+            Enumeración que define las posibles responsabilidades en un reporte.
+            </summary>
+        </member>
+        <member name="F:RSQR.Models.ResponsabilidadOpciones.Meax">
+            <summary>Responsabilidad asignada a MEAX</summary>
+        </member>
+        <member name="F:RSQR.Models.ResponsabilidadOpciones.Proveedor">
+            <summary>Responsabilidad asignada a proveedor externo</summary>
+        </member>
+        <member name="T:RSQR.Models.Reporte">
+            <summary>
+            Modelo principal que representa un reporte de calidad en el sistema.
+            </summary>
+            <remarks>
+            Contiene toda la información relacionada con un problema de calidad reportado,
+            incluyendo análisis, acciones de contención y seguimiento.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.Reporte.Id">
+            <summary>Identificador único del reporte</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.Fecha">
+            <summary>Fecha de creación del reporte</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.ProblemRank">
+            <summary>
+            Nivel de prioridad/severidad del problema
+            </summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.UserName">
+            <summary>Nombre del usuario que creó el reporte</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.Linea">
+            <summary>Línea o área donde se detectó el problema</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.Tipo">
+            <summary>Tipo de reporte según clasificación</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.TituloProblema">
+            <summary>Título descriptivo del problema</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.CincoM">
+            <summary>Categoría según metodología 5M's</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.NumParteAfectado">
+            <summary>Número de parte afectada</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.Descripcion">
+            <summary>Descripción general del problema</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.DescripcionProblema">
+            <summary>Descripción detallada del problema</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.QueP">
+            <summary>Qué ocurrió (What)</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.PorqueP">
+            <summary>Por qué ocurrió (Why)</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.DondeP">
+            <summary>Dónde ocurrió (Where)</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.QuienP">
+            <summary>Quién detectó (Who)</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.CuandoP">
+            <summary>Cuándo ocurrió (When)</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.CuantosP">
+            <summary>Cuántos productos afectados (How many)</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.ComoP">
+            <summary>Cómo se detectó (How)</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.Lote">
+            <summary>Lote o batch afectado</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.CustomerClaimNumber">
+            <summary>Número de reclamo en base de datos</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.CustomerClaimDisplayNumber">
+            <summary>Número de reclamo formateado para visualización (no se persiste)</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.CustomerClaimPrefix">
+            <summary>Prefijo del cliente para formato de número (no se persiste)</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.ContencionItems">
+            <summary>Ítems para acciones de contención</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.ContencionActividades">
+            <summary>Actividades de contención</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.ContencionResponsables">
+            <summary>Responsables de las acciones</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.ContencionFechasInicio">
+            <summary>Fechas de inicio de acciones</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.AlertaCalidad">
+            <summary>Indica si se generó alerta de calidad</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.Disposicion">
+            <summary>Disposición del material afectado</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.EntrevistaInvolucrados">
+            <summary>Indica si se realizó entrevista a involucrados</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.Comentarios">
+            <summary>Comentarios adicionales</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.Severidad">
+            <summary>Nivel de severidad del problema</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.Ocurrencia">
+            <summary>Frecuencia de ocurrencia</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.Deteccion">
+            <summary>Capacidad de detección</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.AP_NPR">
+            <summary>Acciones preventivas/No recurrencia</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.ModoFalla">
+            <summary>Modo de falla identificado</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.ControlesEstablecidos">
+            <summary>Controles existentes al momento del problema</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.EvidenciaFotografica">
+            <summary>Evidencia fotográfica del problema</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.Customer">
+            <summary>Nombre del cliente afectado</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.MotherFactory">
+            <summary>Fábrica de origen</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.CustomerPartNumber">
+            <summary>Número de parte según cliente</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.Mileage">
+            <summary>Kilometraje/horas de uso (para field)</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.InvestigationReport">
+            <summary>Reporte final de investigación</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.DateOfClose">
+            <summary>Fecha de cierre del reporte</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.ImpactoPPM">
+            <summary>Indica si impacta en métricas PPM</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.Responsabilidad">
+            <summary>Responsabilidad asignada</summary>
+        </member>
+        <member name="T:RSQR.Models.ReporteViewModel">
+            <summary>
+            Modelo de vista para el formulario de creación/edición de reportes.
+            </summary>
+            <remarks>
+            Este ViewModel combina los datos del reporte con listas de selección
+            necesarias para los dropdowns en la vista.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.ReporteViewModel.Reporte">
+            <summary>
+            Obtiene o establece el modelo de datos del reporte.
+            </summary>
+            <remarks>
+            Contiene todos los campos y propiedades del reporte de calidad.
+            </remarks>
+        </member>
+        <member name="P:RSQR.Models.ReporteViewModel.ProblemRankList">
+            <summary>
+            Obtiene o establece la lista de opciones para el campo ProblemRank.
+            </summary>
+            <remarks>
+            Lista predefinida de niveles de prioridad/severidad para selección en dropdown.
+            Incluye una opción por defecto "-Seleccionar-".
+            </remarks>
+        </member>
+        <member name="M:RSQR.Models.ReporteViewModel.#ctor">
+            <summary>
+            Inicializa una nueva instancia del ViewModel con valores por defecto.
+            </summary>
+            <remarks>
+            Constructor que inicializa la lista ProblemRankList con las opciones:
+            -Seleccionar- (valor por defecto), Bajo, Medio y Alto.
+            </remarks>
         </member>
         <member name="T:RSQR.Services.ActiveDirectoryService">
             <summary>
@@ -322,6 +811,31 @@
             <summary>
             Devuelve todos los mapeos disponibles (solo lectura).
             </summary>
+        </member>
+        <member name="T:AdUserSyncMiddleware">
+            <summary>
+            Middleware para sincronizar automáticamente usuarios de Active Directory con el sistema de Identity
+            durante el procesamiento de cada solicitud HTTP autenticada.
+            </summary>
+        </member>
+        <member name="M:AdUserSyncMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Inicializa una nueva instancia del middleware de sincronización de usuarios.
+            </summary>
+            <param name="next">El siguiente delegado en la pipeline de solicitudes HTTP.</param>
+        </member>
+        <member name="M:AdUserSyncMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext,AdUserManagerService)">
+            <summary>
+            Método invocado por el runtime de ASP.NET Core para procesar las solicitudes HTTP.
+            </summary>
+            <param name="context">El contexto HTTP para la solicitud actual.</param>
+            <param name="adUserManagerService">Servicio de gestión de usuarios de AD inyectado por DI.</param>
+            <returns>Una tarea que representa la ejecución del middleware.</returns>
+            <remarks>
+            Este middleware verifica si el usuario está autenticado y, en ese caso,
+            invoca el servicio de sincronización de usuarios antes de pasar la solicitud
+            al siguiente middleware en la pipeline.
+            </remarks>
         </member>
         <member name="T:AdUserManagerService">
             <summary>

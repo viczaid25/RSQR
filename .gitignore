@@ -1,3 +1,6 @@
 /.vs
 /RSQR/obj
 /RSQR/bin
+/.vs
+.vs/RSQR/CopilotIndices/17.13.441.19478/CodeChunks.db
+*.db
