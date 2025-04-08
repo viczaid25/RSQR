@@ -1,24 +1,106 @@
 ﻿@{
-    ViewBag.Title = "Login";
+    ViewData["Title"] = "Iniciar Sesión";
+    Layout = null; // Eliminamos el layout para un diseño personalizado
 }
 
-<h2>Login</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RSQR</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body class="bg-light">
+    <div class="container">
+        <div class="row justify-content-center min-vh-100 align-items-center">
+            <div class="col-lg-5 col-md-7">
+                <!-- Tarjeta de Login -->
+                <div class="card shadow-lg rounded-3 overflow-hidden border-0">
+                    <!-- Cabecera con logo/icono -->
+                    <div class="card-header bg-primary py-4 text-center">
+                        <i class="fas fa-user-shield fa-4x mb-3 text-white"></i>
+                        <h2 class="mb-0 text-white">Iniciar Sesión</h2>
+                    </div>
 
-@if (ViewBag.ErrorMessage != null)
-{
-    <div class="alert alert-danger">
-        @ViewBag.ErrorMessage
-    </div>
-}
+                    <div class="card-body p-4 p-sm-5">
+                        @if (ViewBag.ErrorMessage != null)
+                        {
+                            <div class="alert alert-danger d-flex align-items-center mb-4">
+                                <i class="fas fa-exclamation-circle me-2"></i>
+                                <div>@ViewBag.ErrorMessage</div>
+                            </div>
+                        }
 
-<form method="post" asp-action="Login" asp-controller="Account">
-    <div class="form-group">
-        <label for="username">Usuario:</label>
-        <input type="text" id="username" name="username" class="form-control" required />
+                        <form method="post" asp-action="Login" asp-controller="Account" class="needs-validation" novalidate>
+                            <!-- Campo Usuario -->
+                            <div class="mb-4">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Usuario" required>
+                                    <label for="username"><i class="fas fa-user me-2"></i>Usuario</label>
+                                </div>
+                            </div>
+
+                            <!-- Campo Contraseña -->
+                            <div class="mb-4">
+                                <div class="form-floating">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
+                                    <label for="password"><i class="fas fa-lock me-2"></i>Contraseña</label>
+                                </div>
+                            </div>
+
+                            <!-- Botón de Login -->
+                            <div class="d-grid mb-3">
+                                <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow-sm">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Ingresar
+                                </button>
+                            </div>
+
+                            <!-- Opciones adicionales -->
+                            <div class="text-center">
+                                <a href="#" class="text-decoration-none text-muted small">
+                                    <i class="fas fa-question-circle me-1"></i>¿Olvidaste tu contraseña?
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="card-footer bg-light text-center py-3">
+                        <p class="mb-0 small text-muted">
+                            &copy; @DateTime.Now.Year - RSQR Sistema de Reportes
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password" class="form-control" required />
-    </div>
-    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-</form>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Validación de formulario
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+</body>
+</html>
