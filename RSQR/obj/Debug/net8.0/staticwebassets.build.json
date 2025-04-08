@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kjOmcZFtYjzf4Buw66zQCExi+aZo73NIcoh0qWQE860=",
+  "Hash": "hq5LfUOUZe9I+YnH3X9txSVIecUC7pNSt3VOQvATd+Q=",
   "Source": "RSQR",
   "BasePath": "_content/RSQR",
   "Mode": "Default",
@@ -1333,8 +1333,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "a0pr5bqnpq",
-      "Integrity": "Wkg5918rpaJdHIhL0CUjmrsmkXiiTYIoyjmoEKcrZDU=",
+      "Fingerprint": "ph1vhokiob",
+      "Integrity": "TeqKZlF+EkRCuVLQWpIAfbVYJUVjjoSRPe9OejZsm4A=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -2602,51 +2602,6 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/site.a0pr5bqnpq.css",
-      "AssetFile": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2817"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Wkg5918rpaJdHIhL0CUjmrsmkXiiTYIoyjmoEKcrZDU=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 03 Apr 2025 22:22:54 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "a0pr5bqnpq"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-Wkg5918rpaJdHIhL0CUjmrsmkXiiTYIoyjmoEKcrZDU="
-        }
-      ]
-    },
-    {
       "Route": "css/site.css",
       "AssetFile": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\wwwroot\\css\\site.css",
       "Selectors": [],
@@ -2657,7 +2612,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2817"
+          "Value": "5143"
         },
         {
           "Name": "Content-Type",
@@ -2665,11 +2620,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Wkg5918rpaJdHIhL0CUjmrsmkXiiTYIoyjmoEKcrZDU=\""
+          "Value": "\"TeqKZlF+EkRCuVLQWpIAfbVYJUVjjoSRPe9OejZsm4A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 03 Apr 2025 22:22:54 GMT"
+          "Value": "Tue, 08 Apr 2025 16:39:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2679,7 +2634,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Wkg5918rpaJdHIhL0CUjmrsmkXiiTYIoyjmoEKcrZDU="
+          "Value": "sha256-TeqKZlF+EkRCuVLQWpIAfbVYJUVjjoSRPe9OejZsm4A="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.ph1vhokiob.css",
+      "AssetFile": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5143"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TeqKZlF+EkRCuVLQWpIAfbVYJUVjjoSRPe9OejZsm4A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 08 Apr 2025 16:39:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ph1vhokiob"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-TeqKZlF+EkRCuVLQWpIAfbVYJUVjjoSRPe9OejZsm4A="
         }
       ]
     },

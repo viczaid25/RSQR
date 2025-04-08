@@ -9,324 +9,404 @@
     };
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Crear Nuevo Reporte</h1>
-    <a asp-action="Index" class="btn btn-secondary">
-        <i class="fas fa-arrow-left me-1"></i> Volver a la lista
-    </a>
-</div>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="display-6 text-primary">Crear Nuevo Reporte</h1>
+            <a asp-action="Index" class="btn btn-outline-primary rounded-pill">
+                <i class="fas fa-arrow-left me-1"></i> Volver a la lista
+            </a>
+        </div>
 
-<div class="card shadow-sm mb-4">
-    <div class="card-header bg-light">
-        <h5 class="mb-0">Información del Reporte</h5>
-    </div>
-    <div class="card-body">
-        <form asp-action="Create" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-
-            <!-- Sección 1: Información Básica -->
-            <div class="row mb-4">
-                <div class="col-md-4">
-                    <div class="form-group mb-3">
-                        <label asp-for="Fecha" class="form-label">Fecha</label>
-                        <input asp-for="Fecha" class="form-control" type="date" />
-                        <span asp-validation-for="Fecha" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label asp-for="ProblemRank" class="form-label">Ranking del problema</label>
-                        <select asp-for="ProblemRank" class="form-select" asp-items="ViewBag.ProblemRankList"></select>
-                        <span asp-validation-for="ProblemRank" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <div class="form-group mb-3">
-                        <label asp-for="DescripcionProblema" class="form-label">Descripción del problema</label>
-                        <textarea asp-for="DescripcionProblema" class="form-control" rows="5"></textarea>
-                        <span asp-validation-for="DescripcionProblema" class="text-danger"></span>
-                    </div>
-                </div>
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-file-alt me-2"></i>Información del Reporte</h5>
             </div>
+            <div class="card-body">
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-lg"></div>
 
-            <!-- Sección 2: Detalles del Problema -->
-            <div class="row mb-4">
-                <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label asp-for="UserName" class="form-label">Usuario</label>
-                        <input asp-for="UserName" class="form-control" value="@ViewBag.DisplayName" readonly />
-                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    <!-- Sección 1: Información Básica -->
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <div class="form-floating mb-3">
+                                <input asp-for="Fecha" class="form-control" type="date" placeholder="Fecha" />
+                                <label asp-for="Fecha">Fecha</label>
+                                <span asp-validation-for="Fecha" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select asp-for="ProblemRank" class="form-select" asp-items="ViewBag.ProblemRankList"></select>
+                                <label asp-for="ProblemRank">Ranking del problema</label>
+                                <span asp-validation-for="ProblemRank" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-floating mb-3">
+                                <textarea asp-for="DescripcionProblema" class="form-control" style="height: 150px" placeholder="Descripción del problema"></textarea>
+                                <label asp-for="DescripcionProblema">Descripción del problema</label>
+                                <span asp-validation-for="DescripcionProblema" class="text-danger small"></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group mb-3">
-                        <label asp-for="Linea" class="form-label">Línea</label>
-                        <select asp-for="Linea" class="form-select" asp-items="ViewBag.LineaList">
-                            <option value="">-Seleccionar-</option>
-                        </select>
-                        <span asp-validation-for="Linea" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label asp-for="Tipo" class="form-label">Tipo de Problema</label>
-                        <select asp-for="Tipo" class="form-select" asp-items="Html.GetEnumSelectList<TipoReporte>()"></select>
-                        <span asp-validation-for="Tipo" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label asp-for="TituloProblema" class="form-label">Título del Problema</label>
-                        <input asp-for="TituloProblema" class="form-control" />
-                        <span asp-validation-for="TituloProblema" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label asp-for="CincoM" class="form-label">5M</label>
-                        <select asp-for="CincoM" class="form-select" asp-items="Html.GetEnumSelectList<CincoMOpciones>()"></select>
-                        <span asp-validation-for="CincoM" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label asp-for="NumParteAfectado" class="form-label">Número de Parte Afectado</label>
-                        <input asp-for="NumParteAfectado" class="form-control" />
-                        <span asp-validation-for="NumParteAfectado" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label asp-for="Descripcion" class="form-label">Descripción</label>
-                        <input asp-for="Descripcion" class="form-control" />
-                        <span asp-validation-for="Descripcion" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label asp-for="Customer" class="form-label">Cliente</label>
-                        <select asp-for="Customer" class="form-select" id="customer-select" required>
-                            <option value="">-Seleccionar Cliente-</option>
-                            @foreach (var cliente in clientes)
-                            {
-                                <option value="@cliente">@cliente</option>
-                            }
-                        </select>
-                        <span asp-validation-for="Customer" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label asp-for="MotherFactory" class="form-label">Fábrica Madre</label>
-                        <input asp-for="MotherFactory" class="form-control" />
-                        <span asp-validation-for="MotherFactory" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label asp-for="CustomerPartNumber" class="form-label">Número de Parte de Cliente</label>
-                        <input asp-for="CustomerPartNumber" class="form-control" />
-                        <span asp-validation-for="CustomerPartNumber" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Sección 3: Análisis 5W2H -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-header bg-light">
-                    <h5 class="mb-0">Análisis 5W2H</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
+                    <!-- Sección 2: Detalles del Problema -->
+                    <div class="row mb-4">
                         <div class="col-md-6">
-                            <div class="form-group mb-3">
-                                <label asp-for="QueP" class="form-label">¿Qué es el Problema?</label>
-                                <input asp-for="QueP" class="form-control" />
-                                <span asp-validation-for="QueP" class="text-danger"></span>
+                            <div class="form-floating mb-3">
+                                <input asp-for="UserName" class="form-control" value="@ViewBag.DisplayName" readonly placeholder="Usuario" />
+                                <label asp-for="UserName">Usuario</label>
+                                <span asp-validation-for="UserName" class="text-danger small"></span>
                             </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="PorqueP" class="form-label">¿Por qué sucedió?</label>
-                                <input asp-for="PorqueP" class="form-control" />
-                                <span asp-validation-for="PorqueP" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="DondeP" class="form-label">¿Dónde ocurrió?</label>
-                                <input asp-for="DondeP" class="form-control" />
-                                <span asp-validation-for="DondeP" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mb-3">
-                                <label asp-for="QuienP" class="form-label">¿Quién?</label>
-                                <input asp-for="QuienP" class="form-control" />
-                                <span asp-validation-for="QuienP" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="CuandoP" class="form-label">¿Cuándo sucedió el problema?</label>
-                                <input asp-for="CuandoP" class="form-control" type="date" />
-                                <span asp-validation-for="CuandoP" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="CuantosP" class="form-label">¿Cuántas piezas?</label>
-                                <input asp-for="CuantosP" class="form-control" />
-                                <span asp-validation-for="CuantosP" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="ComoP" class="form-label">¿Cómo se detectó el problema?</label>
-                                <input asp-for="ComoP" class="form-control" />
-                                <span asp-validation-for="ComoP" class="text-danger"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sección 4: Contención -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-header bg-light d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Contención</h5>
-                    <button type="button" id="add-group-btn" class="btn btn-sm btn-primary">
-                        <i class="fas fa-plus me-1"></i> Agregar grupo
-                    </button>
-                </div>
-                <div class="card-body">
-                    <div id="dynamic-fields" class="row g-3">
-                        <!-- Campos de contención se agregarán aquí dinámicamente -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sección 5: Información Adicional -->
-            <div class="row mb-4">
-                <div class="col-md-6">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-header bg-light">
-                            <h5 class="mb-0">Información de Cierre</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group mb-3">
-                                <label asp-for="Mileage" class="form-label">Millas</label>
-                                <input asp-for="Mileage" class="form-control" />
-                                <span asp-validation-for="Mileage" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="InvestigationReport" class="form-label">Reporte de Investigación</label>
-                                <input asp-for="InvestigationReport" class="form-control" />
-                                <span asp-validation-for="InvestigationReport" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="DateOfClose" class="form-label">Fecha de Cierre</label>
-                                <input asp-for="DateOfClose" class="form-control" type="date" />
-                                <span asp-validation-for="DateOfClose" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="ImpactoPPM" class="form-label">¿Tiene Impacto en PPM?</label>
-                                <select asp-for="ImpactoPPM" class="form-select">
-                                    <option value="true">Sí</option>
-                                    <option value="false">No</option>
+                            <div class="form-floating mb-3">
+                                <select asp-for="Linea" class="form-select" asp-items="ViewBag.LineaList">
+                                    <option value=""></option>
                                 </select>
-                                <span asp-validation-for="ImpactoPPM" class="text-danger"></span>
+                                <label asp-for="Linea">Línea</label>
+                                <span asp-validation-for="Linea" class="text-danger small"></span>
                             </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="Responsabilidad" class="form-label">Responsabilidad</label>
-                                <select asp-for="Responsabilidad" class="form-select" asp-items="Html.GetEnumSelectList<ResponsabilidadOpciones>()"></select>
-                                <span asp-validation-for="Responsabilidad" class="text-danger"></span>
+                            <div class="form-floating mb-3">
+                                <select asp-for="Tipo" class="form-select" asp-items="Html.GetEnumSelectList<TipoReporte>()"></select>
+                                <label asp-for="Tipo">Tipo de Problema</label>
+                                <span asp-validation-for="Tipo" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="TituloProblema" class="form-control" placeholder="Título del Problema" />
+                                <label asp-for="TituloProblema">Título del Problema</label>
+                                <span asp-validation-for="TituloProblema" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select asp-for="CincoM" class="form-select" asp-items="Html.GetEnumSelectList<CincoMOpciones>()"></select>
+                                <label asp-for="CincoM">5M</label>
+                                <span asp-validation-for="CincoM" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input asp-for="NumParteAfectado" class="form-control" placeholder="Número de Parte Afectado" />
+                                <label asp-for="NumParteAfectado">Número de Parte Afectado</label>
+                                <span asp-validation-for="NumParteAfectado" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="Descripcion" class="form-control" placeholder="Descripción" />
+                                <label asp-for="Descripcion">Descripción</label>
+                                <span asp-validation-for="Descripcion" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select asp-for="Customer" class="form-select" id="customer-select" required>
+                                    <option value=""></option>
+                                    @foreach (var cliente in clientes)
+                                    {
+                                        <option value="@cliente">@cliente</option>
+                                    }
+                                </select>
+                                <label asp-for="Customer">Cliente</label>
+                                <span asp-validation-for="Customer" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="MotherFactory" class="form-control" placeholder="Fábrica Madre" />
+                                <label asp-for="MotherFactory">Fábrica Madre</label>
+                                <span asp-validation-for="MotherFactory" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="CustomerPartNumber" class="form-control" placeholder="Número de Parte de Cliente" />
+                                <label asp-for="CustomerPartNumber">Número de Parte de Cliente</label>
+                                <span asp-validation-for="CustomerPartNumber" class="text-danger small"></span>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-header bg-light">
-                            <h5 class="mb-0">Acciones</h5>
+
+                    <!-- Sección 3: Análisis 5W2H -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-search me-2"></i>Análisis 5W2H</h5>
                         </div>
                         <div class="card-body">
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" asp-for="AlertaCalidad" />
-                                <label class="form-check-label" asp-for="AlertaCalidad"></label>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="Disposicion" class="form-label"></label>
-                                <input asp-for="Disposicion" class="form-control" />
-                                <span asp-validation-for="Disposicion" class="text-danger"></span>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" asp-for="EntrevistaInvolucrados" />
-                                <label class="form-check-label" asp-for="EntrevistaInvolucrados"></label>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="Comentarios" class="form-label"></label>
-                                <input asp-for="Comentarios" class="form-control" />
-                                <span asp-validation-for="Comentarios" class="text-danger"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sección 6: Evaluación de Riesgo -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-header bg-light">
-                    <h5 class="mb-0">Evaluación de Riesgo</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group mb-3">
-                                <label asp-for="Severidad" class="form-label"></label>
-                                <input asp-for="Severidad" class="form-control" />
-                                <span asp-validation-for="Severidad" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="Ocurrencia" class="form-label"></label>
-                                <input asp-for="Ocurrencia" class="form-control" />
-                                <span asp-validation-for="Ocurrencia" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="Deteccion" class="form-label"></label>
-                                <input asp-for="Deteccion" class="form-control" />
-                                <span asp-validation-for="Deteccion" class="text-danger"></span>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label asp-for="AP_NPR" class="form-label"></label>
-                                <input asp-for="AP_NPR" class="form-control" />
-                                <span asp-validation-for="AP_NPR" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="form-group mb-3">
-                                <label asp-for="ModoFalla" class="form-label"></label>
-                                <textarea asp-for="ModoFalla" class="form-control" rows="5"></textarea>
-                                <span asp-validation-for="ModoFalla" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="form-group mb-3">
-                                <label asp-for="ControlesEstablecidos" class="form-label"></label>
-                                <textarea asp-for="ControlesEstablecidos" class="form-control" rows="5"></textarea>
-                                <span asp-validation-for="ControlesEstablecidos" class="text-danger"></span>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="QueP" class="form-control" placeholder="¿Qué es el Problema?" />
+                                        <label asp-for="QueP">¿Qué es el Problema?</label>
+                                        <span asp-validation-for="QueP" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="PorqueP" class="form-control" placeholder="¿Por qué sucedió?" />
+                                        <label asp-for="PorqueP">¿Por qué sucedió?</label>
+                                        <span asp-validation-for="PorqueP" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="DondeP" class="form-control" placeholder="¿Dónde ocurrió?" />
+                                        <label asp-for="DondeP">¿Dónde ocurrió?</label>
+                                        <span asp-validation-for="DondeP" class="text-danger small"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="QuienP" class="form-control" placeholder="¿Quién?" />
+                                        <label asp-for="QuienP">¿Quién?</label>
+                                        <span asp-validation-for="QuienP" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="CuandoP" class="form-control" type="date" placeholder="¿Cuándo sucedió el problema?" />
+                                        <label asp-for="CuandoP">¿Cuándo sucedió el problema?</label>
+                                        <span asp-validation-for="CuandoP" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="CuantosP" class="form-control" placeholder="¿Cuántas piezas?" />
+                                        <label asp-for="CuantosP">¿Cuántas piezas?</label>
+                                        <span asp-validation-for="CuantosP" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="ComoP" class="form-control" placeholder="¿Cómo se detectó el problema?" />
+                                        <label asp-for="ComoP">¿Cómo se detectó el problema?</label>
+                                        <span asp-validation-for="ComoP" class="text-danger small"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Sección 7: Evidencia Fotográfica -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-header bg-light">
-                    <h5 class="mb-0">Evidencia Fotográfica</h5>
-                </div>
-                <div class="card-body">
-                    <div class="form-group mb-3">
-                        <label class="form-label">Subir imágenes</label>
-                        <input type="file" name="EvidenciaFotografica" class="form-control" multiple />
-                        <small class="form-text text-muted">Puede seleccionar múltiples archivos</small>
-                        <span asp-validation-for="EvidenciaFotografica" class="text-danger"></span>
+                    <!-- Sección 4: Contención -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0"><i class="fas fa-shield-alt me-2"></i>Contención</h5>
+                            <button type="button" id="add-group-btn" class="btn btn-sm btn-light rounded-pill">
+                                <i class="fas fa-plus me-1"></i> Agregar grupo
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div id="dynamic-fields" class="row g-3">
+                                <!-- Campos de contención se agregarán aquí dinámicamente -->
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Campo oculto para el número de reclamo -->
-            <input type="hidden" asp-for="CustomerClaimNumber" id="claim-number" />
+                    <!-- Sección 5: Información Adicional -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card shadow-sm h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0"><i class="fas fa-lock me-2"></i>Información de Cierre</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Mileage" class="form-control" placeholder="Millas" />
+                                        <label asp-for="Mileage">Millas</label>
+                                        <span asp-validation-for="Mileage" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="InvestigationReport" class="form-control" placeholder="Reporte de Investigación" />
+                                        <label asp-for="InvestigationReport">Reporte de Investigación</label>
+                                        <span asp-validation-for="InvestigationReport" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="DateOfClose" class="form-control" type="date" placeholder="Fecha de Cierre" />
+                                        <label asp-for="DateOfClose">Fecha de Cierre</label>
+                                        <span asp-validation-for="DateOfClose" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <select asp-for="ImpactoPPM" class="form-select">
+                                            <option value="true">Sí</option>
+                                            <option value="false">No</option>
+                                        </select>
+                                        <label asp-for="ImpactoPPM">¿Tiene Impacto en PPM?</label>
+                                        <span asp-validation-for="ImpactoPPM" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <select asp-for="Responsabilidad" class="form-select" asp-items="Html.GetEnumSelectList<ResponsabilidadOpciones>()"></select>
+                                        <label asp-for="Responsabilidad">Responsabilidad</label>
+                                        <span asp-validation-for="Responsabilidad" class="text-danger small"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card shadow-sm h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>Acciones</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-check form-switch mb-3">
+                                        <input class="form-check-input" type="checkbox" role="switch" asp-for="AlertaCalidad" />
+                                        <label class="form-check-label" asp-for="AlertaCalidad"></label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Disposicion" class="form-control" placeholder="Disposición" />
+                                        <label asp-for="Disposicion">Disposición</label>
+                                        <span asp-validation-for="Disposicion" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-check form-switch mb-3">
+                                        <input class="form-check-input" type="checkbox" role="switch" asp-for="EntrevistaInvolucrados" />
+                                        <label class="form-check-label" asp-for="EntrevistaInvolucrados"></label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Comentarios" class="form-control" placeholder="Comentarios" />
+                                        <label asp-for="Comentarios">Comentarios</label>
+                                        <span asp-validation-for="Comentarios" class="text-danger small"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- Campo de visualización del número de reclamo -->
-            <div class="form-group mb-4">
-                <label class="form-label">Número de Reclamo</label>
-                <input class="form-control" id="claim-display" readonly />
-                <small class="form-text text-muted">Formato: CLIENTE-0001</small>
-            </div>
+                    <!-- Sección 6: Evaluación de Riesgo -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Evaluación de Riesgo</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Severidad" class="form-control" placeholder="Severidad" />
+                                        <label asp-for="Severidad">Severidad</label>
+                                        <span asp-validation-for="Severidad" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Ocurrencia" class="form-control" placeholder="Ocurrencia" />
+                                        <label asp-for="Ocurrencia">Ocurrencia</label>
+                                        <span asp-validation-for="Ocurrencia" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Deteccion" class="form-control" placeholder="Detección" />
+                                        <label asp-for="Deteccion">Detección</label>
+                                        <span asp-validation-for="Deteccion" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="AP_NPR" class="form-control" placeholder="AP/NPR" />
+                                        <label asp-for="AP_NPR">AP/NPR</label>
+                                        <span asp-validation-for="AP_NPR" class="text-danger small"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-floating mb-3">
+                                        <textarea asp-for="ModoFalla" class="form-control" style="height: 150px" placeholder="Modo de Falla"></textarea>
+                                        <label asp-for="ModoFalla">Modo de Falla</label>
+                                        <span asp-validation-for="ModoFalla" class="text-danger small"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-floating mb-3">
+                                        <textarea asp-for="ControlesEstablecidos" class="form-control" style="height: 150px" placeholder="Controles Establecidos"></textarea>
+                                        <label asp-for="ControlesEstablecidos">Controles Establecidos</label>
+                                        <span asp-validation-for="ControlesEstablecidos" class="text-danger small"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- Botón de envío -->
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary btn-lg">
-                    <i class="fas fa-save me-1"></i> Crear Reporte
-                </button>
+                    <!-- Sección 7: Evidencia Fotográfica -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-camera me-2"></i>Evidencia Fotográfica</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Subir imágenes</label>
+                                <input type="file" name="EvidenciaFotografica" class="form-control" multiple />
+                                <small class="form-text text-muted">Puede seleccionar múltiples archivos</small>
+                                <span asp-validation-for="EvidenciaFotografica" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Campo oculto para el número de reclamo -->
+                    <input type="hidden" asp-for="CustomerClaimNumber" id="claim-number" />
+
+                    <!-- Campo de visualización del número de reclamo -->
+                    <div class="form-floating mb-4">
+                        <input class="form-control" id="claim-display" readonly placeholder="Número de Reclamo" />
+                        <label>Número de Reclamo</label>
+                        <small class="form-text text-muted">Formato: CLIENTE-0001</small>
+                    </div>
+
+                    <!-- Botón de envío -->
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill">
+                            <i class="fas fa-save me-1"></i> Crear Reporte
+                        </button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>
+
+@section Styles {
+    <style>
+        /* Efecto ripple para botones */
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+
+        @@keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Estilos modificados para los campos flotantes - SIN FONDO */
+        .form-floating > label {
+            color: #6c757d;
+            transition: all 0.2s ease;
+            background-color: transparent !important; /* Elimina el fondo */
+            padding: 0 !important; /* Elimina el padding que causaba el efecto */
+        }
+
+        .form-floating > .form-control:focus ~ label,
+        .form-floating > .form-control:not(:placeholder-shown) ~ label,
+        .form-floating > .form-select ~ label {
+            transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+            color: #0076df;
+            background-color: transparent !important; /* Fondo transparente */
+            padding: 0 !important; /* Sin padding */
+        }
+
+        /* Asegurar que los inputs sean claramente visibles */
+        .form-control, .form-select {
+            background-color: #fff !important;
+            z-index: 1; /* Asegura que esté sobre el label */
+        }
+
+        /* Estilo para los switches */
+        .form-switch .form-check-input {
+            width: 3em;
+            height: 1.5em;
+            margin-right: 0.5rem;
+        }
+
+        /* Sombras más pronunciadas para las tarjetas */
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+            .card:hover {
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            }
+
+        /* Bordes redondeados */
+        .rounded-lg {
+            border-radius: 1rem !important;
+        }
+
+        /* Espaciado mejorado */
+        .dynamic-field-group {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+}
 
 @section Scripts {
     @{
@@ -339,31 +419,56 @@
 
         document.getElementById('add-group-btn').addEventListener('click', function () {
             const div = document.createElement('div');
-            div.classList.add('col-md-12', 'mb-3');
+            div.classList.add('col-md-12', 'mb-3', 'dynamic-field-group');
 
             div.innerHTML = `
-                <div class="row g-3">
-                    <div class="col-md-3">
-                        <label class="form-label">Contención Item</label>
-                        <input name="ContencionItems[${index}]" class="form-control" />
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Contención Actividad</label>
-                        <input name="ContencionActividades[${index}]" class="form-control" />
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Contención Responsable</label>
-                        <input name="ContencionResponsables[${index}]" class="form-control" />
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Fecha de Inicio</label>
-                        <input name="ContencionFechasInicio[${index}]" type="date" class="form-control" />
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input name="ContencionItems[${index}]" class="form-control" placeholder="Contención Item" />
+                                    <label>Contención Item</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input name="ContencionActividades[${index}]" class="form-control" placeholder="Contención Actividad" />
+                                    <label>Contención Actividad</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input name="ContencionResponsables[${index}]" class="form-control" placeholder="Contención Responsable" />
+                                    <label>Contención Responsable</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input name="ContencionFechasInicio[${index}]" type="date" class="form-control" placeholder="Fecha de Inicio" />
+                                    <label>Fecha de Inicio</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-danger mt-2 remove-group-btn">
+                            <i class="fas fa-trash me-1"></i> Eliminar
+                        </button>
                     </div>
                 </div>
             `;
 
             document.getElementById('dynamic-fields').appendChild(div);
             index++;
+        });
+
+        // Delegación de eventos para eliminar grupos
+        document.getElementById('dynamic-fields').addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-group-btn') || e.target.closest('.remove-group-btn')) {
+                const group = e.target.closest('.dynamic-field-group');
+                if (group) {
+                    group.remove();
+                }
+            }
         });
 
         // Script para generar número de reclamo
@@ -392,6 +497,29 @@
                 displayField.value = 'Error al generar número';
                 numericField.value = '';
             }
+        });
+
+        // Efecto ripple para botones
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple-effect');
+
+                const rect = button.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                ripple.style.width = ripple.style.height = `${size}px`;
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+
+                button.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1000);
+            });
         });
     </script>
 }

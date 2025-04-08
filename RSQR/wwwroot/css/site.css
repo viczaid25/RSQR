@@ -124,4 +124,113 @@ header.navbar {
         }
 }
 
-/* Resto de tus estilos... */
+/* Estilos para la tabla con Material Design */
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-striped-bg: #f8f9fa;
+    --bs-table-hover-bg: #f1f3f5;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--bs-table-hover-bg);
+    transition: background-color 0.2s ease;
+}
+
+.table thead th {
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    color: #6c757d;
+}
+
+.table td, .table th {
+    padding: 1rem 0.75rem;
+    vertical-align: middle;
+    border-top: 1px solid #e9ecef;
+}
+
+/* Botones con efecto Material */
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+    .btn:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 5px;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.5);
+        opacity: 0;
+        border-radius: 100%;
+        transform: scale(1, 1) translate(-50%);
+        transform-origin: 50% 50%;
+    }
+
+    .btn:focus:after, .btn:hover:after {
+        animation: ripple 0.6s ease-out;
+    }
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
+}
+
+/* Badges modernos */
+.badge {
+    font-weight: 500;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    letter-spacing: 0.5px;
+}
+
+/* Sombras y bordes */
+.card {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.rounded-3 {
+    border-radius: 0.75rem !important;
+}
+
+/* Efecto hover para filas */
+.table-hover tbody tr {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .table-hover tbody tr:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+/* Botones de acción compactos */
+.btn-group .btn {
+    padding: 0.375rem 0.75rem;
+    border-radius: 0;
+}
+
+    .btn-group .btn:first-child {
+        border-top-left-radius: 50rem;
+        border-bottom-left-radius: 50rem;
+    }
+
+    .btn-group .btn:last-child {
+        border-top-right-radius: 50rem;
+        border-bottom-right-radius: 50rem;
+    }
