@@ -4,255 +4,311 @@
     ViewData["Title"] = "Detalles del Reporte";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Detalles del Reporte</h1>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">
-            <i class="fas fa-edit me-1"></i> Editar
-        </a>
-        <a asp-action="Index" class="btn btn-secondary">
-            <i class="fas fa-arrow-left me-1"></i> Volver a la lista
-        </a>
-    </div>
-</div>
-
-<div class="card shadow-sm">
-    <div class="card-header bg-light">
-        <h5 class="mb-0">Información Básica</h5>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <dl class="row">
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Fecha)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Fecha)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ProblemRank)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.ProblemRank)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.UserName)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.UserName)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Linea)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Linea)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Tipo)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Tipo)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.TituloProblema)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.TituloProblema)</dd>
-                </dl>
-            </div>
-            <div class="col-md-6">
-                <dl class="row">
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CincoM)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.CincoM)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.NumParteAfectado)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.NumParteAfectado)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Lote)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Lote)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CustomerClaimNumber)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.CustomerClaimNumber)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.AlertaCalidad)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.AlertaCalidad)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Disposicion)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Disposicion)</dd>
-                </dl>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="display-6 text-dark fw-bold">Detalles del Reporte</h1>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning rounded-pill">
+                    <i class="fas fa-edit me-1"></i> Editar
+                </a>
+                <a asp-action="Index" class="btn btn-secondary rounded-pill ms-2">
+                    <i class="fas fa-arrow-left me-1"></i> Volver a la lista
+                </a>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="card shadow-sm mt-4">
-    <div class="card-header bg-light">
-        <h5 class="mb-0">Descripción del Problema</h5>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-12">
-                <dl class="row">
-                    <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Descripcion)</dt>
-                    <dd class="col-sm-10">@Html.DisplayFor(model => model.Descripcion)</dd>
+        <!-- Información Básica -->
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Información Básica</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <dl class="row">
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Fecha)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Fecha)</dd>
 
-                    <dt class="col-sm-2">@Html.DisplayNameFor(model => model.DescripcionProblema)</dt>
-                    <dd class="col-sm-10">@Html.DisplayFor(model => model.DescripcionProblema)</dd>
-                </dl>
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.ProblemRank)</dt>
+                            <dd class="col-sm-8">
+                                <span class="badge bg-@GetProblemRankBadgeColor(Model.ProblemRank)">
+                                    @Html.DisplayFor(model => model.ProblemRank)
+                                </span>
+                            </dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.UserName)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.UserName)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Linea)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Linea)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Tipo)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Tipo)</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-6">
+                        <dl class="row">
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.TituloProblema)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.TituloProblema)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.CincoM)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.CincoM)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.NumParteAfectado)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.NumParteAfectado)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Lote)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Lote)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.CustomerClaimNumber)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.CustomerClaimNumber)</dd>
+                        </dl>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="card shadow-sm mt-4">
-    <div class="card-header bg-light">
-        <h5 class="mb-0">Análisis 5W2H</h5>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <dl class="row">
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.QueP)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.QueP)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.DondeP)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.DondeP)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CuandoP)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.CuandoP)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ComoP)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.ComoP)</dd>
-                </dl>
+        <!-- Descripción del Problema -->
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-align-left me-2"></i>Descripción del Problema</h5>
             </div>
-            <div class="col-md-6">
-                <dl class="row">
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.PorqueP)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.PorqueP)</dd>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <dl class="row">
+                            <dt class="col-sm-2 text-muted">@Html.DisplayNameFor(model => model.Descripcion)</dt>
+                            <dd class="col-sm-10">@Html.DisplayFor(model => model.Descripcion)</dd>
 
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.QuienP)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.QuienP)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CuantosP)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.CuantosP)</dd>
-                </dl>
+                            <dt class="col-sm-2 text-muted">@Html.DisplayNameFor(model => model.DescripcionProblema)</dt>
+                            <dd class="col-sm-10">@Html.DisplayFor(model => model.DescripcionProblema)</dd>
+                        </dl>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="card shadow-sm mt-4">
-    <div class="card-header bg-light">
-        <h5 class="mb-0">Contención</h5>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead class="table-light">
-                    <tr>
-                        <th>@Html.DisplayNameFor(model => model.ContencionItems)</th>
-                        <th>@Html.DisplayNameFor(model => model.ContencionActividades)</th>
-                        <th>@Html.DisplayNameFor(model => model.ContencionResponsables)</th>
-                        <th>@Html.DisplayNameFor(model => model.ContencionFechasInicio)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (int i = 0; i < Model.ContencionItems.Count; i++)
-                    {
-                        <tr>
-                            <td>@Model.ContencionItems[i]</td>
-                            <td>@(Model.ContencionActividades.Count > i ? Model.ContencionActividades[i] : "")</td>
-                            <td>@(Model.ContencionResponsables.Count > i ? Model.ContencionResponsables[i] : "")</td>
-                            <td>@(Model.ContencionFechasInicio.Count > i ? Model.ContencionFechasInicio[i].ToString("dd/MM/yyyy") : "")</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<div class="card shadow-sm mt-4">
-    <div class="card-header bg-light">
-        <h5 class="mb-0">Información Adicional</h5>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <dl class="row">
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.EntrevistaInvolucrados)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.EntrevistaInvolucrados)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Comentarios)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Comentarios)</dd>
-
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Severidad)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Severidad)</dd>
-                </dl>
+        <!-- Análisis 5W2H -->
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-search me-2"></i>Análisis 5W2H</h5>
             </div>
-            <div class="col-md-6">
-                <dl class="row">
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Ocurrencia)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Ocurrencia)</dd>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <dl class="row">
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.QueP)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.QueP)</dd>
 
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Deteccion)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Deteccion)</dd>
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.DondeP)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.DondeP)</dd>
 
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.AP_NPR)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.AP_NPR)</dd>
-                </dl>
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.CuandoP)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.CuandoP)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.ComoP)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.ComoP)</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-6">
+                        <dl class="row">
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.PorqueP)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.PorqueP)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.QuienP)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.QuienP)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.CuantosP)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.CuantosP)</dd>
+                        </dl>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="card shadow-sm mt-4">
-    <div class="card-header bg-light">
-        <h5 class="mb-0">Otros Datos</h5>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <dl class="row">
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ModoFalla)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.ModoFalla)</dd>
-                </dl>
+        <!-- Contención -->
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-shield-alt me-2"></i>Contención</h5>
             </div>
-            <div class="col-md-6">
-                <dl class="row">
-                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ControlesEstablecidos)</dt>
-                    <dd class="col-sm-8">@Html.DisplayFor(model => model.ControlesEstablecidos)</dd>
-                </dl>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.ContencionItems)</th>
+                                <th>@Html.DisplayNameFor(model => model.ContencionActividades)</th>
+                                <th>@Html.DisplayNameFor(model => model.ContencionResponsables)</th>
+                                <th>@Html.DisplayNameFor(model => model.ContencionFechasInicio)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.ContencionItems.Count; i++)
+                            {
+                                <tr>
+                                    <td>@Model.ContencionItems[i]</td>
+                                    <td>@(Model.ContencionActividades.Count > i ? Model.ContencionActividades[i] : "")</td>
+                                    <td>@(Model.ContencionResponsables.Count > i ? Model.ContencionResponsables[i] : "")</td>
+                                    <td>@(Model.ContencionFechasInicio.Count > i ? Model.ContencionFechasInicio[i].ToString("dd/MM/yyyy") : "")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col-12">
-                <dl class="row">
-                    <dt class="col-sm-2">@Html.DisplayNameFor(model => model.EvidenciaFotografica)</dt>
-                    <dd class="col-sm-10">
-                        @if (Model.EvidenciaFotografica != null && Model.EvidenciaFotografica.Count > 0)
-                        {
-                            <div class="d-flex flex-wrap gap-2">
-                                @foreach (var evidencia in Model.EvidenciaFotografica)
+
+        <!-- Información Adicional -->
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-ellipsis-h me-2"></i>Información Adicional</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <dl class="row">
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.AlertaCalidad)</dt>
+                            <dd class="col-sm-8">
+                                @if (Model.AlertaCalidad)
                                 {
-                                    <div class="border p-2 rounded">
-                                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(evidencia)"
-                                             alt="Evidencia fotográfica"
-                                             style="max-height: 150px;"
-                                             class="img-thumbnail" />
-                                        <div class="text-center mt-1">Evidencia @(Model.EvidenciaFotografica.IndexOf(evidencia) + 1)</div>
-                                    </div>
+                                    <span class="badge bg-success">Sí</span>
                                 }
+                                else
+                                {
+                                    <span class="badge bg-secondary">No</span>
+                                }
+                            </dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Disposicion)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Disposicion)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.EntrevistaInvolucrados)</dt>
+                            <dd class="col-sm-8">
+                                @if (Model.EntrevistaInvolucrados)
+                                {
+                                    <span class="badge bg-success">Sí</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">No</span>
+                                }
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-6">
+                        <dl class="row">
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Comentarios)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Comentarios)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Severidad)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Severidad)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Ocurrencia)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Ocurrencia)</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evaluación y Controles -->
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Evaluación y Controles</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <dl class="row">
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Deteccion)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Deteccion)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.AP_NPR)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.AP_NPR)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.ModoFalla)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.ModoFalla)</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-6">
+                        <dl class="row">
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.ControlesEstablecidos)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.ControlesEstablecidos)</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evidencia Fotográfica -->
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-camera me-2"></i>Evidencia Fotográfica</h5>
+            </div>
+            <div class="card-body">
+                @if (Model.EvidenciaFotografica != null && Model.EvidenciaFotografica.Count > 0)
+                {
+                    <div class="row">
+                        @foreach (var evidencia in Model.EvidenciaFotografica)
+                        {
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100">
+                                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(evidencia)"
+                                         class="card-img-top img-fluid"
+                                         alt="Evidencia fotográfica"
+                                         style="max-height: 200px; object-fit: contain;">
+                                    <div class="card-footer text-center">
+                                        <small class="text-muted">Evidencia @(Model.EvidenciaFotografica.IndexOf(evidencia) + 1)</small>
+                                    </div>
+                                </div>
                             </div>
                         }
-                        else
-                        {
-                            <span class="text-muted">No hay evidencias fotográficas</span>
-                        }
-                    </dd>
-                </dl>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info mb-0">
+                        No hay evidencias fotográficas disponibles
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Botones de Acción -->
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-controller="Reportes"
+               asp-action="ExportToExcel"
+               asp-route-linea="@Model.Linea"
+               class="btn btn-primary rounded-pill">
+                <i class="fas fa-file-excel me-1"></i> Descargar Reporte en Excel
+            </a>
+
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning rounded-pill">
+                    <i class="fas fa-edit me-1"></i> Editar
+                </a>
+                <a asp-action="Index" class="btn btn-secondary rounded-pill ms-2">
+                    <i class="fas fa-arrow-left me-1"></i> Volver a la lista
+                </a>
             </div>
         </div>
     </div>
 </div>
 
-<div class="mt-4 d-flex justify-content-between">
-    <a asp-controller="Reportes"
-       asp-action="ExportToExcel"
-       asp-route-linea="@Model.Linea"
-       class="btn btn-primary">
-        <i class="fas fa-file-excel me-1"></i> Descargar Reporte en Excel
-    </a>
-
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">
-            <i class="fas fa-edit me-1"></i> Editar
-        </a>
-        <a asp-action="Index" class="btn btn-secondary ms-2">
-            <i class="fas fa-arrow-left me-1"></i> Volver a la lista
-        </a>
-    </div>
-</div>
+@functions {
+    public string GetProblemRankBadgeColor(string problemRank)
+    {
+        switch (problemRank?.ToUpper())
+        {
+            case "ALTO":
+                return "danger";
+            case "MEDIO":
+                return "warning";
+            case "BAJO":
+                return "success";
+            default:
+                return "secondary";
+        }
+    }
+}
