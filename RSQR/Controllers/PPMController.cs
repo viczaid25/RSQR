@@ -9,14 +9,35 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Data.SqlClient; // Este es el correcto para .NET Core/5+
 
+/// <summary>
+/// Controlador para manejar las operaciones relacionadas con el cálculo PPM (Parts Per Million).
+/// Requiere autenticación para acceder a sus métodos.
+/// </summary>
 [Authorize]
 public class PPMController : Controller
 {
+    /// <summary>
+    /// Configuración de la aplicación para acceder a las cadenas de conexión.
+    /// </summary>
     private readonly IConfiguration _configuration;
+
+    /// <summary>
+    /// Cadena de conexión para la base de datos Oracle.
+    /// </summary>
     private readonly string oracleConnectionString;
+
+    /// <summary>
+    /// Cadena de conexión para la base de datos SQL Server.
+    /// </summary>
     private readonly string sqlServerConnectionString;
 
-    // Diccionario para mapear grupos de descripciones
+    /// <summary>
+    /// Diccionario que mapea grupos de descripciones para consultas agrupadas.
+    /// Contiene tres grupos principales:
+    /// - CM_GROUP: Descripciones relacionadas con sistemas de control de motor
+    /// - EPS_GROUP: Descripciones relacionadas con sistemas de dirección eléctrica
+    /// - BCM_GROUP: Descripciones relacionadas con módulos de control de carrocería
+    /// </summary>
     private readonly Dictionary<string, List<string>> _gruposDescripciones = new()
     {
         ["CM_GROUP"] = new List<string> {
@@ -42,6 +63,10 @@ public class PPMController : Controller
         }
     };
 
+    /// <summary>
+    /// Constructor del controlador que inicializa las cadenas de conexión.
+    /// </summary>
+    /// <param name="configuration">Interfaz de configuración para acceder a appsettings.json</param>
     public PPMController(IConfiguration configuration)
     {
         _configuration = configuration;
@@ -49,11 +74,22 @@ public class PPMController : Controller
         sqlServerConnectionString = _configuration.GetConnectionString("DefaultConnection");
     }
 
+    /// <summary>
+    /// Acción que devuelve la vista principal del módulo PPM.
+    /// </summary>
+    /// <returns>Vista PPM</returns>
     public IActionResult Ppm()
     {
         return View();
     }
 
+    /// <summary>
+    /// Calcula el total de cajas y el valor PPM para un rango de fechas y descripción específicos.
+    /// </summary>
+    /// <param name="fechaInicio">Fecha de inicio en formato yyyy-MM-dd</param>
+    /// <param name="fechaFin">Fecha de fin en formato yyyy-MM-dd</param>
+    /// <param name="descripcion">Descripción del producto o grupo de productos</param>
+    /// <returns>Objeto JSON con total de cajas, valor PPM y posibles errores</returns>
     public IActionResult SumarCajas(string fechaInicio, string fechaFin, string descripcion)
     {
         decimal totalCajas = 0;
@@ -98,6 +134,14 @@ public class PPMController : Controller
         return Json(new { totalCajas = totalCajas, division = division });
     }
 
+    /// <summary>
+    /// Obtiene el total de cajas enviadas desde Oracle para un producto o grupo de productos
+    /// en un rango de fechas específico.
+    /// </summary>
+    /// <param name="descripcion">Descripción del producto o nombre del grupo</param>
+    /// <param name="fechaInicio">Fecha de inicio formateada (dd-MMM-yy)</param>
+    /// <param name="fechaFin">Fecha de fin formateada (dd-MMM-yy)</param>
+    /// <returns>Total de cajas como valor decimal</returns>
     private decimal ObtenerTotalCajasOracle(string descripcion, string fechaInicio, string fechaFin)
     {
         using (OracleConnection oracleConnection = new OracleConnection(oracleConnectionString))
@@ -150,6 +194,11 @@ public class PPMController : Controller
         }
     }
 
+    /// <summary>
+    /// Obtiene la suma de partes defectuosas desde SQL Server para una descripción específica.
+    /// </summary>
+    /// <param name="descripcion">Descripción del producto o nombre del grupo</param>
+    /// <returns>Suma de partes defectuosas como valor decimal</returns>
     private decimal ObtenerSumaCuantosPSqlServer(string descripcion)
     {
         using (SqlConnection sqlConnection = new SqlConnection(sqlServerConnectionString))
