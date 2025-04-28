@@ -37,11 +37,18 @@ namespace RSQR.Services
         /// y luego cierra la conexión. Utiliza SecureSocketOptions.Auto para negociar automáticamente
         /// la seguridad de la conexión (SSL/TLS).
         /// </remarks>
-        public async Task SendEmailAsync(string toEmail, string subject, string body)
+        public async Task SendEmailAsync(string toEmail, string subject, string body, string? bcc = null)
         {
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse(_emailSettings.FromEmail));
             email.To.Add(MailboxAddress.Parse(toEmail));
+
+            // Añadir BCC si se proporciona
+            if (!string.IsNullOrEmpty(bcc))
+            {
+                email.Bcc.Add(MailboxAddress.Parse(bcc));
+            }
+
             email.Subject = subject;
             email.Body = new TextPart("html") { Text = body };
 

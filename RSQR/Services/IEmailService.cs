@@ -16,6 +16,6 @@
         /// Las implementaciones de esta interfaz deben proporcionar la lógica concreta
         /// para enviar correos electrónicos utilizando algún proveedor de servicios SMTP.
         /// </remarks>
-        Task SendEmailAsync(string toEmail, string subject, string body);
+        Task SendEmailAsync(string toEmail, string subject, string body, string? bcc = null);
     }
 }

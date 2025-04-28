@@ -137,11 +137,10 @@ namespace RSQR.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Procesar la lista de archivos y convertir a byte[]
+                // Procesar la lista de archivos
                 if (EvidenciaFotografica != null && EvidenciaFotografica.Count > 0)
                 {
                     reporte.EvidenciaFotografica = new List<byte[]>();
-
                     foreach (var file in EvidenciaFotografica)
                     {
                         if (file.Length > 0)
@@ -155,64 +154,78 @@ namespace RSQR.Controllers
                     }
                 }
 
-                // 2. Validar y asegurar el número de reclamo
+                // Validar número de reclamo
                 if (reporte.CustomerClaimNumber <= 0)
                 {
-                    // Obtener el siguiente número válido si no se proporcionó uno
                     reporte.CustomerClaimNumber = await GetNextClaimNumberForCustomer(reporte.Customer);
                 }
 
-                // Guardar el reporte en la base de datos
                 _context.Add(reporte);
                 await _context.SaveChangesAsync();
 
-                // Verificar si ImpactoPPM es true
-                if (reporte.ImpactoPPM)
+                // Mapeo de líneas a destinatarios
+                var lineaDestinatarios = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    // Crear una nueva instancia de PpmReport
-                    var ppmReport = new PpmReport
-                    {
-                        Fecha = reporte.Fecha,
-                        Customer = reporte.Customer!,
-                        MotherFactory = reporte.MotherFactory!,
-                        CustomerPartNumber = reporte.CustomerPartNumber!,
-                        Mileage = reporte.Mileage!,
-                        InvestigationReport = reporte.InvestigationReport!,
-                        DateOfClose = reporte.DateOfClose,
-                        ImpactoPPM = reporte.ImpactoPPM,
-                        Responsabilidad = reporte.Responsabilidad,
-                        Comentarios = reporte.Comentarios,
-                        CuantosP = reporte.CuantosP,
-                        CustomerClaimNumber = reporte.CustomerClaimNumber,
-                        Linea = reporte.Linea,
-                        Lote = reporte.Lote,
-                        NumParteAfectado = reporte.NumParteAfectado,
-                        Tipo = reporte.Tipo,
-                        TituloProblema = reporte.TituloProblema
-                    };
+                    ["STARTER"] = "meax_qc_st@meax.mx",
+                    ["ALTERNATOR"] = "meax_qc_alt@meax.mx",
+                    ["EPS (3G)"] = "meax_qc_eps@meax.mx",
+                    ["PT EPS"] = "meax_qc_eps@meax.mx",
+                    ["PT SSU"] = "meax_qc_eps@meax.mx",
+                    ["PT FOB"] = "meax_qc_eps@meax.mx",
+                    ["PT RCV"] = "meax_qc_eps@meax.mx",
+                    ["PT BCM"] = "meax_qc_eps@meax.mx",
+                    ["PT LFU"] = "meax_qc_eps@meax.mx",
+                    ["EPS"] = "meax_qc_eps@meax.mx",
+                    ["CM"] = "meax_qc_cm@meax.mx",
+                    ["LCM"] = "meax_qc_mm@meax.mx",
+                    ["AMP"] = "meax_qc_mm@meax.mx",
+                    ["R1"] = "meax_qc_mm@meax.mx",
+                    ["CID"] = "meax_qc_mm@meax.mx",
+                    ["PT CM"] = "meax_qc_cm@meax.mx",
+                    ["DEFAULT"] = "Zaid.Garcia@meax.mx" // Valor por defecto
+                };
 
-                    _context.Add(ppmReport);
-                    await _context.SaveChangesAsync();
-                }
-
-                //Verifica el valor de Responsabilidad y enviar correo
-                string destinatario = "";
-                string asunto = "Nuevo Reporte Creado";
-                string cuerpo = $"Se a creado un nuevo reporte con ID: {reporte.Id}. Fecha {reporte.Fecha}.";
-
+                // Determinar destinatario según responsabilidad y línea
+                string destinatario;
                 switch (reporte.Responsabilidad)
                 {
                     case ResponsabilidadOpciones.Meax:
-                        destinatario = "Zaid.Garcia@meax.mx";
+                        destinatario = lineaDestinatarios.TryGetValue(reporte.Linea ?? "", out var email)
+                                    ? email
+                                    : lineaDestinatarios["DEFAULT"];
                         break;
+
                     case ResponsabilidadOpciones.Proveedor:
                         destinatario = "Akaren.Gonzalez@meax.mx";
                         break;
+
                     default:
                         destinatario = "Sofia.Ramirez@meax.mx";
                         break;
                 }
-                await _emailService.SendEmailAsync(destinatario, asunto, cuerpo);
+
+                // Construir cuerpo del correo
+                string asunto = "Immediate Attention required: A Customer Report Has Been Issued";
+                string cuerpo = $@"Dear Team,
+
+                                Please be advised that a {reporte.Tipo.ToString()} report has been received from customer ""{reporte.Customer}"" regarding the issue ""{reporte.TituloProblema}"". The information of the issue is now contained in CAR ({reporte.Id}).
+
+                                Kindly review the information and proceed accordingly.
+
+                                Best Regards.";
+
+                await _emailService.SendEmailAsync(destinatario, asunto, cuerpo, "Zaid.Garcia@meax.mx");
+
+                // Manejo de PPM si es necesario
+                if (reporte.ImpactoPPM)
+                {
+                    var ppmReport = new PpmReport
+                    {
+                        // ... (tu código existente para PPM) ...
+                    };
+                    _context.Add(ppmReport);
+                    await _context.SaveChangesAsync();
+                }
 
                 return RedirectToAction(nameof(Index));
             }
