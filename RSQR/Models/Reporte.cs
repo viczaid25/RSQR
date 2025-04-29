@@ -192,6 +192,7 @@ namespace RSQR.Models
 
         // Campos adicionales
         /// <summary>Nombre del cliente afectado</summary>
+        [Required(ErrorMessage = "El cliente es obligatorio")]
         public string? Customer { get; set; }
 
         /// <summary>Fábrica de origen</summary>

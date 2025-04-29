@@ -166,22 +166,22 @@ namespace RSQR.Controllers
                 // Mapeo de líneas a destinatarios
                 var lineaDestinatarios = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    ["STARTER"] = "meax_qc_st@meax.mx",
-                    ["ALTERNATOR"] = "meax_qc_alt@meax.mx",
-                    ["EPS (3G)"] = "meax_qc_eps@meax.mx",
-                    ["PT EPS"] = "meax_qc_eps@meax.mx",
-                    ["PT SSU"] = "meax_qc_eps@meax.mx",
-                    ["PT FOB"] = "meax_qc_eps@meax.mx",
-                    ["PT RCV"] = "meax_qc_eps@meax.mx",
-                    ["PT BCM"] = "meax_qc_eps@meax.mx",
-                    ["PT LFU"] = "meax_qc_eps@meax.mx",
-                    ["EPS"] = "meax_qc_eps@meax.mx",
-                    ["CM"] = "meax_qc_cm@meax.mx",
-                    ["LCM"] = "meax_qc_mm@meax.mx",
-                    ["AMP"] = "meax_qc_mm@meax.mx",
-                    ["R1"] = "meax_qc_mm@meax.mx",
-                    ["CID"] = "meax_qc_mm@meax.mx",
-                    ["PT CM"] = "meax_qc_cm@meax.mx",
+                    ["STARTER"] = "Zaid.Garcia@meax.mx",
+                    ["ALTERNATOR"] = "Zaid.Garcia@meax.mx",
+                    ["EPS (3G)"] = "Zaid.Garcia@meax.mx",
+                    ["PT EPS"] = "Zaid.Garcia@meax.mx",
+                    ["PT SSU"] = "Zaid.Garcia@meax.mx",
+                    ["PT FOB"] = "Zaid.Garcia@meax.mx",
+                    ["PT RCV"] = "Zaid.Garcia@meax.mx",
+                    ["PT BCM"] = "Zaid.Garcia@meax.mx",
+                    ["PT LFU"] = "Zaid.Garcia@meax.mx",
+                    ["EPS"] = "Zaid.Garcia@meax.mx",
+                    ["CM"] = "Zaid.Garcia@meax.mx",
+                    ["LCM"] = "Zaid.Garcia@meax.mx",
+                    ["AMP"] = "Zaid.Garcia@meax.mx",
+                    ["R1"] = "Zaid.Garcia@meax.mx",
+                    ["CID"] = "Zaid.Garcia@meax.mx",
+                    ["PT CM"] = "Zaid.Garcia@meax.mx",
                     ["DEFAULT"] = "Zaid.Garcia@meax.mx" // Valor por defecto
                 };
 
