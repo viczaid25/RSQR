@@ -93,13 +93,13 @@
                             </div>
                             <div class="form-floating mb-3">
                                 <select asp-for="Customer" class="form-select" id="customer-select" required>
-                                    <option value=""></option>
+                                    <option value="">-- Seleccione un cliente --</option>
                                     @foreach (var cliente in clientes)
                                     {
                                         <option value="@cliente">@cliente</option>
                                     }
                                 </select>
-                                <label asp-for="Customer">Cliente</label>
+                                <label asp-for="Customer"></label>
                                 <span asp-validation-for="Customer" class="text-danger small"></span>
                             </div>
                             <div class="form-floating mb-3">

@@ -107,31 +107,38 @@ namespace RSQR.Models
 
         // Campos de análisis (5W2H)
         /// <summary>Qué ocurrió (What)</summary>
+        [Display(Name = "Que Problema fue detectado?")]
         public string? QueP { get; set; }
 
         /// <summary>Por qué ocurrió (Why)</summary>
+        [Display(Name = "Porque es un problema?")]
         public string? PorqueP { get; set; }
 
         /// <summary>Dónde ocurrió (Where)</summary>
+        [Display(Name = "Donde se detecto el problema?")]
         public string? DondeP { get; set; }
 
         /// <summary>Quién detectó (Who)</summary>
+        [Display(Name = "Quien detecto el problema?")]
         public string? QuienP { get; set; }
 
         /// <summary>Cuándo ocurrió (When)</summary>
+        [Display(Name = "Cuando fue detectado el problema?")]
         public string? CuandoP { get; set; }
 
         /// <summary>Cuántos productos afectados (How many)</summary>
+        [Display(Name = "Cuantas piezas fueron detectadas con el problema?")]
         public string? CuantosP { get; set; }
 
         /// <summary>Cómo se detectó (How)</summary>
+        [Display(Name = "Como se detecto el problema?")]
         public string? ComoP { get; set; }
 
         /// <summary>Lote o batch afectado</summary>
         public string? Lote { get; set; }
 
         /// <summary>Número de reclamo en base de datos</summary>
-        [Display(Name = "Número de Reclamo (BD)")]
+        [Display(Name = "Número de Reclamo")]
         public int CustomerClaimNumber { get; set; }
 
         /// <summary>Número de reclamo formateado para visualización (no se persiste)</summary>

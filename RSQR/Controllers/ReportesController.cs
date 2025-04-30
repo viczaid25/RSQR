@@ -221,7 +221,23 @@ namespace RSQR.Controllers
                 {
                     var ppmReport = new PpmReport
                     {
-                        // ... (tu código existente para PPM) ...
+                        Fecha = reporte.Fecha,
+                        Customer = reporte.Customer!,
+                        MotherFactory = reporte.MotherFactory!,
+                        CustomerPartNumber = reporte.CustomerPartNumber!,
+                        Mileage = reporte.Mileage!,
+                        InvestigationReport = reporte.InvestigationReport!,
+                        DateOfClose = reporte.DateOfClose,
+                        ImpactoPPM = reporte.ImpactoPPM,
+                        Responsabilidad = reporte.Responsabilidad,
+                        Comentarios = reporte.Comentarios,
+                        CuantosP = reporte.CuantosP,
+                        CustomerClaimNumber = reporte.CustomerClaimNumber,
+                        Linea = reporte.Linea,
+                        Lote = reporte.Lote,
+                        NumParteAfectado = reporte.NumParteAfectado,
+                        Tipo = reporte.Tipo,
+                        TituloProblema = reporte.TituloProblema
                     };
                     _context.Add(ppmReport);
                     await _context.SaveChangesAsync();
@@ -255,6 +271,36 @@ namespace RSQR.Controllers
         // GET: Reportes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+
+            ViewBag.ProblemRankList = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "", Text = "-Seleccionar-", Selected = true },  // Opción por defecto
+                new SelectListItem { Value = "Bajo", Text = "Bajo" },
+                new SelectListItem { Value = "Medio", Text = "Medio" },
+                new SelectListItem { Value = "Alto", Text = "Alto" }
+            };
+
+            // Nuevo: Opciones para Linea
+            ViewBag.LineaList = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "STARTER", Text = "STARTER" },
+                new SelectListItem { Value = "ALTERNATOR", Text = "ALTERNATOR" },
+                new SelectListItem { Value = "EPS (3G)", Text = "EPS (3G)" },
+                new SelectListItem { Value = "PT EPS", Text = "PT EPS" },
+                new SelectListItem { Value = "PT SSU", Text = "PT SSU" },
+                new SelectListItem { Value = "PT FOB", Text = "PT FOB" },
+                new SelectListItem { Value = "PT RCV", Text = "PT RCV" },
+                new SelectListItem { Value = "PT BCM", Text = "PT BCM" },
+                new SelectListItem { Value = "PT LFU", Text = "PT LFU" },
+                new SelectListItem { Value = "EPS", Text = "EPS" },
+                new SelectListItem { Value = "CM", Text = "CM" },
+                new SelectListItem { Value = "LCM", Text = "LCM" },
+                new SelectListItem { Value = "AMP", Text = "AMP" },
+                new SelectListItem { Value = "R1", Text = "R1" },
+                new SelectListItem { Value = "CID", Text = "CID" },
+                new SelectListItem { Value = "PT CM", Text = "PT CM" }
+            };
+
             if (id == null)
             {
                 return NotFound();

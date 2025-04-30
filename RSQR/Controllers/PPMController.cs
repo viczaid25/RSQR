@@ -40,7 +40,7 @@ public class PPMController : Controller
     /// </summary>
     private readonly Dictionary<string, List<string>> _gruposDescripciones = new()
     {
-        ["CM_GROUP"] = new List<string> {
+        ["CM"] = new List<string> {
             "FORD 4G-VVT MPC",
             "4G-VCT MPC",
             "3G-VCT MERVERIC GTDI",
@@ -52,14 +52,32 @@ public class PPMController : Controller
             "VALUE VVT-ACT",
             "OP-OCV"
         },
-        ["EPS_GROUP"] = new List<string> { "EPS ECU", "EPS MOTOR", "EPS MCU" },
-        ["BCM_GROUP"] = new List<string> {
+        ["EPS(3G)"] = new List<string> { 
+            "EPS ECU", 
+            "EPS MOTOR", 
+            "EPS MCU", 
+            "EPS-MCU" 
+        },
+        ["PT BCM"] = new List<string> {
             "C-BCM",
             "BCM V 2.0",
             "BCM V 3.0",
             "BCM VE3.0",
             "BCM 2nd for MMVO",
             "BCM 2nd for MTMUS"
+        },
+        ["PT LFU"] = new List<string> {
+            "LFU",
+            "LFU 2nd for MMVO",
+            "LFU 2nd for MTMUS",
+            "LFU VE 2.0 for MMVO",
+            "LFU VE 2.0 for MTMUS "
+        },
+        ["EPS"] = new List<string> {
+            "EPS MCU (ILX)",
+            "EPS MCU (HRV)",
+            "EPS MCU (CIVIC)",
+            "EPS MCU (CRV)"
         }
     };
 
