@@ -47,7 +47,7 @@
   - [UnidadNegocio](#P-RSQR-Models-ConsecutivoArchivo-UnidadNegocio 'RSQR.Models.ConsecutivoArchivo.UnidadNegocio')
 - [EmailService](#T-RSQR-Services-EmailService 'RSQR.Services.EmailService')
   - [#ctor(emailSettings)](#M-RSQR-Services-EmailService-#ctor-Microsoft-Extensions-Options-IOptions{RSQR-Models-EmailSettings}- 'RSQR.Services.EmailService.#ctor(Microsoft.Extensions.Options.IOptions{RSQR.Models.EmailSettings})')
-  - [SendEmailAsync(toEmail,subject,body)](#M-RSQR-Services-EmailService-SendEmailAsync-System-String,System-String,System-String- 'RSQR.Services.EmailService.SendEmailAsync(System.String,System.String,System.String)')
+  - [SendEmailAsync(toEmail,subject,body)](#M-RSQR-Services-EmailService-SendEmailAsync-System-String,System-String,System-String,System-String- 'RSQR.Services.EmailService.SendEmailAsync(System.String,System.String,System.String,System.String)')
 - [EmailSettings](#T-RSQR-Models-EmailSettings 'RSQR.Models.EmailSettings')
   - [FromEmail](#P-RSQR-Models-EmailSettings-FromEmail 'RSQR.Models.EmailSettings.FromEmail')
   - [SmtpPort](#P-RSQR-Models-EmailSettings-SmtpPort 'RSQR.Models.EmailSettings.SmtpPort')
@@ -60,11 +60,21 @@
   - [Error()](#M-RSQR-Controllers-HomeController-Error 'RSQR.Controllers.HomeController.Error')
   - [Index()](#M-RSQR-Controllers-HomeController-Index 'RSQR.Controllers.HomeController.Index')
 - [IEmailService](#T-RSQR-Services-IEmailService 'RSQR.Services.IEmailService')
-  - [SendEmailAsync(toEmail,subject,body)](#M-RSQR-Services-IEmailService-SendEmailAsync-System-String,System-String,System-String- 'RSQR.Services.IEmailService.SendEmailAsync(System.String,System.String,System.String)')
+  - [SendEmailAsync(toEmail,subject,body)](#M-RSQR-Services-IEmailService-SendEmailAsync-System-String,System-String,System-String,System-String- 'RSQR.Services.IEmailService.SendEmailAsync(System.String,System.String,System.String,System.String)')
 - [NewMigration](#T-RSQR-Migrations-NewMigration 'RSQR.Migrations.NewMigration')
   - [BuildTargetModel()](#M-RSQR-Migrations-NewMigration-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.NewMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
   - [Down()](#M-RSQR-Migrations-NewMigration-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.NewMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
   - [Up()](#M-RSQR-Migrations-NewMigration-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.NewMigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+- [PPMController](#T-PPMController 'PPMController')
+  - [#ctor(configuration)](#M-PPMController-#ctor-Microsoft-Extensions-Configuration-IConfiguration- 'PPMController.#ctor(Microsoft.Extensions.Configuration.IConfiguration)')
+  - [_configuration](#F-PPMController-_configuration 'PPMController._configuration')
+  - [_gruposDescripciones](#F-PPMController-_gruposDescripciones 'PPMController._gruposDescripciones')
+  - [oracleConnectionString](#F-PPMController-oracleConnectionString 'PPMController.oracleConnectionString')
+  - [sqlServerConnectionString](#F-PPMController-sqlServerConnectionString 'PPMController.sqlServerConnectionString')
+  - [ObtenerSumaCuantosPSqlServer(descripcion)](#M-PPMController-ObtenerSumaCuantosPSqlServer-System-String- 'PPMController.ObtenerSumaCuantosPSqlServer(System.String)')
+  - [ObtenerTotalCajasOracle(descripcion,fechaInicio,fechaFin)](#M-PPMController-ObtenerTotalCajasOracle-System-String,System-String,System-String- 'PPMController.ObtenerTotalCajasOracle(System.String,System.String,System.String)')
+  - [Ppm()](#M-PPMController-Ppm 'PPMController.Ppm')
+  - [SumarCajas(fechaInicio,fechaFin,descripcion)](#M-PPMController-SumarCajas-System-String,System-String,System-String- 'PPMController.SumarCajas(System.String,System.String,System.String)')
 - [PpmReport](#T-RSQR-Models-PpmReport 'RSQR.Models.PpmReport')
   - [Comentarios](#P-RSQR-Models-PpmReport-Comentarios 'RSQR.Models.PpmReport.Comentarios')
   - [CuantosP](#P-RSQR-Models-PpmReport-CuantosP 'RSQR.Models.PpmReport.CuantosP')
@@ -719,7 +729,7 @@ Inicializa una nueva instancia del servicio de correo electrónico.
 | ---- | ---- | ----------- |
 | emailSettings | [Microsoft.Extensions.Options.IOptions{RSQR.Models.EmailSettings}](#T-Microsoft-Extensions-Options-IOptions{RSQR-Models-EmailSettings} 'Microsoft.Extensions.Options.IOptions{RSQR.Models.EmailSettings}') | Configuración de correo electrónico inyectada mediante IOptions. |
 
-<a name='M-RSQR-Services-EmailService-SendEmailAsync-System-String,System-String,System-String-'></a>
+<a name='M-RSQR-Services-EmailService-SendEmailAsync-System-String,System-String,System-String,System-String-'></a>
 ### SendEmailAsync(toEmail,subject,body) `method`
 
 ##### Summary
@@ -908,7 +918,7 @@ RSQR.Services
 
 Interfaz que define el contrato para el servicio de envío de correos electrónicos.
 
-<a name='M-RSQR-Services-IEmailService-SendEmailAsync-System-String,System-String,System-String-'></a>
+<a name='M-RSQR-Services-IEmailService-SendEmailAsync-System-String,System-String,System-String,System-String-'></a>
 ### SendEmailAsync(toEmail,subject,body) `method`
 
 ##### Summary
@@ -975,6 +985,134 @@ This method has no parameters.
 ##### Parameters
 
 This method has no parameters.
+
+<a name='T-PPMController'></a>
+## PPMController `type`
+
+##### Namespace
+
+
+
+##### Summary
+
+Controlador para manejar las operaciones relacionadas con el cálculo PPM (Parts Per Million).
+Requiere autenticación para acceder a sus métodos.
+
+<a name='M-PPMController-#ctor-Microsoft-Extensions-Configuration-IConfiguration-'></a>
+### #ctor(configuration) `constructor`
+
+##### Summary
+
+Constructor del controlador que inicializa las cadenas de conexión.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| configuration | [Microsoft.Extensions.Configuration.IConfiguration](#T-Microsoft-Extensions-Configuration-IConfiguration 'Microsoft.Extensions.Configuration.IConfiguration') | Interfaz de configuración para acceder a appsettings.json |
+
+<a name='F-PPMController-_configuration'></a>
+### _configuration `constants`
+
+##### Summary
+
+Configuración de la aplicación para acceder a las cadenas de conexión.
+
+<a name='F-PPMController-_gruposDescripciones'></a>
+### _gruposDescripciones `constants`
+
+##### Summary
+
+Diccionario que mapea grupos de descripciones para consultas agrupadas.
+Contiene tres grupos principales:
+- CM_GROUP: Descripciones relacionadas con sistemas de control de motor
+- EPS_GROUP: Descripciones relacionadas con sistemas de dirección eléctrica
+- BCM_GROUP: Descripciones relacionadas con módulos de control de carrocería
+
+<a name='F-PPMController-oracleConnectionString'></a>
+### oracleConnectionString `constants`
+
+##### Summary
+
+Cadena de conexión para la base de datos Oracle.
+
+<a name='F-PPMController-sqlServerConnectionString'></a>
+### sqlServerConnectionString `constants`
+
+##### Summary
+
+Cadena de conexión para la base de datos SQL Server.
+
+<a name='M-PPMController-ObtenerSumaCuantosPSqlServer-System-String-'></a>
+### ObtenerSumaCuantosPSqlServer(descripcion) `method`
+
+##### Summary
+
+Obtiene la suma de partes defectuosas desde SQL Server para una descripción específica.
+
+##### Returns
+
+Suma de partes defectuosas como valor decimal
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| descripcion | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Descripción del producto o nombre del grupo |
+
+<a name='M-PPMController-ObtenerTotalCajasOracle-System-String,System-String,System-String-'></a>
+### ObtenerTotalCajasOracle(descripcion,fechaInicio,fechaFin) `method`
+
+##### Summary
+
+Obtiene el total de cajas enviadas desde Oracle para un producto o grupo de productos
+en un rango de fechas específico.
+
+##### Returns
+
+Total de cajas como valor decimal
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| descripcion | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Descripción del producto o nombre del grupo |
+| fechaInicio | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Fecha de inicio formateada (dd-MMM-yy) |
+| fechaFin | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Fecha de fin formateada (dd-MMM-yy) |
+
+<a name='M-PPMController-Ppm'></a>
+### Ppm() `method`
+
+##### Summary
+
+Acción que devuelve la vista principal del módulo PPM.
+
+##### Returns
+
+Vista PPM
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-PPMController-SumarCajas-System-String,System-String,System-String-'></a>
+### SumarCajas(fechaInicio,fechaFin,descripcion) `method`
+
+##### Summary
+
+Calcula el total de cajas y el valor PPM para un rango de fechas y descripción específicos.
+
+##### Returns
+
+Objeto JSON con total de cajas, valor PPM y posibles errores
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| fechaInicio | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Fecha de inicio en formato yyyy-MM-dd |
+| fechaFin | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Fecha de fin en formato yyyy-MM-dd |
+| descripcion | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Descripción del producto o grupo de productos |
 
 <a name='T-RSQR-Models-PpmReport'></a>
 ## PpmReport `type`

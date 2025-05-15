@@ -41,16 +41,18 @@ public class PPMController : Controller
     private readonly Dictionary<string, List<string>> _gruposDescripciones = new()
     {
         ["CM"] = new List<string> {
-            "FORD 4G-VVT MPC",
-            "4G-VCT MPC",
-            "3G-VCT MERVERIC GTDI",
-            "2G-VCT",
             "2.5-VCT",
+            "2G-VCT",
+            "3G-VCT GDI",
+            "3G-VCT MERVERIC GTDI",
+            "4G-VCT MPC",
+            "FORD 4G-VVT MPC",
             "OCV",
-            "VVT-OCV",
-            "VVT-ACV",
+            "OP-OCV",
             "VALUE VVT-ACT",
-            "OP-OCV"
+            "VALUE VVT-OCV",
+            "VVT-ACV",
+            "VVT-OCV"
         },
         ["EPS(3G)"] = new List<string> { 
             "EPS ECU", 
@@ -63,21 +65,42 @@ public class PPMController : Controller
             "BCM V 2.0",
             "BCM V 3.0",
             "BCM VE3.0",
+            "BCM VE 2.0",
             "BCM 2nd for MMVO",
             "BCM 2nd for MTMUS"
         },
         ["PT LFU"] = new List<string> {
             "LFU",
-            "LFU 2nd for MMVO",
-            "LFU 2nd for MTMUS",
-            "LFU VE 2.0 for MMVO",
-            "LFU VE 2.0 for MTMUS "
+            "LFU VE2.0 for MMVO",
+            "LFU VE3.0 for MTMUS",
+            "LFU VE4.0 for MMVO",
+            "LFU VE4.0 for MTMUS"
         },
         ["EPS"] = new List<string> {
-            "EPS MCU (ILX)",
+            "EPS MCU (ILX 21M)",
+            "EPS MCU (CIVIC 21M)",
+            "EPS MCU (CIVIC 24.5M)",
+            "EPS MCU (CIVIC 24.5M)",
+            "EPS MCU (CIVIC SI)",
             "EPS MCU (HRV)",
-            "EPS MCU (CIVIC)",
-            "EPS MCU (CRV)"
+            "EPS MCU (22M HRV F4)",
+            "EPS MCU (22.5 CRV F4)",
+            "EPS MCU (CLARITY)",
+            "EPS MCU (25M CRV F4)",
+            "EPS MCU (HRV 24.5)",
+            "EPS MCU (HRV 26M)"
+        },
+        ["CID"] = new List<string> {
+            "DU-7HU2VZL00-X",
+            "DU-7HU5HVL00-X"
+        },
+        ["PT DISPLAY"] = new List<string> {
+            "Display Cluster LHD/Entry plus",
+            "Display Cluster RHD/Entry",
+            "DISPLAY CLUSTER, LHD/Entry",
+            "DISPLAY CLUSTER, LHD/Entry plu",
+            "DISPLAY CLUSTER, RHD/Entry",
+            "DISPLAY CLUSTER, RHD/Entry plu"
         }
     };
 
@@ -169,35 +192,143 @@ public class PPMController : Controller
             {
                 oracleCommand.Connection = oracleConnection;
 
-                // Construir consulta según si es un grupo o descripción individual
+                Debug.WriteLine($"Procesando descripción: {descripcion}");
+
+
+                // Primero verificar si es un grupo definido
                 if (_gruposDescripciones.TryGetValue(descripcion, out var descripcionesGrupo))
                 {
-                    // Consulta para grupos
+                    Debug.WriteLine($"Identificado como grupo con {descripcionesGrupo.Count} elementos");
+
                     string inClause = string.Join(",", descripcionesGrupo.Select(d => $"'{d}'"));
                     oracleCommand.CommandText = $@"
-                        SELECT SUM(QTY_BOX) 
-                        FROM CB_SHIP_D
-                        WHERE DSCRPTN IN ({inClause}) 
-                        AND INVC_NO IN (
-                            SELECT INVC_NO
-                            FROM CB_SHIP_H
-                            WHERE ETD_DATE BETWEEN TO_DATE(:fechaInicio, 'DD-MON-YY') 
-                            AND TO_DATE(:fechaFin, 'DD-MON-YY')
-                        )";
+                    SELECT SUM(SHP_QTY) 
+                    FROM CB_SHIP_D
+                    WHERE DSCRPTN IN ({inClause}) 
+                    AND INVC_NO IN (
+                        SELECT INVC_NO
+                        FROM CB_SHIP_H
+                        WHERE ETD_DATE BETWEEN TO_DATE(:fechaInicio, 'DD-MON-YY') 
+                        AND TO_DATE(:fechaFin, 'DD-MON-YY')
+                    )";
+                }
+                // Luego verificar casos especiales individuales
+                else if (descripcion == "LCM")
+                {
+                    Debug.WriteLine("Identificado como caso especial LCM");
+                    oracleCommand.CommandText = @"
+                    SELECT NVL(SUM(d.SHP_QTY), 0) 
+                    FROM CB_SHIP_D d
+                    INNER JOIN CB_SHIP_H h ON d.INVC_NO = h.INVC_NO
+                    WHERE (d.DSCRPTN = 'LCM' 
+                           OR REGEXP_LIKE(d.DSCRPTN, '^W003'))
+                    AND h.ETD_DATE BETWEEN TO_DATE(:fechaInicio, 'DD-MON-YY') 
+                       AND TO_DATE(:fechaFin, 'DD-MON-YY')";
+
+                    // Log adicional para LCM
+                    Debug.WriteLine("Consulta LCM: " + oracleCommand.CommandText);
+                    Debug.WriteLine("Fechas usadas: " + fechaInicio + " - " + fechaFin);
+                }
+                else if (descripcion == "AMP")
+                {
+                    Debug.WriteLine("Identificado como caso especial AMP");
+                    oracleCommand.CommandText = @"
+                    SELECT NVL(SUM(d.SHP_QTY), 0) 
+                    FROM CB_SHIP_D d
+                    INNER JOIN CB_SHIP_H h ON d.INVC_NO = h.INVC_NO
+                    WHERE (d.DSCRPTN LIKE 'CV-%'
+                            OR REGEXP_LIKE(d.DSCRPTN, '^CZ-'))
+                    AND h.ETD_DATE BETWEEN TO_DATE(:fechaInicio, 'DD-MON-YY') 
+                       AND TO_DATE(:fechaFin, 'DD-MON-YY')";
+
+                    // Log adicional para AMP
+                    Debug.WriteLine("Consulta AMP: " + oracleCommand.CommandText);
+                    Debug.WriteLine("Fechas usadas: " + fechaInicio + " - " + fechaFin);
+                }
+                else if (descripcion == "R1")
+                {
+                    Debug.WriteLine("Identificado como caso especial R1");
+                    oracleCommand.CommandText = @"
+                    SELECT NVL(SUM(d.SHP_QTY), 0) 
+                    FROM CB_SHIP_D d
+                    INNER JOIN CB_SHIP_H h ON d.INVC_NO = h.INVC_NO
+                    WHERE (d.DSCRPTN LIKE 'NR%')
+                    AND h.ETD_DATE BETWEEN TO_DATE(:fechaInicio, 'DD-MON-YY') 
+                       AND TO_DATE(:fechaFin, 'DD-MON-YY')";
+
+                    // Log adicional para R1
+                    Debug.WriteLine("Consulta R1: " + oracleCommand.CommandText);
+                    Debug.WriteLine("Fechas usadas: " + fechaInicio + " - " + fechaFin);
+                }
+                else if (descripcion == "PT CM")
+                {
+                    Debug.WriteLine("Identificado como caso especial PT CM");
+                    oracleCommand.CommandText = @"
+                    SELECT SUM(SHP_QTY) 
+                    FROM CB_SHIP_D
+                    WHERE DSCRPTN = 'VCT DRAGON'
+                    AND INVC_NO IN (
+                        SELECT INVC_NO
+                        FROM CB_SHIP_H
+                        WHERE ETD_DATE BETWEEN TO_DATE(:fechaInicio, 'DD-MON-YY') 
+                        AND TO_DATE(:fechaFin, 'DD-MON-YY')
+                    )";
+                }
+                else if (descripcion == "SSU Circuit Board")
+                {
+                    Debug.WriteLine("Identificado como caso especial SSU Circuit Board");
+                    oracleCommand.CommandText = @"
+                    SELECT SUM(SHP_QTY) 
+                    FROM CB_SHIP_D
+                    WHERE DSCRPTN = 'SSU Circuit Board'
+                    AND INVC_NO IN (
+                        SELECT INVC_NO
+                        FROM CB_SHIP_H
+                        WHERE ETD_DATE BETWEEN TO_DATE(:fechaInicio, 'DD-MON-YY') 
+                        AND TO_DATE(:fechaFin, 'DD-MON-YY')
+                    )";
+                }
+                else if (descripcion == "FOB")
+                {
+                    Debug.WriteLine("Identificado como caso especial FOB");
+                    oracleCommand.CommandText = @"
+                    SELECT SUM(SHP_QTY) 
+                    FROM CB_SHIP_D
+                    WHERE DSCRPTN = 'FOB'
+                    AND INVC_NO IN (
+                        SELECT INVC_NO
+                        FROM CB_SHIP_H
+                        WHERE ETD_DATE BETWEEN TO_DATE(:fechaInicio, 'DD-MON-YY') 
+                        AND TO_DATE(:fechaFin, 'DD-MON-YY')
+                    )";
+                }
+                else if (descripcion == "RCV")
+                {
+                    Debug.WriteLine("Identificado como caso especial RCV");
+                    oracleCommand.CommandText = @"
+                    SELECT SUM(SHP_QTY) 
+                    FROM CB_SHIP_D
+                    WHERE DSCRPTN = 'RCV'
+                    AND INVC_NO IN (
+                        SELECT INVC_NO
+                        FROM CB_SHIP_H
+                        WHERE ETD_DATE BETWEEN TO_DATE(:fechaInicio, 'DD-MON-YY') 
+                        AND TO_DATE(:fechaFin, 'DD-MON-YY')
+                    )";
                 }
                 else
                 {
-                    // Consulta para descripción individual
+                    Debug.WriteLine("Identificado como descripción individual");
                     oracleCommand.CommandText = @"
-                        SELECT SUM(QTY_BOX) 
-                        FROM CB_SHIP_D
-                        WHERE DSCRPTN = :descripcion 
-                        AND INVC_NO IN (
-                            SELECT INVC_NO
-                            FROM CB_SHIP_H
-                            WHERE ETD_DATE BETWEEN TO_DATE(:fechaInicio, 'DD-MON-YY') 
-                            AND TO_DATE(:fechaFin, 'DD-MON-YY')
-                        )";
+                    SELECT SUM(SHP_QTY) 
+                    FROM CB_SHIP_D
+                    WHERE DSCRPTN = :descripcion 
+                    AND INVC_NO IN (
+                        SELECT INVC_NO
+                        FROM CB_SHIP_H
+                        WHERE ETD_DATE BETWEEN TO_DATE(:fechaInicio, 'DD-MON-YY') 
+                        AND TO_DATE(:fechaFin, 'DD-MON-YY')
+                    )";
                     oracleCommand.Parameters.Add(new OracleParameter("descripcion", descripcion));
                 }
 

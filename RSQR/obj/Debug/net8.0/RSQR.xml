@@ -760,7 +760,7 @@
             </summary>
             <param name="emailSettings">Configuración de correo electrónico inyectada mediante IOptions.</param>
         </member>
-        <member name="M:RSQR.Services.EmailService.SendEmailAsync(System.String,System.String,System.String)">
+        <member name="M:RSQR.Services.EmailService.SendEmailAsync(System.String,System.String,System.String,System.String)">
             <summary>
             Envía un correo electrónico de forma asíncrona.
             </summary>
@@ -782,7 +782,7 @@
             Interfaz que define el contrato para el servicio de envío de correos electrónicos.
             </summary>
         </member>
-        <member name="M:RSQR.Services.IEmailService.SendEmailAsync(System.String,System.String,System.String)">
+        <member name="M:RSQR.Services.IEmailService.SendEmailAsync(System.String,System.String,System.String,System.String)">
             <summary>
             Envía un correo electrónico de forma asíncrona.
             </summary>
@@ -811,6 +811,74 @@
             <summary>
             Devuelve todos los mapeos disponibles (solo lectura).
             </summary>
+        </member>
+        <member name="T:PPMController">
+            <summary>
+            Controlador para manejar las operaciones relacionadas con el cálculo PPM (Parts Per Million).
+            Requiere autenticación para acceder a sus métodos.
+            </summary>
+        </member>
+        <member name="F:PPMController._configuration">
+            <summary>
+            Configuración de la aplicación para acceder a las cadenas de conexión.
+            </summary>
+        </member>
+        <member name="F:PPMController.oracleConnectionString">
+            <summary>
+            Cadena de conexión para la base de datos Oracle.
+            </summary>
+        </member>
+        <member name="F:PPMController.sqlServerConnectionString">
+            <summary>
+            Cadena de conexión para la base de datos SQL Server.
+            </summary>
+        </member>
+        <member name="F:PPMController._gruposDescripciones">
+            <summary>
+            Diccionario que mapea grupos de descripciones para consultas agrupadas.
+            Contiene tres grupos principales:
+            - CM_GROUP: Descripciones relacionadas con sistemas de control de motor
+            - EPS_GROUP: Descripciones relacionadas con sistemas de dirección eléctrica
+            - BCM_GROUP: Descripciones relacionadas con módulos de control de carrocería
+            </summary>
+        </member>
+        <member name="M:PPMController.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Constructor del controlador que inicializa las cadenas de conexión.
+            </summary>
+            <param name="configuration">Interfaz de configuración para acceder a appsettings.json</param>
+        </member>
+        <member name="M:PPMController.Ppm">
+            <summary>
+            Acción que devuelve la vista principal del módulo PPM.
+            </summary>
+            <returns>Vista PPM</returns>
+        </member>
+        <member name="M:PPMController.SumarCajas(System.String,System.String,System.String)">
+            <summary>
+            Calcula el total de cajas y el valor PPM para un rango de fechas y descripción específicos.
+            </summary>
+            <param name="fechaInicio">Fecha de inicio en formato yyyy-MM-dd</param>
+            <param name="fechaFin">Fecha de fin en formato yyyy-MM-dd</param>
+            <param name="descripcion">Descripción del producto o grupo de productos</param>
+            <returns>Objeto JSON con total de cajas, valor PPM y posibles errores</returns>
+        </member>
+        <member name="M:PPMController.ObtenerTotalCajasOracle(System.String,System.String,System.String)">
+            <summary>
+            Obtiene el total de cajas enviadas desde Oracle para un producto o grupo de productos
+            en un rango de fechas específico.
+            </summary>
+            <param name="descripcion">Descripción del producto o nombre del grupo</param>
+            <param name="fechaInicio">Fecha de inicio formateada (dd-MMM-yy)</param>
+            <param name="fechaFin">Fecha de fin formateada (dd-MMM-yy)</param>
+            <returns>Total de cajas como valor decimal</returns>
+        </member>
+        <member name="M:PPMController.ObtenerSumaCuantosPSqlServer(System.String)">
+            <summary>
+            Obtiene la suma de partes defectuosas desde SQL Server para una descripción específica.
+            </summary>
+            <param name="descripcion">Descripción del producto o nombre del grupo</param>
+            <returns>Suma de partes defectuosas como valor decimal</returns>
         </member>
         <member name="T:AdUserSyncMiddleware">
             <summary>
