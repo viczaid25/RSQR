@@ -285,20 +285,20 @@ namespace RSQR.Controllers
             {
                 new SelectListItem { Value = "STARTER", Text = "STARTER" },
                 new SelectListItem { Value = "ALTERNATOR", Text = "ALTERNATOR" },
-                new SelectListItem { Value = "EPS (3G)", Text = "EPS (3G)" },
-                new SelectListItem { Value = "PT EPS", Text = "PT EPS" },
-                new SelectListItem { Value = "PT SSU", Text = "PT SSU" },
-                new SelectListItem { Value = "PT FOB", Text = "PT FOB" },
-                new SelectListItem { Value = "PT RCV", Text = "PT RCV" },
+                new SelectListItem { Value = "SSU Circuit Board", Text = "SSU Circuit Board" },
+                new SelectListItem { Value = "FOB", Text = "FOB" },
+                new SelectListItem { Value = "RCV", Text = "RCV" },
+                new SelectListItem { Value = "CM", Text = "CM" },
+                new SelectListItem { Value = "EPS(3G)", Text = "EPS(3G)" },
                 new SelectListItem { Value = "PT BCM", Text = "PT BCM" },
                 new SelectListItem { Value = "PT LFU", Text = "PT LFU" },
                 new SelectListItem { Value = "EPS", Text = "EPS" },
-                new SelectListItem { Value = "CM", Text = "CM" },
+                new SelectListItem { Value = "CID", Text = "CID" },
                 new SelectListItem { Value = "LCM", Text = "LCM" },
                 new SelectListItem { Value = "AMP", Text = "AMP" },
                 new SelectListItem { Value = "R1", Text = "R1" },
-                new SelectListItem { Value = "CID", Text = "CID" },
-                new SelectListItem { Value = "PT CM", Text = "PT CM" }
+                new SelectListItem { Value = "PT CM", Text = "PT CM" },
+                new SelectListItem { Value = "PT DISPLAY", Text = "PT DISPLAY" }
             };
 
             if (id == null)
