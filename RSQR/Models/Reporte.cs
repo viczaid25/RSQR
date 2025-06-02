@@ -128,7 +128,7 @@ namespace RSQR.Models
 
         /// <summary>Cuántos productos afectados (How many)</summary>
         [Display(Name = "Cuantas piezas fueron detectadas con el problema?")]
-        public string? CuantosP { get; set; }
+        public int? CuantosP { get; set; }
 
         /// <summary>Cómo se detectó (How)</summary>
         [Display(Name = "Como se detecto el problema?")]
@@ -222,5 +222,7 @@ namespace RSQR.Models
 
         /// <summary>Responsabilidad asignada</summary>
         public ResponsabilidadOpciones Responsabilidad { get; set; }
+
+        public string? NombreCar { get; set; }
     }
 }

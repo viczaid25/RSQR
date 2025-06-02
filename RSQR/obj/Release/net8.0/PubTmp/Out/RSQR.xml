@@ -72,7 +72,7 @@
             Este controlador está protegido con autorización, por lo que solo los usuarios autenticados pueden acceder a sus acciones.
             </remarks>
         </member>
-        <member name="M:RSQR.Controllers.ReportesController.#ctor(RSQR.Data.ApplicationDbContext,RSQR.Services.IEmailService)">
+        <member name="M:RSQR.Controllers.ReportesController.#ctor(RSQR.Data.ApplicationDbContext,RSQR.Services.IEmailService,Microsoft.Extensions.Logging.ILogger{RSQR.Controllers.ReportesController})">
             <summary>
             Constructor del controlador ReportesController.
             </summary>
@@ -112,7 +112,7 @@
             <param name="id">El ID del reporte a editar.</param>
             <returns>Una vista con el formulario de edición.</returns>
         </member>
-        <member name="M:RSQR.Controllers.ReportesController.Edit(System.Int32,RSQR.Models.Reporte)">
+        <member name="M:RSQR.Controllers.ReportesController.Edit(System.Int32,RSQR.Models.Reporte,System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})">
             <summary>
             Procesa el formulario de edición de un reporte existente.
             </summary>
@@ -141,7 +141,7 @@
             <param name="id">El ID del reporte.</param>
             <returns>True si el reporte existe; de lo contrario, False.</returns>
         </member>
-        <member name="M:RSQR.Controllers.ReportesController.ExportToExcel(System.String)">
+        <member name="M:RSQR.Controllers.ReportesController.ExportToExcel(System.Int32,System.String)">
             <summary>
             Exporta los reportes a un archivo Excel.
             </summary>
@@ -258,6 +258,18 @@
             <inheritdoc />
         </member>
         <member name="M:RSQR.Migrations.AddConsecutivoArchivoTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RSQR.Migrations.AddNombreCarToReporte">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.AddNombreCarToReporte.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.AddNombreCarToReporte.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.AddNombreCarToReporte.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:RSQR.Models.ConsecutivoArchivo">

@@ -69,7 +69,7 @@ namespace RSQR.Models
         /// <summary>
         /// Cantidad de partes afectadas (opcional).
         /// </summary>
-        public string? CuantosP { get; set; }
+        public int? CuantosP { get; set; }
 
         /// <summary>
         /// Lote o batch del producto con problema (opcional).
@@ -87,8 +87,9 @@ namespace RSQR.Models
         /// <remarks>
         /// Debe ser un valor positivo.
         /// </remarks>
-        [Range(0, int.MaxValue)]
+        
         public string? Mileage { get; set; }
+
 
         /// <summary>
         /// Título descriptivo del problema (opcional).

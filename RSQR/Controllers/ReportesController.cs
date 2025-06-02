@@ -34,10 +34,11 @@ namespace RSQR.Controllers
         /// Constructor del controlador ReportesController.
         /// </summary>
         /// <param name="context">Contexto de la base de datos.</param>
-        public ReportesController(ApplicationDbContext context, IEmailService emailService)
+        public ReportesController(ApplicationDbContext context, IEmailService emailService, ILogger<ReportesController> logger)
         {
             _context = context;
             _emailService = emailService;
+            _logger = logger;
         }
 
         /// <summary>
@@ -159,6 +160,12 @@ namespace RSQR.Controllers
                 {
                     reporte.CustomerClaimNumber = await GetNextClaimNumberForCustomer(reporte.Customer);
                 }
+
+                // Generar nombre del archivo CAR antes de guardar
+                string codigoNegocio = BusinessUnitMapping.GetBusinessUnitCode(reporte.Linea ?? "DEFAULT");
+                int anioActual = DateTime.Now.Year % 100;
+                int consecutivo = ObtenerSiguienteConsecutivo(codigoNegocio, DateTime.Now.Year);
+                reporte.NombreCar = $"CAR-{codigoNegocio}-{consecutivo:D2}-{anioActual:D2}.xlsx";
 
                 _context.Add(reporte);
                 await _context.SaveChangesAsync();
@@ -325,7 +332,16 @@ namespace RSQR.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Fecha,ProblemRank,UserName,Linea,Tipo,TituloProblema,CincoM,NumParteAfectado,Descripcion,DescripcionProblema,QueP,PorqueP,DondeP,QuienP,CuandoP,CuantosP,ComoP,Lote,CustomerClaimNumber,PreguntasAdicionales,ContencionItems,ContencionActividades,ContencionResponsables,ContencionFechasInicio,AlertaCalidad,Disposicion,EntrevistaInvolucrados,Comentarios,Severidad,Ocurrencia,Deteccion,AP_NPR,ModoFalla,ControlesEstablecidos,EvidenciaFotografica")] Reporte reporte)
+        public async Task<IActionResult> Edit(int id,
+    [Bind("Id,Fecha,ProblemRank,UserName,Linea,Tipo,TituloProblema,CincoM,NumParteAfectado," +
+          "Descripcion,DescripcionProblema,QueP,PorqueP,DondeP,QuienP,CuandoP,CuantosP,ComoP," +
+          "Lote,CustomerClaimNumber,ContencionItems,ContencionActividades,ContencionResponsables," +
+          "ContencionFechasInicio,AlertaCalidad,Disposicion,EntrevistaInvolucrados,Comentarios," +
+          "Severidad,Ocurrencia,Deteccion,AP_NPR,ModoFalla,ControlesEstablecidos,Customer," +
+          "MotherFactory,CustomerPartNumber,Mileage,InvestigationReport,DateOfClose,ImpactoPPM," +
+          "Responsabilidad")]
+    Reporte reporte,
+    List<IFormFile>? EvidenciaFotografica)
         {
             if (id != reporte.Id)
             {
@@ -336,10 +352,95 @@ namespace RSQR.Controllers
             {
                 try
                 {
-                    _context.Update(reporte);
+                    // Cargar la entidad existente desde la base de datos
+                    var existingReport = await _context.Reportes.FirstOrDefaultAsync(r => r.Id == id);
+
+
+                    if (existingReport == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Copiar los valores del modelo recibido a la entidad existente
+                    _context.Entry(existingReport).CurrentValues.SetValues(reporte);
+
+                    // Manejar la evidencia fotográfica
+                    if (EvidenciaFotografica != null && EvidenciaFotografica.Count > 0)
+                    {
+                        // Limpiar evidencias existentes si es necesario
+                        if (existingReport.EvidenciaFotografica != null)
+                        {
+                            existingReport.EvidenciaFotografica.Clear();
+                        }
+                        else
+                        {
+                            existingReport.EvidenciaFotografica = new List<byte[]>();
+                        }
+
+                        // Agregar nuevas evidencias
+                        foreach (var file in EvidenciaFotografica)
+                        {
+                            if (file.Length > 0)
+                            {
+                                using (var ms = new MemoryStream())
+                                {
+                                    await file.CopyToAsync(ms);
+                                    existingReport.EvidenciaFotografica.Add(ms.ToArray());
+                                }
+                            }
+                        }
+                    }
+
+                    // Marcar la entidad como modificada
+                    _context.Update(existingReport);
+
                     await _context.SaveChangesAsync();
+
+                    // Manejo de PPM si es necesario (similar a Create)
+                    if (existingReport.ImpactoPPM)
+                    {
+                        var ppmReport = await _context.PpmReports
+                            .FirstOrDefaultAsync(p => p.CustomerClaimNumber == existingReport.CustomerClaimNumber);
+
+                        if (ppmReport == null)
+                        {
+                            ppmReport = new PpmReport
+                            {
+                                Fecha = existingReport.Fecha,
+                                Customer = existingReport.Customer!,
+                                MotherFactory = existingReport.MotherFactory!,
+                                CustomerPartNumber = existingReport.CustomerPartNumber!,
+                                Mileage = existingReport.Mileage!,
+                                InvestigationReport = existingReport.InvestigationReport!,
+                                DateOfClose = existingReport.DateOfClose,
+                                ImpactoPPM = existingReport.ImpactoPPM,
+                                Responsabilidad = existingReport.Responsabilidad,
+                                Comentarios = existingReport.Comentarios,
+                                CuantosP = existingReport.CuantosP,
+                                CustomerClaimNumber = existingReport.CustomerClaimNumber,
+                                Linea = existingReport.Linea,
+                                Lote = existingReport.Lote,
+                                NumParteAfectado = existingReport.NumParteAfectado,
+                                Tipo = existingReport.Tipo,
+                                TituloProblema = existingReport.TituloProblema
+                            };
+                            _context.Add(ppmReport);
+                        }
+                        else
+                        {
+                            // Actualizar el reporte PPM existente
+                            ppmReport.Fecha = existingReport.Fecha;
+                            ppmReport.Customer = existingReport.Customer!;
+                            ppmReport.MotherFactory = existingReport.MotherFactory!;
+                            // ... (actualizar otros campos según sea necesario)
+                        }
+
+                        await _context.SaveChangesAsync();
+                    }
+
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
                     if (!ReporteExists(reporte.Id))
                     {
@@ -347,11 +448,36 @@ namespace RSQR.Controllers
                     }
                     else
                     {
-                        throw;
+                        // Loggear el error
+                        _logger.LogError(ex, "Error de concurrencia al editar reporte");
+                        ModelState.AddModelError("", "No se pudo guardar los cambios. " +
+                            "El registro fue modificado por otro usuario. Por favor, intente nuevamente.");
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error al editar reporte");
+                    ModelState.AddModelError("", "Ocurrió un error al guardar los cambios. Por favor, intente nuevamente.");
+                }
             }
+
+            // Si llegamos aquí, algo falló, recargar las listas y mostrar la vista con errores
+            ViewBag.ProblemRankList = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "", Text = "-Seleccionar-", Selected = true },
+        new SelectListItem { Value = "Bajo", Text = "Bajo" },
+        new SelectListItem { Value = "Medio", Text = "Medio" },
+        new SelectListItem { Value = "Alto", Text = "Alto" }
+    };
+
+            ViewBag.LineaList = new List<SelectListItem>
+    {
+        new SelectListItem { Value = "STARTER", Text = "STARTER" },
+        new SelectListItem { Value = "ALTERNATOR", Text = "ALTERNATOR" },
+        new SelectListItem { Value = "SSU Circuit Board", Text = "SSU Circuit Board" },
+        // ... (resto de las opciones)
+    };
+
             return View(reporte);
         }
 
@@ -413,7 +539,7 @@ namespace RSQR.Controllers
         /// </summary>
         /// <returns>Un archivo Excel con los datos de los reportes.</returns>
         [HttpGet]
-        public IActionResult ExportToExcel(string linea)
+        public IActionResult ExportToExcel(int id, string linea)
         {
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -438,12 +564,11 @@ namespace RSQR.Controllers
                     return NotFound("La hoja 'CAR Español' no existe en el archivo de plantilla.");
                 }
 
-                var reportes = _context.Reportes.ToList();
+                // Obtener el registro específico por ID
+                var reporte = _context.Reportes.FirstOrDefault(r => r.Id == id);
 
-                if (reportes.Count > 0)
+                if (reporte != null)
                 {
-                    var reporte = reportes[0];
-
                     // Debug: Imprime los valores de las propiedades del reporte
                     Debug.WriteLine($"Fecha: {reporte.Fecha}");
                     Debug.WriteLine($"ProblemRank: {reporte.ProblemRank}");
@@ -458,16 +583,15 @@ namespace RSQR.Controllers
                     Debug.WriteLine($"ComoP: {reporte.ComoP}");
                     Debug.WriteLine($"CuantosP: {reporte.CuantosP}");
 
-
-                    worksheet.Cells["W6"].Value = reporte.Fecha; // Primer dato en S11
-                    worksheet.Cells["F6"].Value = reporte.ProblemRank; // Segundo dato en E6
+                    worksheet.Cells["W6"].Value = reporte.Fecha;
+                    worksheet.Cells["F6"].Value = reporte.ProblemRank;
                     worksheet.Cells["C11"].Value = reporte.NumParteAfectado;
                     worksheet.Cells["H11"].Value = reporte.CustomerPartNumber;
                     worksheet.Cells["L11"].Value = reporte.Descripcion;
                     worksheet.Cells["P11"].Value = reporte.Lote;
-                    worksheet.Cells["T11"].Value = reporte.UserName; // Otro dato en C5
+                    worksheet.Cells["T11"].Value = reporte.UserName;
                     worksheet.Cells["C13"].Value = reporte.Fecha;
-                    worksheet.Cells["F13"].Value = reporte.Linea; // Otro dato en F7
+                    worksheet.Cells["F13"].Value = reporte.Linea;
                     worksheet.Cells["I26"].Value = reporte.QueP;
                     worksheet.Cells["I27"].Value = reporte.QuienP;
                     worksheet.Cells["J28"].Value = reporte.DondeP;
@@ -481,7 +605,8 @@ namespace RSQR.Controllers
                     stream.Position = 0;
 
                     // Generar nombre del archivo con el formato: CAR-CODIGO-CONSECUTIVO-AÑO
-                    string nombreArchivo = $"CAR-{codigoNegocio}-{consecutivo:D2}-{anioActual:D2}.xlsx";
+                    string nombreArchivo = reporte.NombreCar ?? $"CAR-{codigoNegocio}-{consecutivo:D2}-{anioActual:D2}.xlsx";
+
 
                     return File(stream,
                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -490,8 +615,8 @@ namespace RSQR.Controllers
                 else
                 {
                     // Debug: Si no hay datos, imprime un mensaje
-                    Debug.WriteLine("No se encontraron datos en la base de datos.");
-                    return NotFound("No hay datos para exportar.");
+                    Debug.WriteLine($"No se encontró el reporte con ID {id}");
+                    return NotFound($"No se encontró el reporte con ID {id}");
                 }
             }
         }

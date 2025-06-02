@@ -282,6 +282,7 @@
         <div class="d-flex justify-content-between mt-4">
             <a asp-controller="Reportes"
                asp-action="ExportToExcel"
+               asp-route-id="@Model.Id"
                asp-route-linea="@Model.Linea"
                class="btn btn-primary rounded-pill">
                 <i class="fas fa-file-excel me-1"></i> Descargar Reporte en Excel

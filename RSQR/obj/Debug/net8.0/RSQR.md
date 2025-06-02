@@ -22,6 +22,10 @@
   - [BuildTargetModel()](#M-RSQR-Migrations-AddConsecutivoArchivoTable-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.AddConsecutivoArchivoTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
   - [Down()](#M-RSQR-Migrations-AddConsecutivoArchivoTable-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.AddConsecutivoArchivoTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
   - [Up()](#M-RSQR-Migrations-AddConsecutivoArchivoTable-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.AddConsecutivoArchivoTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+- [AddNombreCarToReporte](#T-RSQR-Migrations-AddNombreCarToReporte 'RSQR.Migrations.AddNombreCarToReporte')
+  - [BuildTargetModel()](#M-RSQR-Migrations-AddNombreCarToReporte-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.AddNombreCarToReporte.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
+  - [Down()](#M-RSQR-Migrations-AddNombreCarToReporte-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.AddNombreCarToReporte.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+  - [Up()](#M-RSQR-Migrations-AddNombreCarToReporte-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.AddNombreCarToReporte.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
 - [ApplicationDbContext](#T-RSQR-Data-ApplicationDbContext 'RSQR.Data.ApplicationDbContext')
   - [#ctor(options)](#M-RSQR-Data-ApplicationDbContext-#ctor-Microsoft-EntityFrameworkCore-DbContextOptions{RSQR-Data-ApplicationDbContext}- 'RSQR.Data.ApplicationDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{RSQR.Data.ApplicationDbContext})')
   - [ConsecutivosArchivos](#P-RSQR-Data-ApplicationDbContext-ConsecutivosArchivos 'RSQR.Data.ApplicationDbContext.ConsecutivosArchivos')
@@ -145,15 +149,15 @@
   - [ProblemRankList](#P-RSQR-Models-ReporteViewModel-ProblemRankList 'RSQR.Models.ReporteViewModel.ProblemRankList')
   - [Reporte](#P-RSQR-Models-ReporteViewModel-Reporte 'RSQR.Models.ReporteViewModel.Reporte')
 - [ReportesController](#T-RSQR-Controllers-ReportesController 'RSQR.Controllers.ReportesController')
-  - [#ctor(context)](#M-RSQR-Controllers-ReportesController-#ctor-RSQR-Data-ApplicationDbContext,RSQR-Services-IEmailService- 'RSQR.Controllers.ReportesController.#ctor(RSQR.Data.ApplicationDbContext,RSQR.Services.IEmailService)')
+  - [#ctor(context)](#M-RSQR-Controllers-ReportesController-#ctor-RSQR-Data-ApplicationDbContext,RSQR-Services-IEmailService,Microsoft-Extensions-Logging-ILogger{RSQR-Controllers-ReportesController}- 'RSQR.Controllers.ReportesController.#ctor(RSQR.Data.ApplicationDbContext,RSQR.Services.IEmailService,Microsoft.Extensions.Logging.ILogger{RSQR.Controllers.ReportesController})')
   - [Create()](#M-RSQR-Controllers-ReportesController-Create 'RSQR.Controllers.ReportesController.Create')
   - [Create(reporte,EvidenciaFotografica)](#M-RSQR-Controllers-ReportesController-Create-RSQR-Models-Reporte,System-Collections-Generic-List{Microsoft-AspNetCore-Http-IFormFile}- 'RSQR.Controllers.ReportesController.Create(RSQR.Models.Reporte,System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})')
   - [Delete(id)](#M-RSQR-Controllers-ReportesController-Delete-System-Nullable{System-Int32}- 'RSQR.Controllers.ReportesController.Delete(System.Nullable{System.Int32})')
   - [DeleteConfirmed(id)](#M-RSQR-Controllers-ReportesController-DeleteConfirmed-System-Int32- 'RSQR.Controllers.ReportesController.DeleteConfirmed(System.Int32)')
   - [Details(id)](#M-RSQR-Controllers-ReportesController-Details-System-Nullable{System-Int32}- 'RSQR.Controllers.ReportesController.Details(System.Nullable{System.Int32})')
   - [Edit(id)](#M-RSQR-Controllers-ReportesController-Edit-System-Nullable{System-Int32}- 'RSQR.Controllers.ReportesController.Edit(System.Nullable{System.Int32})')
-  - [Edit(id,reporte)](#M-RSQR-Controllers-ReportesController-Edit-System-Int32,RSQR-Models-Reporte- 'RSQR.Controllers.ReportesController.Edit(System.Int32,RSQR.Models.Reporte)')
-  - [ExportToExcel()](#M-RSQR-Controllers-ReportesController-ExportToExcel-System-String- 'RSQR.Controllers.ReportesController.ExportToExcel(System.String)')
+  - [Edit(id,reporte)](#M-RSQR-Controllers-ReportesController-Edit-System-Int32,RSQR-Models-Reporte,System-Collections-Generic-List{Microsoft-AspNetCore-Http-IFormFile}- 'RSQR.Controllers.ReportesController.Edit(System.Int32,RSQR.Models.Reporte,System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})')
+  - [ExportToExcel()](#M-RSQR-Controllers-ReportesController-ExportToExcel-System-Int32,System-String- 'RSQR.Controllers.ReportesController.ExportToExcel(System.Int32,System.String)')
   - [Index()](#M-RSQR-Controllers-ReportesController-Index 'RSQR.Controllers.ReportesController.Index')
   - [ReporteExists(id)](#M-RSQR-Controllers-ReportesController-ReporteExists-System-Int32- 'RSQR.Controllers.ReportesController.ReporteExists(System.Int32)')
 - [ResponsabilidadOpciones](#T-RSQR-Models-ResponsabilidadOpciones 'RSQR.Models.ResponsabilidadOpciones')
@@ -460,6 +464,50 @@ This method has no parameters.
 This method has no parameters.
 
 <a name='M-RSQR-Migrations-AddConsecutivoArchivoTable-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Up() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-RSQR-Migrations-AddNombreCarToReporte'></a>
+## AddNombreCarToReporte `type`
+
+##### Namespace
+
+RSQR.Migrations
+
+##### Summary
+
+*Inherit from parent.*
+
+<a name='M-RSQR-Migrations-AddNombreCarToReporte-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder-'></a>
+### BuildTargetModel() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-AddNombreCarToReporte-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Down() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-AddNombreCarToReporte-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
 ### Up() `method`
 
 ##### Summary
@@ -1677,7 +1725,7 @@ Controlador para gestionar los reportes del sistema.
 
 Este controlador está protegido con autorización, por lo que solo los usuarios autenticados pueden acceder a sus acciones.
 
-<a name='M-RSQR-Controllers-ReportesController-#ctor-RSQR-Data-ApplicationDbContext,RSQR-Services-IEmailService-'></a>
+<a name='M-RSQR-Controllers-ReportesController-#ctor-RSQR-Data-ApplicationDbContext,RSQR-Services-IEmailService,Microsoft-Extensions-Logging-ILogger{RSQR-Controllers-ReportesController}-'></a>
 ### #ctor(context) `constructor`
 
 ##### Summary
@@ -1791,7 +1839,7 @@ Una vista con el formulario de edición.
 | ---- | ---- | ----------- |
 | id | [System.Nullable{System.Int32}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Nullable 'System.Nullable{System.Int32}') | El ID del reporte a editar. |
 
-<a name='M-RSQR-Controllers-ReportesController-Edit-System-Int32,RSQR-Models-Reporte-'></a>
+<a name='M-RSQR-Controllers-ReportesController-Edit-System-Int32,RSQR-Models-Reporte,System-Collections-Generic-List{Microsoft-AspNetCore-Http-IFormFile}-'></a>
 ### Edit(id,reporte) `method`
 
 ##### Summary
@@ -1809,7 +1857,7 @@ Redirige a la lista de reportes si el modelo es válido; de lo contrario, muestr
 | id | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | El ID del reporte a editar. |
 | reporte | [RSQR.Models.Reporte](#T-RSQR-Models-Reporte 'RSQR.Models.Reporte') | El objeto Reporte con los datos actualizados. |
 
-<a name='M-RSQR-Controllers-ReportesController-ExportToExcel-System-String-'></a>
+<a name='M-RSQR-Controllers-ReportesController-ExportToExcel-System-Int32,System-String-'></a>
 ### ExportToExcel() `method`
 
 ##### Summary

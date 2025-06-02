@@ -124,42 +124,51 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3">
-                                        <input asp-for="QueP" class="form-control" placeholder="¿Qué es el Problema?" />
-                                        <label asp-for="QueP">¿Qué es el Problema?</label>
+                                        <input asp-for="QueP" class="form-control" placeholder="¿Qué problema fue detectado?" />
+                                        <label asp-for="QueP">¿Qué problema fue detectado?</label>
                                         <span asp-validation-for="QueP" class="text-danger small"></span>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input asp-for="PorqueP" class="form-control" placeholder="¿Por qué sucedió?" />
-                                        <label asp-for="PorqueP">¿Por qué sucedió?</label>
-                                        <span asp-validation-for="PorqueP" class="text-danger small"></span>
+                                        <input asp-for="QuienP" class="form-control" placeholder="¿Quién detecto el problema?" />
+                                        <label asp-for="QuienP">¿Quién detecto el problema?</label>
+                                        <span asp-validation-for="QuienP" class="text-danger small"></span>
+                                    </div>
+                                    
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="DondeP" class="form-control" placeholder="¿Dónde se detecto el problema?" />
+                                        <label asp-for="DondeP">¿Dónde se detecto el problema?</label>
+                                        <span asp-validation-for="DondeP" class="text-danger small"></span>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input asp-for="DondeP" class="form-control" placeholder="¿Dónde ocurrió?" />
-                                        <label asp-for="DondeP">¿Dónde ocurrió?</label>
-                                        <span asp-validation-for="DondeP" class="text-danger small"></span>
+                                        <input asp-for="CuandoP" class="form-control" type="date" placeholder="¿Cuándo fue detectado el problema?" />
+                                        <label asp-for="CuandoP">¿Cuándo fue detectado el problema?</label>
+                                        <span asp-validation-for="CuandoP" class="text-danger small"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+                                    
+                                    
                                     <div class="form-floating mb-3">
-                                        <input asp-for="QuienP" class="form-control" placeholder="¿Quién?" />
-                                        <label asp-for="QuienP">¿Quién?</label>
-                                        <span asp-validation-for="QuienP" class="text-danger small"></span>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <input asp-for="CuandoP" class="form-control" type="date" placeholder="¿Cuándo sucedió el problema?" />
-                                        <label asp-for="CuandoP">¿Cuándo sucedió el problema?</label>
-                                        <span asp-validation-for="CuandoP" class="text-danger small"></span>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <input asp-for="CuantosP" class="form-control" placeholder="¿Cuántas piezas?" />
-                                        <label asp-for="CuantosP">¿Cuántas piezas?</label>
-                                        <span asp-validation-for="CuantosP" class="text-danger small"></span>
+                                        <input asp-for="PorqueP" class="form-control" placeholder="¿Por qué es un problema?" />
+                                        <label asp-for="PorqueP">¿Por qué es un problema?</label>
+                                        <span asp-validation-for="PorqueP" class="text-danger small"></span>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input asp-for="ComoP" class="form-control" placeholder="¿Cómo se detectó el problema?" />
                                         <label asp-for="ComoP">¿Cómo se detectó el problema?</label>
                                         <span asp-validation-for="ComoP" class="text-danger small"></span>
                                     </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="CuantosP" class="form-control" placeholder="¿Cuántas piezas fueron detectadas con el problema?" />
+                                        <label asp-for="CuantosP">¿Cuántas piezas fueron detectadas con el problema?</label>
+                                        <span asp-validation-for="CuantosP" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Lote" class="form-control" placeholder="Numero de lote afectado" />
+                                        <label asp-for="Lote">Numero de lote afectado</label>
+                                        <span asp-validation-for="Lote" class="text-danger small"></span>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
