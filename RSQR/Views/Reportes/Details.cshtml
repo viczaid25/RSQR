@@ -92,6 +92,29 @@
             </div>
         </div>
 
+        <!-- Información del Cliente -->
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-building me-2"></i>Información del Cliente</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <dl class="row">
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.MotherFactory)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.MotherFactory)</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-6">
+                        <dl class="row">
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.CustomerPartNumber)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.CustomerPartNumber)</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Análisis 5W2H -->
         <div class="card shadow-sm rounded-lg mb-4">
             <div class="card-header bg-primary text-white">
@@ -104,14 +127,14 @@
                             <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.QueP)</dt>
                             <dd class="col-sm-8">@Html.DisplayFor(model => model.QueP)</dd>
 
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.QuienP)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.QuienP)</dd>
+
                             <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.DondeP)</dt>
                             <dd class="col-sm-8">@Html.DisplayFor(model => model.DondeP)</dd>
 
                             <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.CuandoP)</dt>
                             <dd class="col-sm-8">@Html.DisplayFor(model => model.CuandoP)</dd>
-
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.ComoP)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.ComoP)</dd>
                         </dl>
                     </div>
                     <div class="col-md-6">
@@ -119,8 +142,8 @@
                             <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.PorqueP)</dt>
                             <dd class="col-sm-8">@Html.DisplayFor(model => model.PorqueP)</dd>
 
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.QuienP)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.QuienP)</dd>
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.ComoP)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.ComoP)</dd>
 
                             <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.CuantosP)</dt>
                             <dd class="col-sm-8">@Html.DisplayFor(model => model.CuantosP)</dd>
@@ -162,10 +185,51 @@
             </div>
         </div>
 
-        <!-- Información Adicional -->
+        <!-- Información de Cierre -->
         <div class="card shadow-sm rounded-lg mb-4">
             <div class="card-header bg-primary text-white">
-                <h5 class="mb-0"><i class="fas fa-ellipsis-h me-2"></i>Información Adicional</h5>
+                <h5 class="mb-0"><i class="fas fa-lock me-2"></i>Información de Cierre</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <dl class="row">
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Mileage)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Mileage)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.InvestigationReport)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.InvestigationReport)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.DateOfClose)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.DateOfClose)</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-6">
+                        <dl class="row">
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.ImpactoPPM)</dt>
+                            <dd class="col-sm-8">
+                                @if (Model.ImpactoPPM)
+                                {
+                                    <span class="badge bg-success">Sí</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">No</span>
+                                }
+                            </dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Responsabilidad)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Responsabilidad)</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Acciones -->
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>Acciones</h5>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -185,7 +249,10 @@
 
                             <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Disposicion)</dt>
                             <dd class="col-sm-8">@Html.DisplayFor(model => model.Disposicion)</dd>
-
+                        </dl>
+                    </div>
+                    <div class="col-md-6">
+                        <dl class="row">
                             <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.EntrevistaInvolucrados)</dt>
                             <dd class="col-sm-8">
                                 @if (Model.EntrevistaInvolucrados)
@@ -197,47 +264,47 @@
                                     <span class="badge bg-secondary">No</span>
                                 }
                             </dd>
-                        </dl>
-                    </div>
-                    <div class="col-md-6">
-                        <dl class="row">
+
                             <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Comentarios)</dt>
                             <dd class="col-sm-8">@Html.DisplayFor(model => model.Comentarios)</dd>
-
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Severidad)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Severidad)</dd>
-
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Ocurrencia)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Ocurrencia)</dd>
                         </dl>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Evaluación y Controles -->
+        <!-- Evaluación de Riesgo -->
         <div class="card shadow-sm rounded-lg mb-4">
             <div class="card-header bg-primary text-white">
-                <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Evaluación y Controles</h5>
+                <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Evaluación de Riesgo</h5>
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-2">
                         <dl class="row">
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Deteccion)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Deteccion)</dd>
+                            <dt class="col-sm-12 text-muted">@Html.DisplayNameFor(model => model.Severidad)</dt>
+                            <dd class="col-sm-12">@Html.DisplayFor(model => model.Severidad)</dd>
 
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.AP_NPR)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.AP_NPR)</dd>
+                            <dt class="col-sm-12 text-muted">@Html.DisplayNameFor(model => model.Ocurrencia)</dt>
+                            <dd class="col-sm-12">@Html.DisplayFor(model => model.Ocurrencia)</dd>
 
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.ModoFalla)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.ModoFalla)</dd>
+                            <dt class="col-sm-12 text-muted">@Html.DisplayNameFor(model => model.Deteccion)</dt>
+                            <dd class="col-sm-12">@Html.DisplayFor(model => model.Deteccion)</dd>
+
+                            <dt class="col-sm-12 text-muted">@Html.DisplayNameFor(model => model.AP_NPR)</dt>
+                            <dd class="col-sm-12">@Html.DisplayFor(model => model.AP_NPR)</dd>
                         </dl>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <dl class="row">
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.ControlesEstablecidos)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.ControlesEstablecidos)</dd>
+                            <dt class="col-sm-12 text-muted">@Html.DisplayNameFor(model => model.ModoFalla)</dt>
+                            <dd class="col-sm-12">@Html.DisplayFor(model => model.ModoFalla)</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-5">
+                        <dl class="row">
+                            <dt class="col-sm-12 text-muted">@Html.DisplayNameFor(model => model.ControlesEstablecidos)</dt>
+                            <dd class="col-sm-12">@Html.DisplayFor(model => model.ControlesEstablecidos)</dd>
                         </dl>
                     </div>
                 </div>
