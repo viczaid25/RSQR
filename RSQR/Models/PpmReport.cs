@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RSQR.Models
 {
@@ -16,6 +17,7 @@ namespace RSQR.Models
         /// Identificador único del reporte en la base de datos.
         /// </summary>
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)] // Desactiva autoincremento
         public int Id { get; set; }
 
         /// <summary>

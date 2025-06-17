@@ -42,6 +42,10 @@
   - [Material](#F-RSQR-Models-CincoMOpciones-Material 'RSQR.Models.CincoMOpciones.Material')
   - [Medicion](#F-RSQR-Models-CincoMOpciones-Medicion 'RSQR.Models.CincoMOpciones.Medicion')
   - [MedioAmbiente](#F-RSQR-Models-CincoMOpciones-MedioAmbiente 'RSQR.Models.CincoMOpciones.MedioAmbiente')
+- [ConfigureOneToOneRelationship](#T-RSQR-Migrations-ConfigureOneToOneRelationship 'RSQR.Migrations.ConfigureOneToOneRelationship')
+  - [BuildTargetModel()](#M-RSQR-Migrations-ConfigureOneToOneRelationship-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.ConfigureOneToOneRelationship.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
+  - [Down()](#M-RSQR-Migrations-ConfigureOneToOneRelationship-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.ConfigureOneToOneRelationship.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+  - [Up()](#M-RSQR-Migrations-ConfigureOneToOneRelationship-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.ConfigureOneToOneRelationship.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
 - [ConsecutivoArchivo](#T-RSQR-Models-ConsecutivoArchivo 'RSQR.Models.ConsecutivoArchivo')
   - [Anio](#P-RSQR-Models-ConsecutivoArchivo-Anio 'RSQR.Models.ConsecutivoArchivo.Anio')
   - [CodigoNegocio](#P-RSQR-Models-ConsecutivoArchivo-CodigoNegocio 'RSQR.Models.ConsecutivoArchivo.CodigoNegocio')
@@ -59,6 +63,10 @@
 - [ErrorViewModel](#T-RSQR-Models-ErrorViewModel 'RSQR.Models.ErrorViewModel')
   - [RequestId](#P-RSQR-Models-ErrorViewModel-RequestId 'RSQR.Models.ErrorViewModel.RequestId')
   - [ShowRequestId](#P-RSQR-Models-ErrorViewModel-ShowRequestId 'RSQR.Models.ErrorViewModel.ShowRequestId')
+- [FixPpmReportIdentity](#T-RSQR-Migrations-FixPpmReportIdentity 'RSQR.Migrations.FixPpmReportIdentity')
+  - [BuildTargetModel()](#M-RSQR-Migrations-FixPpmReportIdentity-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.FixPpmReportIdentity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
+  - [Down()](#M-RSQR-Migrations-FixPpmReportIdentity-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.FixPpmReportIdentity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+  - [Up()](#M-RSQR-Migrations-FixPpmReportIdentity-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.FixPpmReportIdentity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
 - [HomeController](#T-RSQR-Controllers-HomeController 'RSQR.Controllers.HomeController')
   - [#ctor(logger)](#M-RSQR-Controllers-HomeController-#ctor-Microsoft-Extensions-Logging-ILogger{RSQR-Controllers-HomeController}- 'RSQR.Controllers.HomeController.#ctor(Microsoft.Extensions.Logging.ILogger{RSQR.Controllers.HomeController})')
   - [Error()](#M-RSQR-Controllers-HomeController-Error 'RSQR.Controllers.HomeController.Error')
@@ -679,6 +687,50 @@ Problema relacionado con mediciones/calibraciones
 
 Problema relacionado con condiciones ambientales
 
+<a name='T-RSQR-Migrations-ConfigureOneToOneRelationship'></a>
+## ConfigureOneToOneRelationship `type`
+
+##### Namespace
+
+RSQR.Migrations
+
+##### Summary
+
+*Inherit from parent.*
+
+<a name='M-RSQR-Migrations-ConfigureOneToOneRelationship-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder-'></a>
+### BuildTargetModel() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-ConfigureOneToOneRelationship-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Down() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-ConfigureOneToOneRelationship-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Up() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='T-RSQR-Models-ConsecutivoArchivo'></a>
 ## ConsecutivoArchivo `type`
 
@@ -896,6 +948,50 @@ Indica si se debe mostrar el ID de solicitud en la vista.
 
 Esta propiedad calculada se usa para controlar condicionalmente la visualización
 del ID de solicitud en las vistas de error.
+
+<a name='T-RSQR-Migrations-FixPpmReportIdentity'></a>
+## FixPpmReportIdentity `type`
+
+##### Namespace
+
+RSQR.Migrations
+
+##### Summary
+
+*Inherit from parent.*
+
+<a name='M-RSQR-Migrations-FixPpmReportIdentity-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder-'></a>
+### BuildTargetModel() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-FixPpmReportIdentity-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Down() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-FixPpmReportIdentity-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Up() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-RSQR-Controllers-HomeController'></a>
 ## HomeController `type`

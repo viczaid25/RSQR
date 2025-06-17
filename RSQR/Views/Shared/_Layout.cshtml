@@ -33,7 +33,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" asp-controller="Reportes" asp-action="Index">
-                        <i class="fas fa-file-alt me-2"></i> Reportes
+                        <i class="fas fa-file-alt me-2"></i> Reports
                     </a>
                 </li>
                 <li class="nav-item">
@@ -52,13 +52,13 @@
                     <span>@User.FindFirst("DisplayName")?.Value</span>
                 </div>
                 <a class="btn btn-sm btn-outline-light w-100" asp-controller="Account" asp-action="Logout">
-                    <i class="fas fa-sign-out-alt me-1"></i> Cerrar Sesión
+                    <i class="fas fa-sign-out-alt me-1"></i> Logout
                 </a>
             }
             else
             {
                 <a class="btn btn-sm btn-primary w-100" asp-controller="Account" asp-action="Login">
-                    <i class="fas fa-sign-in-alt me-1"></i> Iniciar Sesión
+                    <i class="fas fa-sign-in-alt me-1"></i> Login
                 </a>
             }
         </div>

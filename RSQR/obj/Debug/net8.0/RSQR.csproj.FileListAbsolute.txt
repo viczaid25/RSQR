@@ -302,6 +302,16 @@ C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\bin\Debug\net8.0\BouncyCastle.Cry
 C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\bin\Debug\net8.0\MailKit.dll
 C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\bin\Debug\net8.0\MimeKit.dll
 C:\Users\dm45207\source\repos\RSQR - Copy\RSQR\obj\Debug\net8.0\RSQR.sourcelink.json
+C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.csproj.AssemblyReference.cache
+C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.AssemblyInfoInputs.cache
+C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.AssemblyInfo.cs
+C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.csproj.CoreCompileInputs.cache
+C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.RazorAssemblyInfo.cache
+C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.RazorAssemblyInfo.cs
+C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.sourcelink.json
 C:\Users\dm45207\source\repos\RSQR\RSQR\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\dm45207\source\repos\RSQR\RSQR\bin\Debug\net8.0\appsettings.json
 C:\Users\dm45207\source\repos\RSQR\RSQR\bin\Debug\net8.0\RSQR.staticwebassets.runtime.json
@@ -580,16 +590,6 @@ C:\Users\dm45207\source\repos\RSQR\RSQR\bin\Debug\net8.0\runtimes\osx\lib\net8.0
 C:\Users\dm45207\source\repos\RSQR\RSQR\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.DirectoryServices.Protocols.dll
 C:\Users\dm45207\source\repos\RSQR\RSQR\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Users\dm45207\source\repos\RSQR\RSQR\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.csproj.AssemblyReference.cache
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.AssemblyInfoInputs.cache
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.AssemblyInfo.cs
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.csproj.CoreCompileInputs.cache
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.RazorAssemblyInfo.cache
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.RazorAssemblyInfo.cs
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.sourcelink.json
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\scopedcss\bundle\RSQR.styles.css
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\scopedcss\projectbundle\RSQR.bundle.scp.css

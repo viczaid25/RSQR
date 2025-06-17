@@ -1,94 +1,94 @@
-@model RSQR.Models.Reporte
+@model RSQR.Models.Reporte 
 
 @{
-    ViewData["Title"] = "Eliminar Reporte";
+    ViewData["Title"] = "Delete Report";
 }
 
 <div class="content-wrapper">
     <div class="container-fluid">
-        <!-- Encabezado -->
+        <!-- Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="page-title">
-                <i class="fas fa-trash-alt text-danger me-2"></i>Eliminar Reporte
+                <i class="fas fa-trash-alt text-danger me-2"></i>Delete Report
             </h1>
             <a asp-action="Index" class="btn btn-outline-primary rounded-pill">
-                <i class="fas fa-arrow-left me-1"></i> Volver
+                <i class="fas fa-arrow-left me-1"></i> Back
             </a>
         </div>
 
-        <!-- Tarjeta principal -->
+        <!-- Main card -->
         <div class="card shadow-lg rounded-lg overflow-hidden">
-            <!-- Cabecera con color de advertencia -->
+            <!-- Header with warning color -->
             <div class="card-header bg-danger py-3">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-exclamation-circle fa-lg me-2 text-white"></i>
-                    <h5 class="mb-0 text-white">Confirmar Eliminación</h5>
+                    <h5 class="mb-0 text-white">Confirm Deletion</h5>
                 </div>
             </div>
 
-            <!-- Contenido -->
+            <!-- Content -->
             <div class="card-body p-4">
-                <!-- Alerta de confirmación -->
+                <!-- Confirmation alert -->
                 <div class="alert alert-danger d-flex align-items-center mb-4">
                     <i class="fas fa-exclamation-triangle fa-2x me-3"></i>
                     <div>
-                        <h5 class="alert-heading mb-2">¿Está seguro que desea eliminar este reporte?</h5>
-                        <p class="mb-0">Esta acción es permanente y no se puede deshacer. Todos los datos asociados serán eliminados del sistema.</p>
+                        <h5 class="alert-heading mb-2">Are you sure you want to delete this report?</h5>
+                        <p class="mb-0">This action is permanent and cannot be undone. All associated data will be removed from the system.</p>
                     </div>
                 </div>
 
-                <!-- Resumen del reporte -->
+                <!-- Report summary -->
                 <div class="card mb-4 border-0 shadow-sm">
                     <div class="card-header bg-primary">
                         <div class="d-flex align-items-center">
                             <i class="fas fa-file-alt me-2 text-white"></i>
-                            <h6 class="mb-0 text-white">Detalles del Reporte</h6>
+                            <h6 class="mb-0 text-white">Report Details</h6>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <!-- Columna izquierda -->
+                            <!-- Left column -->
                             <div class="col-md-6">
                                 <dl class="row mb-0">
-                                    <dt class="col-sm-4 text-muted">Fecha</dt>
+                                    <dt class="col-sm-4 text-muted">Date</dt>
                                     <dd class="col-sm-8">@Html.DisplayFor(model => model.Fecha)</dd>
 
-                                    <dt class="col-sm-4 text-muted">Usuario</dt>
+                                    <dt class="col-sm-4 text-muted">User</dt>
                                     <dd class="col-sm-8">@Html.DisplayFor(model => model.UserName)</dd>
 
-                                    <dt class="col-sm-4 text-muted">Línea</dt>
+                                    <dt class="col-sm-4 text-muted">Line</dt>
                                     <dd class="col-sm-8">@Html.DisplayFor(model => model.Linea)</dd>
 
-                                    <dt class="col-sm-4 text-muted">Tipo</dt>
+                                    <dt class="col-sm-4 text-muted">Type</dt>
                                     <dd class="col-sm-8">@Html.DisplayFor(model => model.Tipo)</dd>
 
-                                    <dt class="col-sm-4 text-muted">Título</dt>
+                                    <dt class="col-sm-4 text-muted">Title</dt>
                                     <dd class="col-sm-8">@Html.DisplayFor(model => model.TituloProblema)</dd>
                                 </dl>
                             </div>
 
-                            <!-- Columna derecha -->
+                            <!-- Right column -->
                             <div class="col-md-6">
                                 <dl class="row mb-0">
-                                    <dt class="col-sm-4 text-muted">Nivel Problema</dt>
+                                    <dt class="col-sm-4 text-muted">Problem Rank</dt>
                                     <dd class="col-sm-8">@Html.DisplayFor(model => model.ProblemRank)</dd>
 
-                                    <dt class="col-sm-4 text-muted">Parte Afectado</dt>
+                                    <dt class="col-sm-4 text-muted">Affected Part</dt>
                                     <dd class="col-sm-8">@Html.DisplayFor(model => model.NumParteAfectado)</dd>
 
-                                    <dt class="col-sm-4 text-muted">Lote</dt>
+                                    <dt class="col-sm-4 text-muted">Lot</dt>
                                     <dd class="col-sm-8">@Html.DisplayFor(model => model.Lote)</dd>
 
-                                    <dt class="col-sm-4 text-muted">Reclamo</dt>
+                                    <dt class="col-sm-4 text-muted">Claim</dt>
                                     <dd class="col-sm-8">@Html.DisplayFor(model => model.CustomerClaimNumber)</dd>
                                 </dl>
                             </div>
                         </div>
 
-                        <!-- Descripción del problema -->
+                        <!-- Problem description -->
                         <div class="mt-4">
                             <h6 class="d-flex align-items-center text-muted mb-2">
-                                <i class="fas fa-align-left me-2"></i>Descripción del Problema
+                                <i class="fas fa-align-left me-2"></i>Problem Description
                             </h6>
                             <div class="p-3 bg-light rounded">
                                 <p class="mb-0">@Html.DisplayFor(model => model.DescripcionProblema)</p>
@@ -97,15 +97,15 @@
                     </div>
                 </div>
 
-                <!-- Formulario de eliminación -->
+                <!-- Delete form -->
                 <form asp-action="Delete" class="mt-4">
                     <input type="hidden" asp-for="Id" />
                     <div class="d-flex justify-content-end gap-3">
                         <a asp-action="Index" class="btn btn-outline-secondary rounded-pill px-4">
-                            <i class="fas fa-times me-1"></i> Cancelar
+                            <i class="fas fa-times me-1"></i> Cancel
                         </a>
                         <button type="submit" class="btn btn-danger rounded-pill px-4 shadow-sm">
-                            <i class="fas fa-trash-alt me-1"></i> Eliminar Reporte
+                            <i class="fas fa-trash-alt me-1"></i> Delete Report
                         </button>
                     </div>
                 </form>

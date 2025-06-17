@@ -272,6 +272,30 @@
         <member name="M:RSQR.Migrations.AddNombreCarToReporte.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:RSQR.Migrations.ConfigureOneToOneRelationship">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.ConfigureOneToOneRelationship.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.ConfigureOneToOneRelationship.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.ConfigureOneToOneRelationship.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RSQR.Migrations.FixPpmReportIdentity">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.FixPpmReportIdentity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.FixPpmReportIdentity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.FixPpmReportIdentity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:RSQR.Models.ConsecutivoArchivo">
             <summary>
             Representa un consecutivo numérico para archivos, asociado a unidades de negocio.

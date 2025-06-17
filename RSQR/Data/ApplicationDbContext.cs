@@ -48,13 +48,18 @@ namespace RSQR.Data
         /// </remarks>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder); // Esto es CRUCIAL para Identity
 
-            modelBuilder.Entity<Reporte>(entity =>
+            // Configuración para PpmReport
+            modelBuilder.Entity<PpmReport>(entity =>
             {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Fecha).IsRequired();
-                entity.Property(e => e.UserName).HasMaxLength(256);
+                entity.HasKey(p => p.Id);
+                entity.Property(p => p.Id).ValueGeneratedNever();
+
+                entity.HasOne<Reporte>()
+                      .WithOne(r => r.PpmReport)
+                      .HasForeignKey<PpmReport>(p => p.Id)
+                      .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }

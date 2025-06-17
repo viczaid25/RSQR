@@ -1,7 +1,7 @@
 @model RSQR.Models.Reporte
 
 @{
-    ViewData["Title"] = "Editar Reporte";
+    ViewData["Title"] = "Edit Report";
     var clientes = new List<string> {
         "DAIMLER", "FORD", "GENERAL MOTORS", "HITACHI ASTEMO", "HONDA",
         "JTEKT", "MAZDA", "NAVISTAR", "NISSAN", "PACCAR",
@@ -12,54 +12,58 @@
 <div class="content-wrapper">
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="display-6 text-dark fw-bold">Editar Reporte</h1>
+            <h1 class="display-6 text-dark fw-bold">Edit Report</h1>
             <a asp-action="Index" class="btn btn-outline-secondary rounded-pill">
-                <i class="fas fa-arrow-left me-1"></i> Volver a la lista
+                <i class="fas fa-arrow-left me-1"></i> Back to list
             </a>
         </div>
 
         <div class="card shadow-sm rounded-lg">
             <div class="card-header bg-primary">
-                <h5 class="mb-0 text-white"><i class="fas fa-edit me-2"></i>Información del Reporte</h5>
+                <h5 class="mb-0 text-white"><i class="fas fa-edit me-2"></i>Report Information</h5>
             </div>
             <div class="card-body">
                 <form asp-action="Edit" class="row g-3" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-lg"></div>
                     <input type="hidden" asp-for="Id" />
 
-                    <!-- Sección 1: Información Básica -->
+                    <!-- Section 1: Basic Information -->
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input asp-for="Fecha" class="form-control" type="date" placeholder="Fecha" />
-                            <label asp-for="Fecha">Fecha</label>
+                            <input asp-for="Id" class="form-control" placeholder="Report ID" readonly />
+                            <label asp-for="Id">Report ID</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Fecha" class="form-control" type="date" placeholder="Date" />
+                            <label asp-for="Fecha">Date</label>
                             <span asp-validation-for="Fecha" class="text-danger small"></span>
                         </div>
                         <div class="form-floating mb-3">
                             <select asp-for="ProblemRank" class="form-select" asp-items="ViewBag.ProblemRankList"></select>
-                            <label asp-for="ProblemRank">Ranking del problema</label>
+                            <label asp-for="ProblemRank">Problem ranking</label>
                             <span asp-validation-for="ProblemRank" class="text-danger small"></span>
                         </div>
                         <div class="form-floating mb-3">
-                            <input asp-for="UserName" class="form-control" placeholder="Usuario" readonly />
-                            <label asp-for="UserName">Usuario</label>
+                            <input asp-for="UserName" class="form-control" placeholder="User" readonly />
+                            <label asp-for="UserName">User</label>
                             <span asp-validation-for="UserName" class="text-danger small"></span>
                         </div>
                         <div class="form-floating mb-3">
                             <select asp-for="Linea" class="form-select" asp-items="ViewBag.LineaList"></select>
-                            <label asp-for="Linea">Línea</label>
+                            <label asp-for="Linea">Line</label>
                             <span asp-validation-for="Linea" class="text-danger small"></span>
                         </div>
                         <div class="form-floating mb-3">
                             <select asp-for="Tipo" class="form-select" asp-items="Html.GetEnumSelectList<TipoReporte>()"></select>
-                            <label asp-for="Tipo">Tipo</label>
+                            <label asp-for="Tipo">Type</label>
                             <span asp-validation-for="Tipo" class="text-danger small"></span>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input asp-for="TituloProblema" class="form-control" placeholder="Título del Problema" />
-                            <label asp-for="TituloProblema">Título del Problema</label>
+                            <input asp-for="TituloProblema" class="form-control" placeholder="Problem Title" />
+                            <label asp-for="TituloProblema">Problem Title</label>
                             <span asp-validation-for="TituloProblema" class="text-danger small"></span>
                         </div>
                         <div class="form-floating mb-3">
@@ -68,86 +72,86 @@
                             <span asp-validation-for="CincoM" class="text-danger small"></span>
                         </div>
                         <div class="form-floating mb-3">
-                            <input asp-for="NumParteAfectado" class="form-control" placeholder="Número de Parte Afectado" />
-                            <label asp-for="NumParteAfectado">Número de Parte Afectado</label>
+                            <input asp-for="NumParteAfectado" class="form-control" placeholder="Affected Part Number" />
+                            <label asp-for="NumParteAfectado">Affected Part Number</label>
                             <span asp-validation-for="NumParteAfectado" class="text-danger small"></span>
                         </div>
                         <div class="form-floating mb-3">
-                            <input asp-for="Lote" class="form-control" placeholder="Lote" />
-                            <label asp-for="Lote">Lote</label>
+                            <input asp-for="Lote" class="form-control" placeholder="Batch" />
+                            <label asp-for="Lote">Batch</label>
                             <span asp-validation-for="Lote" class="text-danger small"></span>
                         </div>
                         <div class="form-floating mb-3">
-                            <input asp-for="CustomerClaimNumber" class="form-control" placeholder="Número de Reclamo" />
-                            <label asp-for="CustomerClaimNumber">Número de Reclamo</label>
+                            <input asp-for="CustomerClaimNumber" class="form-control" placeholder="Claim Number" />
+                            <label asp-for="CustomerClaimNumber">Claim Number</label>
                             <span asp-validation-for="CustomerClaimNumber" class="text-danger small"></span>
                         </div>
                     </div>
 
-                    <!-- Sección 2: Información del Cliente -->
+                    <!-- Section 2: Customer Information -->
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
                             <select asp-for="Customer" class="form-select" required>
-                                <option value="">-- Seleccione un cliente --</option>
+                                <option value="">-- Select a client --</option>
                                 @foreach (var cliente in clientes)
                                 {
                                     <option value="@cliente">@cliente</option>
                                 }
                             </select>
-                            <label asp-for="Customer">Cliente</label>
+                            <label asp-for="Customer">Customer</label>
                             <span asp-validation-for="Customer" class="text-danger small"></span>
                         </div>
                         <div class="form-floating mb-3">
-                            <input asp-for="MotherFactory" class="form-control" placeholder="Fábrica Madre" />
-                            <label asp-for="MotherFactory">Fábrica Madre</label>
+                            <input asp-for="MotherFactory" class="form-control" placeholder="Mother Factory" />
+                            <label asp-for="MotherFactory">Mother Factory</label>
                             <span asp-validation-for="MotherFactory" class="text-danger small"></span>
                         </div>
                         <div class="form-floating mb-3">
-                            <input asp-for="CustomerPartNumber" class="form-control" placeholder="Número de Parte de Cliente" />
-                            <label asp-for="CustomerPartNumber">Número de Parte de Cliente</label>
+                            <input asp-for="CustomerPartNumber" class="form-control" placeholder="Customer Part Number" />
+                            <label asp-for="CustomerPartNumber">Customer Part Number</label>
                             <span asp-validation-for="CustomerPartNumber" class="text-danger small"></span>
                         </div>
                     </div>
 
-                    <!-- Sección 3: Descripciones -->
+                    <!-- Section 3: Descriptions -->
                     <div class="col-12">
                         <div class="form-floating mb-3">
-                            <textarea asp-for="Descripcion" class="form-control" placeholder="Descripción" style="height: 100px"></textarea>
-                            <label asp-for="Descripcion">Descripción</label>
+                            <textarea asp-for="Descripcion" class="form-control" placeholder="Description" style="height: 100px"></textarea>
+                            <label asp-for="Descripcion">Description</label>
                             <span asp-validation-for="Descripcion" class="text-danger small"></span>
                         </div>
                         <div class="form-floating mb-3">
-                            <textarea asp-for="DescripcionProblema" class="form-control" placeholder="Descripción del Problema" style="height: 120px"></textarea>
-                            <label asp-for="DescripcionProblema">Descripción del Problema</label>
+                            <textarea asp-for="DescripcionProblema" class="form-control" placeholder="Problem Description" style="height: 120px"></textarea>
+                            <label asp-for="DescripcionProblema">Problem Description</label>
                             <span asp-validation-for="DescripcionProblema" class="text-danger small"></span>
                         </div>
                     </div>
 
-                    <!-- Sección 4: Análisis 5W2H -->
+                    <!-- Section 4: 5W2H Analysis -->
                     <div class="col-md-6">
                         <div class="card shadow-sm mb-4">
                             <div class="card-header bg-primary">
-                                <h6 class="mb-0 text-white"><i class="fas fa-search me-2"></i>Análisis 5W2H</h6>
+                                <h6 class="mb-0 text-white"><i class="fas fa-search me-2"></i>5W2H Analysis</h6>
                             </div>
                             <div class="card-body">
                                 <div class="form-floating mb-3">
-                                    <input asp-for="QueP" class="form-control" placeholder="¿Qué problema fue detectado?" />
-                                    <label asp-for="QueP">¿Qué problema fue detectado?</label>
+                                    <input asp-for="QueP" class="form-control" placeholder="What problem was detected?" />
+                                    <label asp-for="QueP">What problem was detected?</label>
                                     <span asp-validation-for="QueP" class="text-danger small"></span>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input asp-for="PorqueP" class="form-control" placeholder="¿Por qué es un problema?" />
-                                    <label asp-for="PorqueP">¿Por qué es un problema?</label>
+                                    <input asp-for="PorqueP" class="form-control" placeholder="Why is it a problem?" />
+                                    <label asp-for="PorqueP">Why is it a problem?</label>
                                     <span asp-validation-for="PorqueP" class="text-danger small"></span>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input asp-for="DondeP" class="form-control" placeholder="¿Dónde se detectó el problema?" />
-                                    <label asp-for="DondeP">¿Dónde se detectó el problema?</label>
+                                    <input asp-for="DondeP" class="form-control" placeholder="Where was the problem detected?" />
+                                    <label asp-for="DondeP">Where was the problem detected?</label>
                                     <span asp-validation-for="DondeP" class="text-danger small"></span>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input asp-for="CuandoP" class="form-control" type="date" placeholder="¿Cuándo fue detectado el problema?" />
-                                    <label asp-for="CuandoP">¿Cuándo fue detectado el problema?</label>
+                                    <input asp-for="CuandoP" class="form-control" type="date" placeholder="When was the problem detected?" />
+                                    <label asp-for="CuandoP">When was the problem detected?</label>
                                     <span asp-validation-for="CuandoP" class="text-danger small"></span>
                                 </div>
                             </div>
@@ -157,107 +161,107 @@
                     <div class="col-md-6">
                         <div class="card shadow-sm mb-4">
                             <div class="card-header bg-primary">
-                                <h6 class="mb-0 text-white"><i class="fas fa-question-circle me-2"></i>Detalles Adicionales</h6>
+                                <h6 class="mb-0 text-white"><i class="fas fa-question-circle me-2"></i>Additional Details</h6>
                             </div>
                             <div class="card-body">
                                 <div class="form-floating mb-3">
-                                    <input asp-for="QuienP" class="form-control" placeholder="¿Quién detectó el problema?" />
-                                    <label asp-for="QuienP">¿Quién detectó el problema?</label>
+                                    <input asp-for="QuienP" class="form-control" placeholder="Who detected the problem?" />
+                                    <label asp-for="QuienP">Who detected the problem?</label>
                                     <span asp-validation-for="QuienP" class="text-danger small"></span>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input asp-for="ComoP" class="form-control" placeholder="¿Cómo se detectó el problema?" />
-                                    <label asp-for="ComoP">¿Cómo se detectó el problema?</label>
+                                    <input asp-for="ComoP" class="form-control" placeholder="How was the problem detected?" />
+                                    <label asp-for="ComoP">How was the problem detected?</label>
                                     <span asp-validation-for="ComoP" class="text-danger small"></span>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input asp-for="CuantosP" class="form-control" placeholder="¿Cuántas piezas fueron detectadas con el problema?" />
-                                    <label asp-for="CuantosP">¿Cuántas piezas fueron detectadas con el problema?</label>
+                                    <input asp-for="CuantosP" class="form-control" placeholder="How many parts were detected with the problem?" />
+                                    <label asp-for="CuantosP">How many parts were detected with the problem?</label>
                                     <span asp-validation-for="CuantosP" class="text-danger small"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sección 5: Contención Dinámica -->
+                    <!-- Section 5: Dynamic Containment -->
                     <div class="col-12">
                         <div class="card shadow-sm mb-4">
                             <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                                <h6 class="mb-0 text-white"><i class="fas fa-shield-alt me-2"></i>Contención</h6>
+                                <h6 class="mb-0 text-white"><i class="fas fa-shield-alt me-2"></i>Containment</h6>
                                 <button type="button" id="add-group-btn" class="btn btn-sm btn-light rounded-pill">
-                                    <i class="fas fa-plus me-1"></i> Agregar grupo
+                                    <i class="fas fa-plus me-1"></i> Add group
                                 </button>
                             </div>
                             <div class="card-body">
                                 <div id="dynamic-fields" class="row g-3">
-                                    <!-- Campos de contención se agregarán aquí dinámicamente -->
+                                    <!-- Containment fields will be added here dynamically -->
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sección 6: Información de Cierre -->
+                    <!-- Section 6: Closing Information -->
                     <div class="col-md-6">
                         <div class="card shadow-sm h-100">
                             <div class="card-header bg-primary text-white">
-                                <h6 class="mb-0 text-white"><i class="fas fa-lock me-2"></i>Información de Cierre</h6>
+                                <h6 class="mb-0 text-white"><i class="fas fa-lock me-2"></i>Closing Information</h6>
                             </div>
                             <div class="card-body">
                                 <div class="form-floating mb-3">
-                                    <input asp-for="Mileage" class="form-control" placeholder="Millas" />
-                                    <label asp-for="Mileage">Millas</label>
+                                    <input asp-for="Mileage" class="form-control" placeholder="Mileage" />
+                                    <label asp-for="Mileage">Mileage</label>
                                     <span asp-validation-for="Mileage" class="text-danger small"></span>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input asp-for="InvestigationReport" class="form-control" placeholder="Reporte de Investigación" />
-                                    <label asp-for="InvestigationReport">Reporte de Investigación</label>
+                                    <input asp-for="InvestigationReport" class="form-control" placeholder="Investigation Report" />
+                                    <label asp-for="InvestigationReport">Investigation Report</label>
                                     <span asp-validation-for="InvestigationReport" class="text-danger small"></span>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input asp-for="DateOfClose" class="form-control" type="date" placeholder="Fecha de Cierre" />
-                                    <label asp-for="DateOfClose">Fecha de Cierre</label>
+                                    <input asp-for="DateOfClose" class="form-control" type="date" placeholder="Closing Date" />
+                                    <label asp-for="DateOfClose">Closing Date</label>
                                     <span asp-validation-for="DateOfClose" class="text-danger small"></span>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <select asp-for="ImpactoPPM" class="form-select">
-                                        <option value="true">Sí</option>
+                                        <option value="true">Yes</option>
                                         <option value="false">No</option>
                                     </select>
-                                    <label asp-for="ImpactoPPM">¿Tiene Impacto en PPM?</label>
+                                    <label asp-for="ImpactoPPM">Does it impact PPM?</label>
                                     <span asp-validation-for="ImpactoPPM" class="text-danger small"></span>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <select asp-for="Responsabilidad" class="form-select" asp-items="Html.GetEnumSelectList<ResponsabilidadOpciones>()"></select>
-                                    <label asp-for="Responsabilidad">Responsabilidad</label>
+                                    <label asp-for="Responsabilidad">Responsibility</label>
                                     <span asp-validation-for="Responsabilidad" class="text-danger small"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Sección 7: Acciones y Evaluación -->
+                    <!-- Section 7: Actions and Evaluation -->
                     <div class="col-md-6">
                         <div class="card shadow-sm mb-4">
                             <div class="card-header bg-primary">
-                                <h6 class="mb-0 text-white"><i class="fas fa-tasks me-2"></i>Acciones</h6>
+                                <h6 class="mb-0 text-white"><i class="fas fa-tasks me-2"></i>Actions</h6>
                             </div>
                             <div class="card-body">
                                 <div class="form-check form-switch mb-3">
                                     <input class="form-check-input" type="checkbox" role="switch" asp-for="AlertaCalidad" />
-                                    <label class="form-check-label" asp-for="AlertaCalidad"></label>
+                                    <label class="form-check-label" asp-for="AlertaCalidad">Quality Alert</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input asp-for="Disposicion" class="form-control" placeholder="Disposición" />
-                                    <label asp-for="Disposicion">Disposición</label>
+                                    <input asp-for="Disposicion" class="form-control" placeholder="Disposition" />
+                                    <label asp-for="Disposicion">Disposition</label>
                                     <span asp-validation-for="Disposicion" class="text-danger small"></span>
                                 </div>
                                 <div class="form-check form-switch mb-3">
                                     <input class="form-check-input" type="checkbox" role="switch" asp-for="EntrevistaInvolucrados" />
-                                    <label class="form-check-label" asp-for="EntrevistaInvolucrados"></label>
+                                    <label class="form-check-label" asp-for="EntrevistaInvolucrados">Interview Involved</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <textarea asp-for="Comentarios" class="form-control" placeholder="Comentarios" style="height: 100px"></textarea>
-                                    <label asp-for="Comentarios">Comentarios</label>
+                                    <textarea asp-for="Comentarios" class="form-control" placeholder="Comments" style="height: 100px"></textarea>
+                                    <label asp-for="Comentarios">Comments</label>
                                     <span asp-validation-for="Comentarios" class="text-danger small"></span>
                                 </div>
                             </div>
@@ -265,22 +269,22 @@
 
                         <div class="card shadow-sm mb-4">
                             <div class="card-header bg-primary">
-                                <h6 class="mb-0 text-white"><i class="fas fa-chart-line me-2"></i>Evaluación</h6>
+                                <h6 class="mb-0 text-white"><i class="fas fa-chart-line me-2"></i>Evaluation</h6>
                             </div>
                             <div class="card-body">
                                 <div class="form-floating mb-3">
-                                    <input asp-for="Severidad" class="form-control" placeholder="Severidad" />
-                                    <label asp-for="Severidad">Severidad</label>
+                                    <input asp-for="Severidad" class="form-control" placeholder="Severity" />
+                                    <label asp-for="Severidad">Severity</label>
                                     <span asp-validation-for="Severidad" class="text-danger small"></span>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input asp-for="Ocurrencia" class="form-control" placeholder="Ocurrencia" />
-                                    <label asp-for="Ocurrencia">Ocurrencia</label>
+                                    <input asp-for="Ocurrencia" class="form-control" placeholder="Occurrence" />
+                                    <label asp-for="Ocurrencia">Occurrence</label>
                                     <span asp-validation-for="Ocurrencia" class="text-danger small"></span>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input asp-for="Deteccion" class="form-control" placeholder="Detección" />
-                                    <label asp-for="Deteccion">Detección</label>
+                                    <input asp-for="Deteccion" class="form-control" placeholder="Detection" />
+                                    <label asp-for="Deteccion">Detection</label>
                                     <span asp-validation-for="Deteccion" class="text-danger small"></span>
                                 </div>
                                 <div class="form-floating mb-3">
@@ -292,25 +296,25 @@
                         </div>
                     </div>
 
-                    <!-- Sección 8: Análisis y Controles -->
+                    <!-- Section 8: Analysis and Controls -->
                     <div class="col-12">
                         <div class="card shadow-sm mb-4">
                             <div class="card-header bg-primary">
-                                <h6 class="mb-0 text-white"><i class="fas fa-file-alt me-2"></i>Análisis y Controles</h6>
+                                <h6 class="mb-0 text-white"><i class="fas fa-file-alt me-2"></i>Analysis and Controls</h6>
                             </div>
                             <div class="card-body">
                                 <div class="form-floating mb-3">
-                                    <textarea asp-for="ModoFalla" class="form-control" placeholder="Modo de Falla" style="height: 120px"></textarea>
-                                    <label asp-for="ModoFalla">Modo de Falla</label>
+                                    <textarea asp-for="ModoFalla" class="form-control" placeholder="Failure Mode" style="height: 120px"></textarea>
+                                    <label asp-for="ModoFalla">Failure Mode</label>
                                     <span asp-validation-for="ModoFalla" class="text-danger small"></span>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <textarea asp-for="ControlesEstablecidos" class="form-control" placeholder="Controles Establecidos" style="height: 120px"></textarea>
-                                    <label asp-for="ControlesEstablecidos">Controles Establecidos</label>
+                                    <textarea asp-for="ControlesEstablecidos" class="form-control" placeholder="Established Controls" style="height: 120px"></textarea>
+                                    <label asp-for="ControlesEstablecidos">Established Controls</label>
                                     <span asp-validation-for="ControlesEstablecidos" class="text-danger small"></span>
                                 </div>
                                 <div class="mb-3">
-                                    <label asp-for="EvidenciaFotografica" class="form-label">Evidencia Fotográfica</label>
+                                    <label asp-for="EvidenciaFotografica" class="form-label">Photographic Evidence</label>
                                     <input asp-for="EvidenciaFotografica" class="form-control" type="file" multiple />
                                     <span asp-validation-for="EvidenciaFotografica" class="text-danger small"></span>
                                 </div>
@@ -318,11 +322,11 @@
                         </div>
                     </div>
 
-                    <!-- Botón de Guardar -->
+                    <!-- Save Button -->
                     <div class="col-12">
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary btn-lg rounded-pill">
-                                <i class="fas fa-save me-1"></i> Guardar Cambios
+                                <i class="fas fa-save me-1"></i> Save Changes
                             </button>
                         </div>
                     </div>

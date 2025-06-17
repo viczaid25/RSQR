@@ -93,15 +93,16 @@ namespace RSQR.Controllers
 
             ViewBag.ProblemRankList = new List<SelectListItem>
             {
-                new SelectListItem { Value = "", Text = "-Seleccionar-", Selected = true },  // Opción por defecto
-                new SelectListItem { Value = "Bajo", Text = "Bajo" },
-                new SelectListItem { Value = "Medio", Text = "Medio" },
-                new SelectListItem { Value = "Alto", Text = "Alto" }
+                new SelectListItem { Value = "", Text = "-Select-", Selected = true },  // Opción por defecto
+                new SelectListItem { Value = "Bajo", Text = "Low" },
+                new SelectListItem { Value = "Medio", Text = "Medium" },
+                new SelectListItem { Value = "Alto", Text = "High" }
             };
 
             // Nuevo: Opciones para Linea
             ViewBag.LineaList = new List<SelectListItem>
             {
+                new SelectListItem { Value = "", Text = "-Select-", Selected = true },  // Opción por defecto
                 new SelectListItem { Value = "STARTER", Text = "STARTER" },
                 new SelectListItem { Value = "ALTERNATOR", Text = "ALTERNATOR" },
                 new SelectListItem { Value = "EPS (3G)", Text = "EPS (3G)" },
@@ -182,12 +183,12 @@ namespace RSQR.Controllers
                     ["PT RCV"] = "Zaid.Garcia@meax.mx",
                     ["PT BCM"] = "Zaid.Garcia@meax.mx",
                     ["PT LFU"] = "Zaid.Garcia@meax.mx",
-                    ["EPS"] = "Zaid.Garcia@meax.mx",
+                    ["EPS"] = "Zaid.Garcia@meax.mx  ",
                     ["CM"] = "Zaid.Garcia@meax.mx",
                     ["LCM"] = "Zaid.Garcia@meax.mx",
                     ["AMP"] = "Zaid.Garcia@meax.mx",
                     ["R1"] = "Zaid.Garcia@meax.mx",
-                    ["CID"] = "Zaid.Garcia@meax.mx",
+                    ["CID"] = "Zaid.Garcia@meax.mx",        
                     ["PT CM"] = "Zaid.Garcia@meax.mx",
                     ["DEFAULT"] = "Zaid.Garcia@meax.mx" // Valor por defecto
                 };
@@ -352,14 +353,18 @@ namespace RSQR.Controllers
             {
                 try
                 {
-                    // Cargar la entidad existente desde la base de datos
-                    var existingReport = await _context.Reportes.FirstOrDefaultAsync(r => r.Id == id);
-
+                    // Cargar la entidad existente incluyendo el PpmReport relacionado
+                    var existingReport = await _context.Reportes
+                        .Include(r => r.PpmReport) // Incluir el PpmReport relacionado
+                        .FirstOrDefaultAsync(r => r.Id == id);
 
                     if (existingReport == null)
                     {
                         return NotFound();
                     }
+
+                    // Verificar si hubo cambios importantes que requieran notificación
+                    bool requiereNotificacion = RequiereNotificacion(existingReport, reporte);
 
                     // Copiar los valores del modelo recibido a la entidad existente
                     _context.Entry(existingReport).CurrentValues.SetValues(reporte);
@@ -367,75 +372,30 @@ namespace RSQR.Controllers
                     // Manejar la evidencia fotográfica
                     if (EvidenciaFotografica != null && EvidenciaFotografica.Count > 0)
                     {
-                        // Limpiar evidencias existentes si es necesario
-                        if (existingReport.EvidenciaFotografica != null)
-                        {
-                            existingReport.EvidenciaFotografica.Clear();
-                        }
-                        else
-                        {
-                            existingReport.EvidenciaFotografica = new List<byte[]>();
-                        }
+                        existingReport.EvidenciaFotografica ??= new List<byte[]>();
+                        existingReport.EvidenciaFotografica.Clear();
 
-                        // Agregar nuevas evidencias
                         foreach (var file in EvidenciaFotografica)
                         {
                             if (file.Length > 0)
                             {
-                                using (var ms = new MemoryStream())
-                                {
-                                    await file.CopyToAsync(ms);
-                                    existingReport.EvidenciaFotografica.Add(ms.ToArray());
-                                }
+                                using var ms = new MemoryStream();
+                                await file.CopyToAsync(ms);
+                                existingReport.EvidenciaFotografica.Add(ms.ToArray());
                             }
                         }
                     }
 
-                    // Marcar la entidad como modificada
-                    _context.Update(existingReport);
+                    // Manejar PpmReport antes de guardar
+                    await ManejarPpmReport(existingReport);
 
+                    // Guardar cambios
                     await _context.SaveChangesAsync();
 
-                    // Manejo de PPM si es necesario (similar a Create)
-                    if (existingReport.ImpactoPPM)
+                    // Notificaciones
+                    if (requiereNotificacion)
                     {
-                        var ppmReport = await _context.PpmReports
-                            .FirstOrDefaultAsync(p => p.CustomerClaimNumber == existingReport.CustomerClaimNumber);
-
-                        if (ppmReport == null)
-                        {
-                            ppmReport = new PpmReport
-                            {
-                                Fecha = existingReport.Fecha,
-                                Customer = existingReport.Customer!,
-                                MotherFactory = existingReport.MotherFactory!,
-                                CustomerPartNumber = existingReport.CustomerPartNumber!,
-                                Mileage = existingReport.Mileage!,
-                                InvestigationReport = existingReport.InvestigationReport!,
-                                DateOfClose = existingReport.DateOfClose,
-                                ImpactoPPM = existingReport.ImpactoPPM,
-                                Responsabilidad = existingReport.Responsabilidad,
-                                Comentarios = existingReport.Comentarios,
-                                CuantosP = existingReport.CuantosP,
-                                CustomerClaimNumber = existingReport.CustomerClaimNumber,
-                                Linea = existingReport.Linea,
-                                Lote = existingReport.Lote,
-                                NumParteAfectado = existingReport.NumParteAfectado,
-                                Tipo = existingReport.Tipo,
-                                TituloProblema = existingReport.TituloProblema
-                            };
-                            _context.Add(ppmReport);
-                        }
-                        else
-                        {
-                            // Actualizar el reporte PPM existente
-                            ppmReport.Fecha = existingReport.Fecha;
-                            ppmReport.Customer = existingReport.Customer!;
-                            ppmReport.MotherFactory = existingReport.MotherFactory!;
-                            // ... (actualizar otros campos según sea necesario)
-                        }
-
-                        await _context.SaveChangesAsync();
+                        await EnviarCorreoNotificacion(existingReport);
                     }
 
                     return RedirectToAction(nameof(Index));
@@ -446,39 +406,204 @@ namespace RSQR.Controllers
                     {
                         return NotFound();
                     }
-                    else
-                    {
-                        // Loggear el error
-                        _logger.LogError(ex, "Error de concurrencia al editar reporte");
-                        ModelState.AddModelError("", "No se pudo guardar los cambios. " +
-                            "El registro fue modificado por otro usuario. Por favor, intente nuevamente.");
-                    }
+
+                    _logger.LogError(ex, "Error de concurrencia al editar reporte");
+                    ModelState.AddModelError("", "El registro fue modificado por otro usuario. Por favor, actualice y vuelva a intentar.");
+                }
+                catch (DbUpdateException ex)
+                {
+                    _logger.LogError(ex, "Error al guardar reporte");
+                    ModelState.AddModelError("", "Error al guardar en la base de datos. Verifique los datos.");
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Error al editar reporte");
-                    ModelState.AddModelError("", "Ocurrió un error al guardar los cambios. Por favor, intente nuevamente.");
+                    _logger.LogError(ex, "Error inesperado al editar reporte");
+                    ModelState.AddModelError("", "Ocurrió un error inesperado.");
                 }
             }
 
-            // Si llegamos aquí, algo falló, recargar las listas y mostrar la vista con errores
+            // Recargar ViewData si falla
+            RecargarViewData();
+            return View(reporte);
+        }
+
+        // Nuevos métodos auxiliares
+
+        private void RecargarViewData()
+        {
             ViewBag.ProblemRankList = new List<SelectListItem>
-    {
-        new SelectListItem { Value = "", Text = "-Seleccionar-", Selected = true },
-        new SelectListItem { Value = "Bajo", Text = "Bajo" },
-        new SelectListItem { Value = "Medio", Text = "Medio" },
-        new SelectListItem { Value = "Alto", Text = "Alto" }
-    };
+            {
+                new SelectListItem { Value = "", Text = "-Seleccionar-", Selected = true },
+                new SelectListItem { Value = "Bajo", Text = "Bajo" },
+                new SelectListItem { Value = "Medio", Text = "Medio" },
+                new SelectListItem { Value = "Alto", Text = "Alto" }
+            };
 
             ViewBag.LineaList = new List<SelectListItem>
-    {
-        new SelectListItem { Value = "STARTER", Text = "STARTER" },
-        new SelectListItem { Value = "ALTERNATOR", Text = "ALTERNATOR" },
-        new SelectListItem { Value = "SSU Circuit Board", Text = "SSU Circuit Board" },
-        // ... (resto de las opciones)
-    };
+            {
+                new SelectListItem { Value = "STARTER", Text = "STARTER" },
+                new SelectListItem { Value = "ALTERNATOR", Text = "ALTERNATOR" },
+                new SelectListItem { Value = "SSU Circuit Board", Text = "SSU Circuit Board" },
+                new SelectListItem { Value = "FOB", Text = "FOB" },
+                new SelectListItem { Value = "RCV", Text = "RCV" },
+                new SelectListItem { Value = "CM", Text = "CM" },
+                new SelectListItem { Value = "EPS(3G)", Text = "EPS(3G)" },
+                new SelectListItem { Value = "PT BCM", Text = "PT BCM" },
+                new SelectListItem { Value = "PT LFU", Text = "PT LFU" },
+                new SelectListItem { Value = "EPS", Text = "EPS" },
+                new SelectListItem { Value = "CID", Text = "CID" },
+                new SelectListItem { Value = "LCM", Text = "LCM" },
+                new SelectListItem { Value = "AMP", Text = "AMP" },
+                new SelectListItem { Value = "R1", Text = "R1" },
+                new SelectListItem { Value = "PT CM", Text = "PT CM" },
+                new SelectListItem { Value = "PT DISPLAY", Text = "PT DISPLAY" }
+            };
+        }
 
-            return View(reporte);
+        private bool RequiereNotificacion(Reporte existente, Reporte modificado)
+        {
+            // Verificar cambios en campos importantes que requieran notificación
+            return modificado.Tipo != existente.Tipo ||
+                   modificado.TituloProblema != existente.TituloProblema ||
+                   modificado.ProblemRank != existente.ProblemRank ||
+                   modificado.Responsabilidad != existente.Responsabilidad ||
+                   modificado.Linea != existente.Linea ||
+                   modificado.ImpactoPPM != existente.ImpactoPPM;
+        }
+
+        private async Task EnviarCorreoNotificacion(Reporte reporte)
+        {
+            var lineaDestinatarios = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                ["STARTER"] = "Zaid.Garcia@meax.mx",
+                ["ALTERNATOR"] = "Zaid.Garcia@meax.mx",
+                ["EPS (3G)"] = "Zaid.Garcia@meax.mx",
+                ["PT EPS"] = "Zaid.Garcia@meax.mx",
+                ["PT SSU"] = "Zaid.Garcia@meax.mx",
+                ["PT FOB"] = "Zaid.Garcia@meax.mx",
+                ["PT RCV"] = "Zaid.Garcia@meax.mx",
+                ["PT BCM"] = "Zaid.Garcia@meax.mx",
+                ["PT LFU"] = "Zaid.Garcia@meax.mx",
+                ["EPS"] = "Zaid.Garcia@meax.mx",
+                ["CM"] = "Zaid.Garcia@meax.mx",
+                ["LCM"] = "Zaid.Garcia@meax.mx",
+                ["AMP"] = "Zaid.Garcia@meax.mx",
+                ["R1"] = "Zaid.Garcia@meax.mx",
+                ["CID"] = "Zaid.Garcia@meax.mx",
+                ["PT CM"] = "Zaid.Garcia@meax.mx",
+                ["DEFAULT"] = "Zaid.Garcia@meax.mx"
+            };
+
+            string destinatario;
+            switch (reporte.Responsabilidad)
+            {
+                case ResponsabilidadOpciones.Meax:
+                    destinatario = lineaDestinatarios.TryGetValue(reporte.Linea ?? "", out var email)
+                                ? email
+                                : lineaDestinatarios["DEFAULT"];
+                    break;
+                case ResponsabilidadOpciones.Proveedor:
+                    destinatario = "Akaren.Gonzalez@meax.mx";
+                    break;
+                default:
+                    destinatario = "Sofia.Ramirez@meax.mx";
+                    break;
+            }
+
+            string asunto = "Update Notification: Changes Made to Customer Report";
+            string cuerpo = $@"Dear Team,
+
+                    Please be advised that significant changes have been made to the {reporte.Tipo.ToString()} report 
+                    from customer ""{reporte.Customer}"" regarding the issue ""{reporte.TituloProblema}"". 
+                    The updated information is now contained in CAR ({reporte.Id}).
+
+                    Kindly review the changes and proceed accordingly.
+
+                    Best Regards.";
+
+            await _emailService.SendEmailAsync(destinatario, asunto, cuerpo, "Zaid.Garcia@meax.mx");
+        }
+
+        private async Task ManejarPpmReport(Reporte reporte)
+        {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
+            try
+            {
+                // Habilitar IDENTITY_INSERT para SQL Server
+                await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT dbo.PpmReports ON");
+
+                var ppmReport = await _context.PpmReports.FindAsync(reporte.Id);
+
+                if (reporte.ImpactoPPM)
+                {
+                    if (ppmReport == null)
+                    {
+                        ppmReport = new PpmReport
+                        {
+                            Id = reporte.Id, // Mismo ID explícito
+                            Fecha = reporte.DateOfClose ?? reporte.Fecha,
+                            Linea = reporte.Linea,
+                        Customer = reporte.Customer,
+                        CustomerClaimNumber = reporte.CustomerClaimNumber,
+                        MotherFactory = reporte.MotherFactory,
+                        NumParteAfectado = reporte.NumParteAfectado,
+                        CustomerPartNumber = reporte.CustomerPartNumber,
+                        CuantosP = reporte.CuantosP,
+                        Lote = reporte.Lote,
+                        Tipo = reporte.Tipo,
+                        Mileage = reporte.Mileage,
+                        TituloProblema = reporte.TituloProblema,
+                        InvestigationReport = reporte.InvestigationReport,
+                        DateOfClose = reporte.DateOfClose,
+                        ImpactoPPM = true,
+                        Comentarios = reporte.Comentarios,
+                        Responsabilidad = reporte.Responsabilidad
+                    };
+                    _context.PpmReports.Add(ppmReport);
+                    
+                }
+                else
+                {
+                    // Actualizar el existente (que ya tiene el mismo ID)
+                    ppmReport.Fecha = reporte.DateOfClose ?? reporte.Fecha;
+                    ppmReport.Linea = reporte.Linea;
+                    ppmReport.Customer = reporte.Customer;
+                    ppmReport.CustomerClaimNumber = reporte.CustomerClaimNumber;
+                    ppmReport.MotherFactory = reporte.MotherFactory;
+                    ppmReport.NumParteAfectado = reporte.NumParteAfectado;
+                    ppmReport.CustomerPartNumber = reporte.CustomerPartNumber;
+                    ppmReport.CuantosP = reporte.CuantosP;
+                    ppmReport.Lote = reporte.Lote;
+                    ppmReport.Tipo = reporte.Tipo;
+                    ppmReport.Mileage = reporte.Mileage;
+                    ppmReport.TituloProblema = reporte.TituloProblema;
+                    ppmReport.InvestigationReport = reporte.InvestigationReport;
+                    ppmReport.DateOfClose = reporte.DateOfClose;
+                    ppmReport.ImpactoPPM = true;
+                    ppmReport.Comentarios = reporte.Comentarios;
+                    ppmReport.Responsabilidad = reporte.Responsabilidad;
+                    _context.PpmReports.Update(ppmReport);
+                }
+            }
+            else if (ppmReport != null)
+            {
+                // Eliminar si existe y no tiene impacto PPM
+                _context.PpmReports.Remove(ppmReport);              
+            }
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+            finally
+            {
+                // Deshabilitar IDENTITY_INSERT
+                await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT dbo.PpmReports OFF");
+            }
         }
 
         /// <summary>

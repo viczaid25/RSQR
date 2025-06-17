@@ -4,31 +4,31 @@
 }
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>Reporte PPM</h1>
+    <h1>PPM Report</h1>
 </div>
 
 <div class="card shadow-sm mb-4">
     <div class="card-header bg-primary">
-        <h5 class="mb-0">Parámetros del Reporte</h5>
+        <h5 class="mb-0">Report Parameters</h5>
     </div>
     <div class="card-body">
         <form id="fechasForm">
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group mb-3">
-                        <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+                        <label for="fechaInicio" class="form-label">Start Date</label>
                         <input type="date" id="fechaInicio" name="fechaInicio" class="form-control" required />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group mb-3">
-                        <label for="fechaFin" class="form-label">Fecha de Fin</label>
+                        <label for="fechaFin" class="form-label">End Date</label>
                         <input type="date" id="fechaFin" name="fechaFin" class="form-control" required />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group mb-3">
-                        <label for="descripcion" class="form-label">Descripción</label>
+                        <label for="descripcion" class="form-label">Description</label>
                         <select id="descripcion" name="descripcion" class="form-select" required>
                             <option value="">-- Seleccione una opción --</option>
                             <option value="STARTER">STARTER</option>
@@ -54,7 +54,7 @@
 
             <div class="d-flex justify-content-end">
                 <button type="button" id="btnSumar" class="btn btn-primary">
-                    <i class="fas fa-calculator me-1"></i> Calcular
+                    <i class="fas fa-calculator me-1"></i> Calculate
                 </button>
             </div>
         </form>
@@ -63,11 +63,11 @@
 
 <div class="card shadow-sm">
     <div class="card-header bg-primary">
-        <h5 class="mb-0">Resultados</h5>
+        <h5 class="mb-0">Results</h5>
     </div>
     <div class="card-body">
         <div id="resultado" class="text-center py-4">
-            <p class="text-muted">Ingrese los parámetros y haga clic en Calcular</p>
+            <p class="text-muted">Enter the parameters and click Calculate</p>
         </div>
     </div>
 </div>

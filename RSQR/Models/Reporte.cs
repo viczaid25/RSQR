@@ -224,5 +224,8 @@ namespace RSQR.Models
         public ResponsabilidadOpciones Responsabilidad { get; set; }
 
         public string? NombreCar { get; set; }
+
+        // Propiedad de navegación para la relación 1:1
+        public PpmReport? PpmReport { get; set; }
     }
 }
