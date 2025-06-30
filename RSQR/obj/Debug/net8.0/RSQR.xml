@@ -112,7 +112,7 @@
             <param name="id">El ID del reporte a editar.</param>
             <returns>Una vista con el formulario de edición.</returns>
         </member>
-        <member name="M:RSQR.Controllers.ReportesController.Edit(System.Int32,RSQR.Models.Reporte,System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})">
+        <member name="M:RSQR.Controllers.ReportesController.Edit(System.Int32,RSQR.Models.Reporte,System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile},System.Collections.Generic.List{System.Int32})">
             <summary>
             Procesa el formulario de edición de un reporte existente.
             </summary>
@@ -316,7 +316,7 @@
             </summary>
             <remarks>
             Requerido, con longitud máxima de 50 caracteres.
-            </remarks>
+            </remarks>a
         </member>
         <member name="P:RSQR.Models.ConsecutivoArchivo.CodigoNegocio">
             <summary>
@@ -523,10 +523,10 @@
             Enumeración que define los tipos de reportes disponibles en el sistema.
             </summary>
         </member>
-        <member name="F:RSQR.Models.TipoReporte.Interno">
+        <member name="F:RSQR.Models.TipoReporte.Internal">
             <summary>Reporte interno de calidad</summary>
         </member>
-        <member name="F:RSQR.Models.TipoReporte.CeroKm">
+        <member name="F:RSQR.Models.TipoReporte.ZeroKm">
             <summary>Reporte de problema en vehículo nuevo (0km)</summary>
         </member>
         <member name="F:RSQR.Models.TipoReporte.Field">

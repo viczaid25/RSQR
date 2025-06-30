@@ -164,7 +164,7 @@
   - [DeleteConfirmed(id)](#M-RSQR-Controllers-ReportesController-DeleteConfirmed-System-Int32- 'RSQR.Controllers.ReportesController.DeleteConfirmed(System.Int32)')
   - [Details(id)](#M-RSQR-Controllers-ReportesController-Details-System-Nullable{System-Int32}- 'RSQR.Controllers.ReportesController.Details(System.Nullable{System.Int32})')
   - [Edit(id)](#M-RSQR-Controllers-ReportesController-Edit-System-Nullable{System-Int32}- 'RSQR.Controllers.ReportesController.Edit(System.Nullable{System.Int32})')
-  - [Edit(id,reporte)](#M-RSQR-Controllers-ReportesController-Edit-System-Int32,RSQR-Models-Reporte,System-Collections-Generic-List{Microsoft-AspNetCore-Http-IFormFile}- 'RSQR.Controllers.ReportesController.Edit(System.Int32,RSQR.Models.Reporte,System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})')
+  - [Edit(id,reporte)](#M-RSQR-Controllers-ReportesController-Edit-System-Int32,RSQR-Models-Reporte,System-Collections-Generic-List{Microsoft-AspNetCore-Http-IFormFile},System-Collections-Generic-List{System-Int32}- 'RSQR.Controllers.ReportesController.Edit(System.Int32,RSQR.Models.Reporte,System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile},System.Collections.Generic.List{System.Int32})')
   - [ExportToExcel()](#M-RSQR-Controllers-ReportesController-ExportToExcel-System-Int32,System-String- 'RSQR.Controllers.ReportesController.ExportToExcel(System.Int32,System.String)')
   - [Index()](#M-RSQR-Controllers-ReportesController-Index 'RSQR.Controllers.ReportesController.Index')
   - [ReporteExists(id)](#M-RSQR-Controllers-ReportesController-ReporteExists-System-Int32- 'RSQR.Controllers.ReportesController.ReporteExists(System.Int32)')
@@ -172,9 +172,9 @@
   - [Meax](#F-RSQR-Models-ResponsabilidadOpciones-Meax 'RSQR.Models.ResponsabilidadOpciones.Meax')
   - [Proveedor](#F-RSQR-Models-ResponsabilidadOpciones-Proveedor 'RSQR.Models.ResponsabilidadOpciones.Proveedor')
 - [TipoReporte](#T-RSQR-Models-TipoReporte 'RSQR.Models.TipoReporte')
-  - [CeroKm](#F-RSQR-Models-TipoReporte-CeroKm 'RSQR.Models.TipoReporte.CeroKm')
   - [Field](#F-RSQR-Models-TipoReporte-Field 'RSQR.Models.TipoReporte.Field')
-  - [Interno](#F-RSQR-Models-TipoReporte-Interno 'RSQR.Models.TipoReporte.Interno')
+  - [Internal](#F-RSQR-Models-TipoReporte-Internal 'RSQR.Models.TipoReporte.Internal')
+  - [ZeroKm](#F-RSQR-Models-TipoReporte-ZeroKm 'RSQR.Models.TipoReporte.ZeroKm')
 - [UpdateCincoMField](#T-RSQR-Migrations-UpdateCincoMField 'RSQR.Migrations.UpdateCincoMField')
   - [BuildTargetModel()](#M-RSQR-Migrations-UpdateCincoMField-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.UpdateCincoMField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
   - [Down()](#M-RSQR-Migrations-UpdateCincoMField-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.UpdateCincoMField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
@@ -1935,7 +1935,7 @@ Una vista con el formulario de edición.
 | ---- | ---- | ----------- |
 | id | [System.Nullable{System.Int32}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Nullable 'System.Nullable{System.Int32}') | El ID del reporte a editar. |
 
-<a name='M-RSQR-Controllers-ReportesController-Edit-System-Int32,RSQR-Models-Reporte,System-Collections-Generic-List{Microsoft-AspNetCore-Http-IFormFile}-'></a>
+<a name='M-RSQR-Controllers-ReportesController-Edit-System-Int32,RSQR-Models-Reporte,System-Collections-Generic-List{Microsoft-AspNetCore-Http-IFormFile},System-Collections-Generic-List{System-Int32}-'></a>
 ### Edit(id,reporte) `method`
 
 ##### Summary
@@ -2036,13 +2036,6 @@ RSQR.Models
 
 Enumeración que define los tipos de reportes disponibles en el sistema.
 
-<a name='F-RSQR-Models-TipoReporte-CeroKm'></a>
-### CeroKm `constants`
-
-##### Summary
-
-Reporte de problema en vehículo nuevo (0km)
-
 <a name='F-RSQR-Models-TipoReporte-Field'></a>
 ### Field `constants`
 
@@ -2050,12 +2043,19 @@ Reporte de problema en vehículo nuevo (0km)
 
 Reporte de problema en campo (vehículo en uso)
 
-<a name='F-RSQR-Models-TipoReporte-Interno'></a>
-### Interno `constants`
+<a name='F-RSQR-Models-TipoReporte-Internal'></a>
+### Internal `constants`
 
 ##### Summary
 
 Reporte interno de calidad
+
+<a name='F-RSQR-Models-TipoReporte-ZeroKm'></a>
+### ZeroKm `constants`
+
+##### Summary
+
+Reporte de problema en vehículo nuevo (0km)
 
 <a name='T-RSQR-Migrations-UpdateCincoMField'></a>
 ## UpdateCincoMField `type`

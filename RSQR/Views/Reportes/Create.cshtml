@@ -76,7 +76,7 @@
                             </div>
                             <div class="form-floating mb-3">
                                 <select asp-for="CincoM" class="form-select" asp-items="Html.GetEnumSelectList<CincoMOpciones>()"></select>
-                                <label asp-for="CincoM">5M</label>
+                                <label asp-for="CincoM">6M</label>
                                 <span asp-validation-for="CincoM" class="text-danger small"></span>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                     <!-- Sección 3: Análisis 5W2H -->
                     <div class="card shadow-sm mb-4">
                         <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0"><i class="fas fa-search me-2"></i>5W2H Analysis</h5>
+                            <h5 class="mb-0"><i class="fas fa-search me-2"></i>D2</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -143,6 +143,11 @@
                                         <input asp-for="CuandoP" class="form-control" type="date" placeholder="¿Cuándo fue detectado el problema?" />
                                         <label asp-for="CuandoP">When was the problem detected?</label>
                                         <span asp-validation-for="CuandoP" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Mileage" class="form-control" placeholder="Mileage" />
+                                        <label asp-for="Mileage">Mileage</label>
+                                        <span asp-validation-for="Mileage" class="text-danger small"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -169,6 +174,12 @@
                                         <span asp-validation-for="Lote" class="text-danger small"></span>
                                     </div>
                                     
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="InvestigationReport" class="form-control" placeholder="Investigation Report" />
+                                        <label asp-for="InvestigationReport">Investigation Report</label>
+                                        <span asp-validation-for="InvestigationReport" class="text-danger small"></span>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -189,7 +200,33 @@
                         </div>
                     </div>
 
-                    <!-- Sección 5: Información Adicional -->
+                    <!-- Section 7: Actions and Evaluation -->
+                    
+                        
+                    <div class="card-header bg-primary">
+                       <h6 class="mb-0 text-white"><i class="fas fa-tasks me-2"></i>Actions</h6>
+                    </div>
+                    <div class="card-body">
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" role="switch" asp-for="AlertaCalidad" />
+                                    <label class="form-check-label" asp-for="AlertaCalidad">Quality Alert</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Disposicion" class="form-control" placeholder="Disposition" />
+                                    <label asp-for="Disposicion">Disposition</label>
+                                    <span asp-validation-for="Disposicion" class="text-danger small"></span>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" role="switch" asp-for="EntrevistaInvolucrados" />
+                                    <label class="form-check-label" asp-for="EntrevistaInvolucrados">Interview Involved</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <textarea asp-for="Comentarios" class="form-control" placeholder="Comments" style="height: 100px"></textarea>
+                                    <label asp-for="Comentarios">Comments</label>
+                                    <span asp-validation-for="Comentarios" class="text-danger small"></span>
+                                </div>
+                    </div>
+                     
                     
 
                     <!-- Sección 6: Evaluación de Riesgo -->

@@ -131,7 +131,7 @@
                     <div class="col-md-6">
                         <div class="card shadow-sm mb-4">
                             <div class="card-header bg-primary">
-                                <h6 class="mb-0 text-white"><i class="fas fa-search me-2"></i>5W2H Analysis</h6>
+                                <h6 class="mb-0 text-white"><i class="fas fa-search me-2"></i>D2</h6>
                             </div>
                             <div class="card-body">
                                 <div class="form-floating mb-3">
@@ -179,6 +179,16 @@
                                     <label asp-for="CuantosP">How many parts were detected with the problem?</label>
                                     <span asp-validation-for="CuantosP" class="text-danger small"></span>
                                 </div>
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Mileage" class="form-control" placeholder="Mileage" />
+                                    <label asp-for="Mileage">Mileage</label>
+                                    <span asp-validation-for="Mileage" class="text-danger small"></span>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input asp-for="InvestigationReport" class="form-control" placeholder="Investigation Report" />
+                                    <label asp-for="InvestigationReport">Investigation Report</label>
+                                    <span asp-validation-for="InvestigationReport" class="text-danger small"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -194,53 +204,54 @@
                             </div>
                             <div class="card-body">
                                 <div id="dynamic-fields" class="row g-3">
-                                    <!-- Containment fields will be added here dynamically -->
+                                    @if (Model.ContencionItems != null && Model.ContencionItems.Count > 0)
+                                    {
+                                        for (int i = 0; i < Model.ContencionItems.Count; i++)
+                                        {
+                                            <div class="col-md-12 mb-3 dynamic-field-group">
+                                                <div class="card shadow-sm mb-3">
+                                                    <div class="card-body">
+                                                        <div class="row g-3">
+                                                            <div class="col-md-3">
+                                                                <div class="form-floating">
+                                                                    <input name="ContencionItems[@i]" class="form-control" placeholder="Contención Item"
+                                                                           value="@Model.ContencionItems[i]" />
+                                                                    <label>Contención Item</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="form-floating">
+                                                                    <input name="ContencionActividades[@i]" class="form-control" placeholder="Contención Actividad"
+                                                                           value="@(Model.ContencionActividades.Count > i ? Model.ContencionActividades[i] : "")" />
+                                                                    <label>Contención Actividad</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="form-floating">
+                                                                    <input name="ContencionResponsables[@i]" class="form-control" placeholder="Contención Responsable"
+                                                                           value="@(Model.ContencionResponsables.Count > i ? Model.ContencionResponsables[i] : "")" />
+                                                                    <label>Contención Responsable</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="form-floating">
+                                                                    <input name="ContencionFechasInicio[@i]" type="date" class="form-control" placeholder="Fecha de Inicio"
+                                                                           value="@(Model.ContencionFechasInicio.Count > i ? Model.ContencionFechasInicio[i].ToString("yyyy-MM-dd") : "")" />
+                                                                    <label>Fecha de Inicio</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <button type="button" class="btn btn-sm btn-outline-danger mt-2 remove-group-btn">
+                                                            <i class="fas fa-trash me-1"></i> Eliminar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Section 6: Closing Information -->
-                    <div class="col-md-6">
-                        <div class="card shadow-sm h-100">
-                            <div class="card-header bg-primary text-white">
-                                <h6 class="mb-0 text-white"><i class="fas fa-lock me-2"></i>Closing Information</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="Mileage" class="form-control" placeholder="Mileage" />
-                                    <label asp-for="Mileage">Mileage</label>
-                                    <span asp-validation-for="Mileage" class="text-danger small"></span>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input asp-for="InvestigationReport" class="form-control" placeholder="Investigation Report" />
-                                    <label asp-for="InvestigationReport">Investigation Report</label>
-                                    <span asp-validation-for="InvestigationReport" class="text-danger small"></span>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input asp-for="DateOfClose" class="form-control" type="date" placeholder="Closing Date" />
-                                    <label asp-for="DateOfClose">Closing Date</label>
-                                    <span asp-validation-for="DateOfClose" class="text-danger small"></span>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <select asp-for="ImpactoPPM" class="form-select">
-                                        <option value="true">Yes</option>
-                                        <option value="false">No</option>
-                                    </select>
-                                    <label asp-for="ImpactoPPM">Does it impact PPM?</label>
-                                    <span asp-validation-for="ImpactoPPM" class="text-danger small"></span>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <select asp-for="Responsabilidad" class="form-select" asp-items="Html.GetEnumSelectList<ResponsabilidadOpciones>()"></select>
-                                    <label asp-for="Responsabilidad">Responsibility</label>
-                                    <span asp-validation-for="Responsabilidad" class="text-danger small"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Section 7: Actions and Evaluation -->
-                    <div class="col-md-6">
                         <div class="card shadow-sm mb-4">
                             <div class="card-header bg-primary">
                                 <h6 class="mb-0 text-white"><i class="fas fa-tasks me-2"></i>Actions</h6>
@@ -266,6 +277,41 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Section 6: Closing Information -->
+                    <div class="col-md-6">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header bg-primary text-white">
+                                <h6 class="mb-0 text-white"><i class="fas fa-lock me-2"></i>Closing Information</h6>
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="form-floating mb-3">
+                                    <input asp-for="DateOfClose" class="form-control" type="date" placeholder="Closing Date" />
+                                    <label asp-for="DateOfClose">Closing Date</label>
+                                    <span asp-validation-for="DateOfClose" class="text-danger small"></span>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <select asp-for="ImpactoPPM" class="form-select">
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                    <label asp-for="ImpactoPPM">Does it impact PPM?</label>
+                                    <span asp-validation-for="ImpactoPPM" class="text-danger small"></span>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <select asp-for="Responsabilidad" class="form-select" asp-items="Html.GetEnumSelectList<ResponsabilidadOpciones>()"></select>
+                                    <label asp-for="Responsabilidad">Responsibility</label>
+                                    <span asp-validation-for="Responsabilidad" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 7: Actions and Evaluation -->
+                    <div class="col-md-6">
+                        
 
                         <div class="card shadow-sm mb-4">
                             <div class="card-header bg-primary">
@@ -300,7 +346,7 @@
                     <div class="col-12">
                         <div class="card shadow-sm mb-4">
                             <div class="card-header bg-primary">
-                                <h6 class="mb-0 text-white"><i class="fas fa-file-alt me-2"></i>Analysis and Controls</h6>
+                                <h6 class="mb-0 text-white"><i class="fas fa-file-alt me-2"></i>Corrective Actions</h6>
                             </div>
                             <div class="card-body">
                                 <div class="form-floating mb-3">
@@ -313,11 +359,51 @@
                                     <label asp-for="ControlesEstablecidos">Established Controls</label>
                                     <span asp-validation-for="ControlesEstablecidos" class="text-danger small"></span>
                                 </div>
-                                <div class="mb-3">
-                                    <label asp-for="EvidenciaFotografica" class="form-label">Photographic Evidence</label>
-                                    <input asp-for="EvidenciaFotografica" class="form-control" type="file" multiple />
-                                    <span asp-validation-for="EvidenciaFotografica" class="text-danger small"></span>
+
+                                <!-- Mostrar las imágenes existentes -->
+                                @if (ViewBag.ArchivosExistentes != null && ViewBag.ArchivosExistentes.Count > 0)
+                                {
+                                    <div class="mb-3">
+                                        <label class="form-label">Existing Photographic Evidence</label>
+                                        <div class="alert alert-info">
+                                            <i class="bi bi-info-circle"></i> Check the images you want to keep. Unchecked images will be deleted when you save.
+                                        </div>
+                                        <div class="row">
+                                            @foreach (dynamic evidencia in ViewBag.ArchivosExistentes)
+                                            {
+                                                <div class="col-md-3 mb-3">
+                                                    <div class="card h-100">
+                                                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(evidencia.Data)"
+                                                             class="card-img-top img-fluid"
+                                                             alt="Photographic evidence"
+                                                             style="max-height: 150px; object-fit: contain;">
+                                                        <div class="card-footer text-center">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                       name="ArchivosAMantener" value="@evidencia.Index" id="archivo-@evidencia.Index" checked>
+                                                                <label class="form-check-label" for="archivo-@evidencia.Index">
+                                                                    Keep Evidence @(evidencia.Index + 1)
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+
+                                <!-- Sección para nueva evidencia -->
+                                <div class="form-group">
+                                    <label class="control-label">Add New Photographic Evidence</label>
+                                    <input type="file" class="form-control" name="EvidenciaFotografica" multiple
+                                           accept=".jpg,.jpeg,.png,.gif,.pdf" />
+                                    <small class="text-muted">You can select multiple files (max 5MB each, JPG, PNG, GIF or PDF)</small>
+                                    <span asp-validation-for="EvidenciaFotografica" class="text-danger"></span>
                                 </div>
+
+                                <!-- Vista previa de nuevos archivos -->
+                                <div id="preview-container" class="mt-3"></div>
                             </div>
                         </div>
                     </div>
@@ -482,7 +568,7 @@
 
     <script>
         // Script para campos de contención dinámicos
-        let index = 0;
+        let index = @(Model.ContencionItems?.Count ?? 0);
 
         document.getElementById('add-group-btn').addEventListener('click', function () {
             const div = document.createElement('div');
@@ -528,16 +614,6 @@
             index++;
         });
 
-        // Delegación de eventos para eliminar grupos
-        document.getElementById('dynamic-fields').addEventListener('click', function(e) {
-            if (e.target.classList.contains('remove-group-btn') || e.target.closest('.remove-group-btn')) {
-                const group = e.target.closest('.dynamic-field-group');
-                if (group) {
-                    group.remove();
-                }
-            }
-        });
-
         // Efecto ripple para botones
         document.querySelectorAll('.btn').forEach(button => {
             button.addEventListener('click', function(e) {
@@ -559,6 +635,43 @@
                     ripple.remove();
                 }, 1000);
             });
+        });
+
+        document.querySelector('input[type="file"]').addEventListener('change', function(e) {
+            const previewContainer = document.getElementById('preview-container');
+            previewContainer.innerHTML = '';
+
+            if (this.files.length > 0) {
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-warning';
+                alertDiv.innerHTML = `<i class="bi bi-exclamation-triangle"></i> You have selected ${this.files.length} new file(s) to add.`;
+                previewContainer.appendChild(alertDiv);
+
+                const fileList = document.createElement('div');
+                fileList.className = 'list-group mt-2';
+
+                Array.from(this.files).forEach((file, index) => {
+                    const listItem = document.createElement('div');
+                    listItem.className = 'list-group-item';
+
+                    const fileInfo = document.createElement('div');
+                    fileInfo.className = 'd-flex justify-content-between align-items-center';
+
+                    const fileName = document.createElement('span');
+                    fileName.textContent = file.name;
+
+                    const fileSize = document.createElement('span');
+                    fileSize.className = 'badge bg-secondary';
+                    fileSize.textContent = `${(file.size/1024/1024).toFixed(2)}MB`;
+
+                    fileInfo.appendChild(fileName);
+                    fileInfo.appendChild(fileSize);
+                    listItem.appendChild(fileInfo);
+                    fileList.appendChild(listItem);
+                });
+
+                previewContainer.appendChild(fileList);
+            }
         });
     </script>
 }

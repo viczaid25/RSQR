@@ -41,10 +41,10 @@ namespace RSQR.Models
         {
             ProblemRankList = new List<SelectListItem>
             {
-                new SelectListItem { Value = "", Text = "-Seleccionar-", Selected = true },  // Opción por defecto
-                new SelectListItem { Value = "Bajo", Text = "Bajo" },
-                new SelectListItem { Value = "Medio", Text = "Medio" },
-                new SelectListItem { Value = "Alto", Text = "Alto" }
+                new SelectListItem { Value = "", Text = "-Select-", Selected = true },  // Opción por defecto
+                new SelectListItem { Value = "Bajo", Text = "Low" },
+                new SelectListItem { Value = "Medio", Text = "Medium" },
+                new SelectListItem { Value = "Alto", Text = "High" }
             };
         }
     }

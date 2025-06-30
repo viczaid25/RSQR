@@ -23,7 +23,7 @@ namespace RSQR.Models
         /// </summary>
         /// <remarks>
         /// Requerido, con longitud máxima de 50 caracteres.
-        /// </remarks>
+        /// </remarks>a
         [Required, StringLength(50)]
         public string UnidadNegocio { get; set; }
 

@@ -174,23 +174,23 @@ namespace RSQR.Controllers
                 // Mapeo de líneas a destinatarios
                 var lineaDestinatarios = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    ["STARTER"] = "Zaid.Garcia@meax.mx",
-                    ["ALTERNATOR"] = "Zaid.Garcia@meax.mx",
-                    ["EPS (3G)"] = "Zaid.Garcia@meax.mx",
-                    ["PT EPS"] = "Zaid.Garcia@meax.mx",
-                    ["PT SSU"] = "Zaid.Garcia@meax.mx",
-                    ["PT FOB"] = "Zaid.Garcia@meax.mx",
-                    ["PT RCV"] = "Zaid.Garcia@meax.mx",
-                    ["PT BCM"] = "Zaid.Garcia@meax.mx",
-                    ["PT LFU"] = "Zaid.Garcia@meax.mx",
-                    ["EPS"] = "Zaid.Garcia@meax.mx  ",
-                    ["CM"] = "Zaid.Garcia@meax.mx",
-                    ["LCM"] = "Zaid.Garcia@meax.mx",
-                    ["AMP"] = "Zaid.Garcia@meax.mx",
-                    ["R1"] = "Zaid.Garcia@meax.mx",
-                    ["CID"] = "Zaid.Garcia@meax.mx",        
-                    ["PT CM"] = "Zaid.Garcia@meax.mx",
-                    ["DEFAULT"] = "Zaid.Garcia@meax.mx" // Valor por defecto
+                    ["STARTER"] = "rsqtest@meax.mx",
+                    ["ALTERNATOR"] = "rsqtest@meax.mx",
+                    ["EPS (3G)"] = "rsqtest@meax.mx",
+                    ["PT EPS"] = "rsqtest@meax.mx",
+                    ["PT SSU"] = "rsqtest@meax.mx",
+                    ["PT FOB"] = "rsqtest@meax.mx",
+                    ["PT RCV"] = "rsqtest@meax.mx",
+                    ["PT BCM"] = "rsqtest@meax.mx",
+                    ["PT LFU"] = "rsqtest@meax.mx",
+                    ["EPS"] = "rsqtest@meax.mx  ",
+                    ["CM"] = "rsqtest@meax.mx",
+                    ["LCM"] = "rsqtest@meax.mx",
+                    ["AMP"] = "rsqtest@meax.mx",
+                    ["R1"] = "rsqtest@meax.mx",
+                    ["CID"] = "rsqtest@meax.mx",        
+                    ["PT CM"] = "rsqtest@meax.mx",
+                    ["DEFAULT"] = "rsqtest@meax.mx" // Valor por defecto
                 };
 
                 // Determinar destinatario según responsabilidad y línea
@@ -222,7 +222,7 @@ namespace RSQR.Controllers
 
                                 Best Regards.";
 
-                await _emailService.SendEmailAsync(destinatario, asunto, cuerpo, "Zaid.Garcia@meax.mx");
+                await _emailService.SendEmailAsync(destinatario, asunto, cuerpo, "rsqtest@meax.mx");
 
                 // Manejo de PPM si es necesario
                 if (reporte.ImpactoPPM)
@@ -309,16 +309,23 @@ namespace RSQR.Controllers
                 new SelectListItem { Value = "PT DISPLAY", Text = "PT DISPLAY" }
             };
 
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
+            
 
             var reporte = await _context.Reportes.FindAsync(id);
-            if (reporte == null)
+            if (reporte == null) return NotFound();
+
+            var archivosExistentes = new List<object>();
+            if (reporte.EvidenciaFotografica != null)
             {
-                return NotFound();
+                for (int i = 0; i < reporte.EvidenciaFotografica.Count; i++)
+                {
+                    archivosExistentes.Add(new { Index = i, Data = reporte.EvidenciaFotografica[i] });
+                }
             }
+
+            ViewBag.ArchivosExistentes = archivosExistentes;
+
             return View(reporte);
         }
 
@@ -342,12 +349,10 @@ namespace RSQR.Controllers
           "MotherFactory,CustomerPartNumber,Mileage,InvestigationReport,DateOfClose,ImpactoPPM," +
           "Responsabilidad")]
     Reporte reporte,
-    List<IFormFile>? EvidenciaFotografica)
+    List<IFormFile>? EvidenciaFotografica, List<int>? ArchivosAMantener)
         {
-            if (id != reporte.Id)
-            {
-                return NotFound();
-            }
+            if (id != reporte.Id) return NotFound();
+            
 
             if (ModelState.IsValid)
             {
@@ -358,27 +363,64 @@ namespace RSQR.Controllers
                         .Include(r => r.PpmReport) // Incluir el PpmReport relacionado
                         .FirstOrDefaultAsync(r => r.Id == id);
 
-                    if (existingReport == null)
-                    {
-                        return NotFound();
-                    }
+                    if (existingReport == null) return NotFound();
+
+                    
+
 
                     // Verificar si hubo cambios importantes que requieran notificación
                     bool requiereNotificacion = RequiereNotificacion(existingReport, reporte);
 
                     // Copiar los valores del modelo recibido a la entidad existente
-                    _context.Entry(existingReport).CurrentValues.SetValues(reporte);
+                    //_context.Entry(existingReport).CurrentValues.SetValues(reporte);
+                    var entry = _context.Entry(existingReport);
+                    entry.CurrentValues.SetValues(reporte);
+                    entry.Property(e => e.EvidenciaFotografica).IsModified = false;
 
-                    // Manejar la evidencia fotográfica
+
+                    // Manejo de archivos existentes - SOLO si se especificó qué mantener
+                    if (ArchivosAMantener != null && ArchivosAMantener.Any())
+                    {
+                        // Crear una nueva lista solo con los archivos que se deben mantener
+                        var nuevaListaEvidencia = new List<byte[]>();
+
+                        for (int i = 0; i < existingReport.EvidenciaFotografica?.Count; i++)
+                        {
+                            if (ArchivosAMantener.Contains(i))
+                            {
+                                nuevaListaEvidencia.Add(existingReport.EvidenciaFotografica[i]);
+                            }
+                        }
+
+                        existingReport.EvidenciaFotografica = nuevaListaEvidencia;
+                    }
+
+                    // Manejar la evidencia fotográfica nueva
                     if (EvidenciaFotografica != null && EvidenciaFotografica.Count > 0)
                     {
                         existingReport.EvidenciaFotografica ??= new List<byte[]>();
-                        existingReport.EvidenciaFotografica.Clear();
 
                         foreach (var file in EvidenciaFotografica)
                         {
                             if (file.Length > 0)
                             {
+                                // Validar tipo de archivo
+                                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".pdf" };
+                                var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
+
+                                if (string.IsNullOrEmpty(extension) || !allowedExtensions.Contains(extension))
+                                {
+                                    ModelState.AddModelError("EvidenciaFotografica", $"Tipo de archivo no permitido: {file.FileName}");
+                                    continue;
+                                }
+
+                                // Validar tamaño máximo (5MB por archivo)
+                                if (file.Length > 5 * 1024 * 1024)
+                                {
+                                    ModelState.AddModelError("EvidenciaFotografica", $"Archivo demasiado grande (máximo 5MB): {file.FileName}");
+                                    continue;
+                                }
+
                                 using var ms = new MemoryStream();
                                 await file.CopyToAsync(ms);
                                 existingReport.EvidenciaFotografica.Add(ms.ToArray());
@@ -424,6 +466,23 @@ namespace RSQR.Controllers
 
             // Recargar ViewData si falla
             RecargarViewData();
+
+            // Recargar archivos existentes para la vista
+            var reporteActual = await _context.Reportes
+                .AsNoTracking()
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (reporteActual != null && reporteActual.EvidenciaFotografica != null)
+            {
+                ViewBag.ArchivosExistentes = reporteActual.EvidenciaFotografica
+                    .Select((data, index) => new { Index = index, Data = data })
+                    .ToList();
+            }
+            else
+            {
+                ViewBag.ArchivosExistentes = new List<object>();
+            }
+
             return View(reporte);
         }
 
@@ -433,10 +492,10 @@ namespace RSQR.Controllers
         {
             ViewBag.ProblemRankList = new List<SelectListItem>
             {
-                new SelectListItem { Value = "", Text = "-Seleccionar-", Selected = true },
-                new SelectListItem { Value = "Bajo", Text = "Bajo" },
-                new SelectListItem { Value = "Medio", Text = "Medio" },
-                new SelectListItem { Value = "Alto", Text = "Alto" }
+                new SelectListItem { Value = "", Text = "-Select-", Selected = true },
+                new SelectListItem { Value = "Bajo", Text = "Low" },
+                new SelectListItem { Value = "Medio", Text = "Medium" },
+                new SelectListItem { Value = "Alto", Text = "High" }
             };
 
             ViewBag.LineaList = new List<SelectListItem>
@@ -475,23 +534,23 @@ namespace RSQR.Controllers
         {
             var lineaDestinatarios = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             {
-                ["STARTER"] = "Zaid.Garcia@meax.mx",
-                ["ALTERNATOR"] = "Zaid.Garcia@meax.mx",
-                ["EPS (3G)"] = "Zaid.Garcia@meax.mx",
-                ["PT EPS"] = "Zaid.Garcia@meax.mx",
-                ["PT SSU"] = "Zaid.Garcia@meax.mx",
-                ["PT FOB"] = "Zaid.Garcia@meax.mx",
-                ["PT RCV"] = "Zaid.Garcia@meax.mx",
-                ["PT BCM"] = "Zaid.Garcia@meax.mx",
-                ["PT LFU"] = "Zaid.Garcia@meax.mx",
-                ["EPS"] = "Zaid.Garcia@meax.mx",
-                ["CM"] = "Zaid.Garcia@meax.mx",
-                ["LCM"] = "Zaid.Garcia@meax.mx",
-                ["AMP"] = "Zaid.Garcia@meax.mx",
-                ["R1"] = "Zaid.Garcia@meax.mx",
-                ["CID"] = "Zaid.Garcia@meax.mx",
-                ["PT CM"] = "Zaid.Garcia@meax.mx",
-                ["DEFAULT"] = "Zaid.Garcia@meax.mx"
+                ["STARTER"] = "rsqtest@meax.mx",
+                ["ALTERNATOR"] = "rsqtest@meax.mx",
+                ["EPS (3G)"] = "rsqtest@meax.mx",
+                ["PT EPS"] = "rsqtest@meax.mx",
+                ["PT SSU"] = "rsqtest@meax.mx",
+                ["PT FOB"] = "rsqtest@meax.mx",
+                ["PT RCV"] = "rsqtest@meax.mx",
+                ["PT BCM"] = "rsqtest@meax.mx",
+                ["PT LFU"] = "rsqtest@meax.mx",
+                ["EPS"] = "rsqtest@meax.mx",
+                ["CM"] = "rsqtest@meax.mx",
+                ["LCM"] = "rsqtest@meax.mx",
+                ["AMP"] = "rsqtest@meax.mx",
+                ["R1"] = "rsqtest@meax.mx",
+                ["CID"] = "rsqtest@meax.mx",
+                ["PT CM"] = "rsqtest@meax.mx",
+                ["DEFAULT"] = "rsqtest@meax.mx"
             };
 
             string destinatario;
@@ -521,7 +580,7 @@ namespace RSQR.Controllers
 
                     Best Regards.";
 
-            await _emailService.SendEmailAsync(destinatario, asunto, cuerpo, "Zaid.Garcia@meax.mx");
+            await _emailService.SendEmailAsync(destinatario, asunto, cuerpo, "rsqtest@meax.mx");
         }
 
         private async Task ManejarPpmReport(Reporte reporte)
