@@ -26,8 +26,9 @@
                         <th>Level</th>
                         <th>User</th>
                         <th>Line</th>
-                        <th>Title</th>
-                        <th>Affected Party</th>
+                        <th>Problem Title</th>
+                        <th>Affected Parts</th>
+						<th>PPM Impact</th>
                         <th>Evidence</th>
                         <th class="text-end pe-4">Actions</th>
                     </tr>
@@ -49,6 +50,20 @@
                                 @item.TituloProblema
                             </td>
                             <td>@item.NumParteAfectado</td>
+                            <td>
+                                @if (item.ImpactoPPM)
+                                {
+                                    <span class="badge bg-danger">
+                                        <i class="fas fa-times-circle me-1"></i> With Impact
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">
+                                        <i class="fas fa-check-circle me-1"></i> No Impact
+                                    </span>
+                                }
+                            </td>
                             <td>
                                 @if (item.EvidenciaFotografica != null && item.EvidenciaFotografica.Count > 0)
                                 {

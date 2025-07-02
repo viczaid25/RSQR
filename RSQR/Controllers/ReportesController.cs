@@ -135,7 +135,7 @@ namespace RSQR.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Fecha,ProblemRank,UserName,Linea,Tipo,TituloProblema,CincoM,NumParteAfectado,Descripcion,DescripcionProblema,QueP,PorqueP,DondeP,QuienP,CuandoP,CuantosP,ComoP,Lote,CustomerClaimNumber,ContencionItems,ContencionActividades,ContencionResponsables,ContencionFechasInicio,AlertaCalidad,Disposicion,EntrevistaInvolucrados,Comentarios,Severidad,Ocurrencia,Deteccion,AP_NPR,ModoFalla,ControlesEstablecidos,EvidenciaFotografica,Customer,MotherFactory,CustomerPartNumber,Mileage,InvestigationReport,DateOfClose,ImpactoPPM,Responsabilidad")] Reporte reporte, List<IFormFile>? EvidenciaFotografica)
+        public async Task<IActionResult> Create([Bind("Id,Fecha,ProblemRank,UserName,Linea,Tipo,TituloProblema,CincoM,NumParteAfectado,Descripcion,DescripcionProblema,QueP,PorqueP,DondeP,QuienP,CuandoP,CuantosP,ComoP,Lote,CustomerClaimNumber,ContencionItems,ContencionActividades,ContencionResponsables,ContencionFechasInicio,AlertaCalidad,Disposicion,EntrevistaInvolucrados,Comentarios,Severidad,Ocurrencia,Deteccion,AP_NPR,ModoFalla,ControlesEstablecidos,EvidenciaFotografica,Customer,MotherFactory,CustomerPartNumber,Mileage,InvestigationReport,DateOfClose,ImpactoPPM,Responsabilidad,NombreCar,CustomerReport")] Reporte reporte, List<IFormFile>? EvidenciaFotografica)
         {
             if (ModelState.IsValid)
             {
@@ -254,6 +254,14 @@ namespace RSQR.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            foreach (var state in ModelState)
+            {
+                foreach (var error in state.Value.Errors)
+                {
+                    Console.WriteLine($"Campo: {state.Key}, Error: {error.ErrorMessage}");
+                }
+            }
+
             return View(reporte);
         }
 
@@ -347,7 +355,7 @@ namespace RSQR.Controllers
           "ContencionFechasInicio,AlertaCalidad,Disposicion,EntrevistaInvolucrados,Comentarios," +
           "Severidad,Ocurrencia,Deteccion,AP_NPR,ModoFalla,ControlesEstablecidos,Customer," +
           "MotherFactory,CustomerPartNumber,Mileage,InvestigationReport,DateOfClose,ImpactoPPM," +
-          "Responsabilidad")]
+          "Responsabilidad,NombreCar,CustomerReport")]
     Reporte reporte,
     List<IFormFile>? EvidenciaFotografica, List<int>? ArchivosAMantener)
         {

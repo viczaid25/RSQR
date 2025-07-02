@@ -58,6 +58,11 @@
                             <label asp-for="Tipo">Type</label>
                             <span asp-validation-for="Tipo" class="text-danger small"></span>
                         </div>
+                        <!-- Mejor enfoque: readonly + asegurar el envío -->
+                        <div class="form-floating mb-3">
+                            <input asp-for="NombreCar" class="form-control" readonly />
+                            <label asp-for="NombreCar"></label>
+                        </div>
                     </div>
 
                     <div class="col-md-6">
@@ -102,7 +107,11 @@
                             <span asp-validation-for="Customer" class="text-danger small"></span>
                         </div>
                         <div class="form-floating mb-3">
-                            <input asp-for="MotherFactory" class="form-control" placeholder="Mother Factory" />
+                            <select asp-for="MotherFactory" class="form-control">
+                                <option value="">-- Select --</option>
+                                <option value="Himeji Office">Himeji Office</option>
+                                <option value="Sanda Office">Sanda Office</option>
+                            </select>
                             <label asp-for="MotherFactory">Mother Factory</label>
                             <span asp-validation-for="MotherFactory" class="text-danger small"></span>
                         </div>
@@ -117,7 +126,7 @@
                     <div class="col-12">
                         <div class="form-floating mb-3">
                             <textarea asp-for="Descripcion" class="form-control" placeholder="Description" style="height: 100px"></textarea>
-                            <label asp-for="Descripcion">Description</label>
+                            <label asp-for="Descripcion">Part Description</label>
                             <span asp-validation-for="Descripcion" class="text-danger small"></span>
                         </div>
                         <div class="form-floating mb-3">
@@ -304,6 +313,11 @@
                                     <select asp-for="Responsabilidad" class="form-select" asp-items="Html.GetEnumSelectList<ResponsabilidadOpciones>()"></select>
                                     <label asp-for="Responsabilidad">Responsibility</label>
                                     <span asp-validation-for="Responsabilidad" class="text-danger small"></span>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input asp-for="CustomerReport" class="form-control" placeholder="Customer Report" />
+                                    <label asp-for="CustomerReport"></label>
+                                    <span asp-validation-for="CustomerReport" class="text-danger small"></span>
                                 </div>
                             </div>
                         </div>

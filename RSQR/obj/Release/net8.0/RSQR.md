@@ -22,6 +22,10 @@
   - [BuildTargetModel()](#M-RSQR-Migrations-AddConsecutivoArchivoTable-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.AddConsecutivoArchivoTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
   - [Down()](#M-RSQR-Migrations-AddConsecutivoArchivoTable-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.AddConsecutivoArchivoTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
   - [Up()](#M-RSQR-Migrations-AddConsecutivoArchivoTable-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.AddConsecutivoArchivoTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+- [AddCustomerReportField](#T-RSQR-Migrations-AddCustomerReportField 'RSQR.Migrations.AddCustomerReportField')
+  - [BuildTargetModel()](#M-RSQR-Migrations-AddCustomerReportField-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.AddCustomerReportField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
+  - [Down()](#M-RSQR-Migrations-AddCustomerReportField-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.AddCustomerReportField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+  - [Up()](#M-RSQR-Migrations-AddCustomerReportField-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.AddCustomerReportField.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
 - [AddNombreCarToReporte](#T-RSQR-Migrations-AddNombreCarToReporte 'RSQR.Migrations.AddNombreCarToReporte')
   - [BuildTargetModel()](#M-RSQR-Migrations-AddNombreCarToReporte-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.AddNombreCarToReporte.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
   - [Down()](#M-RSQR-Migrations-AddNombreCarToReporte-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.AddNombreCarToReporte.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
@@ -42,10 +46,6 @@
   - [Material](#F-RSQR-Models-CincoMOpciones-Material 'RSQR.Models.CincoMOpciones.Material')
   - [Medicion](#F-RSQR-Models-CincoMOpciones-Medicion 'RSQR.Models.CincoMOpciones.Medicion')
   - [MedioAmbiente](#F-RSQR-Models-CincoMOpciones-MedioAmbiente 'RSQR.Models.CincoMOpciones.MedioAmbiente')
-- [ConfigureOneToOneRelationship](#T-RSQR-Migrations-ConfigureOneToOneRelationship 'RSQR.Migrations.ConfigureOneToOneRelationship')
-  - [BuildTargetModel()](#M-RSQR-Migrations-ConfigureOneToOneRelationship-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.ConfigureOneToOneRelationship.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
-  - [Down()](#M-RSQR-Migrations-ConfigureOneToOneRelationship-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.ConfigureOneToOneRelationship.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
-  - [Up()](#M-RSQR-Migrations-ConfigureOneToOneRelationship-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.ConfigureOneToOneRelationship.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
 - [ConsecutivoArchivo](#T-RSQR-Models-ConsecutivoArchivo 'RSQR.Models.ConsecutivoArchivo')
   - [Anio](#P-RSQR-Models-ConsecutivoArchivo-Anio 'RSQR.Models.ConsecutivoArchivo.Anio')
   - [CodigoNegocio](#P-RSQR-Models-ConsecutivoArchivo-CodigoNegocio 'RSQR.Models.ConsecutivoArchivo.CodigoNegocio')
@@ -73,6 +73,10 @@
   - [Index()](#M-RSQR-Controllers-HomeController-Index 'RSQR.Controllers.HomeController.Index')
 - [IEmailService](#T-RSQR-Services-IEmailService 'RSQR.Services.IEmailService')
   - [SendEmailAsync(toEmail,subject,body)](#M-RSQR-Services-IEmailService-SendEmailAsync-System-String,System-String,System-String,System-String- 'RSQR.Services.IEmailService.SendEmailAsync(System.String,System.String,System.String,System.String)')
+- [InitialCreate](#T-RSQR-Migrations-InitialCreate 'RSQR.Migrations.InitialCreate')
+  - [BuildTargetModel()](#M-RSQR-Migrations-InitialCreate-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
+  - [Down()](#M-RSQR-Migrations-InitialCreate-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+  - [Up()](#M-RSQR-Migrations-InitialCreate-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
 - [NewMigration](#T-RSQR-Migrations-NewMigration 'RSQR.Migrations.NewMigration')
   - [BuildTargetModel()](#M-RSQR-Migrations-NewMigration-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.NewMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
   - [Down()](#M-RSQR-Migrations-NewMigration-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.NewMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
@@ -482,6 +486,50 @@ This method has no parameters.
 
 This method has no parameters.
 
+<a name='T-RSQR-Migrations-AddCustomerReportField'></a>
+## AddCustomerReportField `type`
+
+##### Namespace
+
+RSQR.Migrations
+
+##### Summary
+
+*Inherit from parent.*
+
+<a name='M-RSQR-Migrations-AddCustomerReportField-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder-'></a>
+### BuildTargetModel() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-AddCustomerReportField-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Down() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-AddCustomerReportField-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Up() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='T-RSQR-Migrations-AddNombreCarToReporte'></a>
 ## AddNombreCarToReporte `type`
 
@@ -686,50 +734,6 @@ Problema relacionado con mediciones/calibraciones
 ##### Summary
 
 Problema relacionado con condiciones ambientales
-
-<a name='T-RSQR-Migrations-ConfigureOneToOneRelationship'></a>
-## ConfigureOneToOneRelationship `type`
-
-##### Namespace
-
-RSQR.Migrations
-
-##### Summary
-
-*Inherit from parent.*
-
-<a name='M-RSQR-Migrations-ConfigureOneToOneRelationship-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder-'></a>
-### BuildTargetModel() `method`
-
-##### Summary
-
-*Inherit from parent.*
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-RSQR-Migrations-ConfigureOneToOneRelationship-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
-### Down() `method`
-
-##### Summary
-
-*Inherit from parent.*
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-RSQR-Migrations-ConfigureOneToOneRelationship-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
-### Up() `method`
-
-##### Summary
-
-*Inherit from parent.*
-
-##### Parameters
-
-This method has no parameters.
 
 <a name='T-RSQR-Models-ConsecutivoArchivo'></a>
 ## ConsecutivoArchivo `type`
@@ -1085,6 +1089,50 @@ Tarea que representa la operación asíncrona.
 
 Las implementaciones de esta interfaz deben proporcionar la lógica concreta
 para enviar correos electrónicos utilizando algún proveedor de servicios SMTP.
+
+<a name='T-RSQR-Migrations-InitialCreate'></a>
+## InitialCreate `type`
+
+##### Namespace
+
+RSQR.Migrations
+
+##### Summary
+
+*Inherit from parent.*
+
+<a name='M-RSQR-Migrations-InitialCreate-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder-'></a>
+### BuildTargetModel() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-InitialCreate-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Down() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-InitialCreate-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Up() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-RSQR-Migrations-NewMigration'></a>
 ## NewMigration `type`

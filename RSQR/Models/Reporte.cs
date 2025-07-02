@@ -111,7 +111,7 @@ namespace RSQR.Models
         public string? NumParteAfectado { get; set; }
 
         /// <summary>Descripción general del problema</summary>
-        [Display(Name = "Description")]
+        [Display(Name = "Part Description")]
         public string? Descripcion { get; set; }
 
         /// <summary>Descripción detallada del problema</summary>
@@ -264,5 +264,8 @@ namespace RSQR.Models
 
         // Propiedad de navegación para la relación 1:1
         public PpmReport? PpmReport { get; set; }
+
+        [Display(Name = "Customer Report")]
+        public string? CustomerReport { get; set; }  // Tipo string (o el tipo que necesites)
     }
 }

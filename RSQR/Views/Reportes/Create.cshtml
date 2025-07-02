@@ -88,7 +88,7 @@
                             </div>
                             <div class="form-floating mb-3">
                                 <input asp-for="Descripcion" class="form-control" placeholder="Descripción" />
-                                <label asp-for="Descripcion">Description</label>
+                                <label asp-for="Descripcion">Part Description</label>
                                 <span asp-validation-for="Descripcion" class="text-danger small"></span>
                             </div>
                             <div class="form-floating mb-3">
@@ -103,7 +103,11 @@
                                 <span asp-validation-for="Customer" class="text-danger small"></span>
                             </div>
                             <div class="form-floating mb-3">
-                                <input asp-for="MotherFactory" class="form-control" placeholder="Fábrica Madre" />
+                                <select asp-for="MotherFactory" class="form-control">
+                                    <option value="">-- Select --</option>
+                                    <option value="Himeji Office">Himeji Office</option>
+                                    <option value="Sanda Office">Sanda Office</option>
+                                </select>
                                 <label asp-for="MotherFactory">Mother Factory</label>
                                 <span asp-validation-for="MotherFactory" class="text-danger small"></span>
                             </div>
@@ -430,30 +434,30 @@
                             <div class="col-md-3">
                                 <div class="form-floating">
                                     <input name="ContencionItems[${index}]" class="form-control" placeholder="Contención Item" />
-                                    <label>Contención Item</label>
+                                    <label>Containment Item</label>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-floating">
                                     <input name="ContencionActividades[${index}]" class="form-control" placeholder="Contención Actividad" />
-                                    <label>Contención Actividad</label>
+                                    <label>Containment Activity</label>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-floating">
                                     <input name="ContencionResponsables[${index}]" class="form-control" placeholder="Contención Responsable" />
-                                    <label>Contención Responsable</label>
+                                    <label>Containment Responsable</label>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-floating">
                                     <input name="ContencionFechasInicio[${index}]" type="date" class="form-control" placeholder="Fecha de Inicio" />
-                                    <label>Fecha de Inicio</label>
+                                    <label>Start Date</label>
                                 </div>
                             </div>
                         </div>
                         <button type="button" class="btn btn-sm btn-outline-danger mt-2 remove-group-btn">
-                            <i class="fas fa-trash me-1"></i> Eliminar
+                            <i class="fas fa-trash me-1"></i> Delete
                         </button>
                     </div>
                 </div>

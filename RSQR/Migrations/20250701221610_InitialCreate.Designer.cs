@@ -12,8 +12,8 @@ using RSQR.Data;
 namespace RSQR.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250617200128_ConfigureOneToOneRelationship")]
-    partial class ConfigureOneToOneRelationship
+    [Migration("20250701221610_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -374,6 +374,9 @@ namespace RSQR.Migrations
                     b.Property<string>("CustomerPartNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CustomerReport")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("DateOfClose")
                         .HasColumnType("datetime2");
 
@@ -457,8 +460,7 @@ namespace RSQR.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

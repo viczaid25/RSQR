@@ -272,18 +272,6 @@
         <member name="M:RSQR.Migrations.AddNombreCarToReporte.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:RSQR.Migrations.ConfigureOneToOneRelationship">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.ConfigureOneToOneRelationship.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.ConfigureOneToOneRelationship.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.ConfigureOneToOneRelationship.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
         <member name="T:RSQR.Migrations.FixPpmReportIdentity">
             <inheritdoc />
         </member>
@@ -294,6 +282,30 @@
             <inheritdoc />
         </member>
         <member name="M:RSQR.Migrations.FixPpmReportIdentity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RSQR.Migrations.AddCustomerReportField">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.AddCustomerReportField.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.AddCustomerReportField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.AddCustomerReportField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:RSQR.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:RSQR.Models.ConsecutivoArchivo">
