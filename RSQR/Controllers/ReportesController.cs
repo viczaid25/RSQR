@@ -598,7 +598,7 @@ namespace RSQR.Controllers
             try
             {
                 // Habilitar IDENTITY_INSERT para SQL Server
-                await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT dbo.PpmReports ON");
+                await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT dbo.qcPpmReport ON");
 
                 var ppmReport = await _context.PpmReports.FindAsync(reporte.Id);
 
@@ -669,7 +669,7 @@ namespace RSQR.Controllers
             finally
             {
                 // Deshabilitar IDENTITY_INSERT
-                await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT dbo.PpmReports OFF");
+                await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT dbo.qcPpmReport OFF");
             }
         }
 
