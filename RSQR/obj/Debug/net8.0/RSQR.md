@@ -77,6 +77,10 @@
   - [BuildTargetModel()](#M-RSQR-Migrations-InitialCreate-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
   - [Down()](#M-RSQR-Migrations-InitialCreate-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
   - [Up()](#M-RSQR-Migrations-InitialCreate-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+- [NewDB](#T-RSQR-Migrations-NewDB 'RSQR.Migrations.NewDB')
+  - [BuildTargetModel()](#M-RSQR-Migrations-NewDB-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.NewDB.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
+  - [Down()](#M-RSQR-Migrations-NewDB-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.NewDB.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+  - [Up()](#M-RSQR-Migrations-NewDB-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.NewDB.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
 - [NewMigration](#T-RSQR-Migrations-NewMigration 'RSQR.Migrations.NewMigration')
   - [BuildTargetModel()](#M-RSQR-Migrations-NewMigration-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.NewMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
   - [Down()](#M-RSQR-Migrations-NewMigration-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.NewMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
@@ -110,6 +114,10 @@
   - [Responsabilidad](#P-RSQR-Models-PpmReport-Responsabilidad 'RSQR.Models.PpmReport.Responsabilidad')
   - [Tipo](#P-RSQR-Models-PpmReport-Tipo 'RSQR.Models.PpmReport.Tipo')
   - [TituloProblema](#P-RSQR-Models-PpmReport-TituloProblema 'RSQR.Models.PpmReport.TituloProblema')
+- [RenameTable](#T-RSQR-Migrations-RenameTable 'RSQR.Migrations.RenameTable')
+  - [BuildTargetModel()](#M-RSQR-Migrations-RenameTable-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.RenameTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
+  - [Down()](#M-RSQR-Migrations-RenameTable-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.RenameTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+  - [Up()](#M-RSQR-Migrations-RenameTable-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.RenameTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
 - [Reporte](#T-RSQR-Models-Reporte 'RSQR.Models.Reporte')
   - [AP_NPR](#P-RSQR-Models-Reporte-AP_NPR 'RSQR.Models.Reporte.AP_NPR')
   - [AlertaCalidad](#P-RSQR-Models-Reporte-AlertaCalidad 'RSQR.Models.Reporte.AlertaCalidad')
@@ -1134,6 +1142,50 @@ This method has no parameters.
 
 This method has no parameters.
 
+<a name='T-RSQR-Migrations-NewDB'></a>
+## NewDB `type`
+
+##### Namespace
+
+RSQR.Migrations
+
+##### Summary
+
+*Inherit from parent.*
+
+<a name='M-RSQR-Migrations-NewDB-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder-'></a>
+### BuildTargetModel() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-NewDB-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Down() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-NewDB-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Up() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='T-RSQR-Migrations-NewMigration'></a>
 ## NewMigration `type`
 
@@ -1467,6 +1519,50 @@ Tipo de reporte según la clasificación interna.
 ##### Summary
 
 Título descriptivo del problema (opcional).
+
+<a name='T-RSQR-Migrations-RenameTable'></a>
+## RenameTable `type`
+
+##### Namespace
+
+RSQR.Migrations
+
+##### Summary
+
+*Inherit from parent.*
+
+<a name='M-RSQR-Migrations-RenameTable-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder-'></a>
+### BuildTargetModel() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-RenameTable-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Down() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-RenameTable-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Up() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-RSQR-Models-Reporte'></a>
 ## Reporte `type`

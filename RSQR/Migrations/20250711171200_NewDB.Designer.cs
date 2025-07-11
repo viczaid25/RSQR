@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RSQR.Data;
 
@@ -11,9 +12,11 @@ using RSQR.Data;
 namespace RSQR.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250711171200_NewDB")]
+    partial class NewDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -314,7 +317,7 @@ namespace RSQR.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("qcPpmReport", (string)null);
+                    b.ToTable("PpmReports");
                 });
 
             modelBuilder.Entity("RSQR.Models.Reporte", b =>
@@ -461,7 +464,7 @@ namespace RSQR.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("qcReport", (string)null);
+                    b.ToTable("Reportes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
