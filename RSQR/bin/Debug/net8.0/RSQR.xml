@@ -308,30 +308,6 @@
         <member name="M:RSQR.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:RSQR.Migrations.NewDB">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.NewDB.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.NewDB.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.NewDB.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:RSQR.Migrations.RenameTable">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.RenameTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.RenameTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.RenameTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
         <member name="T:RSQR.Models.ConsecutivoArchivo">
             <summary>
             Representa un consecutivo numérico para archivos, asociado a unidades de negocio.

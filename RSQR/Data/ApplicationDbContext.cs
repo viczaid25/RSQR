@@ -48,9 +48,6 @@ namespace RSQR.Data
         /// </remarks>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Reporte>().ToTable("qcReport");
-            modelBuilder.Entity<PpmReport>().ToTable("qcPpmReport");
-
             base.OnModelCreating(modelBuilder); // Esto es CRUCIAL para Identity
 
             // Configuración para PpmReport

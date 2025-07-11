@@ -314,7 +314,7 @@ namespace RSQR.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("qcPpmReport", (string)null);
+                    b.ToTable("PpmReports");
                 });
 
             modelBuilder.Entity("RSQR.Models.Reporte", b =>
@@ -461,7 +461,7 @@ namespace RSQR.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("qcReport", (string)null);
+                    b.ToTable("Reportes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
