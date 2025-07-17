@@ -340,16 +340,28 @@ namespace RSQR.Migrations
                     b.Property<string>("ComoP")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ContencionActividades")
+                    b.Property<string>("ContencionActivity")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ContencionFechasInicio")
+                    b.Property<string>("ContencionConsiderar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContencionEffectiveness")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContencionItems")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ContencionResponsables")
+                    b.Property<string>("ContencionNgParts")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContencionOkParts")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContencionResponsable")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContencionTotalSuspeciousParts")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ControlesEstablecidos")

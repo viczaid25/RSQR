@@ -12,8 +12,8 @@ using RSQR.Data;
 namespace RSQR.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250701221610_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250717002628_newContainment")]
+    partial class newContainment
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -317,7 +317,7 @@ namespace RSQR.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PpmReports");
+                    b.ToTable("qcPpmReport", (string)null);
                 });
 
             modelBuilder.Entity("RSQR.Models.Reporte", b =>
@@ -343,16 +343,28 @@ namespace RSQR.Migrations
                     b.Property<string>("ComoP")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ContencionActividades")
+                    b.Property<string>("ContencionActivity")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ContencionFechasInicio")
+                    b.Property<string>("ContencionConsiderar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContencionEffectiveness")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContencionItems")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ContencionResponsables")
+                    b.Property<string>("ContencionNgParts")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContencionOkParts")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContencionResponsable")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContencionTotalSuspeciousParts")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ControlesEstablecidos")
@@ -464,7 +476,7 @@ namespace RSQR.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reportes");
+                    b.ToTable("qcReport", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

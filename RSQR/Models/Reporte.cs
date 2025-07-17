@@ -171,16 +171,34 @@ namespace RSQR.Models
         public List<string>? ContencionItems { get; set; } = new List<string>();
 
         /// <summary>Actividades de contención</summary>
-        [Display(Name = "Activities")]
-        public List<string>? ContencionActividades { get; set; } = new List<string>();
+        [Display(Name = "To Consider")]
+        public List<string>? ContencionConsiderar { get; set; } = new List<string>();
 
         /// <summary>Responsables de las acciones</summary>
-        [Display(Name = "Responsibilities")]
-        public List<string>? ContencionResponsables { get; set; } = new List<string>();
+        [Display(Name = "Contention Activity")]
+        public List<string>? ContencionActivity { get; set; } = new List<string>();
 
         /// <summary>Fechas de inicio de acciones</summary>
-        [Display(Name = "Start Date")]
-        public List<DateTime>? ContencionFechasInicio { get; set; } = new List<DateTime>();
+        [Display(Name = "Contention Responsable")]
+        public List<string>? ContencionResponsable { get; set; } = new List<string>();
+
+        /// <summary>Responsables de las acciones</summary>
+        [Display(Name = "Total Suspecious Parts")]
+        public List<string>? ContencionTotalSuspeciousParts { get; set; } = new List<string>();
+
+        /// <summary>Responsables de las acciones</summary>
+        [Display(Name = "OK Parts")]
+        public List<string>? ContencionOkParts { get; set; } = new List<string>();
+
+        /// <summary>Responsables de las acciones</summary>
+        [Display(Name = "NG Parts")]
+        public List<string>? ContencionNgParts { get; set; } = new List<string>();
+
+        /// <summary>Responsables de las acciones</summary>
+        [Display(Name = "% Effectiveness")]
+        public List<int>? ContencionEffectiveness { get; set; } = new List<int>();
+
+
 
         /// <summary>Indica si se generó alerta de calidad</summary>
         [Display(Name = "Quality Alert")]

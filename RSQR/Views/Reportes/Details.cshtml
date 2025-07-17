@@ -167,9 +167,13 @@
                         <thead class="bg-light">
                             <tr>
                                 <th>@Html.DisplayNameFor(model => model.ContencionItems)</th>
-                                <th>@Html.DisplayNameFor(model => model.ContencionActividades)</th>
-                                <th>@Html.DisplayNameFor(model => model.ContencionResponsables)</th>
-                                <th>@Html.DisplayNameFor(model => model.ContencionFechasInicio)</th>
+                                <th>@Html.DisplayNameFor(model => model.ContencionConsiderar)</th>
+                                <th>@Html.DisplayNameFor(model => model.ContencionActivity)</th>
+                                <th>@Html.DisplayNameFor(model => model.ContencionResponsable)</th>
+                                <th>@Html.DisplayNameFor(model => model.ContencionTotalSuspeciousParts)</th>
+                                <th>@Html.DisplayNameFor(model => model.ContencionOkParts)</th>
+                                <th>@Html.DisplayNameFor(model => model.ContencionNgParts)</th>
+                                <th>@Html.DisplayNameFor(model => model.ContencionEffectiveness)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -177,9 +181,13 @@
                             {
                                 <tr>
                                     <td>@Model.ContencionItems[i]</td>
-                                    <td>@(Model.ContencionActividades.Count > i ? Model.ContencionActividades[i] : "")</td>
-                                    <td>@(Model.ContencionResponsables.Count > i ? Model.ContencionResponsables[i] : "")</td>
-                                    <td>@(Model.ContencionFechasInicio.Count > i ? Model.ContencionFechasInicio[i].ToString("dd/MM/yyyy") : "")</td>
+                                    <td>@(Model.ContencionConsiderar.Count > i ? Model.ContencionConsiderar[i] : "")</td>
+                                    <td>@(Model.ContencionActivity.Count > i ? Model.ContencionActivity[i] : "")</td>
+                                    <td>@(Model.ContencionResponsable.Count > i ? Model.ContencionResponsable[i] : "")</td>
+                                    <td>@(Model.ContencionTotalSuspeciousParts.Count > i ? Model.ContencionTotalSuspeciousParts[i] : "")</td>
+                                    <td>@(Model.ContencionOkParts.Count > i ? Model.ContencionOkParts[i] : "")</td>
+                                    <td>@(Model.ContencionNgParts.Count > i ? Model.ContencionNgParts[i] : "")</td>
+                                    <td>@(Model.ContencionEffectiveness.Count > i ? Model.ContencionEffectiveness[i] : "")</td>
                                 </tr>
                             }
                         </tbody>
