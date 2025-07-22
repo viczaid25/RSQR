@@ -159,6 +159,10 @@
   - [Field](#F-RSQR-Models-TipoReporte-Field 'RSQR.Models.TipoReporte.Field')
   - [Internal](#F-RSQR-Models-TipoReporte-Internal 'RSQR.Models.TipoReporte.Internal')
   - [ZeroKm](#F-RSQR-Models-TipoReporte-ZeroKm 'RSQR.Models.TipoReporte.ZeroKm')
+- [d4d5fields](#T-RSQR-Migrations-d4d5fields 'RSQR.Migrations.d4d5fields')
+  - [BuildTargetModel()](#M-RSQR-Migrations-d4d5fields-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.d4d5fields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
+  - [Down()](#M-RSQR-Migrations-d4d5fields-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.d4d5fields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+  - [Up()](#M-RSQR-Migrations-d4d5fields-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.d4d5fields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
 - [newContainment](#T-RSQR-Migrations-newContainment 'RSQR.Migrations.newContainment')
   - [BuildTargetModel()](#M-RSQR-Migrations-newContainment-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.newContainment.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
   - [Down()](#M-RSQR-Migrations-newContainment-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.newContainment.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
@@ -1836,6 +1840,50 @@ Reporte interno de calidad
 ##### Summary
 
 Reporte de problema en vehículo nuevo (0km)
+
+<a name='T-RSQR-Migrations-d4d5fields'></a>
+## d4d5fields `type`
+
+##### Namespace
+
+RSQR.Migrations
+
+##### Summary
+
+*Inherit from parent.*
+
+<a name='M-RSQR-Migrations-d4d5fields-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder-'></a>
+### BuildTargetModel() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-d4d5fields-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Down() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-d4d5fields-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Up() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-RSQR-Migrations-newContainment'></a>
 ## newContainment `type`

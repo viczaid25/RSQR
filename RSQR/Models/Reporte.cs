@@ -285,5 +285,252 @@ namespace RSQR.Models
 
         [Display(Name = "Customer Report")]
         public string? CustomerReport { get; set; }  // Tipo string (o el tipo que necesites)
+
+        //Failure Mode Identification
+        [Display(Name = "Failure Mode")]
+        public List<string>? FmMode { get; set; } = new List<string>();
+
+        [Display(Name = "Process Name")]
+        public List<string>? FmProcessName { get; set; } = new List<string>();
+
+        [Display(Name = "6Ms")]
+        public List<string>? Fm6Ms { get; set; } = new List<string>();
+
+        [Display(Name = "Factor 1")]
+        public List<string>? FmFactorUno { get; set; } = new List<string>();
+
+        [Display(Name = "Factor 2")]
+        public List<string>? FmFactorDos { get; set; } = new List<string>();
+
+        [Display(Name = "Factor 3")]
+        public List<string>? FmFactorTres { get; set; } = new List<string>();
+
+        [Display(Name = "Related With The Issue?")]
+        public List<string>? FmRelated { get; set; } = new List<string>();
+
+        [Display(Name = "Contention Actions")]
+        public List<string>? FmContentionActions { get; set; } = new List<string>();
+
+        //Preventive Controls to Prevent FM - Currently Implemented
+        [Display(Name = "Process Name")]
+        public List<string>? PreventiveCProcessName { get; set; } = new List<string>();
+
+        [Display(Name = "Manpower")]
+        public List<string>? PreventiveCManpower { get; set; } = new List<string>();
+
+        [Display(Name = "Method")]
+        public List<string>? PreventiveCMethod { get; set; } = new List<string>();
+
+        [Display(Name = "Machinary")]
+        public List<string>? PreventiveCMachinary { get; set; } = new List<string>();
+
+        [Display(Name = "Material")]
+        public List<string>? PreventiveCMaterial { get; set; } = new List<string>();
+
+        [Display(Name = "Measurement")]
+        public List<string>? PreventiveCMeasurement { get; set; } = new List<string>();
+
+        [Display(Name = "Environment")]
+        public List<string>? PreventiveCEnvironment { get; set; } = new List<string>();
+
+        [Display(Name = "Rank [O]")]
+        public List<int>? PreventiveCRank { get; set; } = new List<int>();
+
+        //Detection Controls to Prevent FM  - Currently Implemented
+        [Display(Name = "Process Name")]
+        public List<string>? DetectionCProcessName { get; set; } = new List<string>();
+
+        [Display(Name = "Manpower")]
+        public List<string>? DetectionCManpower { get; set; } = new List<string>();
+
+        [Display(Name = "Method")]
+        public List<string>? DetectionCMethod { get; set; } = new List<string>();
+
+        [Display(Name = "Machinary")]
+        public List<string>? DetectionCMachinary { get; set; } = new List<string>();
+
+        [Display(Name = "Material")]
+        public List<string>? DetectionCMaterial { get; set; } = new List<string>();
+
+        [Display(Name = "Measurement")]
+        public List<string>? DetectionCMeasurement { get; set; } = new List<string>();
+
+        [Display(Name = "Environment")]
+        public List<string>? DetectionCEnvironment { get; set; } = new List<string>();
+
+        [Display(Name = "Rank [D]")]
+        public List<int>? DetectionCRank { get; set; } = new List<int>();
+
+        // Factores
+        //Factor 1
+        [Display(Name = "Factor")]
+        public List<string>? FactorUno { get; set; } = new List<string>();
+
+        [Display(Name = "1st Why")]
+        public List<string>? FactorUnoPrimerWhy { get; set; } = new List<string>();
+
+        [Display(Name = "2nd Why")]
+        public List<string>? FactorUnoSegundoWhy { get; set; } = new List<string>();
+
+        [Display(Name = "3rd Why")]
+        public List<string>? FactorUnoTercerWhy { get; set; } = new List<string>();
+
+        [Display(Name = "4th Why")]
+        public List<string>? FactorUnoCuartoWhy { get; set; } = new List<string>();
+
+        [Display(Name = "5th Why")]
+        public List<string>? FactorUnoQuintoWhy { get; set; } = new List<string>();
+
+        [Display(Name = "Corrective Actions")]
+        public List<string>? FactorUnoCorrectiveActions { get; set; } = new List<string>();
+
+        //Factor 2
+        [Display(Name = "Factor")]
+        public List<string>? FactorDos { get; set; } = new List<string>();
+
+        [Display(Name = "1st Why")]
+        public List<string>? FactorDosPrimerWhy { get; set; } = new List<string>();
+
+        [Display(Name = "2nd Why")]
+        public List<string>? FactorDosSegundoWhy { get; set; } = new List<string>();
+
+        [Display(Name = "3rd Why")]
+        public List<string>? FactorDosTercerWhy { get; set; } = new List<string>();
+
+        [Display(Name = "4th Why")]
+        public List<string>? FactorDosCuartoWhy { get; set; } = new List<string>();
+
+        [Display(Name = "5th Why")]
+        public List<string>? FactorDosQuintoWhy { get; set; } = new List<string>();
+
+        [Display(Name = "Corrective Actions")]
+        public List<string>? FactorDosCorrectiveActions { get; set; } = new List<string>();
+
+        //Factor 3
+        [Display(Name = "Factor")]
+        public List<string>? FactorTres { get; set; } = new List<string>();
+
+        [Display(Name = "1st Why")]
+        public List<string>? FactorTresPrimerWhy { get; set; } = new List<string>();
+
+        [Display(Name = "2nd Why")]
+        public List<string>? FactorTresSegundoWhy { get; set; } = new List<string>();
+
+        [Display(Name = "3rd Why")]
+        public List<string>? FactorTresTercerWhy { get; set; } = new List<string>();
+
+        [Display(Name = "4th Why")]
+        public List<string>? FactorTresCuartoWhy { get; set; } = new List<string>();
+
+        [Display(Name = "5th Why")]
+        public List<string>? FactorTresQuintoWhy { get; set; } = new List<string>();
+
+        [Display(Name = "Corrective Actions")]
+        public List<string>? FactorTresCorrectiveActions { get; set; } = new List<string>();
+
+        [Display(Name = "Was The Defect Duplicated?")]
+        public string? DefectoDuplicado { get; set; }
+
+
+        //Preventive Controls to Prevent FM - Proposed Corrective Action Plan
+        [Display(Name = "Process Name")]
+        public List<string>? PreventiveCProcessNameC { get; set; } = new List<string>();
+
+        [Display(Name = "Manpower")]
+        public List<string>? PreventiveCManpowerC { get; set; } = new List<string>();
+
+        [Display(Name = "Method")]
+        public List<string>? PreventiveCMethodC { get; set; } = new List<string>();
+
+        [Display(Name = "Machinary")]
+        public List<string>? PreventiveCMachinaryC { get; set; } = new List<string>();
+
+        [Display(Name = "Material")]
+        public List<string>? PreventiveCMaterialC { get; set; } = new List<string>();
+
+        [Display(Name = "Measurement")]
+        public List<string>? PreventiveCMeasurementC { get; set; } = new List<string>();
+
+        [Display(Name = "Environment")]
+        public List<string>? PreventiveCEnvironmentC { get; set; } = new List<string>();
+
+        [Display(Name = "Rank [O]")]
+        public List<int>? PreventiveCRankC { get; set; } = new List<int>();
+
+        //Detection Controls to Prevent FM  - Proposed Corrective Action Plan
+        [Display(Name = "Process Name")]
+        public List<string>? DetectionCProcessNameC { get; set; } = new List<string>();
+
+        [Display(Name = "Manpower")]
+        public List<string>? DetectionCManpowerC { get; set; } = new List<string>();
+
+        [Display(Name = "Method")]
+        public List<string>? DetectionCMethodC { get; set; } = new List<string>();
+
+        [Display(Name = "Machinary")]
+        public List<string>? DetectionCMachinaryC { get; set; } = new List<string>();
+
+        [Display(Name = "Material")]
+        public List<string>? DetectionCMaterialC { get; set; } = new List<string>();
+
+        [Display(Name = "Measurement")]
+        public List<string>? DetectionCMeasurementC { get; set; } = new List<string>();
+
+        [Display(Name = "Environment")]
+        public List<string>? DetectionCEnvironmentC { get; set; } = new List<string>();
+
+        [Display(Name = "Rank [D]")]
+        public List<int>? DetectionCRankC { get; set; } = new List<int>();
+
+        //D5 Permanent Corrective Actions
+        //Occurrence
+        [Display(Name = "No Item")]
+        public List<string>? OccurrenceItems { get; set; } = new List<string>();
+
+        [Display(Name = "Action")]
+        public List<string>? OccurrenceAction { get; set; } = new List<string>();
+
+        [Display(Name = "Responsable")]
+        public List<string>? OccurrenceResponsable { get; set; } = new List<string>();
+
+        [Display(Name = "Department")]
+        public List<string>? OccurrenceDepartment { get; set; } = new List<string>();
+
+        [Display(Name = "Opening Date")]
+        public List<DateTime>? OccurrenceOpeningDate { get; set; } = new List<DateTime>();
+
+        [Display(Name = "Close Date")]
+        public List<DateTime>? OccurrenceCloseDate { get; set; } = new List<DateTime>();
+
+        [Display(Name = "AMEF")]
+        public List<string>? OccurrenceAmef { get; set; } = new List<string>();
+
+        [Display(Name = "CP")]
+        public List<string>? OccurrenceCp { get; set; } = new List<string>();
+
+        //Detection
+        [Display(Name = "No Item")]
+        public List<string>? DetectionItems { get; set; } = new List<string>();
+
+        [Display(Name = "Action")]
+        public List<string>? DetectionAction { get; set; } = new List<string>();
+
+        [Display(Name = "Responsable")]
+        public List<string>? DetectionResponsable { get; set; } = new List<string>();
+
+        [Display(Name = "Department")]
+        public List<string>? DetectionDepartment { get; set; } = new List<string>();
+
+        [Display(Name = "Opening Date")]
+        public List<DateTime>? DetectionOpeningDate { get; set; } = new List<DateTime>();
+
+        [Display(Name = "Close Date")]
+        public List<DateTime>? DetectionCloseDate { get; set; } = new List<DateTime>();
+
+        [Display(Name = "AMEF")]
+        public List<string>? DetectionAmef { get; set; } = new List<string>();
+
+        [Display(Name = "CP")]
+        public List<string>? DetectionCp { get; set; } = new List<string>();
     }
 }

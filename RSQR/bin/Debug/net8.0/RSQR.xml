@@ -200,6 +200,18 @@
         <member name="M:RSQR.Migrations.newContainment.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:RSQR.Migrations.d4d5fields">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.d4d5fields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.d4d5fields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:RSQR.Migrations.d4d5fields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:RSQR.Models.ConsecutivoArchivo">
             <summary>
             Representa un consecutivo numérico para archivos, asociado a unidades de negocio.

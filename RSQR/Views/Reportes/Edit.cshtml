@@ -1,4 +1,4 @@
-@model RSQR.Models.Reporte
+ï»¿@model RSQR.Models.Reporte
 
 @{
     ViewData["Title"] = "Edit Report";
@@ -7,310 +7,1074 @@
         "JTEKT", "MAZDA", "NAVISTAR", "NISSAN", "PACCAR",
         "SCANIA", "STANLEY", "STELLANTIS", "VOLVO"
     };
+
+    // Inicializar listas para Failure Mode
+    Model.FmMode = Model.FmMode ?? new List<string>();
+    Model.FmProcessName = Model.FmProcessName ?? new List<string>();
+    Model.Fm6Ms = Model.Fm6Ms ?? new List<string>();
+    Model.FmFactorUno = Model.FmFactorUno ?? new List<string>();
+    Model.FmFactorDos = Model.FmFactorDos ?? new List<string>();
+    Model.FmFactorTres = Model.FmFactorTres ?? new List<string>();
+    Model.FmRelated = Model.FmRelated ?? new List<string>();
+    Model.FmContentionActions = Model.FmContentionActions ?? new List<string>();
+
+    // Inicializar listas para Preventive Actions
+    Model.PreventiveCProcessName = Model.PreventiveCProcessName ?? new List<string>();
+    Model.PreventiveCManpower = Model.PreventiveCManpower ?? new List<string>();
+    Model.PreventiveCMethod = Model.PreventiveCMethod ?? new List<string>();
+    Model.PreventiveCMachinary = Model.PreventiveCMachinary ?? new List<string>();
+    Model.PreventiveCMaterial = Model.PreventiveCMaterial ?? new List<string>();
+    Model.PreventiveCMeasurement = Model.PreventiveCMeasurement ?? new List<string>();
+    Model.PreventiveCEnvironment = Model.PreventiveCEnvironment ?? new List<string>();
+    Model.PreventiveCRank = Model.PreventiveCRank ?? new List<int>();
+
+    // En la secciÃ³n de inicializaciÃ³n del modelo
+    Model.DetectionCProcessName = Model.DetectionCProcessName ?? new List<string>();
+    Model.DetectionCManpower = Model.DetectionCManpower ?? new List<string>();
+    Model.DetectionCMethod = Model.DetectionCMethod ?? new List<string>();
+    Model.DetectionCMachinary = Model.DetectionCMachinary ?? new List<string>();
+    Model.DetectionCMaterial = Model.DetectionCMaterial ?? new List<string>();
+    Model.DetectionCMeasurement = Model.DetectionCMeasurement ?? new List<string>();
+    Model.DetectionCEnvironment = Model.DetectionCEnvironment ?? new List<string>();
+    Model.DetectionCRank = Model.DetectionCRank ?? new List<int>();
+
+    // Inicializar listas para Occurrence
+    Model.FactorUno = Model.FactorUno ?? new List<string>();
+    Model.FactorUnoPrimerWhy = Model.FactorUnoPrimerWhy ?? new List<string>();
+    Model.FactorUnoSegundoWhy = Model.FactorUnoSegundoWhy ?? new List<string>();
+    Model.FactorUnoTercerWhy = Model.FactorUnoTercerWhy ?? new List<string>();
+    Model.FactorUnoCuartoWhy = Model.FactorUnoCuartoWhy ?? new List<string>();
+    Model.FactorUnoQuintoWhy = Model.FactorUnoQuintoWhy ?? new List<string>();
+    Model.FactorUnoCorrectiveActions = Model.FactorUnoCorrectiveActions ?? new List<string>();
+
+    // Inicializar listas para Detection
+    Model.FactorDos = Model.FactorDos ?? new List<string>();
+    Model.FactorDosPrimerWhy = Model.FactorDosPrimerWhy ?? new List<string>();
+    Model.FactorDosSegundoWhy = Model.FactorDosSegundoWhy ?? new List<string>();
+    Model.FactorDosTercerWhy = Model.FactorDosTercerWhy ?? new List<string>();
+    Model.FactorDosCuartoWhy = Model.FactorDosCuartoWhy ?? new List<string>();
+    Model.FactorDosQuintoWhy = Model.FactorDosQuintoWhy ?? new List<string>();
+    Model.FactorDosCorrectiveActions = Model.FactorDosCorrectiveActions ?? new List<string>();
+
+    // Inicializar listas para Systemic
+    Model.FactorTres = Model.FactorTres ?? new List<string>();
+    Model.FactorTresPrimerWhy = Model.FactorTresPrimerWhy ?? new List<string>();
+    Model.FactorTresSegundoWhy = Model.FactorTresSegundoWhy ?? new List<string>();
+    Model.FactorTresTercerWhy = Model.FactorTresTercerWhy ?? new List<string>();
+    Model.FactorTresCuartoWhy = Model.FactorTresCuartoWhy ?? new List<string>();
+    Model.FactorTresQuintoWhy = Model.FactorTresQuintoWhy ?? new List<string>();
+    Model.FactorTresCorrectiveActions = Model.FactorTresCorrectiveActions ?? new List<string>();
+
+    Model.OccurrenceItems = Model.OccurrenceItems ?? new List<string>();
+    Model.OccurrenceAction = Model.OccurrenceAction ?? new List<string>();
+    Model.OccurrenceResponsable = Model.OccurrenceResponsable ?? new List<string>();
+    Model.OccurrenceDepartment = Model.OccurrenceDepartment ?? new List<string>();
+    Model.OccurrenceOpeningDate = Model.OccurrenceOpeningDate ?? new List<DateTime>();
+    Model.OccurrenceCloseDate = Model.OccurrenceCloseDate ?? new List<DateTime>();
+    Model.OccurrenceAmef = Model.OccurrenceAmef ?? new List<string>();
+    Model.OccurrenceCp = Model.OccurrenceCp ?? new List<string>();
+
+    Model.DetectionItems = Model.DetectionItems ?? new List<string>();
+    Model.DetectionAction = Model.DetectionAction ?? new List<string>();
+    Model.DetectionResponsable = Model.DetectionResponsable ?? new List<string>();
+    Model.DetectionDepartment = Model.DetectionDepartment ?? new List<string>();
+    Model.DetectionOpeningDate = Model.DetectionOpeningDate ?? new List<DateTime>();
+    Model.DetectionCloseDate = Model.DetectionCloseDate ?? new List<DateTime>();
+    Model.DetectionAmef = Model.DetectionAmef ?? new List<string>();
+    Model.DetectionCp = Model.DetectionCp ?? new List<string>();
+
+
+    int maxFmRows = new[] {
+        Model.FmMode.Count,
+        Model.FmProcessName.Count,
+        Model.Fm6Ms.Count,
+        Model.FmFactorUno.Count,
+        Model.FmFactorDos.Count,
+        Model.FmFactorTres.Count,
+        Model.FmRelated.Count,
+        Model.FmContentionActions.Count,
+        Model.PreventiveCProcessName.Count,
+        Model.PreventiveCManpower.Count,
+        Model.PreventiveCMethod.Count,
+        Model.PreventiveCMachinary.Count,
+        Model.PreventiveCMaterial.Count,
+        Model.PreventiveCMeasurement.Count,
+        Model.PreventiveCEnvironment.Count,
+        Model.PreventiveCRank.Count,
+        Model.DetectionCProcessName.Count,
+        Model.DetectionCManpower.Count,
+        Model.DetectionCMethod.Count,
+        Model.DetectionCMachinary.Count,
+        Model.DetectionCMaterial.Count,
+        Model.DetectionCMeasurement.Count,
+        Model.DetectionCEnvironment.Count,
+        Model.DetectionCRank.Count
+    }.Max();
+
+    if (maxFmRows == 0) { maxFmRows = 1; }
 }
 
 <div class="content-wrapper">
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="display-6 text-dark fw-bold">Edit Report</h1>
-            <a asp-action="Index" class="btn btn-outline-secondary rounded-pill">
-                <i class="fas fa-arrow-left me-1"></i> Back to list
+            <h1 class="display-6 text-primary">Edit Report</h1>
+            <a asp-action="Index" class="btn btn-outline-primary rounded-pill">
+                <i class="fas fa-arrow-left me-1"></i> Back To List
             </a>
         </div>
 
-        <div class="card shadow-sm rounded-lg">
-            <div class="card-header bg-primary">
-                <h5 class="mb-0 text-white"><i class="fas fa-edit me-2"></i>Report Information</h5>
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-file-alt me-2"></i>D0 Initial Notification</h5>
             </div>
             <div class="card-body">
-                <form asp-action="Edit" class="row g-3" enctype="multipart/form-data">
+                <form asp-action="Edit" method="post" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-lg"></div>
                     <input type="hidden" asp-for="Id" />
 
-                    <!-- Section 1: Basic Information -->
-                    <div class="col-md-6">
-                        <div class="form-floating mb-3">
-                            <input asp-for="Id" class="form-control" placeholder="Report ID" readonly />
-                            <label asp-for="Id">Report ID</label>
+                    <!-- SecciÃ³n 1: InformaciÃ³n BÃ¡sica -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input asp-for="Fecha" class="form-control" type="date" placeholder="Fecha" />
+                                <label asp-for="Fecha">Date</label>
+                                <span asp-validation-for="Fecha" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="TituloProblema" class="form-control" placeholder="TÃ­tulo del Problema" />
+                                <label asp-for="TituloProblema">Problem Title</label>
+                                <span asp-validation-for="TituloProblema" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select asp-for="ProblemRank" class="form-select" asp-items="ViewBag.ProblemRankList"></select>
+                                <label asp-for="ProblemRank">Clasification</label>
+                                <span asp-validation-for="ProblemRank" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="UserName" class="form-control" value="@ViewBag.DisplayName" readonly placeholder="Usuario" />
+                                <label asp-for="UserName">Written Up</label>
+                                <span asp-validation-for="UserName" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select asp-for="Linea" class="form-select" asp-items="ViewBag.LineaList">
+                                    <option value=""></option>
+                                </select>
+                                <label asp-for="Linea">Business Unit</label>
+                                <span asp-validation-for="Linea" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <textarea asp-for="DescripcionProblema" class="form-control" style="height: 150px" placeholder="DescripciÃ³n del problema"></textarea>
+                                <label asp-for="DescripcionProblema">Problem Description</label>
+                                <span asp-validation-for="DescripcionProblema" class="text-danger small"></span>
+                            </div>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input asp-for="Fecha" class="form-control" type="date" placeholder="Date" />
-                            <label asp-for="Fecha">Date</label>
-                            <span asp-validation-for="Fecha" class="text-danger small"></span>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <select asp-for="ProblemRank" class="form-select" asp-items="ViewBag.ProblemRankList"></select>
-                            <label asp-for="ProblemRank">Problem ranking</label>
-                            <span asp-validation-for="ProblemRank" class="text-danger small"></span>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input asp-for="UserName" class="form-control" placeholder="User" readonly />
-                            <label asp-for="UserName">User</label>
-                            <span asp-validation-for="UserName" class="text-danger small"></span>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <select asp-for="Linea" class="form-select" asp-items="ViewBag.LineaList"></select>
-                            <label asp-for="Linea">Line</label>
-                            <span asp-validation-for="Linea" class="text-danger small"></span>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <select asp-for="Tipo" class="form-select" asp-items="Html.GetEnumSelectList<TipoReporte>()"></select>
-                            <label asp-for="Tipo">Type</label>
-                            <span asp-validation-for="Tipo" class="text-danger small"></span>
-                        </div>
-                        <!-- Mejor enfoque: readonly + asegurar el envío -->
-                        <div class="form-floating mb-3">
-                            <input asp-for="NombreCar" class="form-control" readonly />
-                            <label asp-for="NombreCar"></label>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <select asp-for="Tipo" class="form-select" asp-items="Html.GetEnumSelectList<TipoReporte>()"></select>
+                                <label asp-for="Tipo">Type of Customer Claim</label>
+                                <span asp-validation-for="Tipo" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select asp-for="Customer" class="form-select" id="customer-select" required>
+                                    <option value="">-- Select a client --</option>
+                                    @foreach (var cliente in clientes)
+                                    {
+                                        <option value="@cliente">@cliente</option>
+                                    }
+                                </select>
+                                <label asp-for="Customer">Occurrence Place</label>
+                                <span asp-validation-for="Customer" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="NumParteAfectado" class="form-control" placeholder="NÃºmero de Parte Afectado" />
+                                <label asp-for="NumParteAfectado">Affected Part Number</label>
+                                <span asp-validation-for="NumParteAfectado" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="CustomerPartNumber" class="form-control" placeholder="NÃºmero de Parte de Cliente" />
+                                <label asp-for="CustomerPartNumber">Customer Part Number</label>
+                                <span asp-validation-for="CustomerPartNumber" class="text-danger small"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input asp-for="Lote" class="form-control" placeholder="Numero de lote afectado" />
+                                <label asp-for="Lote">Production Batch</label>
+                                <span asp-validation-for="Lote" class="text-danger small"></span>
+                            </div>
+                            <!-- Campo oculto para el nÃºmero de reclamo -->
+                            <input type="hidden" asp-for="CustomerClaimNumber" id="claim-number" />
+
+                            <!-- Campo de visualizaciÃ³n del nÃºmero de reclamo -->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="claim-display" readonly placeholder="NÃºmero de Reclamo"
+                                       value="@(Model.Customer + "-" + Model.CustomerClaimNumber.ToString("D4"))" />
+                                <label>Claim Number</label>
+                                <small class="form-text text-muted">Format: CLIENTE-0001</small>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <label class="form-label">Upload images</label>
+                                <input type="file" name="EvidenciaFotografica" class="form-control" multiple />
+                                <small class="form-text text-muted">You can select multiple files</small>
+                                <span asp-validation-for="EvidenciaFotografica" class="text-danger small"></span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="form-floating mb-3">
-                            <input asp-for="TituloProblema" class="form-control" placeholder="Problem Title" />
-                            <label asp-for="TituloProblema">Problem Title</label>
-                            <span asp-validation-for="TituloProblema" class="text-danger small"></span>
+                    <!-- SecciÃ³n 2: Detalles del Problema -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <select asp-for="CincoM" class="form-select" asp-items="Html.GetEnumSelectList<CincoMOpciones>()"></select>
+                                <label asp-for="CincoM">6M</label>
+                                <span asp-validation-for="CincoM" class="text-danger small"></span>
+                            </div>
                         </div>
-                        <div class="form-floating mb-3">
-                            <select asp-for="CincoM" class="form-select" asp-items="Html.GetEnumSelectList<CincoMOpciones>()"></select>
-                            <label asp-for="CincoM">5M</label>
-                            <span asp-validation-for="CincoM" class="text-danger small"></span>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input asp-for="NumParteAfectado" class="form-control" placeholder="Affected Part Number" />
-                            <label asp-for="NumParteAfectado">Affected Part Number</label>
-                            <span asp-validation-for="NumParteAfectado" class="text-danger small"></span>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input asp-for="Lote" class="form-control" placeholder="Batch" />
-                            <label asp-for="Lote">Batch</label>
-                            <span asp-validation-for="Lote" class="text-danger small"></span>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input asp-for="CustomerClaimNumber" class="form-control" placeholder="Claim Number" />
-                            <label asp-for="CustomerClaimNumber">Claim Number</label>
-                            <span asp-validation-for="CustomerClaimNumber" class="text-danger small"></span>
+                        <div class="col-md-6">
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="Descripcion" class="form-control" placeholder="DescripciÃ³n" />
+                                <label asp-for="Descripcion">Part Description</label>
+                                <span asp-validation-for="Descripcion" class="text-danger small"></span>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <select asp-for="MotherFactory" class="form-control">
+                                    <option value="">-- Select --</option>
+                                    <option value="Himeji Office">Himeji Office</option>
+                                    <option value="Sanda Office">Sanda Office</option>
+                                </select>
+                                <label asp-for="MotherFactory">Mother Factory</label>
+                                <span asp-validation-for="MotherFactory" class="text-danger small"></span>
+                            </div>
+
                         </div>
                     </div>
 
-                    <!-- Section 2: Customer Information -->
-                    <div class="col-md-6">
-                        <div class="form-floating mb-3">
-                            <select asp-for="Customer" class="form-select" required>
-                                <option value="">-- Select a client --</option>
-                                @foreach (var cliente in clientes)
+                    <!-- SecciÃ³n 3: AnÃ¡lisis 5W2H -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-search me-2"></i>D2 Problem Description (5W2H)</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="QueP" class="form-control" placeholder="Å¼QuÃ© problema fue detectado?" />
+                                        <label asp-for="QueP">What problem was detected?</label>
+                                        <span asp-validation-for="QueP" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="PorqueP" class="form-control" placeholder="Å¼Por quÃ© es un problema?" />
+                                        <label asp-for="PorqueP">Why is it a problem?</label>
+                                        <span asp-validation-for="PorqueP" class="text-danger small"></span>
+                                    </div>
+
+
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="DondeP" class="form-control" placeholder="Å¼DÃ³nde se detecto el problema?" />
+                                        <label asp-for="DondeP">Where was the problem detected?</label>
+                                        <span asp-validation-for="DondeP" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="CuandoP" class="form-control" type="date" placeholder="Å¼CuÃ¡ndo fue detectado el problema?" />
+                                        <label asp-for="CuandoP">When was the problem detected?</label>
+                                        <span asp-validation-for="CuandoP" class="text-danger small"></span>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="QuienP" class="form-control" placeholder="Å¼QuiÃ©n detecto el problema?" />
+                                        <label asp-for="QuienP">Who detected the problem?</label>
+                                        <span asp-validation-for="QuienP" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="ComoP" class="form-control" placeholder="Å¼CÃ³mo se detectÃ³ el problema?" />
+                                        <label asp-for="ComoP">How was the problem detected?</label>
+                                        <span asp-validation-for="ComoP" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="CuantosP" class="form-control" placeholder="Å¼CuÃ¡ntas piezas fueron detectadas con el problema?" />
+                                        <label asp-for="CuantosP">How many pieces were detected with the problem?</label>
+                                        <span asp-validation-for="CuantosP" class="text-danger small"></span>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Mileage" class="form-control" placeholder="Mileage" />
+                                        <label asp-for="Mileage">Mileage</label>
+                                        <span asp-validation-for="Mileage" class="text-danger small"></span>
+                                    </div>
+
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="InvestigationReport" class="form-control" placeholder="Investigation Report" />
+                                        <label asp-for="InvestigationReport">Investigation Report</label>
+                                        <span asp-validation-for="InvestigationReport" class="text-danger small"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SecciÃ³n 4: ContenciÃ³n -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0"><i class="fas fa-shield-alt me-2"></i>D3 Containment</h5>
+                            <button type="button" id="add-group-btn" class="btn btn-sm btn-light rounded-pill">
+                                <i class="fas fa-plus me-1"></i> Add group
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div id="dynamic-fields" class="row g-3">
+                                @if (Model.ContencionItems != null && Model.ContencionItems.Count > 0)
                                 {
-                                    <option value="@cliente">@cliente</option>
+                                    for (int i = 0; i < Model.ContencionItems.Count; i++)
+                                    {
+                                        <div class="col-md-12 mb-3 dynamic-field-group">
+                                            <div class="card shadow-sm mb-3">
+                                                <div class="card-body">
+                                                    <div class="row g-3 flex-nowrap overflow-auto">
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <select name="ContencionConsiderar[@i]" class="form-select">
+                                                                    <option value="Process" selected="@(i < Model.ContencionConsiderar.Count && Model.ContencionConsiderar[i] == "Process")">Process</option>
+                                                                    <option value="Warehouse" selected="@(i < Model.ContencionConsiderar.Count && Model.ContencionConsiderar[i] == "Warehouse")">Warehouse</option>
+                                                                    <option value="In Transit" selected="@(i < Model.ContencionConsiderar.Count && Model.ContencionConsiderar[i] == "In Transit")">In Transit</option>
+                                                                    <option value="With Customer" selected="@(i < Model.ContencionConsiderar.Count && Model.ContencionConsiderar[i] == "With Customer")">With Customer</option>
+                                                                </select>
+                                                                <label>To Consider</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="ContencionActivity[@i]" class="form-control" placeholder="Contencion Activity"
+                                                                       value="@(i < Model.ContencionActivity.Count ? Model.ContencionActivity[i] : "")" />
+                                                                <label>Contencion Activity</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="ContencionResponsable[@i]" class="form-control" placeholder="Contencion Responsable"
+                                                                       value="@(i < Model.ContencionResponsable.Count ? Model.ContencionResponsable[i] : "")" />
+                                                                <label>Contencion Responsable</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="ContencionTotalSuspeciousParts[@i]" class="form-control" placeholder="Total Suspecious Parts"
+                                                                       value="@(i < Model.ContencionTotalSuspeciousParts.Count ? Model.ContencionTotalSuspeciousParts[i] : "")" />
+                                                                <label>Total Suspecious Parts</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="ContencionOkParts[@i]" class="form-control" placeholder="Ok Parts"
+                                                                       value="@(i < Model.ContencionOkParts.Count ? Model.ContencionOkParts[i] : "")" />
+                                                                <label>Ok Parts</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="ContencionNgParts[@i]" class="form-control" placeholder="NG Parts"
+                                                                       value="@(i < Model.ContencionNgParts.Count ? Model.ContencionNgParts[i] : "")" />
+                                                                <label>NG Parts</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="ContencionEffectiveness[@i]" class="form-control" placeholder="% Effectiveness"
+                                                                       value="@(i < Model.ContencionEffectiveness.Count ? Model.ContencionEffectiveness[i] : "")" />
+                                                                <label>% Effectiveness</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger mt-2 remove-group-btn">
+                                                        <i class="fas fa-trash me-1"></i> Delete
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
                                 }
-                            </select>
-                            <label asp-for="Customer">Customer</label>
-                            <span asp-validation-for="Customer" class="text-danger small"></span>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <select asp-for="MotherFactory" class="form-control">
-                                <option value="">-- Select --</option>
-                                <option value="Himeji Office">Himeji Office</option>
-                                <option value="Sanda Office">Sanda Office</option>
-                            </select>
-                            <label asp-for="MotherFactory">Mother Factory</label>
-                            <span asp-validation-for="MotherFactory" class="text-danger small"></span>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input asp-for="CustomerPartNumber" class="form-control" placeholder="Customer Part Number" />
-                            <label asp-for="CustomerPartNumber">Customer Part Number</label>
-                            <span asp-validation-for="CustomerPartNumber" class="text-danger small"></span>
-                        </div>
-                    </div>
-
-                    <!-- Section 3: Descriptions -->
-                    <div class="col-12">
-                        <div class="form-floating mb-3">
-                            <textarea asp-for="Descripcion" class="form-control" placeholder="Description" style="height: 100px"></textarea>
-                            <label asp-for="Descripcion">Part Description</label>
-                            <span asp-validation-for="Descripcion" class="text-danger small"></span>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <textarea asp-for="DescripcionProblema" class="form-control" placeholder="Problem Description" style="height: 120px"></textarea>
-                            <label asp-for="DescripcionProblema">Problem Description</label>
-                            <span asp-validation-for="DescripcionProblema" class="text-danger small"></span>
-                        </div>
-                    </div>
-
-                    <!-- Section 4: 5W2H Analysis -->
-                    <div class="col-md-6">
-                        <div class="card shadow-sm mb-4">
-                            <div class="card-header bg-primary">
-                                <h6 class="mb-0 text-white"><i class="fas fa-search me-2"></i>D2</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="QueP" class="form-control" placeholder="What problem was detected?" />
-                                    <label asp-for="QueP">What problem was detected?</label>
-                                    <span asp-validation-for="QueP" class="text-danger small"></span>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input asp-for="PorqueP" class="form-control" placeholder="Why is it a problem?" />
-                                    <label asp-for="PorqueP">Why is it a problem?</label>
-                                    <span asp-validation-for="PorqueP" class="text-danger small"></span>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input asp-for="DondeP" class="form-control" placeholder="Where was the problem detected?" />
-                                    <label asp-for="DondeP">Where was the problem detected?</label>
-                                    <span asp-validation-for="DondeP" class="text-danger small"></span>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input asp-for="CuandoP" class="form-control" type="date" placeholder="When was the problem detected?" />
-                                    <label asp-for="CuandoP">When was the problem detected?</label>
-                                    <span asp-validation-for="CuandoP" class="text-danger small"></span>
-                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="card shadow-sm mb-4">
-                            <div class="card-header bg-primary">
-                                <h6 class="mb-0 text-white"><i class="fas fa-question-circle me-2"></i>Additional Details</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="QuienP" class="form-control" placeholder="Who detected the problem?" />
-                                    <label asp-for="QuienP">Who detected the problem?</label>
-                                    <span asp-validation-for="QuienP" class="text-danger small"></span>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input asp-for="ComoP" class="form-control" placeholder="How was the problem detected?" />
-                                    <label asp-for="ComoP">How was the problem detected?</label>
-                                    <span asp-validation-for="ComoP" class="text-danger small"></span>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input asp-for="CuantosP" class="form-control" placeholder="How many parts were detected with the problem?" />
-                                    <label asp-for="CuantosP">How many parts were detected with the problem?</label>
-                                    <span asp-validation-for="CuantosP" class="text-danger small"></span>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input asp-for="Mileage" class="form-control" placeholder="Mileage" />
-                                    <label asp-for="Mileage">Mileage</label>
-                                    <span asp-validation-for="Mileage" class="text-danger small"></span>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input asp-for="InvestigationReport" class="form-control" placeholder="Investigation Report" />
-                                    <label asp-for="InvestigationReport">Investigation Report</label>
-                                    <span asp-validation-for="InvestigationReport" class="text-danger small"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Section 5: Dynamic Containment -->
+                    <!-- Failure Mode Identification Section -->
                     <div class="col-12">
                         <div class="card shadow-sm mb-4">
                             <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                                <h6 class="mb-0 text-white"><i class="fas fa-shield-alt me-2"></i>Containment</h6>
-                                <button type="button" id="add-group-btn" class="btn btn-sm btn-light rounded-pill">
-                                    <i class="fas fa-plus me-1"></i> Add group
+                                <h6 class="mb-0 text-white"><i class="fas fa-exclamation-triangle me-2"></i>Failure Mode Identification</h6>
+                                <button type="button" id="add-fm-row-btn" class="btn btn-sm btn-light rounded-pill">
+                                    <i class="fas fa-plus me-1"></i> Add row
                                 </button>
                             </div>
                             <div class="card-body">
-                                <div id="dynamic-fields" class="row g-3">
-                                    @if (Model.ContencionItems != null && Model.ContencionItems.Count > 0)
+                                <div id="fm-dynamic-fields" class="row g-3">
+                                    @for (int i = 0; i < maxFmRows; i++)
                                     {
-                                        for (int i = 0; i < Model.ContencionItems.Count; i++)
-                                        {
-                                            <div class="col-md-12 mb-3 dynamic-field-group">
-                                                <div class="card shadow-sm mb-3">
-                                                    <div class="card-body">
-                                                        <div class="row g-3">
-                                                            <div class="col-md-3">
-                                                                <div class="form-floating">
-                                                                    <input name="ContencionItems[@i]" class="form-control" placeholder="Contención Item"
-                                                                           value="@Model.ContencionItems[i]" />
-                                                                    <label>Contención Item</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-floating">
-                                                                    <input name="ContencionActividades[@i]" class="form-control" placeholder="Contención Actividad"
-                                                                           value="@(Model.ContencionConsiderar.Count > i ? Model.ContencionConsiderar[i] : "")" />
-                                                                    <label>Contención Actividad</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-floating">
-                                                                    <input name="ContencionActividades[@i]" class="form-control" placeholder="Contención Actividad"
-                                                                           value="@(Model.ContencionActivity.Count > i ? Model.ContencionActivity[i] : "")" />
-                                                                    <label>Contención Actividad</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-floating">
-                                                                    <input name="ContencionActividades[@i]" class="form-control" placeholder="Contención Actividad"
-                                                                           value="@(Model.ContencionResponsable.Count > i ? Model.ContencionResponsable[i] : "")" />
-                                                                    <label>Contención Actividad</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-floating">
-                                                                    <input name="ContencionActividades[@i]" class="form-control" placeholder="Contención Actividad"
-                                                                           value="@(Model.ContencionTotalSuspeciousParts.Count > i ? Model.ContencionTotalSuspeciousParts[i] : "")" />
-                                                                    <label>Contención Actividad</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-floating">
-                                                                    <input name="ContencionActividades[@i]" class="form-control" placeholder="Contención Actividad"
-                                                                           value="@(Model.ContencionOkParts.Count > i ? Model.ContencionOkParts[i] : "")" />
-                                                                    <label>Contención Actividad</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-floating">
-                                                                    <input name="ContencionActividades[@i]" class="form-control" placeholder="Contención Actividad"
-                                                                           value="@(Model.ContencionNgParts.Count > i ? Model.ContencionNgParts[i] : "")" />
-                                                                    <label>Contención Actividad</label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-floating">
-                                                                    <input name="ContencionActividades[@i]" class="form-control" placeholder="Contención Actividad"
-                                                                           value="@(Model.ContencionEffectiveness.Count > i ? Model.ContencionEffectiveness[i] : "")" />
-                                                                    <label>Contención Actividad</label>
-                                                                </div>
+                                        <div class="col-md-12 mb-3 fm-dynamic-field-group" data-index="@i">
+                                            <div class="card shadow-sm mb-3">
+                                                <div class="card-body">
+                                                    <div class="row g-3">
+                                                        <div class="col-md-3">
+                                                            <div class="form-floating">
+                                                                <input name="FmMode[@i]" class="form-control"
+                                                                       value="@(i < Model.FmMode.Count ? Model.FmMode[i] : "")" />
+                                                                <label>Failure Mode</label>
                                                             </div>
                                                         </div>
-                                                        <button type="button" class="btn btn-sm btn-outline-danger mt-2 remove-group-btn">
-                                                            <i class="fas fa-trash me-1"></i> Eliminar
-                                                        </button>
+                                                        <div class="col-md-3">
+                                                            <div class="form-floating">
+                                                                <input name="FmProcessName[@i]" class="form-control fm-process-name"
+                                                                       value="@(i < Model.FmProcessName.Count ? Model.FmProcessName[i] : "")" />
+                                                                <label>Process Name</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <select name="Fm6Ms[@i]" class="form-select">
+                                                                    <option value="">- Select -</option>
+                                                                    <option value="Manpower" selected="@(i < Model.Fm6Ms.Count && Model.Fm6Ms[i] == "Manpower")">Manpower</option>
+                                                                    <option value="Method" selected="@(i < Model.Fm6Ms.Count && Model.Fm6Ms[i] == "Method")">Method</option>
+                                                                    <option value="Machinary" selected="@(i < Model.Fm6Ms.Count && Model.Fm6Ms[i] == "Machinary")">Machinary</option>
+                                                                    <option value="Material" selected="@(i < Model.Fm6Ms.Count && Model.Fm6Ms[i] == "Material")">Material</option>
+                                                                    <option value="Measurement" selected="@(i < Model.Fm6Ms.Count && Model.Fm6Ms[i] == "Measurement")">Measurement</option>
+                                                                    <option value="Environment" selected="@(i < Model.Fm6Ms.Count && Model.Fm6Ms[i] == "Environment")">Environment</option>
+                                                                </select>
+                                                                <label>6Ms</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-floating">
+                                                                <input name="FmFactorUno[@i]" class="form-control"
+                                                                       value="@(i < Model.FmFactorUno.Count ? Model.FmFactorUno[i] : "")" />
+                                                                <label>Factor 1</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-floating">
+                                                                <input name="FmFactorDos[@i]" class="form-control"
+                                                                       value="@(i < Model.FmFactorDos.Count ? Model.FmFactorDos[i] : "")" />
+                                                                <label>Factor 2</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-floating">
+                                                                <input name="FmFactorTres[@i]" class="form-control"
+                                                                       value="@(i < Model.FmFactorTres.Count ? Model.FmFactorTres[i] : "")" />
+                                                                <label>Factor 3</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-floating">
+                                                                <select name="FmRelated[@i]" class="form-select fm-related">
+                                                                    <option value="">- Select -</option>
+                                                                    <option value="Y" selected="@(i < Model.FmRelated.Count && Model.FmRelated[i] == "Y")">Yes</option>
+                                                                    <option value="N" selected="@(i < Model.FmRelated.Count && Model.FmRelated[i] == "N")">No</option>
+                                                                </select>
+                                                                <label>Related With The Issue?</label>
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger mt-2 remove-fm-row-btn">
+                                                        <i class="fas fa-trash me-1"></i> Remove
+                                                    </button>
                                                 </div>
                                             </div>
-                                        }
+                                        </div>
                                     }
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Preventive Actions Section -->
+                    <div class="col-12" id="preventive-actions-section">
                         <div class="card shadow-sm mb-4">
-                            <div class="card-header bg-primary">
-                                <h6 class="mb-0 text-white"><i class="fas fa-tasks me-2"></i>Actions</h6>
+                            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 text-white"><i class="fas fa-shield-alt me-2"></i>Preventive Actions</h6>
+                                <button type="button" id="add-preventive-row-btn" class="btn btn-sm btn-light rounded-pill">
+                                    <i class="fas fa-plus me-1"></i> Add row
+                                </button>
                             </div>
                             <div class="card-body">
-                                <div class="form-check form-switch mb-3">
-                                    <input class="form-check-input" type="checkbox" role="switch" asp-for="AlertaCalidad" />
-                                    <label class="form-check-label" asp-for="AlertaCalidad">Quality Alert</label>
+                                <div id="preventive-dynamic-fields" class="row g-3">
+                                    @for (int i = 0; i < Model.PreventiveCProcessName.Count; i++)
+                                    {
+                                        <div class="col-md-12 mb-3 preventive-dynamic-field-group" data-index="@i">
+                                            <div class="card shadow-sm mb-3">
+                                                <div class="card-body">
+                                                    <div class="row g-3">
+                                                        <div class="col-md-3">
+                                                            <div class="form-floating">
+                                                                <input name="PreventiveCProcessName[@i]" class="form-control preventive-process-name"
+                                                                       value="@Model.PreventiveCProcessName[i]" />
+                                                                <label>Process Name</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="PreventiveCManpower[@i]" class="form-control"
+                                                                       value="@Model.PreventiveCManpower[i]" />
+                                                                <label>Manpower</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="PreventiveCMethod[@i]" class="form-control"
+                                                                       value="@Model.PreventiveCMethod[i]" />
+                                                                <label>Method</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="PreventiveCMachinary[@i]" class="form-control"
+                                                                       value="@Model.PreventiveCMachinary[i]" />
+                                                                <label>Machinary</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="PreventiveCMaterial[@i]" class="form-control"
+                                                                       value="@Model.PreventiveCMaterial[i]" />
+                                                                <label>Material</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="PreventiveCMeasurement[@i]" class="form-control"
+                                                                       value="@Model.PreventiveCMeasurement[i]" />
+                                                                <label>Measurement</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="PreventiveCEnvironment[@i]" class="form-control"
+                                                                       value="@Model.PreventiveCEnvironment[i]" />
+                                                                <label>Environment</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="PreventiveCRank[@i]" type="number" class="form-control"
+                                                                       value="@Model.PreventiveCRank[i]" />
+                                                                <label>Rank [O]</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger mt-2 remove-preventive-row-btn">
+                                                        <i class="fas fa-trash me-1"></i> Remove
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
-                                <div class="form-floating mb-3">
-                                    <input asp-for="Disposicion" class="form-control" placeholder="Disposition" />
-                                    <label asp-for="Disposicion">Disposition</label>
-                                    <span asp-validation-for="Disposicion" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detection Controls Section -->
+                    <div class="col-12" id="detection-controls-section">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-warning text-dark d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0"><i class="fas fa-search me-2"></i>Detection Controls</h6>
+                                <button type="button" id="add-detection-row-btn" class="btn btn-sm btn-light rounded-pill">
+                                    <i class="fas fa-plus me-1"></i> Add row
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div id="detection-dynamic-fields" class="row g-3">
+                                    @for (int i = 0; i < Model.DetectionCProcessName.Count; i++)
+                                    {
+                                        <div class="col-md-12 mb-3 detection-dynamic-field-group" data-index="@i">
+                                            <div class="card shadow-sm mb-3">
+                                                <div class="card-body">
+                                                    <div class="row g-3">
+                                                        <div class="col-md-3">
+                                                            <div class="form-floating">
+                                                                <input name="DetectionCProcessName[@i]" class="form-control detection-process-name"
+                                                                       value="@Model.DetectionCProcessName[i]" />
+                                                                <label>Process Name</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="DetectionCManpower[@i]" class="form-control"
+                                                                       value="@Model.DetectionCManpower[i]" />
+                                                                <label>Manpower</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="DetectionCMethod[@i]" class="form-control"
+                                                                       value="@Model.DetectionCMethod[i]" />
+                                                                <label>Method</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="DetectionCMachinary[@i]" class="form-control"
+                                                                       value="@Model.DetectionCMachinary[i]" />
+                                                                <label>Machinary</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="DetectionCMaterial[@i]" class="form-control"
+                                                                       value="@Model.DetectionCMaterial[i]" />
+                                                                <label>Material</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="DetectionCMeasurement[@i]" class="form-control"
+                                                                       value="@Model.DetectionCMeasurement[i]" />
+                                                                <label>Measurement</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="DetectionCEnvironment[@i]" class="form-control"
+                                                                       value="@Model.DetectionCEnvironment[i]" />
+                                                                <label>Environment</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-floating">
+                                                                <input name="DetectionCRank[@i]" type="number" class="form-control"
+                                                                       value="@Model.DetectionCRank[i]" />
+                                                                <label>Rank [D]</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger mt-2 remove-detection-row-btn">
+                                                        <i class="fas fa-trash me-1"></i> Remove
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
-                                <div class="form-check form-switch mb-3">
-                                    <input class="form-check-input" type="checkbox" role="switch" asp-for="EntrevistaInvolucrados" />
-                                    <label class="form-check-label" asp-for="EntrevistaInvolucrados">Interview Involved</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Occurrence (Technical Root Cause) Section -->
+                    <div class="col-12" id="occurrence-section">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 text-white"><i class="fas fa-search-plus me-2"></i>Occurrence (Technical Root Cause)</h6>
+                                <button type="button" id="add-occurrence-row-btn" class="btn btn-sm btn-light rounded-pill">
+                                    <i class="fas fa-plus me-1"></i> Add row
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div id="occurrence-dynamic-fields" class="row g-3">
+                                    @for (int i = 0; i < Model.FactorUno.Count; i++)
+                                    {
+                                        <div class="col-md-12 mb-3 occurrence-dynamic-field-group" data-index="@i">
+                                            <div class="card shadow-sm mb-3">
+                                                <div class="card-body">
+                                                    <h6 class="text-danger">Root Cause Analysis #@(i + 1)</h6>
+                                                    <div class="row g-3">
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorUno[@i]" class="form-control"
+                                                                       value="@Model.FactorUno[i]" />
+                                                                <label>Root Cause Factor</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorUnoPrimerWhy[@i]" class="form-control"
+                                                                       value="@Model.FactorUnoPrimerWhy[i]" />
+                                                                <label>1st Why</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorUnoSegundoWhy[@i]" class="form-control"
+                                                                       value="@Model.FactorUnoSegundoWhy[i]" />
+                                                                <label>2nd Why</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorUnoTercerWhy[@i]" class="form-control"
+                                                                       value="@Model.FactorUnoTercerWhy[i]" />
+                                                                <label>3rd Why</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorUnoCuartoWhy[@i]" class="form-control"
+                                                                       value="@Model.FactorUnoCuartoWhy[i]" />
+                                                                <label>4th Why</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorUnoQuintoWhy[@i]" class="form-control"
+                                                                       value="@Model.FactorUnoQuintoWhy[i]" />
+                                                                <label>5th Why</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-floating">
+                                                                <textarea name="FactorUnoCorrectiveActions[@i]" class="form-control"
+                                                                          style="height: 100px">@Model.FactorUnoCorrectiveActions[i]</textarea>
+                                                                <label>Corrective Actions</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-outline-danger mt-2 remove-occurrence-row-btn">
+                                                        <i class="fas fa-trash me-1"></i> Remove
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
-                                <div class="form-floating mb-3">
-                                    <textarea asp-for="Comentarios" class="form-control" placeholder="Comments" style="height: 100px"></textarea>
-                                    <label asp-for="Comentarios">Comments</label>
-                                    <span asp-validation-for="Comentarios" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detection (Technical Root Cause) Section -->
+                    <div class="col-12" id="detection-root-cause-section">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 text-white"><i class="fas fa-search me-2"></i>Detection (Technical Root Cause)</h6>
+                                <button type="button" id="add-detection-root-cause-btn" class="btn btn-sm btn-light rounded-pill">
+                                    <i class="fas fa-plus me-1"></i> Add row
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div id="detection-root-cause-dynamic-fields" class="row g-3">
+                                    @for (int i = 0; i < Model.FactorDos.Count; i++)
+                                    {
+                                        <div class="col-md-12 mb-3 detection-root-cause-dynamic-field-group" data-index="@i">
+                                            <div class="card shadow-sm mb-3">
+                                                <div class="card-body">
+                                                    <h6 class="text-secondary">Detection Root Cause Analysis #@(i + 1)</h6>
+                                                    <div class="row g-3">
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorDos[@i]" class="form-control"
+                                                                       value="@Model.FactorDos[i]" />
+                                                                <label>Root Cause Factor</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorDosPrimerWhy[@i]" class="form-control"
+                                                                       value="@Model.FactorDosPrimerWhy[i]" />
+                                                                <label>1st Why</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorDosSegundoWhy[@i]" class="form-control"
+                                                                       value="@Model.FactorDosSegundoWhy[i]" />
+                                                                <label>2nd Why</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorDosTercerWhy[@i]" class="form-control"
+                                                                       value="@Model.FactorDosTercerWhy[i]" />
+                                                                <label>3rd Why</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorDosCuartoWhy[@i]" class="form-control"
+                                                                       value="@Model.FactorDosCuartoWhy[i]" />
+                                                                <label>4th Why</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorDosQuintoWhy[@i]" class="form-control"
+                                                                       value="@Model.FactorDosQuintoWhy[i]" />
+                                                                <label>5th Why</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-floating">
+                                                                <textarea name="FactorDosCorrectiveActions[@i]" class="form-control"
+                                                                          style="height: 100px">@Model.FactorDosCorrectiveActions[i]</textarea>
+                                                                <label>Corrective Actions</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-outline-secondary mt-2 remove-detection-root-cause-btn">
+                                                        <i class="fas fa-trash me-1"></i> Remove
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Systemic (Technical Root Cause) Section -->
+                    <div class="col-12" id="systemic-root-cause-section">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 text-white"><i class="fas fa-sitemap me-2"></i>Systemic (Technical Root Cause)</h6>
+                                <button type="button" id="add-systemic-root-cause-btn" class="btn btn-sm btn-light rounded-pill">
+                                    <i class="fas fa-plus me-1"></i> Add row
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div id="systemic-root-cause-dynamic-fields" class="row g-3">
+                                    @for (int i = 0; i < Model.FactorTres.Count; i++)
+                                    {
+                                        <div class="col-md-12 mb-3 systemic-root-cause-dynamic-field-group" data-index="@i">
+                                            <div class="card shadow-sm mb-3">
+                                                <div class="card-body">
+                                                    <h6 class="text-dark">Systemic Root Cause Analysis #@(i + 1)</h6>
+                                                    <div class="row g-3">
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorTres[@i]" class="form-control"
+                                                                       value="@Model.FactorTres[i]" />
+                                                                <label>Root Cause Factor</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorTresPrimerWhy[@i]" class="form-control"
+                                                                       value="@Model.FactorTresPrimerWhy[i]" />
+                                                                <label>1st Why</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorTresSegundoWhy[@i]" class="form-control"
+                                                                       value="@Model.FactorTresSegundoWhy[i]" />
+                                                                <label>2nd Why</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorTresTercerWhy[@i]" class="form-control"
+                                                                       value="@Model.FactorTresTercerWhy[i]" />
+                                                                <label>3rd Why</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorTresCuartoWhy[@i]" class="form-control"
+                                                                       value="@Model.FactorTresCuartoWhy[i]" />
+                                                                <label>4th Why</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-floating">
+                                                                <input name="FactorTresQuintoWhy[@i]" class="form-control"
+                                                                       value="@Model.FactorTresQuintoWhy[i]" />
+                                                                <label>5th Why</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-floating">
+                                                                <textarea name="FactorTresCorrectiveActions[@i]" class="form-control"
+                                                                          style="height: 100px">@Model.FactorTresCorrectiveActions[i]</textarea>
+                                                                <label>Corrective Actions</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-outline-dark mt-2 remove-systemic-root-cause-btn">
+                                                        <i class="fas fa-trash me-1"></i> Remove
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- D5 Permanent Corrective Actions Section -->
+                    <div class="col-12" id="d5-permanent-corrective-actions">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-success text-white">
+                                <h6 class="mb-0 text-white"><i class="fas fa-check-circle me-2"></i>D5 - Permanent Corrective Actions</h6>
+                            </div>
+                            <div class="card-body">
+
+                                <!-- Occurrence Section -->
+                                <div class="card shadow-sm mb-4">
+                                    <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                                        <h6 class="mb-0 text-white"><i class="fas fa-bolt me-2"></i>Occurrence</h6>
+                                        <button type="button" id="add-occurrence-action-btn" class="btn btn-sm btn-light rounded-pill">
+                                            <i class="fas fa-plus me-1"></i> Add row
+                                        </button>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="occurrence-actions-dynamic-fields" class="row g-3">
+                                            @for (int i = 0; i < Model.OccurrenceItems.Count; i++)
+                                            {
+                                                <div class="col-md-12 mb-3 occurrence-action-dynamic-field-group" data-index="@i">
+                                                    <div class="card shadow-sm mb-3">
+                                                        <div class="card-body">
+                                                            <h6 class="text-success">Occurrence Action #@(i + 1)</h6>
+                                                            <div class="row g-3">
+                                                                <div class="col-md-3">
+                                                                    <div class="form-floating">
+                                                                        <input name="OccurrenceItems[@i]" class="form-control"
+                                                                               value="@Model.OccurrenceItems[i]" />
+                                                                        <label>Action Item</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-floating">
+                                                                        <input name="OccurrenceAction[@i]" class="form-control"
+                                                                               value="@Model.OccurrenceAction[i]" />
+                                                                        <label>Corrective Action</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="form-floating">
+                                                                        <input name="OccurrenceResponsable[@i]" class="form-control"
+                                                                               value="@Model.OccurrenceResponsable[i]" />
+                                                                        <label>Responsible</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="form-floating">
+                                                                        <input name="OccurrenceDepartment[@i]" class="form-control"
+                                                                               value="@Model.OccurrenceDepartment[i]" />
+                                                                        <label>Department</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="form-floating">
+                                                                        <input name="OccurrenceOpeningDate[@i]" class="form-control" type="date"
+                                                                               value="@(i < Model.OccurrenceOpeningDate.Count ? Model.OccurrenceOpeningDate[i].ToString("yyyy-MM-dd") : "")" />
+                                                                        <label>Opening Date</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="form-floating">
+                                                                        <input name="OccurrenceCloseDate[@i]" class="form-control" type="date"
+                                                                               value="@(i < Model.OccurrenceCloseDate.Count ? Model.OccurrenceCloseDate[i].ToString("yyyy-MM-dd") : "")" />
+                                                                        <label>Close Date</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-floating">
+                                                                        <input name="OccurrenceAmef[@i]" class="form-control"
+                                                                               value="@Model.OccurrenceAmef[i]" />
+                                                                        <label>AMEF Update</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-floating">
+                                                                        <input name="OccurrenceCp[@i]" class="form-control"
+                                                                               value="@Model.OccurrenceCp[i]" />
+                                                                        <label>Control Plan Update</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <button type="button" class="btn btn-sm btn-outline-success mt-2 remove-occurrence-action-btn">
+                                                                <i class="fas fa-trash me-1"></i> Remove
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Detection Section -->
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                                        <h6 class="mb-0 text-white"><i class="fas fa-search me-2"></i>Detection</h6>
+                                        <button type="button" id="add-detection-action-btn" class="btn btn-sm btn-light rounded-pill">
+                                            <i class="fas fa-plus me-1"></i> Add row
+                                        </button>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="detection-actions-dynamic-fields" class="row g-3">
+                                            @for (int i = 0; i < Model.DetectionItems.Count; i++)
+                                            {
+                                                <div class="col-md-12 mb-3 detection-action-dynamic-field-group" data-index="@i">
+                                                    <div class="card shadow-sm mb-3">
+                                                        <div class="card-body">
+                                                            <h6 class="text-info">Detection Action #@(i + 1)</h6>
+                                                            <div class="row g-3">
+                                                                <div class="col-md-3">
+                                                                    <div class="form-floating">
+                                                                        <input name="DetectionItems[@i]" class="form-control"
+                                                                               value="@Model.DetectionItems[i]" />
+                                                                        <label>Action Item</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-floating">
+                                                                        <input name="DetectionAction[@i]" class="form-control"
+                                                                               value="@Model.DetectionAction[i]" />
+                                                                        <label>Corrective Action</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="form-floating">
+                                                                        <input name="DetectionResponsable[@i]" class="form-control"
+                                                                               value="@Model.DetectionResponsable[i]" />
+                                                                        <label>Responsible</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="form-floating">
+                                                                        <input name="DetectionDepartment[@i]" class="form-control"
+                                                                               value="@Model.DetectionDepartment[i]" />
+                                                                        <label>Department</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="form-floating">
+                                                                        <input name="DetectionOpeningDate[@i]" class="form-control" type="date"
+                                                                               value="@(i < Model.DetectionOpeningDate.Count ? Model.DetectionOpeningDate[i].ToString("yyyy-MM-dd") : "")" />
+                                                                        <label>Opening Date</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="form-floating">
+                                                                        <input name="DetectionCloseDate[@i]" class="form-control" type="date"
+                                                                               value="@(i < Model.DetectionCloseDate.Count ? Model.DetectionCloseDate[i].ToString("yyyy-MM-dd") : "")" />
+                                                                        <label>Close Date</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-floating">
+                                                                        <input name="DetectionAmef[@i]" class="form-control"
+                                                                               value="@Model.DetectionAmef[i]" />
+                                                                        <label>AMEF Update</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <div class="form-floating">
+                                                                        <input name="DetectionCp[@i]" class="form-control"
+                                                                               value="@Model.DetectionCp[i]" />
+                                                                        <label>Control Plan Update</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <button type="button" class="btn btn-sm btn-outline-info mt-2 remove-detection-action-btn">
+                                                                <i class="fas fa-trash me-1"></i> Remove
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -323,7 +1087,7 @@
                                 <h6 class="mb-0 text-white"><i class="fas fa-lock me-2"></i>Closing Information</h6>
                             </div>
                             <div class="card-body">
-                                
+
                                 <div class="form-floating mb-3">
                                     <input asp-for="DateOfClose" class="form-control" type="date" placeholder="Closing Date" />
                                     <label asp-for="DateOfClose">Closing Date</label>
@@ -353,7 +1117,7 @@
 
                     <!-- Section 7: Actions and Evaluation -->
                     <div class="col-md-6">
-                        
+
 
                         <div class="card shadow-sm mb-4">
                             <div class="card-header bg-primary">
@@ -402,7 +1166,7 @@
                                     <span asp-validation-for="ControlesEstablecidos" class="text-danger small"></span>
                                 </div>
 
-                                <!-- Mostrar las imágenes existentes -->
+                                <!-- Mostrar las imÃ¡genes existentes -->
                                 @if (ViewBag.ArchivosExistentes != null && ViewBag.ArchivosExistentes.Count > 0)
                                 {
                                     <div class="mb-3">
@@ -435,7 +1199,7 @@
                                     </div>
                                 }
 
-                                <!-- Sección para nueva evidencia -->
+                                <!-- SecciÃ³n para nueva evidencia -->
                                 <div class="form-group">
                                     <label class="control-label">Add New Photographic Evidence</label>
                                     <input type="file" class="form-control" name="EvidenciaFotografica" multiple
@@ -466,13 +1230,13 @@
 
 @section Styles {
     <style>
-        /* Fuente SF Pro (si está disponible, sino usa fuentes alternativas) */
+        /* Fuente SF Pro (si estÃ¡ disponible, sino usa fuentes alternativas) */
         body, h1, h2, h3, h4, h5, h6, .form-floating > label {
             font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             font-weight: 600; /* Semi-bold */
         }
 
-            /* Estilo específico para el título principal */
+            /* Estilo especÃ­fico para el tÃ­tulo principal */
             h1.display-6 {
                 color: #000 !important; /* Negro puro */
                 font-weight: 700 !important; /* Bold */
@@ -480,7 +1244,7 @@
                 margin-bottom: 1rem;
             }
 
-        /* Color primario más profesional */
+        /* Color primario mÃ¡s profesional */
         :root {
             --color-primary: #2c5fa8; /* Azul corporativo */
         }
@@ -573,7 +1337,7 @@
             margin-right: 0.5rem;
         }
 
-        /* Sombras más pronunciadas para las tarjetas */
+        /* Sombras mÃ¡s pronunciadas para las tarjetas */
         .card {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: box-shadow 0.3s ease;
@@ -583,7 +1347,7 @@
                 box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
             }
 
-        /* Estilo para subtítulos/tarjetas */
+        /* Estilo para subtÃ­tulos/tarjetas */
         .card-header h5 {
             color: #fff !important; /* Blanco para contraste con fondo azul */
             font-weight: 700 !important;
@@ -609,12 +1373,31 @@
     }
 
     <script>
-        // Script para campos de contención dinámicos
-        let index = @(Model.ContencionItems?.Count ?? 0);
+                // Variables para control de Ã­ndices
+        let fmIndex = @maxFmRows;
+        let preventiveIndex = @(Model.PreventiveCProcessName?.Count ?? 0);
+        let detectionIndex = @(Model.DetectionCProcessName?.Count ?? 0);
+        let occurrenceIndex = @(Model.FactorUno?.Count ?? 0);
+        let detectionRootCauseIndex = @(Model.FactorDos?.Count ?? 0);
+        let systemicRootCauseIndex = @(Model.FactorTres?.Count ?? 0);
+        let occurrenceActionIndex = @(Model.OccurrenceItems?.Count ?? 0);
+        let detectionActionIndex = @(Model.DetectionItems?.Count ?? 0);
 
-        document.getElementById('add-group-btn').addEventListener('click', function () {
+        // ==================== FUNCIONES COMUNES ====================
+        function getProcessName(row) {
+            return row.querySelector('.fm-process-name')?.value || '';
+        }
+
+        function getRowIndex(row) {
+            return row.dataset.index;
+        }
+
+        // ==================== FAILURE MODE ====================
+        // Agregar nueva fila de Failure Mode
+        document.getElementById('add-fm-row-btn').addEventListener('click', function() {
             const div = document.createElement('div');
-            div.classList.add('col-md-12', 'mb-3', 'dynamic-field-group');
+            div.className = 'col-md-12 mb-3 fm-dynamic-field-group';
+            div.dataset.index = fmIndex;
 
             div.innerHTML = `
                 <div class="card shadow-sm mb-3">
@@ -622,63 +1405,635 @@
                         <div class="row g-3">
                             <div class="col-md-3">
                                 <div class="form-floating">
-                                    <input name="ContencionItems[${index}]" class="form-control" placeholder="Contención Item" />
-                                    <label>Contención Item</label>
+                                    <input name="FmMode[${fmIndex}]" class="form-control" />
+                                    <label>Failure Mode</label>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-floating">
-                                    <input name="ContencionActividades[${index}]" class="form-control" placeholder="Contención Actividad" />
-                                    <label>Contención Actividad</label>
+                                    <input name="FmProcessName[${fmIndex}]" class="form-control fm-process-name" />
+                                    <label>Process Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <select name="Fm6Ms[${fmIndex}]" class="form-select">
+                                        <option value="">- Select -</option>
+                                        <option value="Manpower">Manpower</option>
+                                        <option value="Method">Method</option>
+                                        <option value="Machinary">Machinary</option>
+                                        <option value="Material">Material</option>
+                                        <option value="Measurement">Measurement</option>
+                                        <option value="Environment">Environment</option>
+                                    </select>
+                                    <label>6Ms</label>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-floating">
-                                    <input name="ContencionResponsables[${index}]" class="form-control" placeholder="Contención Responsable" />
-                                    <label>Contención Responsable</label>
+                                    <input name="FactorUno[${fmIndex}]" class="form-control" />
+                                    <label>Factor 1</label>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-floating">
-                                    <input name="ContencionFechasInicio[${index}]" type="date" class="form-control" placeholder="Fecha de Inicio" />
-                                    <label>Fecha de Inicio</label>
+                                    <input name="FactorDos[${fmIndex}]" class="form-control" />
+                                    <label>Factor 2</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input name="FactorTres[${fmIndex}]" class="form-control" />
+                                    <label>Factor 3</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <select name="FmRelated[${fmIndex}]" class="form-select fm-related">
+                                        <option value="">- Select -</option>
+                                        <option value="Y">Yes</option>
+                                        <option value="N">No</option>
+                                    </select>
+                                    <label>Related With The Issue?</label>
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-sm btn-outline-danger mt-2 remove-group-btn">
-                            <i class="fas fa-trash me-1"></i> Eliminar
+                        <button type="button" class="btn btn-sm btn-outline-danger mt-2 remove-fm-row-btn">
+                            <i class="fas fa-trash me-1"></i> Remove
                         </button>
                     </div>
                 </div>
             `;
 
-            document.getElementById('dynamic-fields').appendChild(div);
-            index++;
+            document.getElementById('fm-dynamic-fields').appendChild(div);
+            fmIndex++;
         });
 
-        // Efecto ripple para botones
-        document.querySelectorAll('.btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                ripple.classList.add('ripple-effect');
-
-                const rect = button.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-
-                ripple.style.width = ripple.style.height = `${size}px`;
-                ripple.style.left = `${x}px`;
-                ripple.style.top = `${y}px`;
-
-                button.appendChild(ripple);
-
-                setTimeout(() => {
-                    ripple.remove();
-                }, 1000);
-            });
+        // Eliminar fila de Failure Mode
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-fm-row-btn')) {
+                const row = e.target.closest('.fm-dynamic-field-group');
+                if (confirm('Are you sure you want to remove this Failure Mode?')) {
+                    row.remove();
+                }
+            }
         });
 
+        // ==================== PREVENTIVE ACTIONS ====================
+        // Agregar nueva fila de Preventive Action
+        document.getElementById('add-preventive-row-btn').addEventListener('click', function() {
+            const div = document.createElement('div');
+            div.className = 'col-md-12 mb-3 preventive-dynamic-field-group';
+            div.dataset.index = preventiveIndex;
+
+            div.innerHTML = `
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h6 class="text-primary">Preventive Action #${parseInt(preventiveIndex)+1}</h6>
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input name="PreventiveCProcessName[${preventiveIndex}]" class="form-control preventive-process-name" />
+                                    <label>Process Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="PreventiveCManpower[${preventiveIndex}]" class="form-control" />
+                                    <label>Manpower</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="PreventiveCMethod[${preventiveIndex}]" class="form-control" />
+                                    <label>Method</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="PreventiveCMachinary[${preventiveIndex}]" class="form-control" />
+                                    <label>Machinary</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="PreventiveCMaterial[${preventiveIndex}]" class="form-control" />
+                                    <label>Material</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="PreventiveCMeasurement[${preventiveIndex}]" class="form-control" />
+                                    <label>Measurement</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="PreventiveCEnvironment[${preventiveIndex}]" class="form-control" />
+                                    <label>Environment</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="PreventiveCRank[${preventiveIndex}]" type="number" class="form-control" value="0" />
+                                    <label>Rank [O]</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-danger mt-2 remove-preventive-row-btn">
+                            <i class="fas fa-trash me-1"></i> Remove
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('preventive-dynamic-fields').appendChild(div);
+            preventiveIndex++;
+        });
+
+        // Eliminar fila de Preventive Action
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-preventive-row-btn')) {
+                const row = e.target.closest('.preventive-dynamic-field-group');
+                if (confirm('Are you sure you want to remove this Preventive Action?')) {
+                    row.remove();
+                }
+            }
+        });
+
+        // ==================== DETECTION CONTROLS ====================
+        // Agregar nueva fila de Detection Control
+        document.getElementById('add-detection-row-btn').addEventListener('click', function() {
+            const div = document.createElement('div');
+            div.className = 'col-md-12 mb-3 detection-dynamic-field-group';
+            div.dataset.index = detectionIndex;
+
+            div.innerHTML = `
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h6 class="text-warning">Detection Control #${parseInt(detectionIndex)+1}</h6>
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input name="DetectionCProcessName[${detectionIndex}]" class="form-control detection-process-name" />
+                                    <label>Process Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="DetectionCManpower[${detectionIndex}]" class="form-control" />
+                                    <label>Manpower</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="DetectionCMethod[${detectionIndex}]" class="form-control" />
+                                    <label>Method</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="DetectionCMachinary[${detectionIndex}]" class="form-control" />
+                                    <label>Machinary</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="DetectionCMaterial[${detectionIndex}]" class="form-control" />
+                                    <label>Material</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="DetectionCMeasurement[${detectionIndex}]" class="form-control" />
+                                    <label>Measurement</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="DetectionCEnvironment[${detectionIndex}]" class="form-control" />
+                                    <label>Environment</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="DetectionCRank[${detectionIndex}]" type="number" class="form-control" value="0" />
+                                    <label>Rank [D]</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-danger mt-2 remove-detection-row-btn">
+                            <i class="fas fa-trash me-1"></i> Remove
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('detection-dynamic-fields').appendChild(div);
+            detectionIndex++;
+        });
+
+        // Eliminar fila de Detection Control
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-detection-row-btn')) {
+                const row = e.target.closest('.detection-dynamic-field-group');
+                if (confirm('Are you sure you want to remove this Detection Control?')) {
+                    row.remove();
+                }
+            }
+        });
+
+        // ==================== OCCURRENCE FACTOR ====================
+                // Agregar nueva fila de Occurrence (Technical Root Cause)
+        document.getElementById('add-occurrence-row-btn').addEventListener('click', function() {
+            const div = document.createElement('div');
+            div.className = 'col-md-12 mb-3 occurrence-dynamic-field-group';
+            div.dataset.index = occurrenceIndex;
+
+            div.innerHTML = `
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h6 class="text-danger">Root Cause Analysis #${occurrenceIndex + 1}</h6>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorUno[${occurrenceIndex}]" class="form-control" />
+                                    <label>Root Cause Factor</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorUnoPrimerWhy[${occurrenceIndex}]" class="form-control" />
+                                    <label>1st Why</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorUnoSegundoWhy[${occurrenceIndex}]" class="form-control" />
+                                    <label>2nd Why</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorUnoTercerWhy[${occurrenceIndex}]" class="form-control" />
+                                    <label>3rd Why</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorUnoCuartoWhy[${occurrenceIndex}]" class="form-control" />
+                                    <label>4th Why</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorUnoQuintoWhy[${occurrenceIndex}]" class="form-control" />
+                                    <label>5th Why</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <textarea name="FactorUnoCorrectiveActions[${occurrenceIndex}]" class="form-control" style="height: 100px"></textarea>
+                                    <label>Corrective Actions</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-danger mt-2 remove-occurrence-row-btn">
+                            <i class="fas fa-trash me-1"></i> Remove
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('occurrence-dynamic-fields').appendChild(div);
+            occurrenceIndex++;
+        });
+
+        // Eliminar fila de Occurrence
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-occurrence-row-btn')) {
+                const row = e.target.closest('.occurrence-dynamic-field-group');
+                if (confirm('Are you sure you want to remove this Root Cause Analysis?')) {
+                    row.remove();
+                }
+            }
+        });
+
+        // ==================== DETECTION ROOT CAUSE ====================
+                // Agregar nueva fila de Detection (Technical Root Cause)
+        document.getElementById('add-detection-root-cause-btn').addEventListener('click', function() {
+            const div = document.createElement('div');
+            div.className = 'col-md-12 mb-3 detection-root-cause-dynamic-field-group';
+            div.dataset.index = detectionRootCauseIndex;
+
+            div.innerHTML = `
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h6 class="text-secondary">Detection Root Cause Analysis #${detectionRootCauseIndex + 1}</h6>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorDos[${detectionRootCauseIndex}]" class="form-control" />
+                                    <label>Root Cause Factor</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorDosPrimerWhy[${detectionRootCauseIndex}]" class="form-control" />
+                                    <label>1st Why</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorDosSegundoWhy[${detectionRootCauseIndex}]" class="form-control" />
+                                    <label>2nd Why</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorDosTercerWhy[${detectionRootCauseIndex}]" class="form-control" />
+                                    <label>3rd Why</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorDosCuartoWhy[${detectionRootCauseIndex}]" class="form-control" />
+                                    <label>4th Why</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorDosQuintoWhy[${detectionRootCauseIndex}]" class="form-control" />
+                                    <label>5th Why</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <textarea name="FactorDosCorrectiveActions[${detectionRootCauseIndex}]" class="form-control" style="height: 100px"></textarea>
+                                    <label>Corrective Actions</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-secondary mt-2 remove-detection-root-cause-btn">
+                            <i class="fas fa-trash me-1"></i> Remove
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('detection-root-cause-dynamic-fields').appendChild(div);
+            detectionRootCauseIndex++;
+        });
+
+        // Eliminar fila de Detection Root Cause
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-detection-root-cause-btn')) {
+                const row = e.target.closest('.detection-root-cause-dynamic-field-group');
+                if (confirm('Are you sure you want to remove this Detection Root Cause Analysis?')) {
+                    row.remove();
+                }
+            }
+        });
+
+        // ==================== SYSTEMIC ROOT CAUSE ====================
+                // Agregar nueva fila de Systemic (Technical Root Cause)
+        document.getElementById('add-systemic-root-cause-btn').addEventListener('click', function() {
+            const div = document.createElement('div');
+            div.className = 'col-md-12 mb-3 systemic-root-cause-dynamic-field-group';
+            div.dataset.index = systemicRootCauseIndex;
+
+            div.innerHTML = `
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h6 class="text-dark">Systemic Root Cause Analysis #${systemicRootCauseIndex + 1}</h6>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorTres[${systemicRootCauseIndex}]" class="form-control" />
+                                    <label>Root Cause Factor</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorTresPrimerWhy[${systemicRootCauseIndex}]" class="form-control" />
+                                    <label>1st Why</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorTresSegundoWhy[${systemicRootCauseIndex}]" class="form-control" />
+                                    <label>2nd Why</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorTresTercerWhy[${systemicRootCauseIndex}]" class="form-control" />
+                                    <label>3rd Why</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorTresCuartoWhy[${systemicRootCauseIndex}]" class="form-control" />
+                                    <label>4th Why</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input name="FactorTresQuintoWhy[${systemicRootCauseIndex}]" class="form-control" />
+                                    <label>5th Why</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <textarea name="FactorTresCorrectiveActions[${systemicRootCauseIndex}]" class="form-control" style="height: 100px"></textarea>
+                                    <label>Corrective Actions</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-dark mt-2 remove-systemic-root-cause-btn">
+                            <i class="fas fa-trash me-1"></i> Remove
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('systemic-root-cause-dynamic-fields').appendChild(div);
+            systemicRootCauseIndex++;
+        });
+
+        // Eliminar fila de Systemic Root Cause
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-systemic-root-cause-btn')) {
+                const row = e.target.closest('.systemic-root-cause-dynamic-field-group');
+                if (confirm('Are you sure you want to remove this Systemic Root Cause Analysis?')) {
+                    row.remove();
+                }
+            }
+        });
+
+                // Agregar nueva fila de Occurrence Action
+        document.getElementById('add-occurrence-action-btn').addEventListener('click', function() {
+            const div = document.createElement('div');
+            div.className = 'col-md-12 mb-3 occurrence-action-dynamic-field-group';
+            div.dataset.index = occurrenceActionIndex;
+
+            div.innerHTML = `
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h6 class="text-success">Occurrence Action #${occurrenceActionIndex + 1}</h6>
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input name="OccurrenceItems[${occurrenceActionIndex}]" class="form-control" />
+                                    <label>Action Item</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input name="OccurrenceAction[${occurrenceActionIndex}]" class="form-control" />
+                                    <label>Corrective Action</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="OccurrenceResponsable[${occurrenceActionIndex}]" class="form-control" />
+                                    <label>Responsible</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="OccurrenceDepartment[${occurrenceActionIndex}]" class="form-control" />
+                                    <label>Department</label>
+                                </div>
+                            </div>
+                                <div class="col-md-2">
+                                    <div class="form-floating">
+                                        <input name="OccurrenceOpeningDate[${occurrenceActionIndex}]" class="form-control" type="date" />
+                                        <label>Opening Date</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-floating">
+                                        <input name="OccurrenceCloseDate[${occurrenceActionIndex}]" class="form-control" type="date" />
+                                        <label>Close Date</label>
+                                    </div>
+                                </div>
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input name="OccurrenceAmef[${occurrenceActionIndex}]" class="form-control" />
+                                    <label>AMEF Update</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input name="OccurrenceCp[${occurrenceActionIndex}]" class="form-control" />
+                                    <label>Control Plan Update</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-success mt-2 remove-occurrence-action-btn">
+                            <i class="fas fa-trash me-1"></i> Remove
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('occurrence-actions-dynamic-fields').appendChild(div);
+            occurrenceActionIndex++;
+        });
+
+        // Eliminar fila de Occurrence Action
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-occurrence-action-btn')) {
+                const row = e.target.closest('.occurrence-action-dynamic-field-group');
+                if (confirm('Are you sure you want to remove this Occurrence Action?')) {
+                    row.remove();
+                }
+            }
+        });
+
+        // Agregar nueva fila de Detection Action
+        document.getElementById('add-detection-action-btn').addEventListener('click', function() {
+            const div = document.createElement('div');
+            div.className = 'col-md-12 mb-3 detection-action-dynamic-field-group';
+            div.dataset.index = detectionActionIndex;
+
+            div.innerHTML = `
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h6 class="text-info">Detection Action #${detectionActionIndex + 1}</h6>
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input name="DetectionItems[${detectionActionIndex}]" class="form-control" />
+                                    <label>Action Item</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input name="DetectionAction[${detectionActionIndex}]" class="form-control" />
+                                    <label>Corrective Action</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="DetectionResponsable[${detectionActionIndex}]" class="form-control" />
+                                    <label>Responsible</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="DetectionDepartment[${detectionActionIndex}]" class="form-control" />
+                                    <label>Department</label>
+                                </div>
+                            </div>
+                                <div class="col-md-2">
+                                    <div class="form-floating">
+                                        <input name="DetectionOpeningDate[${detectionActionIndex}]" class="form-control" type="date" />
+                                        <label>Opening Date</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-floating">
+                                        <input name="DetectionCloseDate[${detectionActionIndex}]" class="form-control" type="date" />
+                                        <label>Close Date</label>
+                                    </div>
+                                </div>
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input name="DetectionAmef[${detectionActionIndex}]" class="form-control" />
+                                    <label>AMEF Update</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-floating">
+                                    <input name="DetectionCp[${detectionActionIndex}]" class="form-control" />
+                                    <label>Control Plan Update</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-info mt-2 remove-detection-action-btn">
+                            <i class="fas fa-trash me-1"></i> Remove
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('detection-actions-dynamic-fields').appendChild(div);
+            detectionActionIndex++;
+        });
+
+        // Eliminar fila de Detection Action
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-detection-action-btn')) {
+                const row = e.target.closest('.detection-action-dynamic-field-group');
+                if (confirm('Are you sure you want to remove this Detection Action?')) {
+                    row.remove();
+                }
+            }
+        });
+
+        // ==================== MANEJO DE ARCHIVOS ====================
         document.querySelector('input[type="file"]').addEventListener('change', function(e) {
             const previewContainer = document.getElementById('preview-container');
             previewContainer.innerHTML = '';
@@ -714,6 +2069,26 @@
 
                 previewContainer.appendChild(fileList);
             }
+        });
+
+        // ==================== INICIALIZACIÃ“N ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar eventos para los campos de proceso
+            document.addEventListener('change', function(e) {
+                if (e.target.classList.contains('fm-process-name')) {
+                    const row = e.target.closest('.fm-dynamic-field-group');
+                    const index = getRowIndex(row);
+                    const processName = e.target.value;
+
+                    // Actualizar process name en Preventive Actions si existe
+                    const preventiveProcess = document.querySelector(`.preventive-dynamic-field-group[data-index="${index}"] .preventive-process-name`);
+                    if (preventiveProcess) preventiveProcess.value = processName;
+
+                    // Actualizar process name en Detection Controls si existe
+                    const detectionProcess = document.querySelector(`.detection-dynamic-field-group[data-index="${index}"] .detection-process-name`);
+                    if (detectionProcess) detectionProcess.value = processName;
+                }
+            });
         });
     </script>
 }

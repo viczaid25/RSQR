@@ -397,29 +397,52 @@
             div.innerHTML = `
                 <div class="card shadow-sm mb-3">
                     <div class="card-body">
-                        <div class="row g-3">
-                            <div class="col-md-3">
+                        <div class="row g-3 flex-nowrap overflow-auto">
+                            <div class="col-md-2">
                                 <div class="form-floating">
-                                    <input name="ContencionItems[${index}]" class="form-control" placeholder="Contención Item" />
-                                    <label>Containment Item</label>
+                                    <select name="ContencionConsiderar[${index}]" class="form-select">
+                                        <option value="Process">Process</option>
+                                        <option value="Warehouse">Warehouse</option>
+                                        <option value="In Transit">In Transit</option>
+                                        <option value="With Customer">With Customer</option>
+                                    </select>
+                                    <label>To Consider</label>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-floating">
-                                    <input name="ContencionActividades[${index}]" class="form-control" placeholder="Contención Actividad" />
-                                    <label>Containment Activity</label>
+                                    <input name="ContencionActivity[${index}]" class="form-control" placeholder="Contencion Activity" />
+                                    <label>Contencion Activity</label>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-floating">
-                                    <input name="ContencionResponsables[${index}]" class="form-control" placeholder="Contención Responsable" />
-                                    <label>Containment Responsable</label>
+                                    <input name="ContencionResponsable[${index}]" class="form-control" placeholder="Contencion Responsable" />
+                                    <label>Contencion Responsable</label>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-floating">
-                                    <input name="ContencionFechasInicio[${index}]" type="date" class="form-control" placeholder="Fecha de Inicio" />
-                                    <label>Start Date</label>
+                                    <input name="ContencionTotalSuspeciousParts[${index}]" class="form-control" placeholder="Total Suspecious Parts" />
+                                    <label>Total Suspecious Parts</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="ContencionOkParts[${index}]" class="form-control" placeholder="Ok Parts" />
+                                    <label>Ok Parts</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="ContencionNgParts[${index}]" class="form-control" placeholder="NG Parts" />
+                                    <label>NG Parts</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-floating">
+                                    <input name="ContencionEffectiveness[${index}]" class="form-control" placeholder="% Effectiveness" />
+                                    <label>% Effectiveness</label>
                                 </div>
                             </div>
                         </div>

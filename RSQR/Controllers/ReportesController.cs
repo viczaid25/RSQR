@@ -355,12 +355,24 @@ namespace RSQR.Controllers
           "ContencionFechasInicio,AlertaCalidad,Disposicion,EntrevistaInvolucrados,Comentarios," +
           "Severidad,Ocurrencia,Deteccion,AP_NPR,ModoFalla,ControlesEstablecidos,Customer," +
           "MotherFactory,CustomerPartNumber,Mileage,InvestigationReport,DateOfClose,ImpactoPPM," +
-          "Responsabilidad,NombreCar,CustomerReport")]
+          "Responsabilidad,NombreCar,CustomerReport,FmMode,FmProcessName,Fm6Ms,FmFactorUno,FmFactorDos," +
+          "FmFactorTres,FmRelated,FmContentionActions,PreventiveCProcessName,PreventiveCManpower," +
+          "PreventiveCMethod,PreventiveCMachinary,PreventiveCMaterial,PreventiveCMeasurement," +
+          "PreventiveCEnvironment,PreventiveCRank,DetectionCProcessName,DetectionCManpower," +
+          "DetectionCMethod,DetectionCMachinary,DetectionCMaterial,DetectionCMeasurement," +
+          "DetectionCEnvironment,DetectionCRank,FactorUno,FactorUnoPrimerWhy,FactorUnoSegundoWhy," +
+          "FactorUnoTercerWhy,FactorUnoCuartoWhy,FactorUnoQuintoWhy,FactorUnoCorrectiveActions," +
+          "FactorDos,FactorDosPrimerWhy,FactorDosSegundoWhy,FactorDosTercerWhy,FactorDosCuartoWhy," +
+          "FactorDosQuintoWhy,FactorDosCorrectiveActions,FactorTres,FactorTresPrimerWhy," +
+          "FactorTresSegundoWhy,FactorTresTercerWhy,FactorTresCuartoWhy,FactorTresQuintoWhy," +
+          "FactorTresCorrectiveActions,OccurrenceItems,OccurrenceAction,OccurrenceResponsable," +
+          "OccurrenceDepartment,OccurrenceOpeningDate,OccurrenceCloseDate,OccurrenceAmef,OccurrenceCp," +
+          "DetectionItems,DetectionAction,DetectionResponsable,DetectionDepartment,DetectionOpeningDate," +
+          "DetectionCloseDate,DetectionAmef,DetectionCp")]
     Reporte reporte,
     List<IFormFile>? EvidenciaFotografica, List<int>? ArchivosAMantener)
         {
             if (id != reporte.Id) return NotFound();
-            
 
             if (ModelState.IsValid)
             {
@@ -368,30 +380,150 @@ namespace RSQR.Controllers
                 {
                     // Cargar la entidad existente incluyendo el PpmReport relacionado
                     var existingReport = await _context.Reportes
-                        .Include(r => r.PpmReport) // Incluir el PpmReport relacionado
+                        .Include(r => r.PpmReport)
                         .FirstOrDefaultAsync(r => r.Id == id);
 
                     if (existingReport == null) return NotFound();
-
-                    
-
 
                     // Verificar si hubo cambios importantes que requieran notificación
                     bool requiereNotificacion = RequiereNotificacion(existingReport, reporte);
 
                     // Copiar los valores del modelo recibido a la entidad existente
-                    //_context.Entry(existingReport).CurrentValues.SetValues(reporte);
                     var entry = _context.Entry(existingReport);
                     entry.CurrentValues.SetValues(reporte);
                     entry.Property(e => e.EvidenciaFotografica).IsModified = false;
 
+                    // 1. Actualizar las listas de Failure Mode
+                    existingReport.FmMode = reporte.FmMode ?? new List<string>();
+                    existingReport.FmProcessName = reporte.FmProcessName ?? new List<string>();
+                    existingReport.Fm6Ms = reporte.Fm6Ms ?? new List<string>();
+                    existingReport.FmFactorUno = reporte.FmFactorUno ?? new List<string>();
+                    existingReport.FmFactorDos = reporte.FmFactorDos ?? new List<string>();
+                    existingReport.FmFactorTres = reporte.FmFactorTres ?? new List<string>();
+                    existingReport.FmRelated = reporte.FmRelated ?? new List<string>();
+                    existingReport.FmContentionActions = reporte.FmContentionActions ?? new List<string>();
 
-                    // Manejo de archivos existentes - SOLO si se especificó qué mantener
+                    // 2. Actualizar las listas de Preventive Actions
+                    existingReport.PreventiveCProcessName = reporte.PreventiveCProcessName ?? new List<string>();
+                    existingReport.PreventiveCManpower = reporte.PreventiveCManpower ?? new List<string>();
+                    existingReport.PreventiveCMethod = reporte.PreventiveCMethod ?? new List<string>();
+                    existingReport.PreventiveCMachinary = reporte.PreventiveCMachinary ?? new List<string>();
+                    existingReport.PreventiveCMaterial = reporte.PreventiveCMaterial ?? new List<string>();
+                    existingReport.PreventiveCMeasurement = reporte.PreventiveCMeasurement ?? new List<string>();
+                    existingReport.PreventiveCEnvironment = reporte.PreventiveCEnvironment ?? new List<string>();
+                    existingReport.PreventiveCRank = reporte.PreventiveCRank ?? new List<int>();
+
+                    // 3. Actualizar las listas de Detection Controls
+                    existingReport.DetectionCProcessName = reporte.DetectionCProcessName ?? new List<string>();
+                    existingReport.DetectionCManpower = reporte.DetectionCManpower ?? new List<string>();
+                    existingReport.DetectionCMethod = reporte.DetectionCMethod ?? new List<string>();
+                    existingReport.DetectionCMachinary = reporte.DetectionCMachinary ?? new List<string>();
+                    existingReport.DetectionCMaterial = reporte.DetectionCMaterial ?? new List<string>();
+                    existingReport.DetectionCMeasurement = reporte.DetectionCMeasurement ?? new List<string>();
+                    existingReport.DetectionCEnvironment = reporte.DetectionCEnvironment ?? new List<string>();
+                    existingReport.DetectionCRank = reporte.DetectionCRank ?? new List<int>();
+
+                    // 4. Actualizar las listas de Root Cause Analysis
+                    existingReport.FactorUno = reporte.FactorUno ?? new List<string>();
+                    existingReport.FactorUnoPrimerWhy = reporte.FactorUnoPrimerWhy ?? new List<string>();
+                    existingReport.FactorUnoSegundoWhy = reporte.FactorUnoSegundoWhy ?? new List<string>();
+                    existingReport.FactorUnoTercerWhy = reporte.FactorUnoTercerWhy ?? new List<string>();
+                    existingReport.FactorUnoCuartoWhy = reporte.FactorUnoCuartoWhy ?? new List<string>();
+                    existingReport.FactorUnoQuintoWhy = reporte.FactorUnoQuintoWhy ?? new List<string>();
+                    existingReport.FactorUnoCorrectiveActions = reporte.FactorUnoCorrectiveActions ?? new List<string>();
+
+                    existingReport.FactorDos = reporte.FactorDos ?? new List<string>();
+                    existingReport.FactorDosPrimerWhy = reporte.FactorDosPrimerWhy ?? new List<string>();
+                    existingReport.FactorDosSegundoWhy = reporte.FactorDosSegundoWhy ?? new List<string>();
+                    existingReport.FactorDosTercerWhy = reporte.FactorDosTercerWhy ?? new List<string>();
+                    existingReport.FactorDosCuartoWhy = reporte.FactorDosCuartoWhy ?? new List<string>();
+                    existingReport.FactorDosQuintoWhy = reporte.FactorDosQuintoWhy ?? new List<string>();
+                    existingReport.FactorDosCorrectiveActions = reporte.FactorDosCorrectiveActions ?? new List<string>();
+
+                    existingReport.FactorTres = reporte.FactorTres ?? new List<string>();
+                    existingReport.FactorTresPrimerWhy = reporte.FactorTresPrimerWhy ?? new List<string>();
+                    existingReport.FactorTresSegundoWhy = reporte.FactorTresSegundoWhy ?? new List<string>();
+                    existingReport.FactorTresTercerWhy = reporte.FactorTresTercerWhy ?? new List<string>();
+                    existingReport.FactorTresCuartoWhy = reporte.FactorTresCuartoWhy ?? new List<string>();
+                    existingReport.FactorTresQuintoWhy = reporte.FactorTresQuintoWhy ?? new List<string>();
+                    existingReport.FactorTresCorrectiveActions = reporte.FactorTresCorrectiveActions ?? new List<string>();
+
+                    // 5. Actualizar D5 Permanent Corrective Actions - Occurrence
+                    existingReport.OccurrenceItems = reporte.OccurrenceItems ?? new List<string>();
+                    existingReport.OccurrenceAction = reporte.OccurrenceAction ?? new List<string>();
+                    existingReport.OccurrenceResponsable = reporte.OccurrenceResponsable ?? new List<string>();
+                    existingReport.OccurrenceDepartment = reporte.OccurrenceDepartment ?? new List<string>();
+                    existingReport.OccurrenceAmef = reporte.OccurrenceAmef ?? new List<string>();
+                    existingReport.OccurrenceCp = reporte.OccurrenceCp ?? new List<string>();
+
+                    // Procesar fechas de Occurrence
+                    var occurrenceOpeningDates = new List<DateTime>();
+                    var occurrenceCloseDates = new List<DateTime>();
+
+                    if (Request.Form.ContainsKey("OccurrenceOpeningDate"))
+                    {
+                        foreach (var dateStr in Request.Form["OccurrenceOpeningDate"])
+                        {
+                            if (DateTime.TryParse(dateStr, out var date))
+                            {
+                                occurrenceOpeningDates.Add(date);
+                            }
+                        }
+                    }
+                    existingReport.OccurrenceOpeningDate = occurrenceOpeningDates;
+
+                    if (Request.Form.ContainsKey("OccurrenceCloseDate"))
+                    {
+                        foreach (var dateStr in Request.Form["OccurrenceCloseDate"])
+                        {
+                            if (DateTime.TryParse(dateStr, out var date))
+                            {
+                                occurrenceCloseDates.Add(date);
+                            }
+                        }
+                    }
+                    existingReport.OccurrenceCloseDate = occurrenceCloseDates;
+
+                    // 6. Actualizar D5 Permanent Corrective Actions - Detection
+                    existingReport.DetectionItems = reporte.DetectionItems ?? new List<string>();
+                    existingReport.DetectionAction = reporte.DetectionAction ?? new List<string>();
+                    existingReport.DetectionResponsable = reporte.DetectionResponsable ?? new List<string>();
+                    existingReport.DetectionDepartment = reporte.DetectionDepartment ?? new List<string>();
+                    existingReport.DetectionAmef = reporte.DetectionAmef ?? new List<string>();
+                    existingReport.DetectionCp = reporte.DetectionCp ?? new List<string>();
+
+                    // Procesar fechas de Detection
+                    var detectionOpeningDates = new List<DateTime>();
+                    var detectionCloseDates = new List<DateTime>();
+
+                    if (Request.Form.ContainsKey("DetectionOpeningDate"))
+                    {
+                        foreach (var dateStr in Request.Form["DetectionOpeningDate"])
+                        {
+                            if (DateTime.TryParse(dateStr, out var date))
+                            {
+                                detectionOpeningDates.Add(date);
+                            }
+                        }
+                    }
+                    existingReport.DetectionOpeningDate = detectionOpeningDates;
+
+                    if (Request.Form.ContainsKey("DetectionCloseDate"))
+                    {
+                        foreach (var dateStr in Request.Form["DetectionCloseDate"])
+                        {
+                            if (DateTime.TryParse(dateStr, out var date))
+                            {
+                                detectionCloseDates.Add(date);
+                            }
+                        }
+                    }
+                    existingReport.DetectionCloseDate = detectionCloseDates;
+
+                    // Manejo de archivos existentes
                     if (ArchivosAMantener != null && ArchivosAMantener.Any())
                     {
-                        // Crear una nueva lista solo con los archivos que se deben mantener
                         var nuevaListaEvidencia = new List<byte[]>();
-
                         for (int i = 0; i < existingReport.EvidenciaFotografica?.Count; i++)
                         {
                             if (ArchivosAMantener.Contains(i))
@@ -399,7 +531,6 @@ namespace RSQR.Controllers
                                 nuevaListaEvidencia.Add(existingReport.EvidenciaFotografica[i]);
                             }
                         }
-
                         existingReport.EvidenciaFotografica = nuevaListaEvidencia;
                     }
 
@@ -412,7 +543,6 @@ namespace RSQR.Controllers
                         {
                             if (file.Length > 0)
                             {
-                                // Validar tipo de archivo
                                 var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".pdf" };
                                 var extension = Path.GetExtension(file.FileName).ToLowerInvariant();
 
@@ -422,7 +552,6 @@ namespace RSQR.Controllers
                                     continue;
                                 }
 
-                                // Validar tamaño máximo (5MB por archivo)
                                 if (file.Length > 5 * 1024 * 1024)
                                 {
                                     ModelState.AddModelError("EvidenciaFotografica", $"Archivo demasiado grande (máximo 5MB): {file.FileName}");
@@ -456,7 +585,6 @@ namespace RSQR.Controllers
                     {
                         return NotFound();
                     }
-
                     _logger.LogError(ex, "Error de concurrencia al editar reporte");
                     ModelState.AddModelError("", "El registro fue modificado por otro usuario. Por favor, actualice y vuelva a intentar.");
                 }
