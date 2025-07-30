@@ -45,9 +45,6 @@
 
                             <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Tipo)</dt>
                             <dd class="col-sm-8">@Html.DisplayFor(model => model.Tipo)</dd>
-
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.NombreCar)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.NombreCar)</dd>
                         </dl>
                     </div>
                     <div class="col-md-6">
@@ -121,7 +118,7 @@
         <!-- 5W2H Analysis -->
         <div class="card shadow-sm rounded-lg mb-4">
             <div class="card-header bg-primary text-white">
-                <h5 class="mb-0"><i class="fas fa-search me-2"></i>D2</h5>
+                <h5 class="mb-0"><i class="fas fa-search me-2"></i>D2 Problem Description (5W2H)</h5>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -130,8 +127,8 @@
                             <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.QueP)</dt>
                             <dd class="col-sm-8">@Html.DisplayFor(model => model.QueP)</dd>
 
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.QuienP)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.QuienP)</dd>
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.PorqueP)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.PorqueP)</dd>
 
                             <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.DondeP)</dt>
                             <dd class="col-sm-8">@Html.DisplayFor(model => model.DondeP)</dd>
@@ -142,14 +139,20 @@
                     </div>
                     <div class="col-md-6">
                         <dl class="row">
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.PorqueP)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.PorqueP)</dd>
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.QuienP)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.QuienP)</dd>
 
                             <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.ComoP)</dt>
                             <dd class="col-sm-8">@Html.DisplayFor(model => model.ComoP)</dd>
 
                             <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.CuantosP)</dt>
                             <dd class="col-sm-8">@Html.DisplayFor(model => model.CuantosP)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Mileage)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Mileage)</dd>
+
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.InvestigationReport)</dt>
+                            <dd class="col-sm-8">@Html.DisplayFor(model => model.InvestigationReport)</dd>
                         </dl>
                     </div>
                 </div>
@@ -159,29 +162,27 @@
         <!-- Containment -->
         <div class="card shadow-sm rounded-lg mb-4">
             <div class="card-header bg-primary text-white">
-                <h5 class="mb-0"><i class="fas fa-shield-alt me-2"></i>Containment</h5>
+                <h5 class="mb-0"><i class="fas fa-shield-alt me-2"></i>D3 Containment</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="bg-light">
                             <tr>
-                                <th>@Html.DisplayNameFor(model => model.ContencionItems)</th>
-                                <th>@Html.DisplayNameFor(model => model.ContencionConsiderar)</th>
-                                <th>@Html.DisplayNameFor(model => model.ContencionActivity)</th>
-                                <th>@Html.DisplayNameFor(model => model.ContencionResponsable)</th>
-                                <th>@Html.DisplayNameFor(model => model.ContencionTotalSuspeciousParts)</th>
-                                <th>@Html.DisplayNameFor(model => model.ContencionOkParts)</th>
-                                <th>@Html.DisplayNameFor(model => model.ContencionNgParts)</th>
-                                <th>@Html.DisplayNameFor(model => model.ContencionEffectiveness)</th>
+                                <th>To Consider</th>
+                                <th>Contencion Activity</th>
+                                <th>Responsible</th>
+                                <th>Total Suspecious Parts</th>
+                                <th>Ok Parts</th>
+                                <th>NG Parts</th>
+                                <th>% Effectiveness</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @for (int i = 0; i < Model.ContencionItems.Count; i++)
+                            @for (int i = 0; i < Model.ContencionConsiderar.Count; i++)
                             {
                                 <tr>
-                                    <td>@Model.ContencionItems[i]</td>
-                                    <td>@(Model.ContencionConsiderar.Count > i ? Model.ContencionConsiderar[i] : "")</td>
+                                    <td>@Model.ContencionConsiderar[i]</td>
                                     <td>@(Model.ContencionActivity.Count > i ? Model.ContencionActivity[i] : "")</td>
                                     <td>@(Model.ContencionResponsable.Count > i ? Model.ContencionResponsable[i] : "")</td>
                                     <td>@(Model.ContencionTotalSuspeciousParts.Count > i ? Model.ContencionTotalSuspeciousParts[i] : "")</td>
@@ -196,126 +197,538 @@
             </div>
         </div>
 
-        <!-- Closing Information -->
+        <!-- Failure Mode Identification -->
         <div class="card shadow-sm rounded-lg mb-4">
             <div class="card-header bg-primary text-white">
-                <h5 class="mb-0"><i class="fas fa-lock me-2"></i>Closing Information</h5>
+                <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Failure Mode Identification</h5>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <dl class="row">
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Mileage)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Mileage)</dd>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Failure Mode</th>
+                                <th>Process Name</th>
+                                <th>6Ms</th>
+                                <th>Factor 1</th>
+                                <th>Factor 2</th>
+                                <th>Factor 3</th>
+                                <th>Related With The Issue?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.FmMode.Count; i++)
+                            {
+                                <tr>
+                                    <td>@Model.FmMode[i]</td>
+                                    <td>@(Model.FmProcessName.Count > i ? Model.FmProcessName[i] : "")</td>
+                                    <td>@(Model.Fm6Ms.Count > i ? Model.Fm6Ms[i] : "")</td>
+                                    <td>@(Model.FmFactorUno.Count > i ? Model.FmFactorUno[i] : "")</td>
+                                    <td>@(Model.FmFactorDos.Count > i ? Model.FmFactorDos[i] : "")</td>
+                                    <td>@(Model.FmFactorTres.Count > i ? Model.FmFactorTres[i] : "")</td>
+                                    <td>@(Model.FmRelated.Count > i ? Model.FmRelated[i] : "")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.InvestigationReport)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.InvestigationReport)</dd>
+        <!-- Preventive Actions -->
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0"><i class="fas fa-shield-alt me-2"></i>Preventive Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Process Name</th>
+                                <th>Manpower</th>
+                                <th>Method</th>
+                                <th>Machinary</th>
+                                <th>Material</th>
+                                <th>Measurement</th>
+                                <th>Environment</th>
+                                <th>Rank [O]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.PreventiveCProcessName.Count; i++)
+                            {
+                                <tr>
+                                    <td>@Model.PreventiveCProcessName[i]</td>
+                                    <td>@(Model.PreventiveCManpower.Count > i ? Model.PreventiveCManpower[i] : "")</td>
+                                    <td>@(Model.PreventiveCMethod.Count > i ? Model.PreventiveCMethod[i] : "")</td>
+                                    <td>@(Model.PreventiveCMachinary.Count > i ? Model.PreventiveCMachinary[i] : "")</td>
+                                    <td>@(Model.PreventiveCMaterial.Count > i ? Model.PreventiveCMaterial[i] : "")</td>
+                                    <td>@(Model.PreventiveCMeasurement.Count > i ? Model.PreventiveCMeasurement[i] : "")</td>
+                                    <td>@(Model.PreventiveCEnvironment.Count > i ? Model.PreventiveCEnvironment[i] : "")</td>
+                                    <td>@(Model.PreventiveCRank.Count > i ? Model.PreventiveCRank[i] : "")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.DateOfClose)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.DateOfClose)</dd>
-                        </dl>
+        <!-- Detection Controls -->
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-warning text-white">
+                <h5 class="mb-0"><i class="fas fa-search me-2"></i>Detection Controls</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Process Name</th>
+                                <th>Manpower</th>
+                                <th>Method</th>
+                                <th>Machinary</th>
+                                <th>Material</th>
+                                <th>Measurement</th>
+                                <th>Environment</th>
+                                <th>Rank [D]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.DetectionCProcessName.Count; i++)
+                            {
+                                <tr>
+                                    <td>@Model.DetectionCProcessName[i]</td>
+                                    <td>@(Model.DetectionCManpower.Count > i ? Model.DetectionCManpower[i] : "")</td>
+                                    <td>@(Model.DetectionCMethod.Count > i ? Model.DetectionCMethod[i] : "")</td>
+                                    <td>@(Model.DetectionCMachinary.Count > i ? Model.DetectionCMachinary[i] : "")</td>
+                                    <td>@(Model.DetectionCMaterial.Count > i ? Model.DetectionCMaterial[i] : "")</td>
+                                    <td>@(Model.DetectionCMeasurement.Count > i ? Model.DetectionCMeasurement[i] : "")</td>
+                                    <td>@(Model.DetectionCEnvironment.Count > i ? Model.DetectionCEnvironment[i] : "")</td>
+                                    <td>@(Model.DetectionCRank.Count > i ? Model.DetectionCRank[i] : "")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Occurrence (Technical Root Cause) -->
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0"><i class="fas fa-search-plus me-2"></i>Occurrence (Technical Root Cause)</h5>
+            </div>
+            <div class="card-body">
+                @for (int i = 0; i < Model.FactorUno.Count; i++)
+                {
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-0">Root Cause Analysis #@(i + 1)</h6>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-3 text-muted">Root Cause Factor</dt>
+                                <dd class="col-sm-9">@Model.FactorUno[i]</dd>
+
+                                <dt class="col-sm-3 text-muted">1st Why</dt>
+                                <dd class="col-sm-9">@(Model.FactorUnoPrimerWhy.Count > i ? Model.FactorUnoPrimerWhy[i] : "")</dd>
+
+                                <dt class="col-sm-3 text-muted">2nd Why</dt>
+                                <dd class="col-sm-9">@(Model.FactorUnoSegundoWhy.Count > i ? Model.FactorUnoSegundoWhy[i] : "")</dd>
+
+                                <dt class="col-sm-3 text-muted">3rd Why</dt>
+                                <dd class="col-sm-9">@(Model.FactorUnoTercerWhy.Count > i ? Model.FactorUnoTercerWhy[i] : "")</dd>
+
+                                <dt class="col-sm-3 text-muted">4th Why</dt>
+                                <dd class="col-sm-9">@(Model.FactorUnoCuartoWhy.Count > i ? Model.FactorUnoCuartoWhy[i] : "")</dd>
+
+                                <dt class="col-sm-3 text-muted">5th Why</dt>
+                                <dd class="col-sm-9">@(Model.FactorUnoQuintoWhy.Count > i ? Model.FactorUnoQuintoWhy[i] : "")</dd>
+
+                                <dt class="col-sm-3 text-muted">Corrective Actions</dt>
+                                <dd class="col-sm-9">@(Model.FactorUnoCorrectiveActions.Count > i ? Model.FactorUnoCorrectiveActions[i] : "")</dd>
+                            </dl>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <dl class="row">
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.ImpactoPPM)</dt>
-                            <dd class="col-sm-8">
-                                @if (Model.ImpactoPPM)
-                                {
-                                    <span class="badge bg-success">Yes</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-secondary">No</span>
-                                }
-                            </dd>
+                }
+            </div>
+        </div>
 
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Responsabilidad)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Responsabilidad)</dd>
-                        </dl>
+        <!-- Detection (Technical Root Cause) -->
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0"><i class="fas fa-search me-2"></i>Detection (Technical Root Cause)</h5>
+            </div>
+            <div class="card-body">
+                @for (int i = 0; i < Model.FactorDos.Count; i++)
+                {
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-0">Detection Root Cause Analysis #@(i + 1)</h6>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-3 text-muted">Root Cause Factor</dt>
+                                <dd class="col-sm-9">@Model.FactorDos[i]</dd>
+
+                                <dt class="col-sm-3 text-muted">1st Why</dt>
+                                <dd class="col-sm-9">@(Model.FactorDosPrimerWhy.Count > i ? Model.FactorDosPrimerWhy[i] : "")</dd>
+
+                                <dt class="col-sm-3 text-muted">2nd Why</dt>
+                                <dd class="col-sm-9">@(Model.FactorDosSegundoWhy.Count > i ? Model.FactorDosSegundoWhy[i] : "")</dd>
+
+                                <dt class="col-sm-3 text-muted">3rd Why</dt>
+                                <dd class="col-sm-9">@(Model.FactorDosTercerWhy.Count > i ? Model.FactorDosTercerWhy[i] : "")</dd>
+
+                                <dt class="col-sm-3 text-muted">4th Why</dt>
+                                <dd class="col-sm-9">@(Model.FactorDosCuartoWhy.Count > i ? Model.FactorDosCuartoWhy[i] : "")</dd>
+
+                                <dt class="col-sm-3 text-muted">5th Why</dt>
+                                <dd class="col-sm-9">@(Model.FactorDosQuintoWhy.Count > i ? Model.FactorDosQuintoWhy[i] : "")</dd>
+
+                                <dt class="col-sm-3 text-muted">Corrective Actions</dt>
+                                <dd class="col-sm-9">@(Model.FactorDosCorrectiveActions.Count > i ? Model.FactorDosCorrectiveActions[i] : "")</dd>
+                            </dl>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Systemic (Technical Root Cause) -->
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0"><i class="fas fa-sitemap me-2"></i>Systemic (Technical Root Cause)</h5>
+            </div>
+            <div class="card-body">
+                @for (int i = 0; i < Model.FactorTres.Count; i++)
+                {
+                    <div class="card mb-3">
+                        <div class="card-header bg-light">
+                            <h6 class="mb-0">Systemic Root Cause Analysis #@(i + 1)</h6>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-3 text-muted">Root Cause Factor</dt>
+                                <dd class="col-sm-9">@Model.FactorTres[i]</dd>
+
+                                <dt class="col-sm-3 text-muted">1st Why</dt>
+                                <dd class="col-sm-9">@(Model.FactorTresPrimerWhy.Count > i ? Model.FactorTresPrimerWhy[i] : "")</dd>
+
+                                <dt class="col-sm-3 text-muted">2nd Why</dt>
+                                <dd class="col-sm-9">@(Model.FactorTresSegundoWhy.Count > i ? Model.FactorTresSegundoWhy[i] : "")</dd>
+
+                                <dt class="col-sm-3 text-muted">3rd Why</dt>
+                                <dd class="col-sm-9">@(Model.FactorTresTercerWhy.Count > i ? Model.FactorTresTercerWhy[i] : "")</dd>
+
+                                <dt class="col-sm-3 text-muted">4th Why</dt>
+                                <dd class="col-sm-9">@(Model.FactorTresCuartoWhy.Count > i ? Model.FactorTresCuartoWhy[i] : "")</dd>
+
+                                <dt class="col-sm-3 text-muted">5th Why</dt>
+                                <dd class="col-sm-9">@(Model.FactorTresQuintoWhy.Count > i ? Model.FactorTresQuintoWhy[i] : "")</dd>
+
+                                <dt class="col-sm-3 text-muted">Corrective Actions</dt>
+                                <dd class="col-sm-9">@(Model.FactorTresCorrectiveActions.Count > i ? Model.FactorTresCorrectiveActions[i] : "")</dd>
+                            </dl>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- D5 - Permanent Corrective Actions -->
+        <div class="card shadow-sm rounded-lg mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i>D5 - Permanent Corrective Actions</h5>
+            </div>
+            <div class="card-body">
+                <!-- Occurrence -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h6 class="mb-0"><i class="fas fa-bolt me-2"></i>Occurrence</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th>Action Item</th>
+                                        <th>Corrective Action</th>
+                                        <th>Responsible</th>
+                                        <th>Department</th>
+                                        <th>Opening Date</th>
+                                        <th>Close Date</th>
+                                        <th>AMEF Update</th>
+                                        <th>Control Plan Update</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.OccurrenceItems.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>@Model.OccurrenceItems[i]</td>
+                                            <td>@(Model.OccurrenceAction.Count > i ? Model.OccurrenceAction[i] : "")</td>
+                                            <td>@(Model.OccurrenceResponsable.Count > i ? Model.OccurrenceResponsable[i] : "")</td>
+                                            <td>@(Model.OccurrenceDepartment.Count > i ? Model.OccurrenceDepartment[i] : "")</td>
+                                            <td>@(Model.OccurrenceOpeningDate.Count > i ? Model.OccurrenceOpeningDate[i].ToString("yyyy-MM-dd") : "")</td>
+                                            <td>@(Model.OccurrenceCloseDate.Count > i ? Model.OccurrenceCloseDate[i].ToString("yyyy-MM-dd") : "")</td>
+                                            <td>@(Model.OccurrenceAmef.Count > i ? Model.OccurrenceAmef[i] : "")</td>
+                                            <td>@(Model.OccurrenceCp.Count > i ? Model.OccurrenceCp[i] : "")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detection -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-info text-white">
+                        <h6 class="mb-0"><i class="fas fa-search me-2"></i>Detection</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th>Action Item</th>
+                                        <th>Corrective Action</th>
+                                        <th>Responsible</th>
+                                        <th>Department</th>
+                                        <th>Opening Date</th>
+                                        <th>Close Date</th>
+                                        <th>AMEF Update</th>
+                                        <th>Control Plan Update</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.DetectionItems.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>@Model.DetectionItems[i]</td>
+                                            <td>@(Model.DetectionAction.Count > i ? Model.DetectionAction[i] : "")</td>
+                                            <td>@(Model.DetectionResponsable.Count > i ? Model.DetectionResponsable[i] : "")</td>
+                                            <td>@(Model.DetectionDepartment.Count > i ? Model.DetectionDepartment[i] : "")</td>
+                                            <td>@(Model.DetectionOpeningDate.Count > i ? Model.DetectionOpeningDate[i].ToString("yyyy-MM-dd") : "")</td>
+                                            <td>@(Model.DetectionCloseDate.Count > i ? Model.DetectionCloseDate[i].ToString("yyyy-MM-dd") : "")</td>
+                                            <td>@(Model.DetectionAmef.Count > i ? Model.DetectionAmef[i] : "")</td>
+                                            <td>@(Model.DetectionCp.Count > i ? Model.DetectionCp[i] : "")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Impact on PPM -->
+                <div class="card shadow-sm mt-4">
+                    <div class="card-header bg-info text-white">
+                        <h6 class="mb-0"><i class="fas fa-chart-line me-2"></i>Impact on PPM</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <dl class="row">
+                                    <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.ImpactoPPM)</dt>
+                                    <dd class="col-sm-8">
+                                        @if (Model.ImpactoPPM)
+                                        {
+                                            <span class="badge bg-success">Yes</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">No</span>
+                                        }
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="col-md-6">
+                                <dl class="row">
+                                    <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Responsabilidad)</dt>
+                                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Responsabilidad)</dd>
+                                </dl>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Actions -->
+        <!-- D6 - Verification of Implementation of Permanent Corrective Action -->
         <div class="card shadow-sm rounded-lg mb-4">
             <div class="card-header bg-primary text-white">
-                <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>Actions</h5>
+                <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i>D6 - Verification of Implementation of Permanent Corrective Action</h5>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <dl class="row">
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.AlertaCalidad)</dt>
-                            <dd class="col-sm-8">
-                                @if (Model.AlertaCalidad)
-                                {
-                                    <span class="badge bg-success">Yes</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-secondary">No</span>
-                                }
-                            </dd>
-
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Disposicion)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Disposicion)</dd>
-                        </dl>
+                <!-- Verification Occurrence -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h6 class="mb-0"><i class="fas fa-bolt me-2"></i>Occurrence</h6>
                     </div>
-                    <div class="col-md-6">
-                        <dl class="row">
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.EntrevistaInvolucrados)</dt>
-                            <dd class="col-sm-8">
-                                @if (Model.EntrevistaInvolucrados)
-                                {
-                                    <span class="badge bg-success">Yes</span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-secondary">No</span>
-                                }
-                            </dd>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th>Action Item</th>
+                                        <th>Corrective Action</th>
+                                        <th>Responsible</th>
+                                        <th>Department</th>
+                                        <th>Opening Date</th>
+                                        <th>Close Date</th>
+                                        <th>AMEF Update</th>
+                                        <th>Control Plan Update</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.VerOccurrenceItems.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>@Model.VerOccurrenceItems[i]</td>
+                                            <td>@(Model.VerOccurrenceAction.Count > i ? Model.VerOccurrenceAction[i] : "")</td>
+                                            <td>@(Model.VerOccurrenceResponsable.Count > i ? Model.VerOccurrenceResponsable[i] : "")</td>
+                                            <td>@(Model.VerOccurrenceDepartment.Count > i ? Model.VerOccurrenceDepartment[i] : "")</td>
+                                            <td>@(Model.VerOccurrenceOpeningDate.Count > i ? Model.VerOccurrenceOpeningDate[i].ToString("yyyy-MM-dd") : "")</td>
+                                            <td>@(Model.VerOccurrenceCloseDate.Count > i ? Model.VerOccurrenceCloseDate[i].ToString("yyyy-MM-dd") : "")</td>
+                                            <td>@(Model.VerOccurrenceAmef.Count > i ? Model.VerOccurrenceAmef[i] : "")</td>
+                                            <td>@(Model.VerOccurrenceCp.Count > i ? Model.VerOccurrenceCp[i] : "")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
-                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Comentarios)</dt>
-                            <dd class="col-sm-8">@Html.DisplayFor(model => model.Comentarios)</dd>
-                        </dl>
+                <!-- Verification Detection -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-info text-white">
+                        <h6 class="mb-0"><i class="fas fa-search me-2"></i>Detection</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th>Action Item</th>
+                                        <th>Corrective Action</th>
+                                        <th>Responsible</th>
+                                        <th>Department</th>
+                                        <th>Opening Date</th>
+                                        <th>Close Date</th>
+                                        <th>AMEF Update</th>
+                                        <th>Control Plan Update</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.VerDetectionItems.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>@Model.VerDetectionItems[i]</td>
+                                            <td>@(Model.VerDetectionAction.Count > i ? Model.VerDetectionAction[i] : "")</td>
+                                            <td>@(Model.VerDetectionResponsable.Count > i ? Model.VerDetectionResponsable[i] : "")</td>
+                                            <td>@(Model.VerDetectionDepartment.Count > i ? Model.VerDetectionDepartment[i] : "")</td>
+                                            <td>@(Model.VerDetectionOpeningDate.Count > i ? Model.VerDetectionOpeningDate[i].ToString("yyyy-MM-dd") : "")</td>
+                                            <td>@(Model.VerDetectionCloseDate.Count > i ? Model.VerDetectionCloseDate[i].ToString("yyyy-MM-dd") : "")</td>
+                                            <td>@(Model.VerDetectionAmef.Count > i ? Model.VerDetectionAmef[i] : "")</td>
+                                            <td>@(Model.VerDetectionCp.Count > i ? Model.VerDetectionCp[i] : "")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Risk Assessment -->
+        <!-- D7 & D8 - Preventive Activities and Standards -->
         <div class="card shadow-sm rounded-lg mb-4">
-            <div class="card-header bg-primary text-white">
-                <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Risk Assessment</h5>
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0"><i class="fas fa-shield-alt me-2"></i>D7 & D8 - Preventive Activities and Standards to Ensure The Horizontality of Countermeasures</h5>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-2">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Documentation</th>
+                                <th>SN</th>
+                                <th>Code/Document Description</th>
+                                <th>Responsible</th>
+                                <th>Deadline</th>
+                                <th>Actual Closing Date</th>
+                                <th>Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                var predefinedDocs = new List<string> {
+                            "1.- AMEF of design",
+                            "2.- AMEF of process",
+                            "3.- Masters",
+                            "4.- Control plan",
+                            "5.- Maintenance plan",
+                            "6.- Procedure",
+                            "7.- Work Instruction",
+                            "8.- Inspection standards"
+                            };
+                            }
+
+                            @for (int i = 0; i < 8; i++)
+                            {
+                                <tr>
+                                    <td>@predefinedDocs[i]</td>
+                                    <td>@(Model.D7D8Sn.Count > i ? Model.D7D8Sn[i] : "")</td>
+                                    <td>@(Model.D7D8CodeDescription.Count > i ? Model.D7D8CodeDescription[i] : "")</td>
+                                    <td>@(Model.D7D8Responsible.Count > i ? Model.D7D8Responsible[i] : "")</td>
+                                    <td>@(Model.D7D8Deadline.Count > i ? Model.D7D8Deadline[i].ToString("yyyy-MM-dd") : "")</td>
+                                    <td>@(Model.D7D8ActualClosingDate.Count > i ? Model.D7D8ActualClosingDate[i].ToString("yyyy-MM-dd") : "")</td>
+                                    <td>@(Model.D7D8Comments.Count > i ? Model.D7D8Comments[i] : "")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Approval and Status -->
+                <div class="row mt-4">
+                    <div class="col-md-6">
                         <dl class="row">
-                            <dt class="col-sm-12 text-muted">@Html.DisplayNameFor(model => model.Severidad)</dt>
-                            <dd class="col-sm-12">@Html.DisplayFor(model => model.Severidad)</dd>
-
-                            <dt class="col-sm-12 text-muted">@Html.DisplayNameFor(model => model.Ocurrencia)</dt>
-                            <dd class="col-sm-12">@Html.DisplayFor(model => model.Ocurrencia)</dd>
-
-                            <dt class="col-sm-12 text-muted">@Html.DisplayNameFor(model => model.Deteccion)</dt>
-                            <dd class="col-sm-12">@Html.DisplayFor(model => model.Deteccion)</dd>
-
-                            <dt class="col-sm-12 text-muted">@Html.DisplayNameFor(model => model.AP_NPR)</dt>
-                            <dd class="col-sm-12">@Html.DisplayFor(model => model.AP_NPR)</dd>
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Approval)</dt>
+                            <dd class="col-sm-8">
+                                @if (!string.IsNullOrEmpty(Model.Approval))
+                                {
+                                    <span class="badge bg-@(Model.Approval == "Approved" ? "success" : Model.Approval == "Pending" ? "warning" : "danger")">
+                                        @Model.Approval
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Not Set</span>
+                                }
+                            </dd>
                         </dl>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <dl class="row">
-                            <dt class="col-sm-12 text-muted">@Html.DisplayNameFor(model => model.ModoFalla)</dt>
-                            <dd class="col-sm-12">@Html.DisplayFor(model => model.ModoFalla)</dd>
-                        </dl>
-                    </div>
-                    <div class="col-md-5">
-                        <dl class="row">
-                            <dt class="col-sm-12 text-muted">@Html.DisplayNameFor(model => model.ControlesEstablecidos)</dt>
-                            <dd class="col-sm-12">@Html.DisplayFor(model => model.ControlesEstablecidos)</dd>
+                            <dt class="col-sm-4 text-muted">@Html.DisplayNameFor(model => model.Status)</dt>
+                            <dd class="col-sm-8">
+                                @if (!string.IsNullOrEmpty(Model.Status))
+                                {
+                                    <span class="badge bg-@(Model.Status == "Completed" ? "success" : Model.Status == "In Progress" ? "primary" : "secondary")">
+                                        @Model.Status
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Not Set</span>
+                                }
+                            </dd>
                         </dl>
                     </div>
                 </div>

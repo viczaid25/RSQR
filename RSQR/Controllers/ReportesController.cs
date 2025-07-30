@@ -66,10 +66,113 @@ namespace RSQR.Controllers
 
             var reporte = await _context.Reportes
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (reporte == null)
             {
                 return NotFound();
             }
+
+            // Inicializar todas las listas que podrían ser null
+            reporte.ContencionConsiderar = reporte.ContencionConsiderar ?? new List<string>();
+            reporte.ContencionActivity = reporte.ContencionActivity ?? new List<string>();
+            reporte.ContencionResponsable = reporte.ContencionResponsable ?? new List<string>();
+            reporte.ContencionTotalSuspeciousParts = reporte.ContencionTotalSuspeciousParts ?? new List<string>();
+            reporte.ContencionOkParts = reporte.ContencionOkParts ?? new List<string>();
+            reporte.ContencionNgParts = reporte.ContencionNgParts ?? new List<string>();
+            reporte.ContencionEffectiveness = reporte.ContencionEffectiveness ?? new List<int>();
+
+            reporte.FmMode = reporte.FmMode ?? new List<string>();
+            reporte.FmProcessName = reporte.FmProcessName ?? new List<string>();
+            reporte.Fm6Ms = reporte.Fm6Ms ?? new List<string>();
+            reporte.FmFactorUno = reporte.FmFactorUno ?? new List<string>();
+            reporte.FmFactorDos = reporte.FmFactorDos ?? new List<string>();
+            reporte.FmFactorTres = reporte.FmFactorTres ?? new List<string>();
+            reporte.FmRelated = reporte.FmRelated ?? new List<string>();
+
+            reporte.PreventiveCProcessName = reporte.PreventiveCProcessName ?? new List<string>();
+            reporte.PreventiveCManpower = reporte.PreventiveCManpower ?? new List<string>();
+            reporte.PreventiveCMethod = reporte.PreventiveCMethod ?? new List<string>();
+            reporte.PreventiveCMachinary = reporte.PreventiveCMachinary ?? new List<string>();
+            reporte.PreventiveCMaterial = reporte.PreventiveCMaterial ?? new List<string>();
+            reporte.PreventiveCMeasurement = reporte.PreventiveCMeasurement ?? new List<string>();
+            reporte.PreventiveCEnvironment = reporte.PreventiveCEnvironment ?? new List<string>();
+            reporte.PreventiveCRank = reporte.PreventiveCRank ?? new List<int>();
+
+            reporte.DetectionCProcessName = reporte.DetectionCProcessName ?? new List<string>();
+            reporte.DetectionCManpower = reporte.DetectionCManpower ?? new List<string>();
+            reporte.DetectionCMethod = reporte.DetectionCMethod ?? new List<string>();
+            reporte.DetectionCMachinary = reporte.DetectionCMachinary ?? new List<string>();
+            reporte.DetectionCMaterial = reporte.DetectionCMaterial ?? new List<string>();
+            reporte.DetectionCMeasurement = reporte.DetectionCMeasurement ?? new List<string>();
+            reporte.DetectionCEnvironment = reporte.DetectionCEnvironment ?? new List<string>();
+            reporte.DetectionCRank = reporte.DetectionCRank ?? new List<int>();
+
+            reporte.FactorUno = reporte.FactorUno ?? new List<string>();
+            reporte.FactorUnoPrimerWhy = reporte.FactorUnoPrimerWhy ?? new List<string>();
+            reporte.FactorUnoSegundoWhy = reporte.FactorUnoSegundoWhy ?? new List<string>();
+            reporte.FactorUnoTercerWhy = reporte.FactorUnoTercerWhy ?? new List<string>();
+            reporte.FactorUnoCuartoWhy = reporte.FactorUnoCuartoWhy ?? new List<string>();
+            reporte.FactorUnoQuintoWhy = reporte.FactorUnoQuintoWhy ?? new List<string>();
+            reporte.FactorUnoCorrectiveActions = reporte.FactorUnoCorrectiveActions ?? new List<string>();
+
+            reporte.FactorDos = reporte.FactorDos ?? new List<string>();
+            reporte.FactorDosPrimerWhy = reporte.FactorDosPrimerWhy ?? new List<string>();
+            reporte.FactorDosSegundoWhy = reporte.FactorDosSegundoWhy ?? new List<string>();
+            reporte.FactorDosTercerWhy = reporte.FactorDosTercerWhy ?? new List<string>();
+            reporte.FactorDosCuartoWhy = reporte.FactorDosCuartoWhy ?? new List<string>();
+            reporte.FactorDosQuintoWhy = reporte.FactorDosQuintoWhy ?? new List<string>();
+            reporte.FactorDosCorrectiveActions = reporte.FactorDosCorrectiveActions ?? new List<string>();
+
+            reporte.FactorTres = reporte.FactorTres ?? new List<string>();
+            reporte.FactorTresPrimerWhy = reporte.FactorTresPrimerWhy ?? new List<string>();
+            reporte.FactorTresSegundoWhy = reporte.FactorTresSegundoWhy ?? new List<string>();
+            reporte.FactorTresTercerWhy = reporte.FactorTresTercerWhy ?? new List<string>();
+            reporte.FactorTresCuartoWhy = reporte.FactorTresCuartoWhy ?? new List<string>();
+            reporte.FactorTresQuintoWhy = reporte.FactorTresQuintoWhy ?? new List<string>();
+            reporte.FactorTresCorrectiveActions = reporte.FactorTresCorrectiveActions ?? new List<string>();
+
+            reporte.OccurrenceItems = reporte.OccurrenceItems ?? new List<string>();
+            reporte.OccurrenceAction = reporte.OccurrenceAction ?? new List<string>();
+            reporte.OccurrenceResponsable = reporte.OccurrenceResponsable ?? new List<string>();
+            reporte.OccurrenceDepartment = reporte.OccurrenceDepartment ?? new List<string>();
+            reporte.OccurrenceOpeningDate = reporte.OccurrenceOpeningDate ?? new List<DateTime>();
+            reporte.OccurrenceCloseDate = reporte.OccurrenceCloseDate ?? new List<DateTime>();
+            reporte.OccurrenceAmef = reporte.OccurrenceAmef ?? new List<string>();
+            reporte.OccurrenceCp = reporte.OccurrenceCp ?? new List<string>();
+
+            reporte.DetectionItems = reporte.DetectionItems ?? new List<string>();
+            reporte.DetectionAction = reporte.DetectionAction ?? new List<string>();
+            reporte.DetectionResponsable = reporte.DetectionResponsable ?? new List<string>();
+            reporte.DetectionDepartment = reporte.DetectionDepartment ?? new List<string>();
+            reporte.DetectionOpeningDate = reporte.DetectionOpeningDate ?? new List<DateTime>();
+            reporte.DetectionCloseDate = reporte.DetectionCloseDate ?? new List<DateTime>();
+            reporte.DetectionAmef = reporte.DetectionAmef ?? new List<string>();
+            reporte.DetectionCp = reporte.DetectionCp ?? new List<string>();
+
+            reporte.VerOccurrenceItems = reporte.VerOccurrenceItems ?? new List<string>();
+            reporte.VerOccurrenceAction = reporte.VerOccurrenceAction ?? new List<string>();
+            reporte.VerOccurrenceResponsable = reporte.VerOccurrenceResponsable ?? new List<string>();
+            reporte.VerOccurrenceDepartment = reporte.VerOccurrenceDepartment ?? new List<string>();
+            reporte.VerOccurrenceOpeningDate = reporte.VerOccurrenceOpeningDate ?? new List<DateTime>();
+            reporte.VerOccurrenceCloseDate = reporte.VerOccurrenceCloseDate ?? new List<DateTime>();
+            reporte.VerOccurrenceAmef = reporte.VerOccurrenceAmef ?? new List<string>();
+            reporte.VerOccurrenceCp = reporte.VerOccurrenceCp ?? new List<string>();
+
+            reporte.VerDetectionItems = reporte.VerDetectionItems ?? new List<string>();
+            reporte.VerDetectionAction = reporte.VerDetectionAction ?? new List<string>();
+            reporte.VerDetectionResponsable = reporte.VerDetectionResponsable ?? new List<string>();
+            reporte.VerDetectionDepartment = reporte.VerDetectionDepartment ?? new List<string>();
+            reporte.VerDetectionOpeningDate = reporte.VerDetectionOpeningDate ?? new List<DateTime>();
+            reporte.VerDetectionCloseDate = reporte.VerDetectionCloseDate ?? new List<DateTime>();
+            reporte.VerDetectionAmef = reporte.VerDetectionAmef ?? new List<string>();
+            reporte.VerDetectionCp = reporte.VerDetectionCp ?? new List<string>();
+
+            reporte.D7D8Sn = reporte.D7D8Sn ?? new List<string>();
+            reporte.D7D8CodeDescription = reporte.D7D8CodeDescription ?? new List<string>();
+            reporte.D7D8Responsible = reporte.D7D8Responsible ?? new List<string>();
+            reporte.D7D8Deadline = reporte.D7D8Deadline ?? new List<DateTime>();
+            reporte.D7D8ActualClosingDate = reporte.D7D8ActualClosingDate ?? new List<DateTime>();
+            reporte.D7D8Comments = reporte.D7D8Comments ?? new List<string>();
 
             return View(reporte);
         }

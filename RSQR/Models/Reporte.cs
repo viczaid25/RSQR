@@ -532,5 +532,85 @@ namespace RSQR.Models
 
         [Display(Name = "CP")]
         public List<string>? DetectionCp { get; set; } = new List<string>();
+
+        //D6 Verification of Implementation of Permanent Corrective Actions
+        //Occurrence
+        [Display(Name = "No Item")]
+        public List<string>? VerOccurrenceItems { get; set; } = new List<string>();
+
+        [Display(Name = "Action")]
+        public List<string>? VerOccurrenceAction { get; set; } = new List<string>();
+
+        [Display(Name = "Responsable")]
+        public List<string>? VerOccurrenceResponsable { get; set; } = new List<string>();
+
+        [Display(Name = "Department")]
+        public List<string>? VerOccurrenceDepartment { get; set; } = new List<string>();
+
+        [Display(Name = "Opening Date")]
+        public List<DateTime>? VerOccurrenceOpeningDate { get; set; } = new List<DateTime>();
+
+        [Display(Name = "Close Date")]
+        public List<DateTime>? VerOccurrenceCloseDate { get; set; } = new List<DateTime>();
+
+        [Display(Name = "AMEF")]
+        public List<string>? VerOccurrenceAmef { get; set; } = new List<string>();
+
+        [Display(Name = "CP")]
+        public List<string>? VerOccurrenceCp { get; set; } = new List<string>();
+
+        //Detection
+        [Display(Name = "No Item")]
+        public List<string>? VerDetectionItems { get; set; } = new List<string>();
+
+        [Display(Name = "Action")]
+        public List<string>? VerDetectionAction { get; set; } = new List<string>();
+
+        [Display(Name = "Responsable")]
+        public List<string>? VerDetectionResponsable { get; set; } = new List<string>();
+
+        [Display(Name = "Department")]
+        public List<string>? VerDetectionDepartment { get; set; } = new List<string>();
+
+        [Display(Name = "Opening Date")]
+        public List<DateTime>? VerDetectionOpeningDate { get; set; } = new List<DateTime>();
+
+        [Display(Name = "Close Date")]
+        public List<DateTime>? VerDetectionCloseDate { get; set; } = new List<DateTime>();
+
+        [Display(Name = "AMEF")]
+        public List<string>? VerDetectionAmef { get; set; } = new List<string>();
+
+        [Display(Name = "CP")]
+        public List<string>? VerDetectionCp { get; set; } = new List<string>();
+
+        //D7 D8 Preventive Activities And Standards of Ensure The Horizontality of countermeasures
+
+        [Display(Name = "Documentation")]
+        public List<string>? D7D8Documentation { get; set; } = new List<string>();
+
+        [Display(Name = "SN")]
+        public List<string>? D7D8Sn { get; set; } = new List<string>();
+
+        [Display(Name = "Code/Document Description")]
+        public List<string>? D7D8CodeDescription { get; set; } = new List<string>();
+
+        [Display(Name = "Responsible")]
+        public List<string>? D7D8Responsible { get; set; } = new List<string>();
+
+        [Display(Name = "Deadline")]
+        public List<DateTime>? D7D8Deadline { get; set; } = new List<DateTime>();
+
+        [Display(Name = "Actual Closing Date")]
+        public List<DateTime>? D7D8ActualClosingDate { get; set; } = new List<DateTime>();
+
+        [Display(Name = "Comments")]
+        public List<string>? D7D8Comments { get; set; } = new List<string>();
+
+        [Display(Name = "Approval")]
+        public string? Approval { get; set; }
+
+        [Display(Name = "Status")]
+        public string? Status { get; set; }
     }
 }

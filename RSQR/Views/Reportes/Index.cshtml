@@ -1,7 +1,29 @@
 @model IEnumerable<RSQR.Models.Reporte>
 <style>
-    h1 {
-        color: #000 !important;
+    /* Estilos para los filtros */
+    .filter-container {
+        min-width: 100px;
+        margin-bottom: 5px;
+    }
+
+        .filter-container select,
+        .filter-container input {
+            width: 100% !important;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+        }
+
+    /* Asegurar que los encabezados con filtros tengan suficiente espacio */
+    thead th {
+        padding-top: 0 !important;
+        vertical-align: bottom !important;
+    }
+
+    /* Consulta de medios correctamente estructurada */
+    @@media (max-width: 768px) {
+        .filter-container {
+            min-width: 80px;
+        }
     }
 </style>
 @{
@@ -102,19 +124,99 @@
 @section Scripts {
     <script>
         $(document).ready(function() {
-            $('#reportesTable').DataTable({
+            // Inicializar DataTable con configuración extendida
+            var table = $('#reportesTable').DataTable({
                 responsive: true,
                 language: {
                     url: 'https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
                 },
                 columnDefs: [
-                    { orderable: false, targets: [8] } // Deshabilitar ordenación en columna Acciones
+                    { orderable: false, targets: [8, 9] }, // Deshabilitar ordenación en columnas Evidence y Actions
+                    { searchable: false, targets: [8, 9] } // Deshabilitar búsqueda en columnas Evidence y Actions
                 ],
                 dom: '<"top"f>rt<"bottom"lip><"clear">',
                 initComplete: function() {
                     $('.dataTables_filter input').addClass('form-control');
                     $('.dataTables_length select').addClass('form-select');
+
+                    // Agregar campos de filtro a cada columna
+                    this.api().columns().every(function(index) {
+                        var column = this;
+
+                        // No agregar filtro a las columnas de Evidence y Actions
+                        if (index === 8 || index === 9) return;
+
+                        // Crear contenedor para el filtro
+                        var header = $(column.header());
+                        var title = header.text().trim();
+                        var filterContainer = $('<div class="filter-container"></div>').appendTo(header);
+
+                        // Caso especial para columna de fechas
+                        if (index === 1) {
+                            $('<input type="date" class="form-control form-control-sm mb-2" placeholder="Filtrar '+title+'" />')
+                                .appendTo(filterContainer)
+                                .on('change', function() {
+                                    if (column.search() !== this.value) {
+                                        column.search(this.value).draw();
+                                    }
+                                });
+                            return;
+                        }
+
+                        // Caso especial para columna de nivel (ProblemRank)
+                        if (index === 2) {
+                            var select = $('<select class="form-select form-select-sm mb-2"><option value="">Todos</option></select>')
+                                .appendTo(filterContainer)
+                                .on('change', function() {
+                                    column.search(this.value).draw();
+                                });
+
+                            // Obtener valores únicos de la columna
+                            column.data().unique().sort().each(function(d) {
+                                var value = $.trim(d);
+                                if (value) {
+                                    select.append('<option value="'+value+'">'+value+'</option>');
+                                }
+                            });
+                            return;
+                        }
+
+                        // Caso especial para columna PPM Impact (booleana)
+                        if (index === 7) {
+                            $('<select class="form-select form-select-sm mb-2"><option value="">Todos</option><option value="true">With Impact</option><option value="false">No Impact</option></select>')
+                                .appendTo(filterContainer)
+                                .on('change', function() {
+                                    column.search(this.value).draw();
+                                });
+                            return;
+                        }
+
+                        // Para columnas con texto normal
+                        var select = $('<select class="form-select form-select-sm mb-2"><option value="">Todos</option></select>')
+                            .appendTo(filterContainer)
+                            .on('change', function() {
+                                column.search(this.value).draw();
+                            });
+
+                        // Obtener valores únicos de la columna
+                        column.data().unique().sort().each(function(d) {
+                            var value = $.trim(d);
+                            if (value) {
+                                select.append('<option value="'+value+'">'+value+'</option>');
+                            }
+                        });
+                    });
                 }
+            });
+
+            // Aplicar estilos a los filtros
+            $('thead th').css({
+                'vertical-align': 'bottom',
+                'position': 'relative'
+            });
+
+            $('.filter-container').css({
+                'min-width': '100px'
             });
         });
     </script>

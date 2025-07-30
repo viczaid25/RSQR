@@ -167,6 +167,10 @@
   - [BuildTargetModel()](#M-RSQR-Migrations-newContainment-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.newContainment.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
   - [Down()](#M-RSQR-Migrations-newContainment-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.newContainment.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
   - [Up()](#M-RSQR-Migrations-newContainment-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.newContainment.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+- [thirdStepData](#T-RSQR-Migrations-thirdStepData 'RSQR.Migrations.thirdStepData')
+  - [BuildTargetModel()](#M-RSQR-Migrations-thirdStepData-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.thirdStepData.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
+  - [Down()](#M-RSQR-Migrations-thirdStepData-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.thirdStepData.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+  - [Up()](#M-RSQR-Migrations-thirdStepData-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.thirdStepData.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
 
 <a name='T-RSQR-Controllers-AccountController'></a>
 ## AccountController `type`
@@ -1919,6 +1923,50 @@ This method has no parameters.
 This method has no parameters.
 
 <a name='M-RSQR-Migrations-newContainment-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Up() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-RSQR-Migrations-thirdStepData'></a>
+## thirdStepData `type`
+
+##### Namespace
+
+RSQR.Migrations
+
+##### Summary
+
+*Inherit from parent.*
+
+<a name='M-RSQR-Migrations-thirdStepData-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder-'></a>
+### BuildTargetModel() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-thirdStepData-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Down() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-thirdStepData-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
 ### Up() `method`
 
 ##### Summary

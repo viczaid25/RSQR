@@ -188,124 +188,40 @@
             se bloquee y se use para inicializar el contexto.
             </remarks>
         </member>
-        <member name="T:RSQR.Migrations.NewMigration">
+        <member name="T:RSQR.Migrations.newContainment">
             <inheritdoc />
         </member>
-        <member name="M:RSQR.Migrations.NewMigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:RSQR.Migrations.newContainment.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:RSQR.Migrations.NewMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:RSQR.Migrations.newContainment.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:RSQR.Migrations.NewMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:RSQR.Migrations.newContainment.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:RSQR.Migrations.UpdateImpactoPPMType">
+        <member name="T:RSQR.Migrations.d4d5fields">
             <inheritdoc />
         </member>
-        <member name="M:RSQR.Migrations.UpdateImpactoPPMType.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:RSQR.Migrations.d4d5fields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:RSQR.Migrations.UpdateImpactoPPMType.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:RSQR.Migrations.d4d5fields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:RSQR.Migrations.UpdateImpactoPPMType.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:RSQR.Migrations.d4d5fields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:RSQR.Migrations.UpdateTipoField">
+        <member name="T:RSQR.Migrations.thirdStepData">
             <inheritdoc />
         </member>
-        <member name="M:RSQR.Migrations.UpdateTipoField.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:RSQR.Migrations.thirdStepData.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:RSQR.Migrations.UpdateTipoField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:RSQR.Migrations.thirdStepData.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:RSQR.Migrations.UpdateTipoField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:RSQR.Migrations.UpdateCincoMField">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.UpdateCincoMField.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.UpdateCincoMField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.UpdateCincoMField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:RSQR.Migrations.UpdateResponsabilidadField">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.UpdateResponsabilidadField.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.UpdateResponsabilidadField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.UpdateResponsabilidadField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:RSQR.Migrations.AddConsecutivoArchivoTable">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.AddConsecutivoArchivoTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.AddConsecutivoArchivoTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.AddConsecutivoArchivoTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:RSQR.Migrations.AddNombreCarToReporte">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.AddNombreCarToReporte.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.AddNombreCarToReporte.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.AddNombreCarToReporte.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:RSQR.Migrations.FixPpmReportIdentity">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.FixPpmReportIdentity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.FixPpmReportIdentity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.FixPpmReportIdentity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:RSQR.Migrations.AddCustomerReportField">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.AddCustomerReportField.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.AddCustomerReportField.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.AddCustomerReportField.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:RSQR.Migrations.InitialCreate">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:RSQR.Migrations.thirdStepData.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:RSQR.Models.ConsecutivoArchivo">
@@ -655,14 +571,26 @@
         <member name="P:RSQR.Models.Reporte.ContencionItems">
             <summary>Ítems para acciones de contención</summary>
         </member>
-        <member name="P:RSQR.Models.Reporte.ContencionActividades">
+        <member name="P:RSQR.Models.Reporte.ContencionConsiderar">
             <summary>Actividades de contención</summary>
         </member>
-        <member name="P:RSQR.Models.Reporte.ContencionResponsables">
+        <member name="P:RSQR.Models.Reporte.ContencionActivity">
             <summary>Responsables de las acciones</summary>
         </member>
-        <member name="P:RSQR.Models.Reporte.ContencionFechasInicio">
+        <member name="P:RSQR.Models.Reporte.ContencionResponsable">
             <summary>Fechas de inicio de acciones</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.ContencionTotalSuspeciousParts">
+            <summary>Responsables de las acciones</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.ContencionOkParts">
+            <summary>Responsables de las acciones</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.ContencionNgParts">
+            <summary>Responsables de las acciones</summary>
+        </member>
+        <member name="P:RSQR.Models.Reporte.ContencionEffectiveness">
+            <summary>Responsables de las acciones</summary>
         </member>
         <member name="P:RSQR.Models.Reporte.AlertaCalidad">
             <summary>Indica si se generó alerta de calidad</summary>

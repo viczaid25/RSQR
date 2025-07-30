@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "O0+2kmXtn5YhXz86A7eLIJvw1PHwBYjE5xLFJGVLk8o=",
+  "Hash": "ZecE4MIRlDgpxz0C3d35kiD2JfuGYC7iGmhjYTMnxyo=",
   "Source": "RSQR",
   "BasePath": "_content/RSQR",
   "Mode": "Default",
@@ -1359,6 +1359,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\wwwroot\\js\\reportEdit.js",
+      "SourceId": "RSQR",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\wwwroot\\",
+      "BasePath": "_content/RSQR",
+      "RelativePath": "js/reportEdit#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "0alntkhfeu",
+      "Integrity": "iFfHQkJalPrtgJN0sZiUM5TDdECrSzffYzaFiXn61SI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\reportEdit.js"
     },
     {
       "Identity": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\wwwroot\\js\\site.js",
@@ -4982,6 +5003,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+        }
+      ]
+    },
+    {
+      "Route": "js/reportEdit.0alntkhfeu.js",
+      "AssetFile": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\wwwroot\\js\\reportEdit.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "34163"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"iFfHQkJalPrtgJN0sZiUM5TDdECrSzffYzaFiXn61SI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 23 Jul 2025 18:28:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "0alntkhfeu"
+        },
+        {
+          "Name": "label",
+          "Value": "js/reportEdit.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-iFfHQkJalPrtgJN0sZiUM5TDdECrSzffYzaFiXn61SI="
+        }
+      ]
+    },
+    {
+      "Route": "js/reportEdit.js",
+      "AssetFile": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\wwwroot\\js\\reportEdit.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "34163"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"iFfHQkJalPrtgJN0sZiUM5TDdECrSzffYzaFiXn61SI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 23 Jul 2025 18:28:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-iFfHQkJalPrtgJN0sZiUM5TDdECrSzffYzaFiXn61SI="
         }
       ]
     },

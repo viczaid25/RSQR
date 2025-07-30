@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\wwwroot\\js\\reportEdit.js",
+      "PackagePath": "staticwebassets\\js\\reportEdit.js"
+    },
+    {
       "Id": "C:\\Users\\dm45207\\source\\repos\\RSQR\\RSQR\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
