@@ -358,7 +358,7 @@ public class PPMController : Controller
                 sqlCommand.Connection = sqlConnection;
                 sqlCommand.CommandText = @"
                     SELECT SUM(CuantosP) 
-                    FROM PpmReports
+                    FROM [dbo].[qcPpmReport]
                     WHERE Linea = @descripcion";
 
                 sqlCommand.Parameters.Add(new SqlParameter("@descripcion", descripcion));

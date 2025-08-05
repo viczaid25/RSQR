@@ -142,15 +142,15 @@
     if (maxFmRows == 0) { maxFmRows = 1; }
 }
 
-<div class="content-wrapper">
-    <div class="container-fluid">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="display-6 text-primary">Edit Report</h1>
-            <a asp-action="Index" class="btn btn-outline-primary rounded-pill">
-                <i class="fas fa-arrow-left me-1"></i> Back To List
-            </a>
-        </div>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="display-6 text-dark fw-bold">@ViewData["Title"]</h1>
+    <a asp-action="Index" class="btn btn-outline-primary rounded-pill">
+        <i class="fas fa-arrow-left me-1"></i> Back To List
+    </a>
+</div>
 
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
         <div class="card shadow-sm rounded-lg mb-4">
             <div class="card-header bg-primary text-white">
                 <h5 class="mb-0"><i class="fas fa-file-alt me-2"></i>D0 Initial Notification</h5>
@@ -1108,7 +1108,7 @@
                                 <!-- Detection Section -->
                                 <div class="card shadow-sm">
                                     <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
-                                        <h6 class="mb-0 text-white"><i class="fas fa-search me-2"></i>Impact on PPM</h6>                                    
+                                        <h6 class="mb-0 text-white"><i class="fas fa-search me-2"></i>Impact on PPM</h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="form-floating mb-3">
@@ -1126,7 +1126,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -1423,13 +1423,13 @@
                             </div>
                         </div>
                     </div>
- 
+
                     <!-- Section 8: Analysis and Controls -->
                     <div class="col-12">
                         <div class="card shadow-sm mb-4">
-                            
+
                             <div class="card-body">
-                                
+
 
                                 <!-- Mostrar las imágenes existentes -->
                                 @if (ViewBag.ArchivosExistentes != null && ViewBag.ArchivosExistentes.Count > 0)
@@ -1492,6 +1492,8 @@
         </div>
     </div>
 </div>
+
+
 
 @section Styles {
     <style>
