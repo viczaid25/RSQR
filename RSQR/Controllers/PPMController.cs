@@ -10,9 +10,17 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Data.SqlClient; // Este es el correcto para .NET Core/5+
 
 /// <summary>
-/// Controlador para manejar las operaciones relacionadas con el cálculo PPM (Parts Per Million).
-/// Requiere autenticación para acceder a sus métodos.
+/// Controlador encargado de manejar las operaciones de cálculo de PPM (Parts Per Million).
+/// Se conecta a bases de datos Oracle y SQL Server para obtener información de embarques y reclamaciones.
+/// Requiere autenticación mediante el atributo <see cref="AuthorizeAttribute"/>.
 /// </summary>
+/// <remarks>
+/// Este controlador realiza cálculos de PPM en base a:
+/// - Cantidad de piezas enviadas (Oracle).
+/// - Cantidad de piezas defectuosas (SQL Server).
+/// 
+/// Además, soporta el manejo de grupos de descripciones predefinidas y casos especiales.
+/// </remarks>
 [Authorize]
 public class PPMController : Controller
 {
@@ -32,12 +40,14 @@ public class PPMController : Controller
     private readonly string sqlServerConnectionString;
 
     /// <summary>
-    /// Diccionario que mapea grupos de descripciones para consultas agrupadas.
-    /// Contiene tres grupos principales:
-    /// - CM_GROUP: Descripciones relacionadas con sistemas de control de motor
-    /// - EPS_GROUP: Descripciones relacionadas con sistemas de dirección eléctrica
-    /// - BCM_GROUP: Descripciones relacionadas con módulos de control de carrocería
+    /// Diccionario que mapea nombres de grupos a una lista de descripciones que los componen.
+    /// Utilizado para realizar consultas de forma agrupada.
     /// </summary>
+    /// <remarks>
+    /// Ejemplos:
+    /// - "CM" incluye varios tipos de sistemas de control de motor.
+    /// - "EPS(3G)" agrupa piezas de dirección eléctrica de tercera generación.
+    /// </remarks>
     private readonly Dictionary<string, List<string>> _gruposDescripciones = new()
     {
         ["CM"] = new List<string> {
@@ -125,12 +135,20 @@ public class PPMController : Controller
     }
 
     /// <summary>
-    /// Calcula el total de cajas y el valor PPM para un rango de fechas y descripción específicos.
+    /// Calcula el total de cajas enviadas y el valor PPM (Parts Per Million) para un rango de fechas y descripción especificados.
     /// </summary>
-    /// <param name="fechaInicio">Fecha de inicio en formato yyyy-MM-dd</param>
-    /// <param name="fechaFin">Fecha de fin en formato yyyy-MM-dd</param>
-    /// <param name="descripcion">Descripción del producto o grupo de productos</param>
-    /// <returns>Objeto JSON con total de cajas, valor PPM y posibles errores</returns>
+    /// <param name="fechaInicio">Fecha inicial en formato <c>yyyy-MM-dd</c>.</param>
+    /// <param name="fechaFin">Fecha final en formato <c>yyyy-MM-dd</c>.</param>
+    /// <param name="descripcion">Descripción del producto o grupo de productos.</param>
+    /// <returns>
+    /// Objeto JSON con:
+    /// - <c>totalCajas</c>: total de cajas enviadas.
+    /// - <c>division</c>: valor PPM calculado.
+    /// - <c>error</c>: mensaje de error si aplica.
+    /// </returns>
+    /// <remarks>
+    /// Fórmula de cálculo: <c>(Piezas defectuosas / Total de piezas enviadas) * 1,000,000</c>.
+    /// </remarks>
     public IActionResult SumarCajas(string fechaInicio, string fechaFin, string descripcion)
     {
         decimal totalCajas = 0;
@@ -176,13 +194,173 @@ public class PPMController : Controller
     }
 
     /// <summary>
-    /// Obtiene el total de cajas enviadas desde Oracle para un producto o grupo de productos
-    /// en un rango de fechas específico.
+    /// Obtiene datos mes a mes para generar un gráfico de PPM y reclamaciones en un rango de fechas.
     /// </summary>
-    /// <param name="descripcion">Descripción del producto o nombre del grupo</param>
-    /// <param name="fechaInicio">Fecha de inicio formateada (dd-MMM-yy)</param>
-    /// <param name="fechaFin">Fecha de fin formateada (dd-MMM-yy)</param>
-    /// <returns>Total de cajas como valor decimal</returns>
+    /// <param name="fechaInicio">Fecha inicial en formato <c>yyyy-MM-dd</c>.</param>
+    /// <param name="fechaFin">Fecha final en formato <c>yyyy-MM-dd</c>.</param>
+    /// <param name="descripcion">Descripción del producto o grupo.</param>
+    /// <returns>
+    /// Objeto JSON con:
+    /// - <c>labels</c>: lista de meses.
+    /// - <c>reclamos</c>: lista con el total de reclamaciones por mes.
+    /// - <c>ppm</c>: lista con los valores PPM por mes.
+    /// </returns>
+    [HttpGet]
+    public IActionResult ObtenerDatosGrafico(string fechaInicio, string fechaFin, string descripcion)
+    {
+        try
+        {
+            DateTime inicio = DateTime.ParseExact(fechaInicio, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            DateTime fin = DateTime.ParseExact(fechaFin, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+            var meses = new List<string>();
+            var reclamosPorMes = new List<decimal>();
+            var ppmPorMes = new List<decimal>();
+
+            // Iterar por cada mes en el rango
+            for (var dt = inicio; dt <= fin; dt = dt.AddMonths(1))
+            {
+                var mesInicio = new DateTime(dt.Year, dt.Month, 1);
+                var mesFin = mesInicio.AddMonths(1).AddDays(-1);
+
+                // Ajustar fechas para no exceder el rango solicitado
+                if (mesInicio < inicio) mesInicio = inicio;
+                if (mesFin > fin) mesFin = fin;
+
+                string mesInicioFormateado = mesInicio.ToString("dd-MMM-yy", CultureInfo.InvariantCulture).ToUpper();
+                string mesFinFormateado = mesFin.ToString("dd-MMM-yy", CultureInfo.InvariantCulture).ToUpper();
+
+                // Obtener datos para el mes
+                decimal totalCajas = ObtenerTotalCajasOracle(descripcion, mesInicioFormateado, mesFinFormateado);
+                decimal sumaCuantosP = ObtenerSumaCuantosPSqlServer(descripcion);
+                decimal ppm = sumaCuantosP != 0 ? (sumaCuantosP / totalCajas) * 1000000 : 0;
+
+                meses.Add(mesInicio.ToString("MMM yyyy"));
+                reclamosPorMes.Add(sumaCuantosP);
+                ppmPorMes.Add(ppm);
+            }
+
+            return Json(new
+            {
+                labels = meses,
+                reclamos = reclamosPorMes,
+                ppm = ppmPorMes
+            });
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error al obtener datos para gráfico: {ex.Message}");
+            return Json(new { error = ex.Message });
+        }
+    }
+
+    /// <summary>
+    /// Obtiene el PPM acumulado para el mes actual considerando todas las descripciones configuradas.
+    /// </summary>
+    /// <returns>Objeto JSON con el valor PPM y la fecha de referencia.</returns>
+    [HttpGet]
+    public IActionResult GetPpmMesActual()
+    {
+        try
+        {
+            DateTime ahora = DateTime.Now;
+            DateTime inicioMes = new DateTime(ahora.Year, ahora.Month, 1);
+            DateTime finMes = inicioMes.AddMonths(1).AddDays(-1);
+
+            string inicioFormateado = inicioMes.ToString("dd-MMM-yy", CultureInfo.InvariantCulture).ToUpper();
+            string finFormateado = finMes.ToString("dd-MMM-yy", CultureInfo.InvariantCulture).ToUpper();
+
+            // Obtener datos para todas las descripciones
+            var descripciones = new List<string> {
+            "STARTER", "ALTERNATOR", "SSU Circuit Board", "FOB", "RCV", "CM",
+            "EPS(3G)", "PT BCM", "PT LFU", "EPS", "CID", "LCM", "AMP",
+            "R1", "PT CM", "PT DISPLAY"
+        };
+
+            decimal totalCajas = 0;
+            decimal totalReclamos = 0;
+
+            foreach (var desc in descripciones)
+            {
+                totalCajas += ObtenerTotalCajasOracle(desc, inicioFormateado, finFormateado);
+                totalReclamos += ObtenerSumaCuantosPSqlServer(desc);
+            }
+
+            decimal ppm = totalReclamos != 0 ? (totalReclamos / totalCajas) * 1000000 : 0;
+
+            return Json(new { ppm = ppm.ToString("N2"), fechaInicio = inicioMes.ToString("MMM yyyy") });
+        }
+        catch (Exception ex)
+        {
+            return Json(new { error = ex.Message });
+        }
+    }
+
+    /// <summary>
+    /// Obtiene el PPM acumulado para el año fiscal en curso.
+    /// </summary>
+    /// <remarks>
+    /// El año fiscal se considera desde el 1 de abril hasta el 31 de marzo.
+    /// Si la fecha actual es anterior al fin del año fiscal, se usa la fecha actual como límite.
+    /// </remarks>
+    /// <returns>Objeto JSON con el PPM y el rango de fechas del año fiscal.</returns>
+    [HttpGet]
+    public IActionResult GetPpmAnioFiscal()
+    {
+        try
+        {
+            DateTime ahora = DateTime.Now;
+            int anioFiscalInicio = ahora.Month >= 4 ? ahora.Year : ahora.Year - 1;
+            DateTime inicioAnioFiscal = new DateTime(anioFiscalInicio, 4, 1);
+            DateTime finAnioFiscal = new DateTime(anioFiscalInicio + 1, 3, 31);
+
+            // Si el año fiscal futuro no ha terminado aún, usar la fecha actual
+            if (finAnioFiscal > ahora)
+            {
+                finAnioFiscal = ahora;
+            }
+
+            string inicioFormateado = inicioAnioFiscal.ToString("dd-MMM-yy", CultureInfo.InvariantCulture).ToUpper();
+            string finFormateado = finAnioFiscal.ToString("dd-MMM-yy", CultureInfo.InvariantCulture).ToUpper();
+
+            // Obtener datos para todas las descripciones
+            var descripciones = new List<string> {
+            "STARTER", "ALTERNATOR", "SSU Circuit Board", "FOB", "RCV", "CM",
+            "EPS(3G)", "PT BCM", "PT LFU", "EPS", "CID", "LCM", "AMP",
+            "R1", "PT CM", "PT DISPLAY"
+        };
+
+            decimal totalCajas = 0;
+            decimal totalReclamos = 0;
+
+            foreach (var desc in descripciones)
+            {
+                totalCajas += ObtenerTotalCajasOracle(desc, inicioFormateado, finFormateado);
+                totalReclamos += ObtenerSumaCuantosPSqlServer(desc);
+            }
+
+            decimal ppm = totalReclamos != 0 ? (totalReclamos / totalCajas) * 1000000 : 0;
+
+            return Json(new
+            {
+                ppm = ppm.ToString("N2"),
+                fechaInicio = inicioAnioFiscal.ToString("MMM yyyy"),
+                fechaFin = finAnioFiscal.ToString("MMM yyyy")
+            });
+        }
+        catch (Exception ex)
+        {
+            return Json(new { error = ex.Message });
+        }
+    }
+
+    /// <summary>
+    /// Obtiene el total de cajas enviadas desde Oracle para una descripción o grupo de descripciones en un rango de fechas.
+    /// </summary>
+    /// <param name="descripcion">Descripción o grupo.</param>
+    /// <param name="fechaInicio">Fecha inicial en formato <c>dd-MMM-yy</c>.</param>
+    /// <param name="fechaFin">Fecha final en formato <c>dd-MMM-yy</c>.</param>
+    /// <returns>Total de cajas enviadas.</returns>
     private decimal ObtenerTotalCajasOracle(string descripcion, string fechaInicio, string fechaFin)
     {
         using (OracleConnection oracleConnection = new OracleConnection(oracleConnectionString))
@@ -344,10 +522,10 @@ public class PPMController : Controller
     }
 
     /// <summary>
-    /// Obtiene la suma de partes defectuosas desde SQL Server para una descripción específica.
+    /// Obtiene la cantidad de piezas defectuosas desde SQL Server para una descripción.
     /// </summary>
-    /// <param name="descripcion">Descripción del producto o nombre del grupo</param>
-    /// <returns>Suma de partes defectuosas como valor decimal</returns>
+    /// <param name="descripcion">Descripción del producto o grupo.</param>
+    /// <returns>Total de piezas defectuosas.</returns>
     private decimal ObtenerSumaCuantosPSqlServer(string descripcion)
     {
         using (SqlConnection sqlConnection = new SqlConnection(sqlServerConnectionString))

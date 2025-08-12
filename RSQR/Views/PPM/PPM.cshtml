@@ -14,6 +14,27 @@
     <div class="card-body">
         <form id="fechasForm">
             <div class="row">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary">
+                        <h5 class="mb-0">Filtros Rápidos</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-filtro="anio_fiscal">
+                                <i class="fas fa-calendar-alt me-1"></i> Año Fiscal Actual
+                            </button>
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-filtro="semestre_actual">
+                                <i class="fas fa-calendar-week me-1"></i> Semestre Actual
+                            </button>
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-filtro="ultimo_mes">
+                                <i class="fas fa-calendar-day me-1"></i> Último Mes
+                            </button>
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-filtro="trimestre_actual">
+                                <i class="fas fa-calendar me-1"></i> Trimestre Actual
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-4">
                     <div class="form-group mb-3">
                         <label for="fechaInicio" class="form-label">Start Date</label>
@@ -72,67 +93,279 @@
     </div>
 </div>
 
+<div class="card shadow-sm" id="graficaContainer" style="display: none;">
+    <div class="card-header bg-primary">
+        <h5 class="mb-0">Graphical Representation</h5>
+    </div>
+    <div class="card-body">
+        <canvas id="graficaPPM" width="400" height="200"></canvas>
+    </div>
+</div>
+
 @section Scripts {
-    <script>
-        $(document).ready(function () {
-            $('#btnSumar').click(function () {
-                // Mostrar spinner de carga
-                $('#resultado').html('<div class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Cargando...</span></div></div>');
+        <script>
+            $(document).ready(function () {
+                let graficaPPM = null; // Variable para mantener la instancia del gráfico
 
-                // Obtener las fechas y la descripción del formulario
-                const fechaInicio = $('#fechaInicio').val();
-                const fechaFin = $('#fechaFin').val();
-                const descripcion = $('#descripcion').val();
-
-                // Validar que las fechas y la descripción no estén vacías
-                if (!fechaInicio || !fechaFin || !descripcion) {
-                    $('#resultado').html('<div class="alert alert-warning">Por favor, completa todos los campos.</div>');
-                    return;
-                }
-
-                // Validar que fecha inicio sea menor que fecha fin
-                if (new Date(fechaInicio) > new Date(fechaFin)) {
-                    $('#resultado').html('<div class="alert alert-warning">La fecha de inicio debe ser anterior a la fecha de fin.</div>');
-                    return;
-                }
-
-                // Enviar los datos al controlador mediante AJAX
-                $.ajax({
-                    url: '@Url.Action("SumarCajas", "PPM")',
-                    type: 'GET',
-                    data: {
-                        fechaInicio: fechaInicio,
-                        fechaFin: fechaFin,
-                        descripcion: descripcion
-                    },
-                    success: function (result) {
-                        const resultadoHTML = `
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card bg-light mb-3">
-                                        <div class="card-body text-center">
-                                            <h6 class="card-title">Total de Piezas</h6>
-                                            <p class="display-6 text-primary">${result.totalCajas}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card bg-light mb-3">
-                                        <div class="card-body text-center">
-                                            <h6 class="card-title">División PPM</h6>
-                                            <p class="display-6 text-primary">${result.division}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                        $('#resultado').html(resultadoHTML);
-                    },
-                    error: function () {
-                        $('#resultado').html('<div class="alert alert-danger">Error al realizar el cálculo. Intente nuevamente.</div>');
-                    }
+                // Event listeners para los botones de filtro
+                $('[data-filtro]').click(function() {
+                    const tipoFiltro = $(this).data('filtro');
+                    aplicarFiltro(tipoFiltro);
                 });
+
+                $('#btnSumar').click(function () {
+                    // Mostrar spinner de carga
+                    $('#resultado').html('<div class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Cargando...</span></div></div>');
+                    $('#graficaContainer').hide(); // Ocultar gráfico inicialmente
+
+                    // Obtener las fechas y la descripción del formulario
+                    const fechaInicio = $('#fechaInicio').val();
+                    const fechaFin = $('#fechaFin').val();
+                    const descripcion = $('#descripcion').val();
+
+                    // Validar que las fechas y la descripción no estén vacías
+                    if (!fechaInicio || !fechaFin || !descripcion) {
+                        $('#resultado').html('<div class="alert alert-warning">Por favor, completa todos los campos.</div>');
+                        return;
+                    }
+
+                    // Validar que fecha inicio sea menor que fecha fin
+                    if (new Date(fechaInicio) > new Date(fechaFin)) {
+                        $('#resultado').html('<div class="alert alert-warning">La fecha de inicio debe ser anterior a la fecha de fin.</div>');
+                        return;
+                    }
+
+                    // Calcular diferencia en meses
+                    const diffMonths = monthDiff(new Date(fechaInicio), new Date(fechaFin));
+
+                    // Enviar los datos al controlador mediante AJAX
+                    $.ajax({
+                        url: '@Url.Action("SumarCajas", "PPM")',
+                        type: 'GET',
+                        data: {
+                            fechaInicio: fechaInicio,
+                            fechaFin: fechaFin,
+                            descripcion: descripcion
+                        },
+                        success: function (result) {
+                            const resultadoHTML = `
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card bg-light mb-3">
+                                            <div class="card-body text-center">
+                                                <h6 class="card-title">Total de Piezas</h6>
+                                                <p class="display-6 text-primary">${result.totalCajas}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card bg-light mb-3">
+                                            <div class="card-body text-center">
+                                                <h6 class="card-title">División PPM</h6>
+                                                <p class="display-6 text-primary">${result.division.toFixed(2)}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            $('#resultado').html(resultadoHTML);
+
+                            // Si el rango es mayor a 1 mes, mostrar gráfico
+                            if (diffMonths > 1) {
+                                cargarDatosParaGrafico(fechaInicio, fechaFin, descripcion);
+                            }
+                        },
+                        error: function () {
+                            $('#resultado').html('<div class="alert alert-danger">Error al realizar el cálculo. Intente nuevamente.</div>');
+                        }
+                    });
+                });
+
+                // Función para aplicar filtros
+                function aplicarFiltro(tipoFiltro) {
+                    const hoy = new Date();
+                    let fechaInicio, fechaFin;
+
+                    switch (tipoFiltro) {
+                        case 'anio_fiscal':
+                            // Año fiscal (abril a marzo)
+                            const añoActual = hoy.getFullYear();
+                            const mesActual = hoy.getMonth(); // Enero = 0
+
+                            if (mesActual >= 3) { // Abril (3) en adelante
+                                fechaInicio = new Date(añoActual, 3, 1); // 1 de abril
+                                fechaFin = new Date(añoActual + 1, 2, 31); // 31 de marzo
+                            } else {
+                                fechaInicio = new Date(añoActual - 1, 3, 1); // 1 de abril del año anterior
+                                fechaFin = new Date(añoActual, 2, 31); // 31 de marzo del año actual
+                            }
+                            break;
+
+                        case 'semestre_actual':
+                            // Semestre fiscal (abril-septiembre u octubre-marzo)
+                            const semestre = hoy.getMonth() < 9 ? 1 : 2;
+                            if (semestre === 1) {
+                                fechaInicio = new Date(hoy.getFullYear(), 3, 1); // 1 de abril
+                                fechaFin = new Date(hoy.getFullYear(), 8, 30); // 30 de septiembre
+                            } else {
+                                fechaInicio = new Date(hoy.getFullYear(), 9, 1); // 1 de octubre
+                                fechaFin = new Date(hoy.getFullYear() + 1, 2, 31); // 31 de marzo
+                            }
+                            break;
+
+                        case 'trimestre_actual':
+                            // Trimestre dentro del año fiscal
+                            const mes = hoy.getMonth();
+                            if (mes >= 3 && mes <= 5) { // Abril (3) a Junio (5)
+                                fechaInicio = new Date(hoy.getFullYear(), 3, 1);
+                                fechaFin = new Date(hoy.getFullYear(), 5, 30);
+                            } else if (mes >= 6 && mes <= 8) { // Julio (6) a Septiembre (8)
+                                fechaInicio = new Date(hoy.getFullYear(), 6, 1);
+                                fechaFin = new Date(hoy.getFullYear(), 8, 30);
+                            } else if (mes >= 9 && mes <= 11) { // Octubre (9) a Diciembre (11)
+                                fechaInicio = new Date(hoy.getFullYear(), 9, 1);
+                                fechaFin = new Date(hoy.getFullYear(), 11, 31);
+                            } else { // Enero (0) a Marzo (2)
+                                fechaInicio = new Date(hoy.getFullYear() - 1, 0, 1);
+                                fechaFin = new Date(hoy.getFullYear() - 1, 2, 31);
+                            }
+                            break;
+
+                        case 'ultimo_mes':
+                            // Último mes completo
+                            fechaInicio = new Date(hoy.getFullYear(), hoy.getMonth() - 1, 1);
+                            fechaFin = new Date(hoy.getFullYear(), hoy.getMonth(), 0);
+                            break;
+
+                        default:
+                            return;
+                    }
+
+                    // Formatear fechas como YYYY-MM-DD
+                    function formatDate(date) {
+                        if (!date) return '';
+                        const d = new Date(date);
+                        const year = d.getFullYear();
+                        const month = String(d.getMonth() + 1).padStart(2, '0');
+                        const day = String(d.getDate()).padStart(2, '0');
+                        return `${year}-${month}-${day}`;
+                    }
+
+                    // Establecer valores en los campos de fecha
+                    $('#fechaInicio').val(formatDate(fechaInicio));
+                    $('#fechaFin').val(formatDate(fechaFin));
+
+                    // Mostrar confirmación visual
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: `Filtro aplicado: ${tipoFiltro.replace(/_/g, ' ')}`
+                    });
+                }
+
+                // Función para calcular diferencia en meses
+                function monthDiff(dateFrom, dateTo) {
+                    return dateTo.getMonth() - dateFrom.getMonth() +
+                           (12 * (dateTo.getFullYear() - dateFrom.getFullYear()));
+                }
+
+                // Función para cargar datos para el gráfico
+                function cargarDatosParaGrafico(fechaInicio, fechaFin, descripcion) {
+                    $.ajax({
+                        url: '@Url.Action("ObtenerDatosGrafico", "PPM")',
+                        type: 'GET',
+                        data: {
+                            fechaInicio: fechaInicio,
+                            fechaFin: fechaFin,
+                            descripcion: descripcion
+                        },
+                        success: function (data) {
+                            if (data && data.labels && data.reclamos && data.ppm) {
+                                mostrarGrafico(data.labels, data.reclamos, data.ppm);
+                                $('#graficaContainer').show();
+                            }
+                        },
+                        error: function () {
+                            console.error('Error al cargar datos para el gráfico');
+                        }
+                    });
+                }
+
+                // Función para mostrar el gráfico
+                function mostrarGrafico(labels, reclamosData, ppmData) {
+                    const ctx = document.getElementById('graficaPPM').getContext('2d');
+
+                    // Destruir gráfico anterior si existe
+                    if (graficaPPM) {
+                        graficaPPM.destroy();
+                    }
+
+                    graficaPPM = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'Reclamos',
+                                    data: reclamosData,
+                                    borderColor: 'rgb(255, 99, 132)',
+                                    backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                                    tension: 0.1,
+                                    yAxisID: 'y'
+                                },
+                                {
+                                    label: 'PPM',
+                                    data: ppmData,
+                                    borderColor: 'rgb(54, 162, 235)',
+                                    backgroundColor: 'rgba(54, 162, 235, 0.1)',
+                                    tension: 0.1,
+                                    yAxisID: 'y1'
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            interaction: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            scales: {
+                                y: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'left',
+                                    title: {
+                                        display: true,
+                                        text: 'Reclamos'
+                                    }
+                                },
+                                y1: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'right',
+                                    title: {
+                                        display: true,
+                                        text: 'PPM'
+                                    },
+                                    grid: {
+                                        drawOnChartArea: false
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
             });
-        });
-    </script>
+        </script>
 }

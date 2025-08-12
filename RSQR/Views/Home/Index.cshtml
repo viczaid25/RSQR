@@ -2,7 +2,148 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row mb-4">
+    <!-- Tarjeta PPM Mes Actual -->
+    <div class="col-md-6 mb-3">
+        <div class="card border-primary h-100 shadow-sm">
+            <div class="card-header custom-header-primary">
+                <h5 class="mb-0">
+                    <i class="fas fa-calendar-alt me-2"></i>PPM del Mes Actual
+                </h5>
+            </div>
+            <div class="card-body text-center">
+                <div class="d-flex justify-content-center align-items-center" style="height: 100px;">
+                    <div id="ppmMesActualLoading" class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                    </div>
+                    <div id="ppmMesActualContent" style="display: none;">
+                        <h2 class="display-4 text-primary mb-1" id="ppmMesActualValor">0.00</h2>
+                        <p class="text-muted mb-0" id="ppmMesActualPeriodo">Mes actual</p>
+                    </div>
+                    <div id="ppmMesActualError" class="text-danger" style="display: none;"></div>
+                </div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <small class="text-muted">Actualizado: <span id="lastUpdatedMes">@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</span></small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tarjeta PPM Año Fiscal -->
+    <div class="col-md-6 mb-3">
+        <div class="card border-success h-100 shadow-sm">
+            <div class="card-header custom-header-primary">
+                <h5 class="mb-0">
+                    <i class="fas fa-calendar-check me-2"></i>PPM del Año Fiscal
+                </h5>
+            </div>
+            <div class="card-body text-center">
+                <div class="d-flex justify-content-center align-items-center" style="height: 100px;">
+                    <div id="ppmAnioFiscalLoading" class="text-center py-4">
+                        <div class="spinner-border text-success" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                    </div>
+                    <div id="ppmAnioFiscalContent" style="display: none;">
+                        <h2 class="display-4 text-success mb-1" id="ppmAnioFiscalValor">0.00</h2>
+                        <p class="text-muted mb-0" id="ppmAnioFiscalPeriodo">Año fiscal en curso</p>
+                    </div>
+                    <div id="ppmAnioFiscalError" class="text-danger" style="display: none;"></div>
+                </div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <small class="text-muted">Año fiscal: Abril - Marzo - Actualizado: <span id="lastUpdatedAnio">@DateTime.Now.ToString("dd/MM/yyyy HH:mm")</span></small>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="row mt-4">
+    <!-- Tarjeta para Reports -->
+    <div class="col-md-6 mb-4">
+        <a asp-controller="Reportes" asp-action="Index" class="text-decoration-none">
+            <div class="card h-100 shadow-sm hover-effect">
+                <div class="card-body text-center">
+                    <i class="fas fa-file-alt fa-3x mb-3 text-primary"></i>
+                    <h5 class="card-title">Reports</h5>
+                    <p class="text-muted">View and generate system reports</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Tarjeta para PPM -->
+    <div class="col-md-6 mb-4">
+        <a asp-controller="PPM" asp-action="Ppm" class="text-decoration-none">
+            <div class="card h-100 shadow-sm hover-effect">
+                <div class="card-body text-center">
+                    <i class="fas fa-chart-line fa-3x mb-3 text-success"></i>
+                    <h5 class="card-title">PPM</h5>
+                    <p class="text-muted">Process Performance Monitoring</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Cargar datos del mes actual
+            cargarPpmMesActual();
+
+            // Cargar datos del año fiscal
+            cargarPpmAnioFiscal();
+
+            function cargarPpmMesActual() {
+                $.ajax({
+                    url: '@Url.Action("GetPpmMesActual", "PPM")',
+                    type: 'GET',
+                    success: function (data) {
+                        if (data.error) {
+                            $('#ppmMesActualError').text(data.error).show();
+                        } else {
+                            $('#ppmMesActualValor').text(data.ppm);
+                            $('#ppmMesActualPeriodo').text(data.fechaInicio);
+                            $('#ppmMesActualContent').show();
+                        }
+                        $('#ppmMesActualLoading').hide();
+                    },
+                    error: function () {
+                        $('#ppmMesActualError').text('Error al cargar datos').show();
+                        $('#ppmMesActualLoading').hide();
+                    }
+                });
+            }
+
+            function cargarPpmAnioFiscal() {
+                $.ajax({
+                    url: '@Url.Action("GetPpmAnioFiscal", "PPM")',
+                    type: 'GET',
+                    success: function (data) {
+                        if (data.error) {
+                            $('#ppmAnioFiscalError').text(data.error).show();
+                        } else {
+                            $('#ppmAnioFiscalValor').text(data.ppm);
+                            $('#ppmAnioFiscalPeriodo').text(`${data.fechaInicio} - ${data.fechaFin}`);
+                            $('#ppmAnioFiscalContent').show();
+                        }
+                        $('#ppmAnioFiscalLoading').hide();
+                    },
+                    error: function () {
+                        $('#ppmAnioFiscalError').text('Error al cargar datos').show();
+                        $('#ppmAnioFiscalLoading').hide();
+                    }
+                });
+            }
+
+            // Actualizar cada 5 minutos (opcional)
+            setInterval(function() {
+                cargarPpmMesActual();
+                cargarPpmAnioFiscal();
+            }, 300000);
+        });
+    </script>
+}
