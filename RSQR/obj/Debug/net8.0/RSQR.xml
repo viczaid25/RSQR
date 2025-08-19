@@ -790,9 +790,17 @@
         </member>
         <member name="T:PPMController">
             <summary>
-            Controlador para manejar las operaciones relacionadas con el cálculo PPM (Parts Per Million).
-            Requiere autenticación para acceder a sus métodos.
+            Controlador encargado de manejar las operaciones de cálculo de PPM (Parts Per Million).
+            Se conecta a bases de datos Oracle y SQL Server para obtener información de embarques y reclamaciones.
+            Requiere autenticación mediante el atributo <see cref="T:Microsoft.AspNetCore.Authorization.AuthorizeAttribute"/>.
             </summary>
+            <remarks>
+            Este controlador realiza cálculos de PPM en base a:
+            - Cantidad de piezas enviadas (Oracle).
+            - Cantidad de piezas defectuosas (SQL Server).
+            
+            Además, soporta el manejo de grupos de descripciones predefinidas y casos especiales.
+            </remarks>
         </member>
         <member name="F:PPMController._configuration">
             <summary>
@@ -811,12 +819,14 @@
         </member>
         <member name="F:PPMController._gruposDescripciones">
             <summary>
-            Diccionario que mapea grupos de descripciones para consultas agrupadas.
-            Contiene tres grupos principales:
-            - CM_GROUP: Descripciones relacionadas con sistemas de control de motor
-            - EPS_GROUP: Descripciones relacionadas con sistemas de dirección eléctrica
-            - BCM_GROUP: Descripciones relacionadas con módulos de control de carrocería
+            Diccionario que mapea nombres de grupos a una lista de descripciones que los componen.
+            Utilizado para realizar consultas de forma agrupada.
             </summary>
+            <remarks>
+            Ejemplos:
+            - "CM" incluye varios tipos de sistemas de control de motor.
+            - "EPS(3G)" agrupa piezas de dirección eléctrica de tercera generación.
+            </remarks>
         </member>
         <member name="M:PPMController.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
@@ -832,29 +842,66 @@
         </member>
         <member name="M:PPMController.SumarCajas(System.String,System.String,System.String)">
             <summary>
-            Calcula el total de cajas y el valor PPM para un rango de fechas y descripción específicos.
+            Calcula el total de cajas enviadas y el valor PPM (Parts Per Million) para un rango de fechas y descripción especificados.
             </summary>
-            <param name="fechaInicio">Fecha de inicio en formato yyyy-MM-dd</param>
-            <param name="fechaFin">Fecha de fin en formato yyyy-MM-dd</param>
-            <param name="descripcion">Descripción del producto o grupo de productos</param>
-            <returns>Objeto JSON con total de cajas, valor PPM y posibles errores</returns>
+            <param name="fechaInicio">Fecha inicial en formato <c>yyyy-MM-dd</c>.</param>
+            <param name="fechaFin">Fecha final en formato <c>yyyy-MM-dd</c>.</param>
+            <param name="descripcion">Descripción del producto o grupo de productos.</param>
+            <returns>
+            Objeto JSON con:
+            - <c>totalCajas</c>: total de cajas enviadas.
+            - <c>division</c>: valor PPM calculado.
+            - <c>error</c>: mensaje de error si aplica.
+            </returns>
+            <remarks>
+            Fórmula de cálculo: <c>(Piezas defectuosas / Total de piezas enviadas) * 1,000,000</c>.
+            </remarks>
+        </member>
+        <member name="M:PPMController.ObtenerDatosGrafico(System.String,System.String,System.String)">
+            <summary>
+            Obtiene datos mes a mes para generar un gráfico de PPM y reclamaciones en un rango de fechas.
+            </summary>
+            <param name="fechaInicio">Fecha inicial en formato <c>yyyy-MM-dd</c>.</param>
+            <param name="fechaFin">Fecha final en formato <c>yyyy-MM-dd</c>.</param>
+            <param name="descripcion">Descripción del producto o grupo.</param>
+            <returns>
+            Objeto JSON con:
+            - <c>labels</c>: lista de meses.
+            - <c>reclamos</c>: lista con el total de reclamaciones por mes.
+            - <c>ppm</c>: lista con los valores PPM por mes.
+            </returns>
+        </member>
+        <member name="M:PPMController.GetPpmMesActual">
+            <summary>
+            Obtiene el PPM acumulado para el mes actual considerando todas las descripciones configuradas.
+            </summary>
+            <returns>Objeto JSON con el valor PPM y la fecha de referencia.</returns>
+        </member>
+        <member name="M:PPMController.GetPpmAnioFiscal">
+            <summary>
+            Obtiene el PPM acumulado para el año fiscal en curso.
+            </summary>
+            <remarks>
+            El año fiscal se considera desde el 1 de abril hasta el 31 de marzo.
+            Si la fecha actual es anterior al fin del año fiscal, se usa la fecha actual como límite.
+            </remarks>
+            <returns>Objeto JSON con el PPM y el rango de fechas del año fiscal.</returns>
         </member>
         <member name="M:PPMController.ObtenerTotalCajasOracle(System.String,System.String,System.String)">
             <summary>
-            Obtiene el total de cajas enviadas desde Oracle para un producto o grupo de productos
-            en un rango de fechas específico.
+            Obtiene el total de cajas enviadas desde Oracle para una descripción o grupo de descripciones en un rango de fechas.
             </summary>
-            <param name="descripcion">Descripción del producto o nombre del grupo</param>
-            <param name="fechaInicio">Fecha de inicio formateada (dd-MMM-yy)</param>
-            <param name="fechaFin">Fecha de fin formateada (dd-MMM-yy)</param>
-            <returns>Total de cajas como valor decimal</returns>
+            <param name="descripcion">Descripción o grupo.</param>
+            <param name="fechaInicio">Fecha inicial en formato <c>dd-MMM-yy</c>.</param>
+            <param name="fechaFin">Fecha final en formato <c>dd-MMM-yy</c>.</param>
+            <returns>Total de cajas enviadas.</returns>
         </member>
         <member name="M:PPMController.ObtenerSumaCuantosPSqlServer(System.String)">
             <summary>
-            Obtiene la suma de partes defectuosas desde SQL Server para una descripción específica.
+            Obtiene la cantidad de piezas defectuosas desde SQL Server para una descripción.
             </summary>
-            <param name="descripcion">Descripción del producto o nombre del grupo</param>
-            <returns>Suma de partes defectuosas como valor decimal</returns>
+            <param name="descripcion">Descripción del producto o grupo.</param>
+            <returns>Total de piezas defectuosas.</returns>
         </member>
         <member name="T:AdUserSyncMiddleware">
             <summary>

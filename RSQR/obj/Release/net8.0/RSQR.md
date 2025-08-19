@@ -63,6 +63,9 @@
   - [_gruposDescripciones](#F-PPMController-_gruposDescripciones 'PPMController._gruposDescripciones')
   - [oracleConnectionString](#F-PPMController-oracleConnectionString 'PPMController.oracleConnectionString')
   - [sqlServerConnectionString](#F-PPMController-sqlServerConnectionString 'PPMController.sqlServerConnectionString')
+  - [GetPpmAnioFiscal()](#M-PPMController-GetPpmAnioFiscal 'PPMController.GetPpmAnioFiscal')
+  - [GetPpmMesActual()](#M-PPMController-GetPpmMesActual 'PPMController.GetPpmMesActual')
+  - [ObtenerDatosGrafico(fechaInicio,fechaFin,descripcion)](#M-PPMController-ObtenerDatosGrafico-System-String,System-String,System-String- 'PPMController.ObtenerDatosGrafico(System.String,System.String,System.String)')
   - [ObtenerSumaCuantosPSqlServer(descripcion)](#M-PPMController-ObtenerSumaCuantosPSqlServer-System-String- 'PPMController.ObtenerSumaCuantosPSqlServer(System.String)')
   - [ObtenerTotalCajasOracle(descripcion,fechaInicio,fechaFin)](#M-PPMController-ObtenerTotalCajasOracle-System-String,System-String,System-String- 'PPMController.ObtenerTotalCajasOracle(System.String,System.String,System.String)')
   - [Ppm()](#M-PPMController-Ppm 'PPMController.Ppm')
@@ -899,8 +902,17 @@ para enviar correos electrónicos utilizando algún proveedor de servicios SMTP.
 
 ##### Summary
 
-Controlador para manejar las operaciones relacionadas con el cálculo PPM (Parts Per Million).
-Requiere autenticación para acceder a sus métodos.
+Controlador encargado de manejar las operaciones de cálculo de PPM (Parts Per Million).
+Se conecta a bases de datos Oracle y SQL Server para obtener información de embarques y reclamaciones.
+Requiere autenticación mediante el atributo [AuthorizeAttribute](#T-Microsoft-AspNetCore-Authorization-AuthorizeAttribute 'Microsoft.AspNetCore.Authorization.AuthorizeAttribute').
+
+##### Remarks
+
+Este controlador realiza cálculos de PPM en base a:
+- Cantidad de piezas enviadas (Oracle).
+- Cantidad de piezas defectuosas (SQL Server).
+
+Además, soporta el manejo de grupos de descripciones predefinidas y casos especiales.
 
 <a name='M-PPMController-#ctor-Microsoft-Extensions-Configuration-IConfiguration-'></a>
 ### #ctor(configuration) `constructor`
@@ -927,11 +939,14 @@ Configuración de la aplicación para acceder a las cadenas de conexión.
 
 ##### Summary
 
-Diccionario que mapea grupos de descripciones para consultas agrupadas.
-Contiene tres grupos principales:
-- CM_GROUP: Descripciones relacionadas con sistemas de control de motor
-- EPS_GROUP: Descripciones relacionadas con sistemas de dirección eléctrica
-- BCM_GROUP: Descripciones relacionadas con módulos de control de carrocería
+Diccionario que mapea nombres de grupos a una lista de descripciones que los componen.
+Utilizado para realizar consultas de forma agrupada.
+
+##### Remarks
+
+Ejemplos:
+- "CM" incluye varios tipos de sistemas de control de motor.
+- "EPS(3G)" agrupa piezas de dirección eléctrica de tercera generación.
 
 <a name='F-PPMController-oracleConnectionString'></a>
 ### oracleConnectionString `constants`
@@ -947,42 +962,98 @@ Cadena de conexión para la base de datos Oracle.
 
 Cadena de conexión para la base de datos SQL Server.
 
-<a name='M-PPMController-ObtenerSumaCuantosPSqlServer-System-String-'></a>
-### ObtenerSumaCuantosPSqlServer(descripcion) `method`
+<a name='M-PPMController-GetPpmAnioFiscal'></a>
+### GetPpmAnioFiscal() `method`
 
 ##### Summary
 
-Obtiene la suma de partes defectuosas desde SQL Server para una descripción específica.
+Obtiene el PPM acumulado para el año fiscal en curso.
 
 ##### Returns
 
-Suma de partes defectuosas como valor decimal
+Objeto JSON con el PPM y el rango de fechas del año fiscal.
+
+##### Parameters
+
+This method has no parameters.
+
+##### Remarks
+
+El año fiscal se considera desde el 1 de abril hasta el 31 de marzo.
+Si la fecha actual es anterior al fin del año fiscal, se usa la fecha actual como límite.
+
+<a name='M-PPMController-GetPpmMesActual'></a>
+### GetPpmMesActual() `method`
+
+##### Summary
+
+Obtiene el PPM acumulado para el mes actual considerando todas las descripciones configuradas.
+
+##### Returns
+
+Objeto JSON con el valor PPM y la fecha de referencia.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-PPMController-ObtenerDatosGrafico-System-String,System-String,System-String-'></a>
+### ObtenerDatosGrafico(fechaInicio,fechaFin,descripcion) `method`
+
+##### Summary
+
+Obtiene datos mes a mes para generar un gráfico de PPM y reclamaciones en un rango de fechas.
+
+##### Returns
+
+Objeto JSON con:
+- `labels`: lista de meses.
+- `reclamos`: lista con el total de reclamaciones por mes.
+- `ppm`: lista con los valores PPM por mes.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| descripcion | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Descripción del producto o nombre del grupo |
+| fechaInicio | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Fecha inicial en formato `yyyy-MM-dd`. |
+| fechaFin | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Fecha final en formato `yyyy-MM-dd`. |
+| descripcion | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Descripción del producto o grupo. |
+
+<a name='M-PPMController-ObtenerSumaCuantosPSqlServer-System-String-'></a>
+### ObtenerSumaCuantosPSqlServer(descripcion) `method`
+
+##### Summary
+
+Obtiene la cantidad de piezas defectuosas desde SQL Server para una descripción.
+
+##### Returns
+
+Total de piezas defectuosas.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| descripcion | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Descripción del producto o grupo. |
 
 <a name='M-PPMController-ObtenerTotalCajasOracle-System-String,System-String,System-String-'></a>
 ### ObtenerTotalCajasOracle(descripcion,fechaInicio,fechaFin) `method`
 
 ##### Summary
 
-Obtiene el total de cajas enviadas desde Oracle para un producto o grupo de productos
-en un rango de fechas específico.
+Obtiene el total de cajas enviadas desde Oracle para una descripción o grupo de descripciones en un rango de fechas.
 
 ##### Returns
 
-Total de cajas como valor decimal
+Total de cajas enviadas.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| descripcion | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Descripción del producto o nombre del grupo |
-| fechaInicio | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Fecha de inicio formateada (dd-MMM-yy) |
-| fechaFin | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Fecha de fin formateada (dd-MMM-yy) |
+| descripcion | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Descripción o grupo. |
+| fechaInicio | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Fecha inicial en formato `dd-MMM-yy`. |
+| fechaFin | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Fecha final en formato `dd-MMM-yy`. |
 
 <a name='M-PPMController-Ppm'></a>
 ### Ppm() `method`
@@ -1004,19 +1075,26 @@ This method has no parameters.
 
 ##### Summary
 
-Calcula el total de cajas y el valor PPM para un rango de fechas y descripción específicos.
+Calcula el total de cajas enviadas y el valor PPM (Parts Per Million) para un rango de fechas y descripción especificados.
 
 ##### Returns
 
-Objeto JSON con total de cajas, valor PPM y posibles errores
+Objeto JSON con:
+- `totalCajas`: total de cajas enviadas.
+- `division`: valor PPM calculado.
+- `error`: mensaje de error si aplica.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| fechaInicio | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Fecha de inicio en formato yyyy-MM-dd |
-| fechaFin | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Fecha de fin en formato yyyy-MM-dd |
-| descripcion | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Descripción del producto o grupo de productos |
+| fechaInicio | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Fecha inicial en formato `yyyy-MM-dd`. |
+| fechaFin | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Fecha final en formato `yyyy-MM-dd`. |
+| descripcion | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Descripción del producto o grupo de productos. |
+
+##### Remarks
+
+Fórmula de cálculo: `(Piezas defectuosas / Total de piezas enviadas) * 1,000,000`.
 
 <a name='T-RSQR-Models-PpmReport'></a>
 ## PpmReport `type`
