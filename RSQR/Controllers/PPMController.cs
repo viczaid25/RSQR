@@ -151,14 +151,8 @@ public class PPMController : Controller
     /// </remarks>
     public IActionResult SumarCajas(string fechaInicio, string fechaFin, string descripcion)
     {
-        decimal totalCajas = 0;
-        decimal sumaCuantosP = 0;
-        decimal division = 0;
-
         if (string.IsNullOrEmpty(fechaInicio) || string.IsNullOrEmpty(fechaFin) || string.IsNullOrEmpty(descripcion))
-        {
-            return Json(new { totalCajas = 0, division = 0, error = "Fechas o descripción no válidas." });
-        }
+            return Json(new { totalCajas = 0, division = 0, reclamos = 0, error = "Fechas o descripción no válidas." });
 
         try
         {
@@ -168,30 +162,20 @@ public class PPMController : Controller
             string inicioFormateado = inicio.ToString("dd-MMM-yy", CultureInfo.InvariantCulture).ToUpper();
             string finFormateado = fin.ToString("dd-MMM-yy", CultureInfo.InvariantCulture).ToUpper();
 
-            // Consulta Oracle modificada para manejar grupos
-            totalCajas = ObtenerTotalCajasOracle(descripcion, inicioFormateado, finFormateado);
+            decimal totalCajas = ObtenerTotalCajasOracle(descripcion, inicioFormateado, finFormateado);
+            decimal reclamos = ObtenerSumaCuantosPSqlServer(descripcion, inicio, fin);
 
-            // Consulta SQL Server
-            sumaCuantosP = ObtenerSumaCuantosPSqlServer(descripcion);
+            decimal division = (totalCajas > 0) ? (reclamos / totalCajas) * 1_000_000 : 0;
 
-            // Cálculo PPM
-            if (sumaCuantosP != 0)
-            {
-                division = (sumaCuantosP / totalCajas) * 1000000;
-            }
-            else
-            {
-                return Json(new { totalCajas = totalCajas, division = 0, error = "No se puede dividir por cero." });
-            }
+            return Json(new { totalCajas, division, reclamos });
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"Error: {ex.Message}");
-            return Json(new { totalCajas = 0, division = 0, error = "Error: " + ex.Message });
+            return Json(new { totalCajas = 0, division = 0, reclamos = 0, error = "Error: " + ex.Message });
         }
-
-        return Json(new { totalCajas = totalCajas, division = division });
     }
+
 
     /// <summary>
     /// Obtiene datos mes a mes para generar un gráfico de PPM y reclamaciones en un rango de fechas.
@@ -217,35 +201,27 @@ public class PPMController : Controller
             var reclamosPorMes = new List<decimal>();
             var ppmPorMes = new List<decimal>();
 
-            // Iterar por cada mes en el rango
-            for (var dt = inicio; dt <= fin; dt = dt.AddMonths(1))
+            for (var dt = new DateTime(inicio.Year, inicio.Month, 1); dt <= fin; dt = dt.AddMonths(1))
             {
                 var mesInicio = new DateTime(dt.Year, dt.Month, 1);
                 var mesFin = mesInicio.AddMonths(1).AddDays(-1);
 
-                // Ajustar fechas para no exceder el rango solicitado
                 if (mesInicio < inicio) mesInicio = inicio;
                 if (mesFin > fin) mesFin = fin;
 
                 string mesInicioFormateado = mesInicio.ToString("dd-MMM-yy", CultureInfo.InvariantCulture).ToUpper();
                 string mesFinFormateado = mesFin.ToString("dd-MMM-yy", CultureInfo.InvariantCulture).ToUpper();
 
-                // Obtener datos para el mes
                 decimal totalCajas = ObtenerTotalCajasOracle(descripcion, mesInicioFormateado, mesFinFormateado);
-                decimal sumaCuantosP = ObtenerSumaCuantosPSqlServer(descripcion);
-                decimal ppm = sumaCuantosP != 0 ? (sumaCuantosP / totalCajas) * 1000000 : 0;
+                decimal reclamos = ObtenerSumaCuantosPSqlServer(descripcion, mesInicio, mesFin);
+                decimal ppm = (totalCajas > 0) ? (reclamos / totalCajas) * 1_000_000 : 0;
 
                 meses.Add(mesInicio.ToString("MMM yyyy"));
-                reclamosPorMes.Add(sumaCuantosP);
+                reclamosPorMes.Add(reclamos);
                 ppmPorMes.Add(ppm);
             }
 
-            return Json(new
-            {
-                labels = meses,
-                reclamos = reclamosPorMes,
-                ppm = ppmPorMes
-            });
+            return Json(new { labels = meses, reclamos = reclamosPorMes, ppm = ppmPorMes });
         }
         catch (Exception ex)
         {
@@ -253,6 +229,7 @@ public class PPMController : Controller
             return Json(new { error = ex.Message });
         }
     }
+
 
     /// <summary>
     /// Obtiene el PPM acumulado para el mes actual considerando todas las descripciones configuradas.
@@ -270,11 +247,9 @@ public class PPMController : Controller
             string inicioFormateado = inicioMes.ToString("dd-MMM-yy", CultureInfo.InvariantCulture).ToUpper();
             string finFormateado = finMes.ToString("dd-MMM-yy", CultureInfo.InvariantCulture).ToUpper();
 
-            // Obtener datos para todas las descripciones
             var descripciones = new List<string> {
-            "STARTER", "ALTERNATOR", "SSU Circuit Board", "FOB", "RCV", "CM",
-            "EPS(3G)", "PT BCM", "PT LFU", "EPS", "CID", "LCM", "AMP",
-            "R1", "PT CM", "PT DISPLAY"
+            "STARTER","ALTERNATOR","SSU Circuit Board","FOB","RCV","CM",
+            "EPS(3G)","PT BCM","PT LFU","EPS","CID","LCM","AMP","R1","PT CM","PT DISPLAY"
         };
 
             decimal totalCajas = 0;
@@ -283,10 +258,10 @@ public class PPMController : Controller
             foreach (var desc in descripciones)
             {
                 totalCajas += ObtenerTotalCajasOracle(desc, inicioFormateado, finFormateado);
-                totalReclamos += ObtenerSumaCuantosPSqlServer(desc);
+                totalReclamos += ObtenerSumaCuantosPSqlServer(desc, inicioMes, finMes);
             }
 
-            decimal ppm = totalReclamos != 0 ? (totalReclamos / totalCajas) * 1000000 : 0;
+            decimal ppm = (totalCajas > 0) ? (totalReclamos / totalCajas) * 1_000_000 : 0;
 
             return Json(new { ppm = ppm.ToString("N2"), fechaInicio = inicioMes.ToString("MMM yyyy") });
         }
@@ -296,14 +271,6 @@ public class PPMController : Controller
         }
     }
 
-    /// <summary>
-    /// Obtiene el PPM acumulado para el año fiscal en curso.
-    /// </summary>
-    /// <remarks>
-    /// El año fiscal se considera desde el 1 de abril hasta el 31 de marzo.
-    /// Si la fecha actual es anterior al fin del año fiscal, se usa la fecha actual como límite.
-    /// </remarks>
-    /// <returns>Objeto JSON con el PPM y el rango de fechas del año fiscal.</returns>
     [HttpGet]
     public IActionResult GetPpmAnioFiscal()
     {
@@ -313,21 +280,14 @@ public class PPMController : Controller
             int anioFiscalInicio = ahora.Month >= 4 ? ahora.Year : ahora.Year - 1;
             DateTime inicioAnioFiscal = new DateTime(anioFiscalInicio, 4, 1);
             DateTime finAnioFiscal = new DateTime(anioFiscalInicio + 1, 3, 31);
-
-            // Si el año fiscal futuro no ha terminado aún, usar la fecha actual
-            if (finAnioFiscal > ahora)
-            {
-                finAnioFiscal = ahora;
-            }
+            if (finAnioFiscal > ahora) finAnioFiscal = ahora;
 
             string inicioFormateado = inicioAnioFiscal.ToString("dd-MMM-yy", CultureInfo.InvariantCulture).ToUpper();
             string finFormateado = finAnioFiscal.ToString("dd-MMM-yy", CultureInfo.InvariantCulture).ToUpper();
 
-            // Obtener datos para todas las descripciones
             var descripciones = new List<string> {
-            "STARTER", "ALTERNATOR", "SSU Circuit Board", "FOB", "RCV", "CM",
-            "EPS(3G)", "PT BCM", "PT LFU", "EPS", "CID", "LCM", "AMP",
-            "R1", "PT CM", "PT DISPLAY"
+            "STARTER","ALTERNATOR","SSU Circuit Board","FOB","RCV","CM",
+            "EPS(3G)","PT BCM","PT LFU","EPS","CID","LCM","AMP","R1","PT CM","PT DISPLAY"
         };
 
             decimal totalCajas = 0;
@@ -336,10 +296,10 @@ public class PPMController : Controller
             foreach (var desc in descripciones)
             {
                 totalCajas += ObtenerTotalCajasOracle(desc, inicioFormateado, finFormateado);
-                totalReclamos += ObtenerSumaCuantosPSqlServer(desc);
+                totalReclamos += ObtenerSumaCuantosPSqlServer(desc, inicioAnioFiscal, finAnioFiscal);
             }
 
-            decimal ppm = totalReclamos != 0 ? (totalReclamos / totalCajas) * 1000000 : 0;
+            decimal ppm = (totalCajas > 0) ? (totalReclamos / totalCajas) * 1_000_000 : 0;
 
             return Json(new
             {
@@ -353,6 +313,7 @@ public class PPMController : Controller
             return Json(new { error = ex.Message });
         }
     }
+
 
     /// <summary>
     /// Obtiene el total de cajas enviadas desde Oracle para una descripción o grupo de descripciones en un rango de fechas.
@@ -526,7 +487,8 @@ public class PPMController : Controller
     /// </summary>
     /// <param name="descripcion">Descripción del producto o grupo.</param>
     /// <returns>Total de piezas defectuosas.</returns>
-    private decimal ObtenerSumaCuantosPSqlServer(string descripcion)
+    // Ahora acepta rango de fechas opcional y usa Fecha con inicio inclusivo / fin exclusivo
+    private decimal ObtenerSumaCuantosPSqlServer(string descripcion, DateTime? inicio = null, DateTime? fin = null)
     {
         using (SqlConnection sqlConnection = new SqlConnection(sqlServerConnectionString))
         {
@@ -534,18 +496,27 @@ public class PPMController : Controller
             using (SqlCommand sqlCommand = new SqlCommand())
             {
                 sqlCommand.Connection = sqlConnection;
-                sqlCommand.CommandText = @"
-                    SELECT SUM(CuantosP) 
-                    FROM [dbo].[qcPpmReport]
-                    WHERE Linea = @descripcion";
 
+                var sql = @"
+                SELECT SUM(CuantosP) 
+                FROM [dbo].[qcPpmReport]
+                WHERE Linea = @descripcion";
+
+                if (inicio.HasValue && fin.HasValue)
+                {
+                    // Inicio >= @inicio y Fin < @finExcl para evitar problemas de hora
+                    sql += " AND Fecha >= @inicio AND Fecha < @finExcl";
+                    sqlCommand.Parameters.Add(new SqlParameter("@inicio", inicio.Value.Date));
+                    sqlCommand.Parameters.Add(new SqlParameter("@finExcl", fin.Value.Date.AddDays(1)));
+                }
+
+                sqlCommand.CommandText = sql;
                 sqlCommand.Parameters.Add(new SqlParameter("@descripcion", descripcion));
-
-                Debug.WriteLine($"Consulta SQL Server: {sqlCommand.CommandText}");
 
                 object result = sqlCommand.ExecuteScalar();
                 return result != DBNull.Value ? Convert.ToDecimal(result) : 0;
             }
         }
     }
+
 }

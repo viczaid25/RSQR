@@ -63,10 +63,9 @@
   - [_gruposDescripciones](#F-PPMController-_gruposDescripciones 'PPMController._gruposDescripciones')
   - [oracleConnectionString](#F-PPMController-oracleConnectionString 'PPMController.oracleConnectionString')
   - [sqlServerConnectionString](#F-PPMController-sqlServerConnectionString 'PPMController.sqlServerConnectionString')
-  - [GetPpmAnioFiscal()](#M-PPMController-GetPpmAnioFiscal 'PPMController.GetPpmAnioFiscal')
   - [GetPpmMesActual()](#M-PPMController-GetPpmMesActual 'PPMController.GetPpmMesActual')
   - [ObtenerDatosGrafico(fechaInicio,fechaFin,descripcion)](#M-PPMController-ObtenerDatosGrafico-System-String,System-String,System-String- 'PPMController.ObtenerDatosGrafico(System.String,System.String,System.String)')
-  - [ObtenerSumaCuantosPSqlServer(descripcion)](#M-PPMController-ObtenerSumaCuantosPSqlServer-System-String- 'PPMController.ObtenerSumaCuantosPSqlServer(System.String)')
+  - [ObtenerSumaCuantosPSqlServer(descripcion)](#M-PPMController-ObtenerSumaCuantosPSqlServer-System-String,System-Nullable{System-DateTime},System-Nullable{System-DateTime}- 'PPMController.ObtenerSumaCuantosPSqlServer(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})')
   - [ObtenerTotalCajasOracle(descripcion,fechaInicio,fechaFin)](#M-PPMController-ObtenerTotalCajasOracle-System-String,System-String,System-String- 'PPMController.ObtenerTotalCajasOracle(System.String,System.String,System.String)')
   - [Ppm()](#M-PPMController-Ppm 'PPMController.Ppm')
   - [SumarCajas(fechaInicio,fechaFin,descripcion)](#M-PPMController-SumarCajas-System-String,System-String,System-String- 'PPMController.SumarCajas(System.String,System.String,System.String)')
@@ -962,26 +961,6 @@ Cadena de conexión para la base de datos Oracle.
 
 Cadena de conexión para la base de datos SQL Server.
 
-<a name='M-PPMController-GetPpmAnioFiscal'></a>
-### GetPpmAnioFiscal() `method`
-
-##### Summary
-
-Obtiene el PPM acumulado para el año fiscal en curso.
-
-##### Returns
-
-Objeto JSON con el PPM y el rango de fechas del año fiscal.
-
-##### Parameters
-
-This method has no parameters.
-
-##### Remarks
-
-El año fiscal se considera desde el 1 de abril hasta el 31 de marzo.
-Si la fecha actual es anterior al fin del año fiscal, se usa la fecha actual como límite.
-
 <a name='M-PPMController-GetPpmMesActual'></a>
 ### GetPpmMesActual() `method`
 
@@ -1019,7 +998,7 @@ Objeto JSON con:
 | fechaFin | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Fecha final en formato `yyyy-MM-dd`. |
 | descripcion | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Descripción del producto o grupo. |
 
-<a name='M-PPMController-ObtenerSumaCuantosPSqlServer-System-String-'></a>
+<a name='M-PPMController-ObtenerSumaCuantosPSqlServer-System-String,System-Nullable{System-DateTime},System-Nullable{System-DateTime}-'></a>
 ### ObtenerSumaCuantosPSqlServer(descripcion) `method`
 
 ##### Summary

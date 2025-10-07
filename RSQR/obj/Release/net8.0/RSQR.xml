@@ -877,16 +877,6 @@
             </summary>
             <returns>Objeto JSON con el valor PPM y la fecha de referencia.</returns>
         </member>
-        <member name="M:PPMController.GetPpmAnioFiscal">
-            <summary>
-            Obtiene el PPM acumulado para el año fiscal en curso.
-            </summary>
-            <remarks>
-            El año fiscal se considera desde el 1 de abril hasta el 31 de marzo.
-            Si la fecha actual es anterior al fin del año fiscal, se usa la fecha actual como límite.
-            </remarks>
-            <returns>Objeto JSON con el PPM y el rango de fechas del año fiscal.</returns>
-        </member>
         <member name="M:PPMController.ObtenerTotalCajasOracle(System.String,System.String,System.String)">
             <summary>
             Obtiene el total de cajas enviadas desde Oracle para una descripción o grupo de descripciones en un rango de fechas.
@@ -896,7 +886,7 @@
             <param name="fechaFin">Fecha final en formato <c>dd-MMM-yy</c>.</param>
             <returns>Total de cajas enviadas.</returns>
         </member>
-        <member name="M:PPMController.ObtenerSumaCuantosPSqlServer(System.String)">
+        <member name="M:PPMController.ObtenerSumaCuantosPSqlServer(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>
             Obtiene la cantidad de piezas defectuosas desde SQL Server para una descripción.
             </summary>

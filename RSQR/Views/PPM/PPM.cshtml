@@ -3,53 +3,100 @@
     ViewBag.Title = "PPM";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>PPM Report</h1>
+<!-- Barra sticky con acciones -->
+<div class="position-sticky top-0 z-3 bg-white border-bottom py-2 mb-3" style="--bs-border-color:#eee;">
+    <div class="container-fluid d-flex gap-2 justify-content-between align-items-center">
+        <h1 class="h4 mb-0">PPM Report</h1>
+        <div class="d-flex gap-2">
+            <button type="button" id="btnExportCsv" class="btn btn-outline-secondary btn-sm rounded-pill" disabled>
+                <i class="fas fa-file-export me-1"></i> Export CSV
+            </button>
+            <button type="button" id="btnDownloadChart" class="btn btn-outline-secondary btn-sm rounded-pill" disabled>
+                <i class="fas fa-image me-1"></i> Download Chart
+            </button>
+            <button type="button" id="btnCopyLink" class="btn btn-outline-secondary btn-sm rounded-pill" data-bs-toggle="tooltip" title="Copia un enlace con los filtros actuales">
+                <i class="fas fa-link me-1"></i> Copy Link
+            </button>
+        </div>
+    </div>
 </div>
 
+<div class="row g-3 mb-3" id="globalPpmRow">
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="text-muted small">Current Month PPM (all descriptions)</div>
+                    <div class="h3 mb-0" id="ppmMesActual">—</div>
+                </div>
+                <i class="fas fa-calendar-day fa-2x text-primary opacity-75"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="text-muted small">Fiscal YTD PPM (all descriptions)</div>
+                    <div class="h3 mb-0" id="ppmAnioFiscal">—</div>
+                    <div class="small text-muted" id="ppmAnioFiscalRango"></div>
+                </div>
+                <i class="fas fa-business-time fa-2x text-primary opacity-75"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Parámetros -->
 <div class="card shadow-sm mb-4">
-    <div class="card-header bg-primary">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
         <h5 class="mb-0">Report Parameters</h5>
+        <div class="d-none d-md-flex small opacity-75">
+            <i class="fas fa-info-circle me-2"></i>Use quick filters or define a manual range.
+        </div>
     </div>
     <div class="card-body">
-        <form id="fechasForm">
-            <div class="row">
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-primary">
-                        <h5 class="mb-0">Filtros Rápidos</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-outline-primary btn-sm" data-filtro="anio_fiscal">
-                                <i class="fas fa-calendar-alt me-1"></i> Año Fiscal Actual
-                            </button>
-                            <button type="button" class="btn btn-outline-primary btn-sm" data-filtro="semestre_actual">
-                                <i class="fas fa-calendar-week me-1"></i> Semestre Actual
-                            </button>
-                            <button type="button" class="btn btn-outline-primary btn-sm" data-filtro="ultimo_mes">
-                                <i class="fas fa-calendar-day me-1"></i> Último Mes
-                            </button>
-                            <button type="button" class="btn btn-outline-primary btn-sm" data-filtro="trimestre_actual">
-                                <i class="fas fa-calendar me-1"></i> Trimestre Actual
-                            </button>
-                        </div>
+        <form id="fechasForm" class="vstack gap-3">
+
+            <!-- Filtros rápidos como chips -->
+            <div class="card shadow-sm mb-2">
+                <div class="card-header bg-primary text-white">
+                    <h6 class="mb-0">Quick Filters</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="button" class="btn btn-sm btn-outline-primary rounded-pill" data-filtro="anio_fiscal">
+                            <i class="fas fa-calendar-alt me-1"></i> Current Fiscal Year
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-primary rounded-pill" data-filtro="semestre_actual">
+                            <i class="fas fa-calendar-week me-1"></i> Current Semester
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-primary rounded-pill" data-filtro="trimestre_actual">
+                            <i class="fas fa-calendar me-1"></i> Current Quarter
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-primary rounded-pill" data-filtro="ultimo_mes">
+                            <i class="fas fa-calendar-day me-1"></i> Last Month
+                        </button>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group mb-3">
-                        <label for="fechaInicio" class="form-label">Start Date</label>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <div class="form-floating">
                         <input type="date" id="fechaInicio" name="fechaInicio" class="form-control" required />
+                        <label for="fechaInicio">Start Date</label>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group mb-3">
-                        <label for="fechaFin" class="form-label">End Date</label>
+                <div class="col-md-3">
+                    <div class="form-floating">
                         <input type="date" id="fechaFin" name="fechaFin" class="form-control" required />
+                        <label for="fechaFin">End Date</label>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group mb-3">
-                        <label for="descripcion" class="form-label">Description</label>
+                <div class="col-md-3">
+                    <div class="form-floating">
                         <select id="descripcion" name="descripcion" class="form-select" required>
                             <option value="">-- Seleccione una opción --</option>
                             <option value="STARTER">STARTER</option>
@@ -69,21 +116,41 @@
                             <option value="PT CM">PT CM</option>
                             <option value="PT DISPLAY">PT DISPLAY</option>
                         </select>
+                        <label for="descripcion">Description</label>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        <input type="number" id="ppmTarget" class="form-control" min="0" step="0.01" value="1000" />
+                        <label for="ppmTarget">PPM Target (línea)</label>
                     </div>
                 </div>
             </div>
 
-            <div class="d-flex justify-content-end">
-                <button type="button" id="btnSumar" class="btn btn-primary">
-                    <i class="fas fa-calculator me-1"></i> Calculate
-                </button>
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="chkComparar" />
+                    <label class="form-check-label" for="chkComparar">Compare with previous period</label>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="button" id="btnReset" class="btn btn-outline-secondary rounded-pill">
+                        <i class="fas fa-undo me-1"></i> Reset
+                    </button>
+                    <button type="button" id="btnSumar" class="btn btn-primary rounded-pill">
+                        <span class="spinner-border spinner-border-sm me-1 d-none" id="btnSpinner"></span>
+                        <i class="fas fa-calculator me-1"></i> Calculate
+                    </button>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div class="card shadow-sm">
-    <div class="card-header bg-primary">
+<!-- KPIs -->
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
         <h5 class="mb-0">Results</h5>
     </div>
     <div class="card-body">
@@ -93,279 +160,391 @@
     </div>
 </div>
 
-<div class="card shadow-sm" id="graficaContainer" style="display: none;">
-    <div class="card-header bg-primary">
+<!-- Gráfica -->
+<div class="card shadow-sm mb-4" id="graficaContainer" style="display:none;">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
         <h5 class="mb-0">Graphical Representation</h5>
+        <div class="small opacity-75" id="rangoLabel">—</div>
     </div>
     <div class="card-body">
-        <canvas id="graficaPPM" width="400" height="200"></canvas>
+        <canvas id="graficaPPM" height="220" aria-label="Gráfico PPM por mes" role="img"></canvas>
     </div>
 </div>
 
-@section Scripts {
-        <script>
-            $(document).ready(function () {
-                let graficaPPM = null; // Variable para mantener la instancia del gráfico
+<!-- Tabla detalle -->
+<div class="card shadow-sm mb-4" id="tablaContainer" style="display:none;">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Monthly Detail</h5>
+    </div>
+    <div class="card-body table-responsive">
+        <table class="table table-striped align-middle" id="tablaDetalle">
+            <thead class="table-light">
+                <tr>
+                    <th>Period</th>
+                    <th class="text-end">Claims</th>
+                    <th class="text-end">PPM</th>
+                    <th class="text-end d-none" id="thPrev">PPM (Prev)</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
 
-                // Event listeners para los botones de filtro
-                $('[data-filtro]').click(function() {
-                    const tipoFiltro = $(this).data('filtro');
-                    aplicarFiltro(tipoFiltro);
-                });
+@section Styles {
+    <style>
+        :root {
+            --color-primary: #2c5fa8;
+        }
 
-                $('#btnSumar').click(function () {
-                    // Mostrar spinner de carga
-                    $('#resultado').html('<div class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Cargando...</span></div></div>');
-                    $('#graficaContainer').hide(); // Ocultar gráfico inicialmente
+        .bg-primary {
+            background-color: var(--color-primary) !important;
+        }
 
-                    // Obtener las fechas y la descripción del formulario
-                    const fechaInicio = $('#fechaInicio').val();
-                    const fechaFin = $('#fechaFin').val();
-                    const descripcion = $('#descripcion').val();
+        .btn-primary {
+            background-color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
 
-                    // Validar que las fechas y la descripción no estén vacías
-                    if (!fechaInicio || !fechaFin || !descripcion) {
-                        $('#resultado').html('<div class="alert alert-warning">Por favor, completa todos los campos.</div>');
-                        return;
-                    }
+            .btn-primary:hover {
+                filter: brightness(1.05);
+            }
 
-                    // Validar que fecha inicio sea menor que fecha fin
-                    if (new Date(fechaInicio) > new Date(fechaFin)) {
-                        $('#resultado').html('<div class="alert alert-warning">La fecha de inicio debe ser anterior a la fecha de fin.</div>');
-                        return;
-                    }
+        .btn-outline-primary {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
 
-                    // Calcular diferencia en meses
-                    const diffMonths = monthDiff(new Date(fechaInicio), new Date(fechaFin));
+            .btn-outline-primary:hover {
+                background-color: var(--color-primary);
+                color: #fff;
+            }
 
-                    // Enviar los datos al controlador mediante AJAX
-                    $.ajax({
-                        url: '@Url.Action("SumarCajas", "PPM")',
-                        type: 'GET',
-                        data: {
-                            fechaInicio: fechaInicio,
-                            fechaFin: fechaFin,
-                            descripcion: descripcion
-                        },
-                        success: function (result) {
-                            const resultadoHTML = `
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card bg-light mb-3">
-                                            <div class="card-body text-center">
-                                                <h6 class="card-title">Total de Piezas</h6>
-                                                <p class="display-6 text-primary">${result.totalCajas}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card bg-light mb-3">
-                                            <div class="card-body text-center">
-                                                <h6 class="card-title">División PPM</h6>
-                                                <p class="display-6 text-primary">${result.division.toFixed(2)}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                            $('#resultado').html(resultadoHTML);
+        .position-sticky {
+            backdrop-filter: saturate(150%) blur(6px);
+        }
 
-                            // Si el rango es mayor a 1 mes, mostrar gráfico
-                            if (diffMonths > 1) {
-                                cargarDatosParaGrafico(fechaInicio, fechaFin, descripcion);
-                            }
-                        },
-                        error: function () {
-                            $('#resultado').html('<div class="alert alert-danger">Error al realizar el cálculo. Intente nuevamente.</div>');
-                        }
-                    });
-                });
-
-                // Función para aplicar filtros
-                function aplicarFiltro(tipoFiltro) {
-                    const hoy = new Date();
-                    let fechaInicio, fechaFin;
-
-                    switch (tipoFiltro) {
-                        case 'anio_fiscal':
-                            // Año fiscal (abril a marzo)
-                            const añoActual = hoy.getFullYear();
-                            const mesActual = hoy.getMonth(); // Enero = 0
-
-                            if (mesActual >= 3) { // Abril (3) en adelante
-                                fechaInicio = new Date(añoActual, 3, 1); // 1 de abril
-                                fechaFin = new Date(añoActual + 1, 2, 31); // 31 de marzo
-                            } else {
-                                fechaInicio = new Date(añoActual - 1, 3, 1); // 1 de abril del año anterior
-                                fechaFin = new Date(añoActual, 2, 31); // 31 de marzo del año actual
-                            }
-                            break;
-
-                        case 'semestre_actual':
-                            // Semestre fiscal (abril-septiembre u octubre-marzo)
-                            const semestre = hoy.getMonth() < 9 ? 1 : 2;
-                            if (semestre === 1) {
-                                fechaInicio = new Date(hoy.getFullYear(), 3, 1); // 1 de abril
-                                fechaFin = new Date(hoy.getFullYear(), 8, 30); // 30 de septiembre
-                            } else {
-                                fechaInicio = new Date(hoy.getFullYear(), 9, 1); // 1 de octubre
-                                fechaFin = new Date(hoy.getFullYear() + 1, 2, 31); // 31 de marzo
-                            }
-                            break;
-
-                        case 'trimestre_actual':
-                            // Trimestre dentro del año fiscal
-                            const mes = hoy.getMonth();
-                            if (mes >= 3 && mes <= 5) { // Abril (3) a Junio (5)
-                                fechaInicio = new Date(hoy.getFullYear(), 3, 1);
-                                fechaFin = new Date(hoy.getFullYear(), 5, 30);
-                            } else if (mes >= 6 && mes <= 8) { // Julio (6) a Septiembre (8)
-                                fechaInicio = new Date(hoy.getFullYear(), 6, 1);
-                                fechaFin = new Date(hoy.getFullYear(), 8, 30);
-                            } else if (mes >= 9 && mes <= 11) { // Octubre (9) a Diciembre (11)
-                                fechaInicio = new Date(hoy.getFullYear(), 9, 1);
-                                fechaFin = new Date(hoy.getFullYear(), 11, 31);
-                            } else { // Enero (0) a Marzo (2)
-                                fechaInicio = new Date(hoy.getFullYear() - 1, 0, 1);
-                                fechaFin = new Date(hoy.getFullYear() - 1, 2, 31);
-                            }
-                            break;
-
-                        case 'ultimo_mes':
-                            // Último mes completo
-                            fechaInicio = new Date(hoy.getFullYear(), hoy.getMonth() - 1, 1);
-                            fechaFin = new Date(hoy.getFullYear(), hoy.getMonth(), 0);
-                            break;
-
-                        default:
-                            return;
-                    }
-
-                    // Formatear fechas como YYYY-MM-DD
-                    function formatDate(date) {
-                        if (!date) return '';
-                        const d = new Date(date);
-                        const year = d.getFullYear();
-                        const month = String(d.getMonth() + 1).padStart(2, '0');
-                        const day = String(d.getDate()).padStart(2, '0');
-                        return `${year}-${month}-${day}`;
-                    }
-
-                    // Establecer valores en los campos de fecha
-                    $('#fechaInicio').val(formatDate(fechaInicio));
-                    $('#fechaFin').val(formatDate(fechaFin));
-
-                    // Mostrar confirmación visual
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    });
-
-                    Toast.fire({
-                        icon: 'success',
-                        title: `Filtro aplicado: ${tipoFiltro.replace(/_/g, ' ')}`
-                    });
-                }
-
-                // Función para calcular diferencia en meses
-                function monthDiff(dateFrom, dateTo) {
-                    return dateTo.getMonth() - dateFrom.getMonth() +
-                           (12 * (dateTo.getFullYear() - dateFrom.getFullYear()));
-                }
-
-                // Función para cargar datos para el gráfico
-                function cargarDatosParaGrafico(fechaInicio, fechaFin, descripcion) {
-                    $.ajax({
-                        url: '@Url.Action("ObtenerDatosGrafico", "PPM")',
-                        type: 'GET',
-                        data: {
-                            fechaInicio: fechaInicio,
-                            fechaFin: fechaFin,
-                            descripcion: descripcion
-                        },
-                        success: function (data) {
-                            if (data && data.labels && data.reclamos && data.ppm) {
-                                mostrarGrafico(data.labels, data.reclamos, data.ppm);
-                                $('#graficaContainer').show();
-                            }
-                        },
-                        error: function () {
-                            console.error('Error al cargar datos para el gráfico');
-                        }
-                    });
-                }
-
-                // Función para mostrar el gráfico
-                function mostrarGrafico(labels, reclamosData, ppmData) {
-                    const ctx = document.getElementById('graficaPPM').getContext('2d');
-
-                    // Destruir gráfico anterior si existe
-                    if (graficaPPM) {
-                        graficaPPM.destroy();
-                    }
-
-                    graficaPPM = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: labels,
-                            datasets: [
-                                {
-                                    label: 'Reclamos',
-                                    data: reclamosData,
-                                    borderColor: 'rgb(255, 99, 132)',
-                                    backgroundColor: 'rgba(255, 99, 132, 0.1)',
-                                    tension: 0.1,
-                                    yAxisID: 'y'
-                                },
-                                {
-                                    label: 'PPM',
-                                    data: ppmData,
-                                    borderColor: 'rgb(54, 162, 235)',
-                                    backgroundColor: 'rgba(54, 162, 235, 0.1)',
-                                    tension: 0.1,
-                                    yAxisID: 'y1'
-                                }
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            interaction: {
-                                mode: 'index',
-                                intersect: false,
-                            },
-                            scales: {
-                                y: {
-                                    type: 'linear',
-                                    display: true,
-                                    position: 'left',
-                                    title: {
-                                        display: true,
-                                        text: 'Reclamos'
-                                    }
-                                },
-                                y1: {
-                                    type: 'linear',
-                                    display: true,
-                                    position: 'right',
-                                    title: {
-                                        display: true,
-                                        text: 'PPM'
-                                    },
-                                    grid: {
-                                        drawOnChartArea: false
-                                    }
-                                }
-                            }
-                        }
-                    });
-                }
-            });
-        </script>
+        .card {
+            box-shadow: 0 4px 6px rgba(0,0,0,.08);
+        }
+    </style>
 }
+
+@section Scripts {
+    <!-- Fallbacks de librerías si faltan (jQuery, SweetAlert2, Chart.js) -->
+    <script>
+        (function ensureLibs(){
+          function load(src){ return new Promise((res,rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=()=>rej(new Error('No se pudo cargar '+src)); document.head.appendChild(s); }); }
+          const tasks=[];
+          if(!window.jQuery){ tasks.push(load('https://code.jquery.com/jquery-3.7.1.min.js')); }
+          if(!window.Swal){ tasks.push(load('https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js')); }
+          if(!window.Chart){ tasks.push(load('https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js')); }
+          Promise.all(tasks).then(()=>console.log('[PPM] Libs OK')).catch(e=>console.warn('[PPM] Faltó cargar alguna librería:', e));
+        })();
+    </script>
+
+    <script>
+        (function(){
+          console.log('[PPM] scripts cargados');
+
+          // Endpoints del backend
+          const ENDPOINTS = {
+            sumar: '@Url.Action("SumarCajas", "PPM")',
+            graf: '@Url.Action("ObtenerDatosGrafico", "PPM")',
+            ppmMes: '@Url.Action("GetPpmMesActual", "PPM")',
+            ppmFY: '@Url.Action("GetPpmAnioFiscal", "PPM")'
+          };
+
+          // Utilidades
+          const $ = window.jQuery; // puede o no existir
+          const hasJQ = !!$;
+          let chartInstance=null, lastData=null, lastPrev=null;
+
+          function qs(sel){ return document.querySelector(sel); }
+          function qsa(sel){ return Array.from(document.querySelectorAll(sel)); }
+
+          function showMsg(icon, title){
+            if(window.Swal){ Swal.fire({icon, title, timer:2200, showConfirmButton:false}); }
+            else { alert(title); }
+          }
+          function formatNumber(n){ return (n??0).toLocaleString(); }
+          function monthDiff(a,b){ return b.getMonth()-a.getMonth()+12*(b.getFullYear()-a.getFullYear()); }
+          function formatDate(d){ const dt=new Date(d); const y=dt.getFullYear(), m=String(dt.getMonth()+1).padStart(2,'0'), day=String(dt.getDate()).padStart(2,'0'); return `${y}-${m}-${day}`; }
+          function previousPeriod(start,end){ const days=Math.round((end-start)/86400000)+1; const prevEnd=new Date(start); prevEnd.setDate(prevEnd.getDate()-1); const prevStart=new Date(prevEnd); prevStart.setDate(prevStart.getDate()-(days-1)); return {start:prevStart,end:prevEnd}; }
+          function loaderHTML(){ return `<div class="text-center py-5"><div class="spinner-border text-primary" role="status"></div><div class="mt-2 text-muted">Calculando...</div></div>`; }
+
+          // Bind del botón Calculate (jQuery o vanilla, lo que haya)
+          function bindEvents(){
+            const btnSumar = qs('#btnSumar');
+            if(!btnSumar){ console.warn('[PPM] No existe #btnSumar en el DOM'); return; }
+
+            if(hasJQ){
+              $('#btnSumar').off('click.ppm').on('click.ppm', onCalcular);
+              $('[data-filtro]').off('click.ppm').on('click.ppm', function(){ aplicarFiltro(this.getAttribute('data-filtro')); });
+              $('#btnExportCsv').off('click.ppm').on('click.ppm', exportCsv);
+              $('#btnDownloadChart').off('click.ppm').on('click.ppm', downloadChart);
+              $('#btnCopyLink').off('click.ppm').on('click.ppm', copyLink);
+              $('#btnReset').off('click.ppm').on('click.ppm', resetForm);
+            } else {
+              btnSumar.addEventListener('click', onCalcular);
+              qsa('[data-filtro]').forEach(b=>b.addEventListener('click', ()=>aplicarFiltro(b.getAttribute('data-filtro'))));
+              qs('#btnExportCsv')?.addEventListener('click', exportCsv);
+              qs('#btnDownloadChart')?.addEventListener('click', downloadChart);
+              qs('#btnCopyLink')?.addEventListener('click', copyLink);
+              qs('#btnReset')?.addEventListener('click', resetForm);
+            }
+
+            // Autocarga sumarios globales si hay endpoints
+            fetch(ENDPOINTS.ppmMes).then(r=>safeJson(r)).then(r=>{
+              if(r?.ppm){ qs('#ppmMesActual') && (qs('#ppmMesActual').textContent = r.ppm); }
+            }).catch(()=>{});
+            fetch(ENDPOINTS.ppmFY).then(r=>safeJson(r)).then(r=>{
+              if(r?.ppm){
+                qs('#ppmAnioFiscal') && (qs('#ppmAnioFiscal').textContent = r.ppm);
+                if(r?.fechaInicio && r?.fechaFin){ qs('#ppmAnioFiscalRango') && (qs('#ppmAnioFiscalRango').textContent=`${r.fechaInicio} – ${r.fechaFin}`); }
+              }
+            }).catch(()=>{});
+          }
+
+          // Detecta si la respuesta es JSON o HTML (p.ej. redirección a login)
+          async function safeJson(resp){
+            const ct = resp.headers.get('content-type')||'';
+            if(!ct.includes('application/json')){
+              const text = await resp.text();
+              console.error('[PPM] Respuesta no JSON (posible login):', text.slice(0,300));
+              throw new Error('La sesión pudo expirar o el endpoint devolvió HTML.');
+            }
+            return resp.json();
+          }
+
+          function getValues(){
+            const fi = qs('#fechaInicio')?.value;
+            const ff = qs('#fechaFin')?.value;
+            const desc = qs('#descripcion')?.value;
+            const target = parseFloat(qs('#ppmTarget')?.value||'0');
+            const comparar = !!qs('#chkComparar')?.checked;
+            return {fi, ff, desc, target, comparar};
+          }
+
+          async function onCalcular(){
+            try{
+              // spinner
+              const spinner = qs('#btnSpinner'); const btn = qs('#btnSumar');
+              spinner && spinner.classList.remove('d-none'); btn && (btn.disabled=true);
+
+              const {fi, ff, desc, target, comparar} = getValues();
+              if(!fi || !ff || !desc){ showMsg('warning','Por favor, completa todos los campos.'); return; }
+              if(new Date(fi) > new Date(ff)){ showMsg('warning','La fecha de inicio debe ser anterior a la fecha de fin.'); return; }
+
+              // loader
+              const resultDiv = qs('#resultado'); if(resultDiv) resultDiv.innerHTML = loaderHTML();
+              qs('#graficaContainer')?.setAttribute('style','display:none;'); qs('#tablaContainer')?.setAttribute('style','display:none;');
+
+              // llamada principal
+              const r = await fetch(`${ENDPOINTS.sumar}?fechaInicio=${encodeURIComponent(fi)}&fechaFin=${encodeURIComponent(ff)}&descripcion=${encodeURIComponent(desc)}`, { credentials:'same-origin' });
+              const res = await safeJson(r).catch(e=>{ showMsg('error', e.message); throw e; });
+
+              if(res?.error){ showMsg('warning', res.error); }
+
+              // KPIs
+              const kpis = `
+                <div class="row g-3">
+                  <div class="col-md-3"><div class="card bg-light h-100"><div class="card-body text-center">
+                    <div class="text-muted small">Shipped Pieces</div>
+                    <div class="display-6 text-primary">${formatNumber(res.totalCajas ?? 0)}</div>
+                  </div></div></div>
+                  <div class="col-md-3"><div class="card bg-light h-100"><div class="card-body text-center">
+                    <div class="text-muted small">Defective Pieces</div>
+                    <div class="display-6 text-danger">${formatNumber(res.reclamos ?? 0)}</div>
+                  </div></div></div>
+                  <div class="col-md-3"><div class="card bg-light h-100"><div class="card-body text-center">
+                    <div class="text-muted small">PPM</div>
+                    <div class="display-6 text-primary">${Number(res.division ?? 0).toFixed(2)}</div>
+                  </div></div></div>
+                  <div class="col-md-3"><div class="card bg-light h-100"><div class="card-body text-center">
+                    <div class="text-muted small">Description</div>
+                    <div class="h4 mb-0">${desc}</div>
+                  </div></div></div>
+                </div>`;
+              if(resultDiv) resultDiv.innerHTML = kpis;
+
+              // Gráfica si >1 mes
+              const diffMonths = monthDiff(new Date(fi), new Date(ff));
+              if(diffMonths > 1){
+                const current = await cargarDatosParaGrafico(fi, ff, desc);
+                lastData = {...current, target};
+                let prev=null;
+                if(qs('#chkComparar')?.checked){
+                  const prevRange = previousPeriod(new Date(fi), new Date(ff));
+                  prev = await cargarDatosParaGrafico(formatDate(prevRange.start), formatDate(prevRange.end), desc);
+                }
+                lastPrev = prev;
+                renderChart(lastData, prev);
+                renderTable(lastData, prev);
+                qs('#graficaContainer')?.setAttribute('style','display:block;');
+                qs('#tablaContainer')?.setAttribute('style','display:block;');
+                qs('#btnExportCsv')?.removeAttribute('disabled');
+                qs('#btnDownloadChart')?.removeAttribute('disabled');
+              } else {
+                qs('#btnExportCsv')?.setAttribute('disabled','disabled');
+                qs('#btnDownloadChart')?.setAttribute('disabled','disabled');
+              }
+            } catch(err){
+              console.error('[PPM] Error en Calculate:', err);
+              showMsg('error','Error al realizar el cálculo.');
+            } finally{
+              const spinner = qs('#btnSpinner'); const btn = qs('#btnSumar');
+              spinner && spinner.classList.add('d-none'); btn && (btn.disabled=false);
+            }
+          }
+
+          async function cargarDatosParaGrafico(fi, ff, desc){
+            const r = await fetch(`${ENDPOINTS.graf}?fechaInicio=${encodeURIComponent(fi)}&fechaFin=${encodeURIComponent(ff)}&descripcion=${encodeURIComponent(desc)}`, { credentials:'same-origin' });
+            const data = await safeJson(r);
+            if(!data || !data.labels || !data.reclamos || !data.ppm) throw new Error('Datos insuficientes para gráfico');
+            return data;
+          }
+
+          function renderChart(current, prev){
+            const ctx = document.getElementById('graficaPPM')?.getContext('2d'); if(!ctx || !window.Chart) return;
+
+            if(chartInstance){ chartInstance.destroy(); }
+            const target = Number(qs('#ppmTarget')?.value||0);
+            const targetLine = Array(current.labels.length).fill(target);
+
+            const datasets = [
+              { type:'bar', label:'Claims', data: current.reclamos, yAxisID:'y',
+                backgroundColor:'rgba(255, 99, 132, 0.2)', borderColor:'rgb(255, 99, 132)', borderWidth:1 },
+              { type:'line', label:'PPM', data: current.ppm, yAxisID:'y1',
+                borderColor:'rgb(54, 162, 235)', backgroundColor:'rgba(54, 162, 235, 0.15)', tension:0.2, pointRadius:3, fill:false },
+              { type:'line', label:'Target', data: targetLine, yAxisID:'y1',
+                borderColor:'rgb(75, 192, 192)', borderDash:[6,6], pointRadius:0, tension:0 }
+            ];
+            if(prev){
+              datasets.push({ type:'line', label:'PPM (Prev)', data: alignPrevSeries(current.labels, prev), yAxisID:'y1',
+                borderColor:'rgb(153, 102, 255)', backgroundColor:'rgba(153, 102, 255, 0.1)', tension:0.2, pointRadius:3, fill:false });
+            }
+
+            chartInstance = new Chart(ctx, {
+              data: { labels: current.labels, datasets },
+              options:{
+                responsive:true,
+                interaction:{ mode:'index', intersect:false },
+                plugins:{
+                  legend:{ position:'top' },
+                  tooltip:{ callbacks:{ label: function(c){
+                    const v=c.parsed.y, axis=c.dataset.yAxisID, label=c.dataset.label||'';
+                    return axis==='y' ? `${label}: ${formatNumber(v)}` : `${label}: ${Number(v).toFixed(2)}`;
+                  }}}
+                },
+                scales:{
+                  y:{ type:'linear', position:'left', title:{display:true,text:'Claims'} },
+                  y1:{ type:'linear', position:'right', title:{display:true,text:'PPM'}, grid:{ drawOnChartArea:false } }
+                }
+              }
+            });
+            const rango = `${qs('#fechaInicio')?.value||''} → ${qs('#fechaFin')?.value||''}`;
+            const rangoLabel = document.getElementById('rangoLabel'); if(rangoLabel) rangoLabel.textContent = rango;
+          }
+
+          function alignPrevSeries(labels, prev){
+            const map = {}; prev.labels.forEach((l,i)=> map[l]=prev.ppm[i]);
+            return labels.map(l => (map[l] ?? null));
+          }
+
+          function renderTable(current, prev){
+            const tbody = document.querySelector('#tablaDetalle tbody'); if(!tbody) return;
+            tbody.innerHTML='';
+            const thPrev = document.getElementById('thPrev');
+            const hasPrev = !!prev; if(thPrev) thPrev.classList.toggle('d-none', !hasPrev);
+
+            const alignedPrev = hasPrev ? alignPrevSeries(current.labels, prev) : [];
+            current.labels.forEach((lbl,i)=>{
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                <td>${lbl}</td>
+                <td class="text-end">${formatNumber(current.reclamos[i]??0)}</td>
+                <td class="text-end">${Number(current.ppm[i]??0).toFixed(2)}</td>
+                <td class="text-end ${hasPrev?'':'d-none'}">${hasPrev && alignedPrev[i]!=null ? Number(alignedPrev[i]).toFixed(2) : ''}</td>`;
+              tbody.appendChild(tr);
+            });
+          }
+
+          // Extra UX
+          function exportCsv(){
+            if(!lastData) return;
+            const rows=[], headers=['Period','Claims','PPM']; const hasPrev=!!lastPrev;
+            if(hasPrev) headers.push('PPM (Prev)'); rows.push(headers.join(','));
+            const prevAligned = hasPrev ? alignPrevSeries(lastData.labels, lastPrev) : [];
+            lastData.labels.forEach((lbl,i)=>{
+              const r=[`"${lbl}"`, (lastData.reclamos[i]??0), Number(lastData.ppm[i]??0).toFixed(2)];
+              if(hasPrev) r.push(prevAligned[i]!=null? Number(prevAligned[i]).toFixed(2):'');
+              rows.push(r.join(','));
+            });
+            const csv = rows.join('\n'), blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+            const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`PPM_${new Date().toISOString().slice(0,10)}.csv`; a.click(); URL.revokeObjectURL(a.href);
+          }
+          function downloadChart(){
+            if(!chartInstance) return;
+            const a=document.createElement('a'); a.href=chartInstance.toBase64Image('image/png',1); a.download=`PPM_Chart_${new Date().toISOString().slice(0,10)}.png`; a.click();
+          }
+          function copyLink(){ navigator.clipboard.writeText(location.href).then(()=>showMsg('success','Link copiado')).catch(()=>showMsg('error','No se pudo copiar')); }
+          function resetForm(){
+            ['#fechaInicio','#fechaFin','#descripcion'].forEach(sel=>{ const el=qs(sel); if(el) el.value=''; });
+            qs('#resultado') && (qs('#resultado').innerHTML='<p class="text-muted">Enter the parameters and click Calculate</p>');
+            qs('#graficaContainer')?.setAttribute('style','display:none;'); qs('#tablaContainer')?.setAttribute('style','display:none;');
+            qs('#btnExportCsv')?.setAttribute('disabled','disabled'); qs('#btnDownloadChart')?.setAttribute('disabled','disabled');
+          }
+                  function aplicarFiltro(tipo){
+          const hoy = new Date(); let fi, ff;
+          const y = hoy.getFullYear(), m = hoy.getMonth(); // 0-11
+
+          if(tipo==='anio_fiscal'){
+            if(m>=3){ fi=new Date(y,3,1); ff=new Date(y+1,2,31); }
+            else { fi=new Date(y-1,3,1); ff=new Date(y,2,31); }
+          } else if(tipo==='semestre_actual'){
+            if(m<9){ fi=new Date(y,3,1); ff=new Date(y,8,30); }
+            else { fi=new Date(y,9,1); ff=new Date(y+1,2,31); }
+          } else if(tipo==='trimestre_actual'){
+            if(m>=3 && m<=5){ fi=new Date(y,3,1); ff=new Date(y,5,30); }
+            else if(m>=6 && m<=8){ fi=new Date(y,6,1); ff=new Date(y,8,30); }
+            else if(m>=9 && m<=11){ fi=new Date(y,9,1); ff=new Date(y,11,31); }
+            else { fi=new Date(y-1,0,1); ff=new Date(y-1,2,31); }
+          } else if(tipo==='ultimo_mes'){
+            fi=new Date(y, m-1, 1);
+            ff=new Date(y, m, 0);
+          } else { return; }
+
+          // setea fechas sin mostrar alertas
+          const formatDate = d => {
+            const dt = new Date(d);
+            const yy = dt.getFullYear();
+            const mm = String(dt.getMonth()+1).padStart(2,'0');
+            const dd = String(dt.getDate()).padStart(2,'0');
+            return `${yy}-${mm}-${dd}`;
+          };
+          document.querySelector('#fechaInicio').value = formatDate(fi);
+          document.querySelector('#fechaFin').value   = formatDate(ff);
+
+          // resalta el chip activo (opcional, sin alertas)
+          document.querySelectorAll('[data-filtro]').forEach(b=>b.classList.remove('active'));
+          document.querySelector(`[data-filtro="${tipo}"]`)?.classList.add('active');
+
+          // si quieres calcular automáticamente al elegir filtro, descomenta:
+          // onCalcular();
+        }
+
+          // Auto: si hay valores, dispara cálculo
+          function autoCalcIfReady(){
+            const {fi,ff,desc} = getValues();
+            if(fi && ff && desc){ onCalcular(); }
+          }
+
+          // Iniciar
+          if(document.readyState === 'loading'){
+            document.addEventListener('DOMContentLoaded', ()=>{ bindEvents(); autoCalcIfReady(); });
+          } else { bindEvents(); autoCalcIfReady(); }
+        })();
+    </script>
+}
+
