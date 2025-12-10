@@ -208,7 +208,7 @@
               </div>
 
               <div class="form-floating mb-3">
-                <input asp-for="UserName" class="form-control" value="@ViewBag.DisplayName" readonly placeholder="Usuario" />
+                                <input asp-for="UserName" class="form-control" readonly placeholder="Usuario" />
                 <label asp-for="UserName">Written Up</label>
                 <span asp-validation-for="UserName" class="text-danger small"></span>
               </div>
@@ -1548,32 +1548,49 @@
           const dz = document.getElementById('dropzoneNew');
           const fi = document.getElementById('fileInputNew');
           const pv = document.getElementById('preview-container');
-
           const openFileDialog = ()=> fi?.click();
+
           dz?.addEventListener('click', openFileDialog);
           dz?.addEventListener('keypress', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openFileDialog(); }});
           dz?.addEventListener('dragover', e=>{ e.preventDefault(); dz.classList.add('bg-light'); });
           dz?.addEventListener('dragleave', ()=> dz.classList.remove('bg-light'));
           dz?.addEventListener('drop', e=>{
-            e.preventDefault(); dz.classList.remove('bg-light');
-            if(!fi) return; fi.files = e.dataTransfer.files; renderPreviews();
+            e.preventDefault(); 
+            dz.classList.remove('bg-light');
+            if(!fi) return; 
+            fi.files = e.dataTransfer.files; 
+            renderPreviews();
           });
           fi?.addEventListener('change', renderPreviews);
 
+          function escapeHtml(str){
+            return str.replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+          }
+
           function renderPreviews(){
+            if(!pv || !fi) return;
             pv.innerHTML = '';
-            const files = fi?.files ?? [];
+            const files = fi.files ?? [];
             [...files].forEach(f=>{
-              const url = URL.createObjectURL(f);
               const card = document.createElement('div');
               card.className = 'card p-1';
               card.style.width = '120px';
-              const isImg = /image\//.test(f.type);
-              card.innerHTML = isImg
-                ? `<img src="${url}" class="card-img-top rounded" style="height:90px;object-fit:cover;" alt="">
-                   <div class="small text-truncate px-1" title="${f.name}">${f.name}</div>`
-                : `<div class="d-flex align-items-center justify-content-center" style="height:90px;"><i class="fas fa-file-pdf fa-2x"></i></div>
-                   <div class="small text-truncate px-1" title="${f.name}">${f.name}</div>`;
+
+              const safeName = escapeHtml(f.name);
+              if (/image\//.test(f.type)) {
+                const url = URL.createObjectURL(f);
+                card.innerHTML = `
+                  <img src="${url}" class="card-img-top rounded" style="height:90px;object-fit:cover;" alt="">
+                  <div class="small text-truncate px-1" title="${safeName}">${safeName}</div>
+                `;
+              } else {
+                card.innerHTML = `
+                  <div class="d-flex align-items-center justify-content-center" style="height:90px;">
+                    <i class="fas fa-file-pdf fa-2x"></i>
+                  </div>
+                  <div class="small text-truncate px-1" title="${safeName}">${safeName}</div>
+                `;
+              }
               pv.appendChild(card);
             });
           }
@@ -1581,6 +1598,21 @@
 
         // ===== Tooltips =====
         document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
+    </script>
+
+    <script>
+        window.reportEditInitialData = {
+          fmIndex: @Model.FmMode?.Count ?? 0,
+          preventiveIndex: @Model.PreventiveCProcessName?.Count ?? 0,
+          detectionIndex: @Model.DetectionCProcessName?.Count ?? 0,
+          occurrenceIndex: @Model.FactorUno?.Count ?? 0,
+          detectionRootCauseIndex: @Model.FactorDos?.Count ?? 0,
+          systemicRootCauseIndex: @Model.FactorTres?.Count ?? 0,
+          occurrenceActionIndex: @Model.OccurrenceItems?.Count ?? 0,
+          detectionActionIndex: @Model.DetectionItems?.Count ?? 0,
+          verOccurrenceActionIndex: @Model.VerOccurrenceItems?.Count ?? 0,
+          verDetectionActionIndex: @Model.VerDetectionItems?.Count ?? 0
+        };
     </script>
 
     <!-- Tu lógica específica -->

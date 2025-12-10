@@ -1,6 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Iniciar Sesión";
-    Layout = null; // Eliminamos el layout para un diseño personalizado
+    ViewData["Title"] = "Iniciar sesión - RSQR";
+    Layout = null;  // 👈 IMPORTANTE: sin layout, así no sale sidebar ni barra superior
 }
 
 <!DOCTYPE html>
@@ -8,74 +8,59 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - RSQR</title>
+    <title>@ViewData["Title"]</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body class="bg-light">
     <div class="container">
         <div class="row justify-content-center min-vh-100 align-items-center">
-            <div class="col-lg-5 col-md-7">
-                <!-- Tarjeta de Login -->
+            <div class="col-lg-4 col-md-6">
                 <div class="card shadow-lg rounded-3 overflow-hidden border-0">
-
-                    <!-- Header usa tu clase personalizada -->
-                    <div class="card-header custom-header-primary py-4 text-center">
-                        <div class="card-header custom-header-primary py-4 text-center">
-                            <img src="~/images/logo.png" asp-append-version="true"
-                                 alt="Movimientos PCS" class="mb-3" style="height:56px; width:auto;" />
-                            <h2 class="mb-0 text-white">Iniciar Sesión</h2>
-                        </div>
+                    <div class="card-header bg-primary text-white text-center py-3">
+                        <img src="~/images/logo.png" alt="RSQR" class="mb-2" style="height:40px; width:auto;" />
+                        <h5 class="mb-0">RSQR</h5>
+                        <p class="mb-0 small text-white-50">
+                            Inicio de sesión con usuario de red
+                        </p>
                     </div>
 
-                    <div class="card-body p-4 p-sm-5">
+                    <div class="card-body p-4">
                         @if (ViewBag.ErrorMessage != null)
                         {
-                            <div class="alert alert-danger d-flex align-items-center mb-4">
+                            <div class="alert alert-danger d-flex align-items-center mb-3">
                                 <i class="fas fa-exclamation-circle me-2"></i>
-                                <div>@ViewBag.ErrorMessage</div>
+                                <span>@ViewBag.ErrorMessage</span>
                             </div>
                         }
 
-                        <form method="post" asp-action="Login" asp-controller="Account" class="needs-validation" novalidate>
-                            <!-- Campo Usuario -->
-                            <div class="mb-4">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="Usuario" required>
-                                    <label for="username"><i class="fas fa-user me-2"></i>Usuario</label>
-                                </div>
+                        <form asp-action="Login" asp-controller="Account" method="post">
+                            @Html.AntiForgeryToken()
+
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    <i class="fas fa-user me-1"></i>Usuario
+                                </label>
+                                <input name="username" class="form-control" autocomplete="username" />
                             </div>
 
-                            <!-- Campo Contraseña -->
-                            <div class="mb-4">
-                                <div class="form-floating">
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
-                                    <label for="password"><i class="fas fa-lock me-2"></i>Contraseña</label>
-                                </div>
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    <i class="fas fa-lock me-1"></i>Contraseña
+                                </label>
+                                <input name="password" type="password" class="form-control" autocomplete="current-password" />
                             </div>
 
-                            <!-- Botón de Login -->
-                            <div class="d-grid mb-3">
-                                <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow-sm">
-                                    <i class="fas fa-sign-in-alt me-2"></i>Ingresar
-                                </button>
-                            </div>
-
-                            <!-- Opciones adicionales -->
-                            <div class="text-center">
-                                <a href="#" class="text-decoration-none text-muted small">
-                                    <i class="fas fa-question-circle me-1"></i>¿Olvidaste tu contraseña?
-                                </a>
-                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-sign-in-alt me-1"></i>Ingresar
+                            </button>
                         </form>
                     </div>
 
-                    <!-- Footer -->
-                    <div class="card-footer bg-light text-center py-3">
-                        <p class="mb-0 small text-muted">
-                            &copy; @DateTime.Now.Year - RSQR Sistema de Reportes
-                        </p>
+                    <div class="card-footer bg-light text-center py-2">
+                        <small class="text-muted">&copy; @DateTime.Now.Year - RSQR</small>
                     </div>
                 </div>
             </div>
@@ -84,27 +69,5 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Validación de formulario
-        (function () {
-            'use strict'
-
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.querySelectorAll('.needs-validation')
-
-            // Loop over them and prevent submission
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })()
-    </script>
 </body>
 </html>

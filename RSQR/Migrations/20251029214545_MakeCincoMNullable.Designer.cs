@@ -12,8 +12,8 @@ using RSQR.Data;
 namespace RSQR.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250717002628_newContainment")]
-    partial class newContainment
+    [Migration("20251029214545_MakeCincoMNullable")]
+    partial class MakeCincoMNullable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -258,7 +258,10 @@ namespace RSQR.Migrations
             modelBuilder.Entity("RSQR.Models.PpmReport", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Comentarios")
                         .HasColumnType("nvarchar(max)");
@@ -306,6 +309,9 @@ namespace RSQR.Migrations
                     b.Property<string>("NumParteAfectado")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ReporteId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Responsabilidad")
                         .HasColumnType("int");
 
@@ -316,6 +322,9 @@ namespace RSQR.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ReporteId")
+                        .IsUnique();
 
                     b.ToTable("qcPpmReport", (string)null);
                 });
@@ -334,7 +343,10 @@ namespace RSQR.Migrations
                     b.Property<bool>("AlertaCalidad")
                         .HasColumnType("bit");
 
-                    b.Property<int>("CincoM")
+                    b.Property<string>("Approval")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CincoM")
                         .HasColumnType("int");
 
                     b.Property<string>("Comentarios")
@@ -389,8 +401,32 @@ namespace RSQR.Migrations
                     b.Property<string>("CustomerReport")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("D7D8ActualClosingDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("D7D8CodeDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("D7D8Comments")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("D7D8Deadline")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("D7D8Documentation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("D7D8Responsible")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("D7D8Sn")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("DateOfClose")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("DefectoDuplicado")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
@@ -399,6 +435,78 @@ namespace RSQR.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Deteccion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionAction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionAmef")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCEnvironment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCEnvironmentC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCMachinary")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCMachinaryC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCManpower")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCManpowerC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCMaterial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCMaterialC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCMeasurement")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCMeasurementC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCMethodC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCProcessName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCProcessNameC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCRank")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCRankC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCloseDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionCp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionDepartment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionItems")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionOpeningDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DetectionResponsable")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Disposicion")
@@ -413,8 +521,95 @@ namespace RSQR.Migrations
                     b.Property<string>("EvidenciaFotografica")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("FactorDos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorDosCorrectiveActions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorDosCuartoWhy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorDosPrimerWhy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorDosQuintoWhy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorDosSegundoWhy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorDosTercerWhy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorTres")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorTresCorrectiveActions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorTresCuartoWhy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorTresPrimerWhy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorTresQuintoWhy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorTresSegundoWhy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorTresTercerWhy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorUno")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorUnoCorrectiveActions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorUnoCuartoWhy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorUnoPrimerWhy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorUnoQuintoWhy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorUnoSegundoWhy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FactorUnoTercerWhy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Fm6Ms")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FmContentionActions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FmFactorDos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FmFactorTres")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FmFactorUno")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FmMode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FmProcessName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FmRelated")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("ImpactoPPM")
                         .HasColumnType("bit");
@@ -443,10 +638,82 @@ namespace RSQR.Migrations
                     b.Property<string>("NumParteAfectado")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("OccurrenceAction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OccurrenceAmef")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OccurrenceCloseDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OccurrenceCp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OccurrenceDepartment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OccurrenceItems")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OccurrenceOpeningDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OccurrenceResponsable")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Ocurrencia")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PorqueP")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCEnvironment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCEnvironmentC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCMachinary")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCMachinaryC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCManpower")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCManpowerC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCMaterial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCMaterialC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCMeasurement")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCMeasurementC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCMethodC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCProcessName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCProcessNameC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCRank")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PreventiveCRankC")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProblemRank")
@@ -465,6 +732,9 @@ namespace RSQR.Migrations
                     b.Property<string>("Severidad")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Tipo")
                         .HasColumnType("int");
 
@@ -472,6 +742,54 @@ namespace RSQR.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerDetectionAction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerDetectionAmef")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerDetectionCloseDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerDetectionCp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerDetectionDepartment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerDetectionItems")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerDetectionOpeningDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerDetectionResponsable")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerOccurrenceAction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerOccurrenceAmef")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerOccurrenceCloseDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerOccurrenceCp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerOccurrenceDepartment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerOccurrenceItems")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerOccurrenceOpeningDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VerOccurrenceResponsable")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -532,11 +850,13 @@ namespace RSQR.Migrations
 
             modelBuilder.Entity("RSQR.Models.PpmReport", b =>
                 {
-                    b.HasOne("RSQR.Models.Reporte", null)
+                    b.HasOne("RSQR.Models.Reporte", "Reporte")
                         .WithOne("PpmReport")
-                        .HasForeignKey("RSQR.Models.PpmReport", "Id")
+                        .HasForeignKey("RSQR.Models.PpmReport", "ReporteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Reporte");
                 });
 
             modelBuilder.Entity("RSQR.Models.Reporte", b =>

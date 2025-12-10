@@ -4,10 +4,7 @@
 ## Contents
 
 - [AccountController](#T-RSQR-Controllers-AccountController 'RSQR.Controllers.AccountController')
-  - [#ctor(adService)](#M-RSQR-Controllers-AccountController-#ctor-RSQR-Services-ActiveDirectoryService- 'RSQR.Controllers.AccountController.#ctor(RSQR.Services.ActiveDirectoryService)')
-  - [Login()](#M-RSQR-Controllers-AccountController-Login 'RSQR.Controllers.AccountController.Login')
-  - [Login(username,password)](#M-RSQR-Controllers-AccountController-Login-System-String,System-String- 'RSQR.Controllers.AccountController.Login(System.String,System.String)')
-  - [Logout()](#M-RSQR-Controllers-AccountController-Logout 'RSQR.Controllers.AccountController.Logout')
+  - [Login()](#M-RSQR-Controllers-AccountController-Login-System-String,System-String- 'RSQR.Controllers.AccountController.Login(System.String,System.String)')
 - [ActiveDirectoryService](#T-RSQR-Services-ActiveDirectoryService 'RSQR.Services.ActiveDirectoryService')
   - [#ctor(domain)](#M-RSQR-Services-ActiveDirectoryService-#ctor-System-String- 'RSQR.Services.ActiveDirectoryService.#ctor(System.String)')
   - [GetDisplayName(username,password)](#M-RSQR-Services-ActiveDirectoryService-GetDisplayName-System-String,System-String- 'RSQR.Services.ActiveDirectoryService.GetDisplayName(System.String,System.String)')
@@ -57,6 +54,10 @@
   - [Index()](#M-RSQR-Controllers-HomeController-Index 'RSQR.Controllers.HomeController.Index')
 - [IEmailService](#T-RSQR-Services-IEmailService 'RSQR.Services.IEmailService')
   - [SendEmailAsync(toEmail,subject,body)](#M-RSQR-Services-IEmailService-SendEmailAsync-System-String,System-String,System-String,System-String- 'RSQR.Services.IEmailService.SendEmailAsync(System.String,System.String,System.String,System.String)')
+- [MakeCincoMNullable](#T-RSQR-Migrations-MakeCincoMNullable 'RSQR.Migrations.MakeCincoMNullable')
+  - [BuildTargetModel()](#M-RSQR-Migrations-MakeCincoMNullable-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.MakeCincoMNullable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
+  - [Down()](#M-RSQR-Migrations-MakeCincoMNullable-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.MakeCincoMNullable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
+  - [Up()](#M-RSQR-Migrations-MakeCincoMNullable-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.MakeCincoMNullable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
 - [PPMController](#T-PPMController 'PPMController')
   - [#ctor(configuration)](#M-PPMController-#ctor-Microsoft-Extensions-Configuration-IConfiguration- 'PPMController.#ctor(Microsoft.Extensions.Configuration.IConfiguration)')
   - [_configuration](#F-PPMController-_configuration 'PPMController._configuration')
@@ -69,25 +70,6 @@
   - [ObtenerTotalCajasOracle(descripcion,fechaInicio,fechaFin)](#M-PPMController-ObtenerTotalCajasOracle-System-String,System-String,System-String- 'PPMController.ObtenerTotalCajasOracle(System.String,System.String,System.String)')
   - [Ppm()](#M-PPMController-Ppm 'PPMController.Ppm')
   - [SumarCajas(fechaInicio,fechaFin,descripcion)](#M-PPMController-SumarCajas-System-String,System-String,System-String- 'PPMController.SumarCajas(System.String,System.String,System.String)')
-- [PpmReport](#T-RSQR-Models-PpmReport 'RSQR.Models.PpmReport')
-  - [Comentarios](#P-RSQR-Models-PpmReport-Comentarios 'RSQR.Models.PpmReport.Comentarios')
-  - [CuantosP](#P-RSQR-Models-PpmReport-CuantosP 'RSQR.Models.PpmReport.CuantosP')
-  - [Customer](#P-RSQR-Models-PpmReport-Customer 'RSQR.Models.PpmReport.Customer')
-  - [CustomerClaimNumber](#P-RSQR-Models-PpmReport-CustomerClaimNumber 'RSQR.Models.PpmReport.CustomerClaimNumber')
-  - [CustomerPartNumber](#P-RSQR-Models-PpmReport-CustomerPartNumber 'RSQR.Models.PpmReport.CustomerPartNumber')
-  - [DateOfClose](#P-RSQR-Models-PpmReport-DateOfClose 'RSQR.Models.PpmReport.DateOfClose')
-  - [Fecha](#P-RSQR-Models-PpmReport-Fecha 'RSQR.Models.PpmReport.Fecha')
-  - [Id](#P-RSQR-Models-PpmReport-Id 'RSQR.Models.PpmReport.Id')
-  - [ImpactoPPM](#P-RSQR-Models-PpmReport-ImpactoPPM 'RSQR.Models.PpmReport.ImpactoPPM')
-  - [InvestigationReport](#P-RSQR-Models-PpmReport-InvestigationReport 'RSQR.Models.PpmReport.InvestigationReport')
-  - [Linea](#P-RSQR-Models-PpmReport-Linea 'RSQR.Models.PpmReport.Linea')
-  - [Lote](#P-RSQR-Models-PpmReport-Lote 'RSQR.Models.PpmReport.Lote')
-  - [Mileage](#P-RSQR-Models-PpmReport-Mileage 'RSQR.Models.PpmReport.Mileage')
-  - [MotherFactory](#P-RSQR-Models-PpmReport-MotherFactory 'RSQR.Models.PpmReport.MotherFactory')
-  - [NumParteAfectado](#P-RSQR-Models-PpmReport-NumParteAfectado 'RSQR.Models.PpmReport.NumParteAfectado')
-  - [Responsabilidad](#P-RSQR-Models-PpmReport-Responsabilidad 'RSQR.Models.PpmReport.Responsabilidad')
-  - [Tipo](#P-RSQR-Models-PpmReport-Tipo 'RSQR.Models.PpmReport.Tipo')
-  - [TituloProblema](#P-RSQR-Models-PpmReport-TituloProblema 'RSQR.Models.PpmReport.TituloProblema')
 - [Reporte](#T-RSQR-Models-Reporte 'RSQR.Models.Reporte')
   - [AP_NPR](#P-RSQR-Models-Reporte-AP_NPR 'RSQR.Models.Reporte.AP_NPR')
   - [AlertaCalidad](#P-RSQR-Models-Reporte-AlertaCalidad 'RSQR.Models.Reporte.AlertaCalidad')
@@ -161,18 +143,6 @@
   - [Field](#F-RSQR-Models-TipoReporte-Field 'RSQR.Models.TipoReporte.Field')
   - [Internal](#F-RSQR-Models-TipoReporte-Internal 'RSQR.Models.TipoReporte.Internal')
   - [ZeroKm](#F-RSQR-Models-TipoReporte-ZeroKm 'RSQR.Models.TipoReporte.ZeroKm')
-- [d4d5fields](#T-RSQR-Migrations-d4d5fields 'RSQR.Migrations.d4d5fields')
-  - [BuildTargetModel()](#M-RSQR-Migrations-d4d5fields-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.d4d5fields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
-  - [Down()](#M-RSQR-Migrations-d4d5fields-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.d4d5fields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
-  - [Up()](#M-RSQR-Migrations-d4d5fields-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.d4d5fields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
-- [newContainment](#T-RSQR-Migrations-newContainment 'RSQR.Migrations.newContainment')
-  - [BuildTargetModel()](#M-RSQR-Migrations-newContainment-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.newContainment.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
-  - [Down()](#M-RSQR-Migrations-newContainment-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.newContainment.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
-  - [Up()](#M-RSQR-Migrations-newContainment-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.newContainment.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
-- [thirdStepData](#T-RSQR-Migrations-thirdStepData 'RSQR.Migrations.thirdStepData')
-  - [BuildTargetModel()](#M-RSQR-Migrations-thirdStepData-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder- 'RSQR.Migrations.thirdStepData.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)')
-  - [Down()](#M-RSQR-Migrations-thirdStepData-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.thirdStepData.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
-  - [Up()](#M-RSQR-Migrations-thirdStepData-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder- 'RSQR.Migrations.thirdStepData.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)')
 
 <a name='T-RSQR-Controllers-AccountController'></a>
 ## AccountController `type`
@@ -185,63 +155,12 @@ RSQR.Controllers
 
 Controlador para gestionar la autenticación de usuarios.
 
-<a name='M-RSQR-Controllers-AccountController-#ctor-RSQR-Services-ActiveDirectoryService-'></a>
-### #ctor(adService) `constructor`
-
-##### Summary
-
-Constructor del controlador AccountController.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| adService | [RSQR.Services.ActiveDirectoryService](#T-RSQR-Services-ActiveDirectoryService 'RSQR.Services.ActiveDirectoryService') | Servicio de Active Directory para autenticación. |
-
-<a name='M-RSQR-Controllers-AccountController-Login'></a>
+<a name='M-RSQR-Controllers-AccountController-Login-System-String,System-String-'></a>
 ### Login() `method`
 
 ##### Summary
 
-Muestra la vista de inicio de sesión.
-
-##### Returns
-
-La vista de inicio de sesión.
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-RSQR-Controllers-AccountController-Login-System-String,System-String-'></a>
-### Login(username,password) `method`
-
-##### Summary
-
 Procesa el formulario de inicio de sesión.
-
-##### Returns
-
-Redirige al usuario a la página de inicio si la autenticación es exitosa.
-Muestra un mensaje de error en la vista de inicio de sesión si la autenticación falla.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| username | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Nombre de usuario. |
-| password | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | Contraseña del usuario. |
-
-<a name='M-RSQR-Controllers-AccountController-Logout'></a>
-### Logout() `method`
-
-##### Summary
-
-Cierra la sesión del usuario actual.
-
-##### Returns
-
-Redirige al usuario a la vista de inicio de sesión.
 
 ##### Parameters
 
@@ -892,6 +811,50 @@ Tarea que representa la operación asíncrona.
 Las implementaciones de esta interfaz deben proporcionar la lógica concreta
 para enviar correos electrónicos utilizando algún proveedor de servicios SMTP.
 
+<a name='T-RSQR-Migrations-MakeCincoMNullable'></a>
+## MakeCincoMNullable `type`
+
+##### Namespace
+
+RSQR.Migrations
+
+##### Summary
+
+*Inherit from parent.*
+
+<a name='M-RSQR-Migrations-MakeCincoMNullable-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder-'></a>
+### BuildTargetModel() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-MakeCincoMNullable-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Down() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RSQR-Migrations-MakeCincoMNullable-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
+### Up() `method`
+
+##### Summary
+
+*Inherit from parent.*
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='T-PPMController'></a>
 ## PPMController `type`
 
@@ -1074,168 +1037,6 @@ Objeto JSON con:
 ##### Remarks
 
 Fórmula de cálculo: `(Piezas defectuosas / Total de piezas enviadas) * 1,000,000`.
-
-<a name='T-RSQR-Models-PpmReport'></a>
-## PpmReport `type`
-
-##### Namespace
-
-RSQR.Models
-
-##### Summary
-
-Representa un reporte PPM (Parts Per Million) para el control de calidad y gestión de reclamos de clientes.
-
-##### Remarks
-
-Este modelo almacena información detallada sobre problemas de calidad reportados por clientes,
-incluyendo investigación, responsabilidad y métricas de impacto.
-
-<a name='P-RSQR-Models-PpmReport-Comentarios'></a>
-### Comentarios `property`
-
-##### Summary
-
-Comentarios adicionales sobre el caso (opcional).
-
-<a name='P-RSQR-Models-PpmReport-CuantosP'></a>
-### CuantosP `property`
-
-##### Summary
-
-Cantidad de partes afectadas (opcional).
-
-<a name='P-RSQR-Models-PpmReport-Customer'></a>
-### Customer `property`
-
-##### Summary
-
-Nombre del cliente que reporta el problema.
-
-##### Remarks
-
-Campo obligatorio con longitud máxima de 100 caracteres.
-
-<a name='P-RSQR-Models-PpmReport-CustomerClaimNumber'></a>
-### CustomerClaimNumber `property`
-
-##### Summary
-
-Número de reclamo asignado por el cliente.
-
-<a name='P-RSQR-Models-PpmReport-CustomerPartNumber'></a>
-### CustomerPartNumber `property`
-
-##### Summary
-
-Número de parte según el cliente.
-
-##### Remarks
-
-Longitud máxima de 100 caracteres.
-
-<a name='P-RSQR-Models-PpmReport-DateOfClose'></a>
-### DateOfClose `property`
-
-##### Summary
-
-Fecha de cierre del reporte (opcional).
-
-##### Remarks
-
-Solo se completa cuando el caso está resuelto.
-
-<a name='P-RSQR-Models-PpmReport-Fecha'></a>
-### Fecha `property`
-
-##### Summary
-
-Fecha de creación del reporte.
-
-<a name='P-RSQR-Models-PpmReport-Id'></a>
-### Id `property`
-
-##### Summary
-
-Identificador único del reporte en la base de datos.
-
-<a name='P-RSQR-Models-PpmReport-ImpactoPPM'></a>
-### ImpactoPPM `property`
-
-##### Summary
-
-Indica si el problema impacta en las métricas PPM de la organización.
-
-<a name='P-RSQR-Models-PpmReport-InvestigationReport'></a>
-### InvestigationReport `property`
-
-##### Summary
-
-Reporte detallado de la investigación del problema.
-
-<a name='P-RSQR-Models-PpmReport-Linea'></a>
-### Linea `property`
-
-##### Summary
-
-Línea de producción o área relacionada con el problema.
-
-<a name='P-RSQR-Models-PpmReport-Lote'></a>
-### Lote `property`
-
-##### Summary
-
-Lote o batch del producto con problema (opcional).
-
-<a name='P-RSQR-Models-PpmReport-Mileage'></a>
-### Mileage `property`
-
-##### Summary
-
-Kilometraje o horas de uso (para productos en servicio).
-
-##### Remarks
-
-Debe ser un valor positivo.
-
-<a name='P-RSQR-Models-PpmReport-MotherFactory'></a>
-### MotherFactory `property`
-
-##### Summary
-
-Fábrica de origen del producto con problema.
-
-##### Remarks
-
-Longitud máxima de 100 caracteres.
-
-<a name='P-RSQR-Models-PpmReport-NumParteAfectado'></a>
-### NumParteAfectado `property`
-
-##### Summary
-
-Número de parte afectado (opcional).
-
-<a name='P-RSQR-Models-PpmReport-Responsabilidad'></a>
-### Responsabilidad `property`
-
-##### Summary
-
-Determina la responsabilidad asignada por el análisis de calidad.
-
-<a name='P-RSQR-Models-PpmReport-Tipo'></a>
-### Tipo `property`
-
-##### Summary
-
-Tipo de reporte según la clasificación interna.
-
-<a name='P-RSQR-Models-PpmReport-TituloProblema'></a>
-### TituloProblema `property`
-
-##### Summary
-
-Título descriptivo del problema (opcional).
 
 <a name='T-RSQR-Models-Reporte'></a>
 ## Reporte `type`
@@ -1901,135 +1702,3 @@ Reporte interno de calidad
 ##### Summary
 
 Reporte de problema en vehículo nuevo (0km)
-
-<a name='T-RSQR-Migrations-d4d5fields'></a>
-## d4d5fields `type`
-
-##### Namespace
-
-RSQR.Migrations
-
-##### Summary
-
-*Inherit from parent.*
-
-<a name='M-RSQR-Migrations-d4d5fields-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder-'></a>
-### BuildTargetModel() `method`
-
-##### Summary
-
-*Inherit from parent.*
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-RSQR-Migrations-d4d5fields-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
-### Down() `method`
-
-##### Summary
-
-*Inherit from parent.*
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-RSQR-Migrations-d4d5fields-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
-### Up() `method`
-
-##### Summary
-
-*Inherit from parent.*
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='T-RSQR-Migrations-newContainment'></a>
-## newContainment `type`
-
-##### Namespace
-
-RSQR.Migrations
-
-##### Summary
-
-*Inherit from parent.*
-
-<a name='M-RSQR-Migrations-newContainment-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder-'></a>
-### BuildTargetModel() `method`
-
-##### Summary
-
-*Inherit from parent.*
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-RSQR-Migrations-newContainment-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
-### Down() `method`
-
-##### Summary
-
-*Inherit from parent.*
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-RSQR-Migrations-newContainment-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
-### Up() `method`
-
-##### Summary
-
-*Inherit from parent.*
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='T-RSQR-Migrations-thirdStepData'></a>
-## thirdStepData `type`
-
-##### Namespace
-
-RSQR.Migrations
-
-##### Summary
-
-*Inherit from parent.*
-
-<a name='M-RSQR-Migrations-thirdStepData-BuildTargetModel-Microsoft-EntityFrameworkCore-ModelBuilder-'></a>
-### BuildTargetModel() `method`
-
-##### Summary
-
-*Inherit from parent.*
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-RSQR-Migrations-thirdStepData-Down-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
-### Down() `method`
-
-##### Summary
-
-*Inherit from parent.*
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-RSQR-Migrations-thirdStepData-Up-Microsoft-EntityFrameworkCore-Migrations-MigrationBuilder-'></a>
-### Up() `method`
-
-##### Summary
-
-*Inherit from parent.*
-
-##### Parameters
-
-This method has no parameters.

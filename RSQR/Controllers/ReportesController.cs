@@ -14,6 +14,7 @@ using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using System.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Data.SqlClient;
 
 namespace RSQR.Controllers
 {
@@ -238,7 +239,7 @@ namespace RSQR.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Fecha,ProblemRank,UserName,Linea,Tipo,TituloProblema,CincoM,NumParteAfectado,Descripcion,DescripcionProblema,QueP,PorqueP,DondeP,QuienP,CuandoP,CuantosP,ComoP,Lote,CustomerClaimNumber,ContencionItems,ContencionActividades,ContencionResponsables,ContencionFechasInicio,AlertaCalidad,Disposicion,EntrevistaInvolucrados,Comentarios,Severidad,Ocurrencia,Deteccion,AP_NPR,ModoFalla,ControlesEstablecidos,EvidenciaFotografica,Customer,MotherFactory,CustomerPartNumber,Mileage,InvestigationReport,DateOfClose,ImpactoPPM,Responsabilidad,NombreCar,CustomerReport")] Reporte reporte, List<IFormFile>? EvidenciaFotografica)
+        public async Task<IActionResult> Create([Bind("Id,Fecha,ProblemRank,UserName,Linea,Tipo,TituloProblema,NumParteAfectado,Descripcion,DescripcionProblema,QueP,PorqueP,DondeP,QuienP,CuandoP,CuantosP,ComoP,Lote,CustomerClaimNumber,ContencionItems,ContencionActividades,ContencionResponsables,ContencionFechasInicio,AlertaCalidad,Disposicion,EntrevistaInvolucrados,Comentarios,Severidad,Ocurrencia,Deteccion,AP_NPR,ModoFalla,ControlesEstablecidos,EvidenciaFotografica,Customer,MotherFactory,CustomerPartNumber,Mileage,InvestigationReport,DateOfClose,ImpactoPPM,Responsabilidad,NombreCar,CustomerReport")] Reporte reporte, List<IFormFile>? EvidenciaFotografica)
         {
             if (ModelState.IsValid)
             {
@@ -273,6 +274,8 @@ namespace RSQR.Controllers
 
                 _context.Add(reporte);
                 await _context.SaveChangesAsync();
+                await ManejarPpmReport(reporte); // un solo punto de verdad para PPM
+
 
                 // Mapeo de líneas a destinatarios
                 var lineaDestinatarios = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
@@ -332,16 +335,19 @@ namespace RSQR.Controllers
                 {
                     var ppmReport = new PpmReport
                     {
-                        Fecha = reporte.Fecha,
+                        // vínculo por ReporteId
+                        ReporteId = reporte.Id,
+
+                        Fecha = reporte.DateOfClose ?? reporte.Fecha,
                         Customer = reporte.Customer!,
-                        MotherFactory = reporte.MotherFactory!,
-                        CustomerPartNumber = reporte.CustomerPartNumber!,
-                        Mileage = reporte.Mileage!,
-                        InvestigationReport = reporte.InvestigationReport!,
+                        MotherFactory = reporte.MotherFactory,
+                        CustomerPartNumber = reporte.CustomerPartNumber,
+                        Mileage = reporte.Mileage,
+                        InvestigationReport = reporte.InvestigationReport,
                         DateOfClose = reporte.DateOfClose,
-                        ImpactoPPM = reporte.ImpactoPPM,
-                        Responsabilidad = reporte.Responsabilidad,
+                        ImpactoPPM = true,
                         Comentarios = reporte.Comentarios,
+                        Responsabilidad = reporte.Responsabilidad,
                         CuantosP = reporte.CuantosP,
                         CustomerClaimNumber = reporte.CustomerClaimNumber,
                         Linea = reporte.Linea,
@@ -353,6 +359,8 @@ namespace RSQR.Controllers
                     _context.Add(ppmReport);
                     await _context.SaveChangesAsync();
                 }
+
+
 
                 return RedirectToAction(nameof(Index));
             }
@@ -426,6 +434,14 @@ namespace RSQR.Controllers
             var reporte = await _context.Reportes.FindAsync(id);
             if (reporte == null) return NotFound();
 
+            var current = NormalizarLinea(reporte.Linea);
+            var lineaList = (List<SelectListItem>)ViewBag.LineaList;
+
+            if (!string.IsNullOrWhiteSpace(current) && !lineaList.Any(x => string.Equals(x.Value, current, StringComparison.OrdinalIgnoreCase)))
+            {
+                lineaList.Insert(0, new SelectListItem { Value = current, Text = current, Selected = true });
+            }
+
             var archivosExistentes = new List<object>();
             if (reporte.EvidenciaFotografica != null)
             {
@@ -488,12 +504,45 @@ namespace RSQR.Controllers
 
                     if (existingReport == null) return NotFound();
 
+                    // Guarda originales
+                    var originalUserName = existingReport.UserName;
+                    var originalLinea = existingReport.Linea;
+                    var originalDescProb = existingReport.DescripcionProblema;
+
+                    // Normaliza la línea entrante para evitar el "EPS (3G)" vs "EPS(3G)"
+                    var incomingLinea = NormalizarLinea(reporte.Linea);
+
                     // Verificar si hubo cambios importantes que requieran notificación
                     bool requiereNotificacion = RequiereNotificacion(existingReport, reporte);
 
                     // Copiar los valores del modelo recibido a la entidad existente
                     var entry = _context.Entry(existingReport);
                     entry.CurrentValues.SetValues(reporte);
+
+                    // PROTECCIONES: si el POST viene vacío, NO pises el valor existente
+                    if (string.IsNullOrWhiteSpace(reporte.UserName))
+                    {
+                        existingReport.UserName = originalUserName;
+                        entry.Property(e => e.UserName).IsModified = false;
+                    }
+
+                    if (string.IsNullOrWhiteSpace(incomingLinea))
+                    {
+                        existingReport.Linea = originalLinea;
+                        entry.Property(e => e.Linea).IsModified = false;
+                    }
+                    else
+                    {
+                        existingReport.Linea = incomingLinea;
+                    }
+
+                    if (string.IsNullOrWhiteSpace(reporte.DescripcionProblema))
+                    {
+                        existingReport.DescripcionProblema = originalDescProb;
+                        entry.Property(e => e.DescripcionProblema).IsModified = false;
+                    }
+
+                    // Manejar EvidenciaFotografica
                     entry.Property(e => e.EvidenciaFotografica).IsModified = false;
 
                     // 1. Actualizar las listas de Failure Mode
@@ -824,85 +873,97 @@ namespace RSQR.Controllers
 
         private async Task ManejarPpmReport(Reporte reporte)
         {
-            using var transaction = await _context.Database.BeginTransactionAsync();
+            // Buscar por ReporteId (nuevo esquema 1:1)
+            var ppmReport = await _context.PpmReports
+                .FirstOrDefaultAsync(p => p.ReporteId == reporte.Id);
 
-            try
+            var lineaNorm = NormalizarLinea(reporte.Linea);
+
+
+            if (reporte.ImpactoPPM)
             {
-                // Habilitar IDENTITY_INSERT para SQL Server
-                await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT dbo.qcPpmReport ON");
-
-                var ppmReport = await _context.PpmReports.FindAsync(reporte.Id);
-
-                if (reporte.ImpactoPPM)
+                if (ppmReport == null)
                 {
-                    if (ppmReport == null)
+                    ppmReport = new PpmReport
                     {
-                        ppmReport = new PpmReport
-                        {
-                            Id = reporte.Id, // Mismo ID explícito
-                            Fecha = reporte.DateOfClose ?? reporte.Fecha,
-                            Linea = reporte.Linea,
-                            Customer = reporte.Customer,
-                            CustomerClaimNumber = reporte.CustomerClaimNumber,
-                            MotherFactory = reporte.MotherFactory,
-                            NumParteAfectado = reporte.NumParteAfectado,
-                            CustomerPartNumber = reporte.CustomerPartNumber,
-                            CuantosP = reporte.CuantosP,
-                            Lote = reporte.Lote,
-                            Tipo = reporte.Tipo,
-                            Mileage = reporte.Mileage,
-                            TituloProblema = reporte.TituloProblema,
-                            InvestigationReport = reporte.InvestigationReport,
-                            DateOfClose = reporte.DateOfClose,
-                            ImpactoPPM = true,
-                            Comentarios = reporte.Comentarios,
-                            Responsabilidad = reporte.Responsabilidad
-                        };
-                        _context.PpmReports.Add(ppmReport);
+                        // CLAVE: se relaciona por ReporteId; el Id (PK) lo genera SQL (identity)
+                        ReporteId = reporte.Id,
 
-                    }
-                    else
-                    {
-                        // Actualizar el existente (que ya tiene el mismo ID)
-                        ppmReport.Fecha = reporte.DateOfClose ?? reporte.Fecha;
-                        ppmReport.Linea = reporte.Linea;
-                        ppmReport.Customer = reporte.Customer;
-                        ppmReport.CustomerClaimNumber = reporte.CustomerClaimNumber;
-                        ppmReport.MotherFactory = reporte.MotherFactory;
-                        ppmReport.NumParteAfectado = reporte.NumParteAfectado;
-                        ppmReport.CustomerPartNumber = reporte.CustomerPartNumber;
-                        ppmReport.CuantosP = reporte.CuantosP;
-                        ppmReport.Lote = reporte.Lote;
-                        ppmReport.Tipo = reporte.Tipo;
-                        ppmReport.Mileage = reporte.Mileage;
-                        ppmReport.TituloProblema = reporte.TituloProblema;
-                        ppmReport.InvestigationReport = reporte.InvestigationReport;
-                        ppmReport.DateOfClose = reporte.DateOfClose;
-                        ppmReport.ImpactoPPM = true;
-                        ppmReport.Comentarios = reporte.Comentarios;
-                        ppmReport.Responsabilidad = reporte.Responsabilidad;
-                        _context.PpmReports.Update(ppmReport);
-                    }
+                        Fecha = reporte.DateOfClose ?? reporte.Fecha,
+                        Linea = reporte.Linea,
+                        Customer = reporte.Customer!,
+                        CustomerClaimNumber = reporte.CustomerClaimNumber,
+                        MotherFactory = reporte.MotherFactory,
+                        NumParteAfectado = reporte.NumParteAfectado,
+                        CustomerPartNumber = reporte.CustomerPartNumber,
+                        CuantosP = reporte.CuantosP,
+                        Lote = reporte.Lote,
+                        Tipo = reporte.Tipo,
+                        Mileage = reporte.Mileage,
+                        TituloProblema = reporte.TituloProblema,
+                        InvestigationReport = reporte.InvestigationReport,
+                        DateOfClose = reporte.DateOfClose,
+                        ImpactoPPM = true,
+                        Comentarios = reporte.Comentarios,
+                        Responsabilidad = reporte.Responsabilidad
+                    };
+                    _context.PpmReports.Add(ppmReport); // NO asignar Id manual ni usar IDENTITY_INSERT
                 }
-                else if (ppmReport != null)
+                else
                 {
-                    // Eliminar si existe y no tiene impacto PPM
+                    // Actualiza campos del existente
+                    ppmReport.Fecha = reporte.DateOfClose ?? reporte.Fecha;
+                    ppmReport.Linea = lineaNorm;
+                    ppmReport.Customer = reporte.Customer!;
+                    ppmReport.CustomerClaimNumber = reporte.CustomerClaimNumber;
+                    ppmReport.MotherFactory = reporte.MotherFactory;
+                    ppmReport.NumParteAfectado = reporte.NumParteAfectado;
+                    ppmReport.CustomerPartNumber = reporte.CustomerPartNumber;
+                    ppmReport.CuantosP = reporte.CuantosP;
+                    ppmReport.Lote = reporte.Lote;
+                    ppmReport.Tipo = reporte.Tipo;
+                    ppmReport.Mileage = reporte.Mileage;
+                    ppmReport.TituloProblema = reporte.TituloProblema;
+                    ppmReport.InvestigationReport = reporte.InvestigationReport;
+                    ppmReport.DateOfClose = reporte.DateOfClose;
+                    ppmReport.ImpactoPPM = true;
+                    ppmReport.Comentarios = reporte.Comentarios;
+                    ppmReport.Responsabilidad = reporte.Responsabilidad;
+
+                    _context.PpmReports.Update(ppmReport);
+                }
+            }
+            else
+            {
+                // Si se desactiva el impacto PPM, elimina el registro 1:1
+                if (ppmReport != null)
                     _context.PpmReports.Remove(ppmReport);
-                }
-                await _context.SaveChangesAsync();
-                await transaction.CommitAsync();
             }
-            catch
-            {
-                await transaction.RollbackAsync();
-                throw;
-            }
-            finally
-            {
-                // Deshabilitar IDENTITY_INSERT
-                await _context.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT dbo.qcPpmReport OFF");
-            }
+
+            await _context.SaveChangesAsync();
         }
+
+
+        private static string? NormalizarLinea(string? linea)
+        {
+            if (string.IsNullOrWhiteSpace(linea)) return linea;
+
+            var map = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    {
+        { "EPS (3G)", "EPS(3G)" },
+        { "PT EPS", "EPS" },               // si quieres que PT EPS cuente como EPS
+        { "PT SSU", "SSU Circuit Board" }, // si así lo requieres para agrupar
+        { "PT FOB", "FOB" },
+        { "PT RCV", "RCV" },
+        { "PT BCM", "PT BCM" },            // ya coincide
+        { "PT LFU", "PT LFU" },            // ya coincide
+        { "PT CM",  "PT CM" }              // ya coincide
+    };
+
+            return map.TryGetValue(linea, out var normalized) ? normalized : linea.Trim();
+        }
+
+
 
         /// <summary>
         /// Muestra el formulario para confirmar la eliminación de un reporte.
@@ -937,15 +998,17 @@ namespace RSQR.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            // Limpieza manual (opcional si hay CASCADE en la BD)
+            var ppm = await _context.PpmReports.Where(p => p.ReporteId == id).ToListAsync();
+            if (ppm.Any()) _context.PpmReports.RemoveRange(ppm);
+
             var reporte = await _context.Reportes.FindAsync(id);
-            if (reporte != null)
-            {
-                _context.Reportes.Remove(reporte);
-            }
+            if (reporte != null) _context.Reportes.Remove(reporte);
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
 
         /// <summary>
         /// Verifica si un reporte existe en la base de datos.

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using RSQR.Services;
 using System.Security.Claims;
@@ -14,19 +13,11 @@ namespace RSQR.Controllers
     {
         private readonly ActiveDirectoryService _adService;
 
-        /// <summary>
-        /// Constructor del controlador AccountController.
-        /// </summary>
-        /// <param name="adService">Servicio de Active Directory para autenticación.</param>
         public AccountController(ActiveDirectoryService adService)
         {
             _adService = adService;
         }
 
-        /// <summary>
-        /// Muestra la vista de inicio de sesión.
-        /// </summary>
-        /// <returns>La vista de inicio de sesión.</returns>
         [HttpGet]
         public IActionResult Login()
         {
@@ -36,57 +27,65 @@ namespace RSQR.Controllers
         /// <summary>
         /// Procesa el formulario de inicio de sesión.
         /// </summary>
-        /// <param name="username">Nombre de usuario.</param>
-        /// <param name="password">Contraseña del usuario.</param>
-        /// <returns>
-        /// Redirige al usuario a la página de inicio si la autenticación es exitosa.
-        /// Muestra un mensaje de error en la vista de inicio de sesión si la autenticación falla.
-        /// </returns>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(string username, string password)
         {
-            string displayName = _adService.GetDisplayName(username, password);
-
-            if (!string.IsNullOrEmpty(displayName))
+            // 1) Validación básica de campos vacíos
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
-                var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, username),
-            new Claim("DisplayName", displayName),
-            new Claim(ClaimTypes.Role, "User")
-        };
-
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-                var authProperties = new AuthenticationProperties
-                {
-                    IsPersistent = true,
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddDays(30)
-                };
-
-                await HttpContext.SignInAsync(
-                    CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(claimsIdentity),
-                    authProperties);
-
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                ViewBag.ErrorMessage = "Usuario o contraseña incorrectos.";
+                ViewBag.ErrorMessage = "Usuario y contraseña son obligatorios.";
                 return View();
             }
+
+            // 2) Validar contra Active Directory
+            string? displayName;
+            try
+            {
+                displayName = _adService.GetDisplayName(username, password);
+            }
+            catch
+            {
+                // Si hay un error en la conexión a AD, no queremos que pase el login
+                ViewBag.ErrorMessage = "Hubo un problema al validar contra Active Directory.";
+                return View();
+            }
+
+            if (string.IsNullOrEmpty(displayName))
+            {
+                // AD rechazó usuario/contraseña
+                ViewBag.ErrorMessage = "Usuario o contraseña incorrectos (AD).";
+                return View();
+            }
+
+            // 3) AD OK → crear claims y cookie de autenticación
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, username),
+                new Claim("DisplayName", displayName),
+                new Claim(ClaimTypes.Role, "User")
+            };
+
+            var claimsIdentity = new ClaimsIdentity(claims, "MeaxAuth");
+
+            var authProperties = new AuthenticationProperties
+            {
+                IsPersistent = true,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddDays(30)
+            };
+
+            await HttpContext.SignInAsync(
+                "MeaxAuth",                         // 🔹 mismo esquema que en Program.cs
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
+
+            return RedirectToAction("Index", "Home");
         }
 
-        /// <summary>
-        /// Cierra la sesión del usuario actual.
-        /// </summary>
-        /// <returns>Redirige al usuario a la vista de inicio de sesión.</returns>
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
-            // Cerrar la sesión y eliminar la cookie de autenticación
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignOutAsync("MeaxAuth");
             return RedirectToAction("Login");
         }
     }

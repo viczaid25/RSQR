@@ -1,58 +1,75 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
+ï»¿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using RSQR.Data;
 using RSQR.Models;
 using RSQR.Services;
 using System.Diagnostics;
-
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+// 1) DbContext RSQR (si lo usas para algo; si no, tambiÃ©n puedes quitarlo)
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-// Configurar Identity manualmente
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
-{
-    options.SignIn.RequireConfirmedAccount = false; // Desactiva la confirmación de cuenta
-})
-.AddEntityFrameworkStores<ApplicationDbContext>()
-.AddDefaultTokenProviders();
+// 2) DataProtection (lo dejamos listo para el futuro SSO)
+builder.Services.AddDataProtection()
+    .PersistKeysToFileSystem(new DirectoryInfo(@"C:\DataProtectionKeys\MeaxAuth"))
+    .SetApplicationName("MeaxAuth");
 
-// Registrar el servicio de Active Directory
-builder.Services.AddSingleton(new ActiveDirectoryService("ad.meax.mx")); // Reemplaza "ad.meax.mx" con tu dominio de AD
-
-// Registrar la configuración de EmailSettings
+// 3) Servicios propios
+builder.Services.AddSingleton(new ActiveDirectoryService("ad.meax.mx"));
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
-
-// Registrar el servicio de correo
 builder.Services.AddTransient<IEmailService, EmailService>();
 
-// Configurar autenticación basada en cookies
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-})
-.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
-{
-    options.Cookie.Name = "RSQR.Auth"; // Nombre único para evitar conflictos
-    options.LoginPath = "/Account/Login";
-    options.AccessDeniedPath = "/Account/AccessDenied";
-    options.ExpireTimeSpan = TimeSpan.FromDays(30);
-    options.SlidingExpiration = true;
-});
+// 4) AutenticaciÃ³n: SOLO cookie "MeaxAuth" para RSQR
+builder.Services
+    .AddAuthentication("MeaxAuth")
+    .AddCookie("MeaxAuth", options =>
+    {
+        options.Cookie.Name = ".MEAX.AUTH";
+        options.Cookie.Path = "/";
+        options.Cookie.SecurePolicy = CookieSecurePolicy.None;
+        options.Cookie.SameSite = SameSiteMode.Lax;
 
+        // ðŸ”¹ cuando falte autenticaciÃ³n, manda al Hub
+        options.Events = new CookieAuthenticationEvents
+        {
+            OnRedirectToLogin = context =>
+            {
+                // Usa el mismo esquema + host + puerto de la peticiÃ³n actual
+                var request = context.Request;
+
+                // ejemplo: http://10.228.25.13:81
+                var baseUrl = $"{request.Scheme}://{request.Host.Value}";
+
+                // login del Hub, que estÃ¡ en la raÃ­z del mismo sitio
+                var hubLoginUrl = baseUrl + "/Account/Login";
+
+                var returnUrl = request.PathBase + request.Path + request.QueryString;
+                var redirectUrl = hubLoginUrl + "?returnUrl=" + Uri.EscapeDataString(returnUrl);
+
+                context.Response.Redirect(redirectUrl);
+                return Task.CompletedTask;
+            }
+        };
+
+        options.SlidingExpiration = true;
+        options.ExpireTimeSpan = TimeSpan.FromDays(30);
+    });
+
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -63,27 +80,26 @@ else
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// Para pruebas, si usas sÃ³lo HTTP se puede comentar esta lÃ­nea
+// app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // Asegúrate de que UseAuthentication esté antes de UseAuthorization
+app.UseAuthentication();
 
 app.Use(async (context, next) =>
 {
-    Debug.WriteLine($"Autenticado: {context.User.Identity.IsAuthenticated}");
-    Debug.WriteLine($"Usuario: {context.User.Identity.Name}");
+    Debug.WriteLine($"[RSQR] Autenticado: {context.User.Identity?.IsAuthenticated}");
+    Debug.WriteLine($"[RSQR] Usuario: {context.User.Identity?.Name}");
     await next();
 });
 
-
 app.UseAuthorization();
 
-// Cambiar la ruta predeterminada a Account/Login
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 
 app.Run();

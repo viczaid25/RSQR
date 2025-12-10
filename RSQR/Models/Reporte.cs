@@ -104,7 +104,7 @@ namespace RSQR.Models
 
         /// <summary>Categoría según metodología 5M's</summary>
         [Display(Name = "6 M's")]
-        public CincoMOpciones CincoM { get; set; }
+        public CincoMOpciones? CincoM { get; set; }
 
         /// <summary>Número de parte afectada</summary>
         [Display(Name = "Affected Part Number")]

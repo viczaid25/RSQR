@@ -1,11 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!--
-https://go.microsoft.com/fwlink/?LinkID=208121.
--->
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>C:\sites\qc</_PublishTargetUrl>
-    <History>True|2025-02-25T16:19:36.2628367Z||;</History>
+    <_PublishTargetUrl>\\MEAXS013\inetpub\meaxApps\rsq</_PublishTargetUrl>
+    <History>True|2025-12-09T16:14:20.8532017Z||;True|2025-12-09T10:07:27.5707126-06:00||;True|2025-12-08T16:02:41.6979075-06:00||;True|2025-12-08T15:44:51.5173991-06:00||;True|2025-12-08T15:39:11.8144297-06:00||;False|2025-12-08T15:38:31.8820799-06:00||;True|2025-12-08T15:08:05.1739805-06:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

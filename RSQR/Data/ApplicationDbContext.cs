@@ -51,19 +51,23 @@ namespace RSQR.Data
             modelBuilder.Entity<Reporte>().ToTable("qcReport");
             modelBuilder.Entity<PpmReport>().ToTable("qcPpmReport");
 
-            base.OnModelCreating(modelBuilder); // Esto es CRUCIAL para Identity
+            base.OnModelCreating(modelBuilder);
 
-            // Configuración para PpmReport
             modelBuilder.Entity<PpmReport>(entity =>
             {
                 entity.HasKey(p => p.Id);
-                entity.Property(p => p.Id).ValueGeneratedNever();
+                entity.Property(p => p.Id).ValueGeneratedOnAdd();   // Identity
+                entity.Property(p => p.ReporteId).IsRequired();
 
-                entity.HasOne<Reporte>()
+                entity.HasOne(p => p.Reporte)
                       .WithOne(r => r.PpmReport)
-                      .HasForeignKey<PpmReport>(p => p.Id)
+                      .HasForeignKey<PpmReport>(p => p.ReporteId)
                       .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasIndex(p => p.ReporteId).IsUnique(); // match a UX_qcPpmReport_ReporteId
             });
         }
+
+
     }
 }

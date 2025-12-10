@@ -1,11 +1,9 @@
-@*
-  Vista mejorada para la creación de CAR (Corrective Action Reports)
-  - Bootstrap 5 + TagHelpers
-  - Tabs + Acordeones
-  - Resumen offcanvas
-  - Drag&Drop + previews para evidencias
-  - D3 con Template e indexación correcta
-  - UX: bloqueo doble envío, unsaved changes, tooltips, contador
+ï»¿@*
+  Vista Create con Wizard lineal (sin tabs)
+  - Stepper + progreso
+  - ValidaciÃ³n por paso + estado (done/error)
+  - Review final antes de enviar
+  - Conserva: Offcanvas Summary, D3 Template, Dropzone, Claim number, unsaved changes, spinner
 *@
 @model RSQR.Models.Reporte
 
@@ -29,12 +27,8 @@
             <span class="badge text-bg-light">Report Draft</span>
         </div>
         <div class="d-flex gap-2">
-            <button type="button" id="btnSaveDraft" class="btn btn-outline-primary rounded-pill" data-bs-toggle="tooltip" title="Guardar sin enviar">
+            <button type="button" id="btnSaveDraftTop" class="btn btn-outline-primary rounded-pill" data-bs-toggle="tooltip" title="Guardar sin enviar">
                 <i class="fas fa-save me-1"></i> Save draft
-            </button>
-            <button type="submit" form="carForm" id="btnSubmit" class="btn btn-primary rounded-pill">
-                <span class="spinner-border spinner-border-sm me-1 d-none" id="btnSpinner"></span>
-                <i class="fas fa-save me-1"></i> Create Report
             </button>
             <button class="btn btn-outline-dark rounded-pill" type="button" data-bs-toggle="offcanvas" data-bs-target="#summaryCanvas">
                 <i class="fas fa-list-ul me-1"></i> Summary
@@ -49,300 +43,338 @@
         <h1 class="display-6 text-dark fw-bold">@ViewData["Title"]</h1>
     </div>
 
-    <!-- Tabs -->
-    <ul class="nav nav-tabs mb-3" id="carTabs" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-d0" type="button" role="tab">D0 Initial</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-basic" type="button" role="tab">Basic Info</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-5w2h" type="button" role="tab">5W2H</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-d3" type="button" role="tab">D3 Containment</button>
-        </li>
-    </ul>
+    <!-- Progress + Stepper header -->
+    <div class="mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+            <div class="fw-semibold">Progress</div>
+            <div><span id="progressPct">0</span>%</div>
+        </div>
+        <div class="progress" style="height: 8px;">
+            <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+        </div>
+    </div>
 
-    <!-- Form -->
-    <form asp-action="Create" method="post" enctype="multipart/form-data" id="carForm" novalidate>
-        <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-lg"></div>
+    <ol id="stepper" class="list-group list-group-horizontal-md flex-wrap gap-2 mb-3">
+        <li class="list-group-item px-3 py-2 step-link active" data-step="1">
+            <span class="me-2 badge rounded-pill bg-primary">1</span> D0 Initial
+            <span class="ms-2 small text-muted step-state"></span>
+        </li>
+        <li class="list-group-item px-3 py-2 step-link" data-step="2">
+            <span class="me-2 badge rounded-pill bg-primary">2</span> Basic Info
+            <span class="ms-2 small text-muted step-state"></span>
+        </li>
+        <li class="list-group-item px-3 py-2 step-link" data-step="3">
+            <span class="me-2 badge rounded-pill bg-primary">3</span> 5W2H
+            <span class="ms-2 small text-muted step-state"></span>
+        </li>
+        <li class="list-group-item px-3 py-2 step-link" data-step="4">
+            <span class="me-2 badge rounded-pill bg-primary">4</span> D3 Containment
+            <span class="ms-2 small text-muted step-state"></span>
+        </li>
+        <li class="list-group-item px-3 py-2 step-link" data-step="5">
+            <span class="me-2 badge rounded-pill bg-success">5</span> Review & Submit
+            <span class="ms-2 small text-muted step-state"></span>
+        </li>
+    </ol>
+</div>
 
-        <div class="tab-content">
+<form asp-action="Create" method="post" enctype="multipart/form-data" id="carForm" novalidate>
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-lg d-none" id="globalErrors"></div>
 
-            <!-- TAB: D0 -->
-            <div class="tab-pane fade show active" id="tab-d0" role="tabpanel" tabindex="0">
-                <div class="accordion" id="accD0">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="hdD0">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#colD0" aria-expanded="true">
-                                D0 Initial Notification
-                            </button>
-                        </h2>
-                        <div id="colD0" class="accordion-collapse collapse show" data-bs-parent="#accD0">
-                            <div class="accordion-body">
-                                <div class="alert alert-info">
-                                    <i class="fas fa-info-circle me-1"></i>
-                                    Capture the initial notification details and make sure the customer is selected to generate the Claim Number.
-                                </div>
-                                <!-- Número de reclamo (generado automáticamente) -->
-                                <input type="hidden" asp-for="CustomerClaimNumber" id="claim-number" />
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <div class="form-floating">
-                                            <input class="form-control" id="claim-display" readonly placeholder="Claim Number" aria-describedby="claimHelp" />
-                                            <label>Claim Number</label>
-                                        </div>
-                                        <div class="form-text" id="claimHelp">Format: CLIENT-0001</div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-floating">
-                                            <select asp-for="Customer" class="form-select" id="customer-select" required aria-describedby="customerHelp">
-                                                <option value="">-- Select a client --</option>
-                                                @foreach (var c in clientes)
-                                                {
-                                                    <option value="@c">@c</option>
-                                                }
-                                            </select>
-                                            <label asp-for="Customer">Occurrence Place</label>
-                                        </div>
-                                        <div class="text-danger small"><span asp-validation-for="Customer"></span></div>
-                                        <div class="form-text" id="customerHelp">Choose the customer to create the claim sequence.</div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-floating">
-                                            <select asp-for="Tipo" class="form-select" asp-items="Html.GetEnumSelectList<TipoReporte>()"></select>
-                                            <label asp-for="Tipo">Type of Customer Claim</label>
-                                        </div>
-                                        <div class="text-danger small"><span asp-validation-for="Tipo"></span></div>
-                                    </div>
-                                </div>
-                            </div><!-- /accordion-body -->
+    <!-- STEP 1: D0 -->
+    <section class="step" data-step="1">
+        <div class="accordion" id="accD0">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="hdD0">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#colD0" aria-expanded="true">
+                        D0 Initial Notification
+                    </button>
+                </h2>
+                <div id="colD0" class="accordion-collapse collapse show" data-bs-parent="#accD0">
+                    <div class="accordion-body">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-1"></i>
+                            Capture the initial notification details and make sure the customer is selected to generate the Claim Number.
                         </div>
+
+                        <!-- NÃºmero de reclamo (generado automÃ¡ticamente) -->
+                        <input type="hidden" asp-for="CustomerClaimNumber" id="claim-number" />
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <input class="form-control" id="claim-display" readonly placeholder="Claim Number" aria-describedby="claimHelp" />
+                                    <label>Claim Number</label>
+                                </div>
+                                <div class="form-text" id="claimHelp">Format: CLIENT-0001</div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <select asp-for="Customer" class="form-select" id="customer-select" required aria-describedby="customerHelp">
+                                        <option value="">-- Select a client --</option>
+                                        @foreach (var c in clientes)
+                                        {
+                                            <option value="@c">@c</option>
+                                        }
+                                    </select>
+                                    <label asp-for="Customer">Occurrence Place</label>
+                                </div>
+                                <div class="text-danger small"><span asp-validation-for="Customer"></span></div>
+                                <div class="form-text" id="customerHelp">Choose the customer to create the claim sequence.</div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-floating">
+                                    <select asp-for="Tipo" class="form-select" asp-items="Html.GetEnumSelectList<TipoReporte>()" required></select>
+                                    <label asp-for="Tipo">Type of Customer Claim</label>
+                                </div>
+                                <div class="text-danger small"><span asp-validation-for="Tipo"></span></div>
+                            </div>
+                        </div>
+                    </div><!-- /accordion-body -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 2: Basic Info (sin 6M) -->
+    <section class="step d-none" data-step="2">
+        <fieldset class="card shadow-sm border-0 mb-4">
+            <legend class="card-header bg-primary text-white m-0 py-2 px-3">Basic Report Information</legend>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <div class="form-floating">
+                            <input asp-for="Fecha" class="form-control" type="date" placeholder="Date" required />
+                            <label asp-for="Fecha">Date</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="Fecha"></span></div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="form-floating">
+                            <input asp-for="TituloProblema" class="form-control" placeholder="Title" required />
+                            <label asp-for="TituloProblema" class="required">Problem Title</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="TituloProblema"></span></div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <select asp-for="ProblemRank" class="form-select" asp-items="ViewBag.ProblemRankList"></select>
+                            <label asp-for="ProblemRank">Classification</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="ProblemRank"></span></div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input asp-for="UserName" class="form-control" value="@ViewBag.DisplayName" readonly placeholder="User" />
+                            <label asp-for="UserName">Written Up</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="UserName"></span></div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <select asp-for="Linea" class="form-select" asp-items="ViewBag.LineaList">
+                                <option value=""></option>
+                            </select>
+                            <label asp-for="Linea">Business Unit</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="Linea"></span></div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input asp-for="Descripcion" class="form-control" placeholder="Part description" />
+                            <label asp-for="Descripcion">Part Description</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="Descripcion"></span></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <textarea asp-for="DescripcionProblema" class="form-control" id="txtDesc" maxlength="1000" style="height:150px" placeholder="Problem description"></textarea>
+                            <label asp-for="DescripcionProblema">Problem Description</label>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="text-danger small"><span asp-validation-for="DescripcionProblema"></span></div>
+                            <div class="form-text"><span id="descCount">0</span>/1000</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-floating">
+                            <select asp-for="MotherFactory" class="form-select">
+                                <option value="">-- Select --</option>
+                                <option value="Himeji Office">Himeji Office</option>
+                                <option value="Sanda Office">Sanda Office</option>
+                            </select>
+                            <label asp-for="MotherFactory">Mother Factory</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="MotherFactory"></span></div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input asp-for="NumParteAfectado" class="form-control" placeholder="Affected Part Number" required />
+                            <label asp-for="NumParteAfectado" class="required">Affected Part Number</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="NumParteAfectado"></span></div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input asp-for="CustomerPartNumber" class="form-control" placeholder="Customer Part Number" />
+                            <label asp-for="CustomerPartNumber">Customer Part Number</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="CustomerPartNumber"></span></div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input asp-for="Lote" class="form-control" placeholder="Production batch" />
+                            <label asp-for="Lote">Production Batch</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="Lote"></span></div>
+                    </div>
+
+                    <!-- Evidencia fotogrÃ¡fica -->
+                    <div class="col-12">
+                        <label class="form-label">Upload images <span class="text-muted">(drag & drop or click)</span></label>
+                        <div id="dropzone" class="border border-2 border-dashed rounded-3 p-4 text-center" aria-describedby="eviHelp" role="button" tabindex="0">
+                            <i class="fas fa-cloud-upload-alt fa-2x mb-2"></i>
+                            <div class="small text-muted">PNG, JPG. Multiple files allowed.</div>
+                            <input type="file" id="fileInput" name="EvidenciaFotografica" class="form-control d-none" multiple accept="image/*" />
+                        </div>
+                        <div class="form-text" id="eviHelp">Click or drop files in the box.</div>
+                        <div id="previews" class="d-flex flex-wrap gap-2 mt-2"></div>
+                        <div class="text-danger small"><span asp-validation-for="EvidenciaFotografica"></span></div>
                     </div>
                 </div>
             </div>
+        </fieldset>
+    </section>
 
-            <!-- TAB: Basic Info -->
-            <div class="tab-pane fade" id="tab-basic" role="tabpanel" tabindex="0">
-                <fieldset class="card shadow-sm border-0 mb-4">
-                    <legend class="card-header bg-primary text-white m-0 py-2 px-3">Basic Report Information</legend>
-                    <div class="card-body">
-                        <div class="row g-3">
-                            <div class="col-md-3">
-                                <div class="form-floating">
-                                    <input asp-for="Fecha" class="form-control" type="date" placeholder="Date" />
-                                    <label asp-for="Fecha">Date</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="Fecha"></span></div>
-                            </div>
-
-                            <div class="col-md-5">
-                                <div class="form-floating">
-                                    <input asp-for="TituloProblema" class="form-control" placeholder="Title" />
-                                    <label asp-for="TituloProblema" class="required">Problem Title</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="TituloProblema"></span></div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <select asp-for="ProblemRank" class="form-select" asp-items="ViewBag.ProblemRankList"></select>
-                                    <label asp-for="ProblemRank">Classification</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="ProblemRank"></span></div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <input asp-for="UserName" class="form-control" value="@ViewBag.DisplayName" readonly placeholder="User" />
-                                    <label asp-for="UserName">Written Up</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="UserName"></span></div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <select asp-for="Linea" class="form-select" asp-items="ViewBag.LineaList">
-                                        <option value=""></option>
-                                    </select>
-                                    <label asp-for="Linea">Business Unit</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="Linea"></span></div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <input asp-for="Descripcion" class="form-control" placeholder="Part description" />
-                                    <label asp-for="Descripcion">Part Description</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="Descripcion"></span></div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <textarea asp-for="DescripcionProblema" class="form-control" id="txtDesc" maxlength="1000" style="height:150px" placeholder="Problem description"></textarea>
-                                    <label asp-for="DescripcionProblema">Problem Description</label>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <div class="text-danger small"><span asp-validation-for="DescripcionProblema"></span></div>
-                                    <div class="form-text"><span id="descCount">0</span>/1000</div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="form-floating">
-                                    <select asp-for="CincoM" class="form-select" asp-items="Html.GetEnumSelectList<CincoMOpciones>()"></select>
-                                    <label asp-for="CincoM">6M</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="CincoM"></span></div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="form-floating">
-                                    <select asp-for="MotherFactory" class="form-select">
-                                        <option value="">-- Select --</option>
-                                        <option value="Himeji Office">Himeji Office</option>
-                                        <option value="Sanda Office">Sanda Office</option>
-                                    </select>
-                                    <label asp-for="MotherFactory">Mother Factory</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="MotherFactory"></span></div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <input asp-for="NumParteAfectado" class="form-control" placeholder="Affected Part Number" />
-                                    <label asp-for="NumParteAfectado" class="required">Affected Part Number</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="NumParteAfectado"></span></div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <input asp-for="CustomerPartNumber" class="form-control" placeholder="Customer Part Number" />
-                                    <label asp-for="CustomerPartNumber">Customer Part Number</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="CustomerPartNumber"></span></div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <input asp-for="Lote" class="form-control" placeholder="Production batch" />
-                                    <label asp-for="Lote">Production Batch</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="Lote"></span></div>
-                            </div>
-
-                            <!-- Evidencia fotográfica -->
-                            <div class="col-12">
-                                <label class="form-label">Upload images <span class="text-muted">(drag & drop or click)</span></label>
-                                <div id="dropzone" class="border border-2 border-dashed rounded-3 p-4 text-center" aria-describedby="eviHelp" role="button" tabindex="0">
-                                    <i class="fas fa-cloud-upload-alt fa-2x mb-2"></i>
-                                    <div class="small text-muted">PNG, JPG. Multiple files allowed.</div>
-                                    <input type="file" id="fileInput" name="EvidenciaFotografica" class="form-control d-none" multiple accept="image/*" />
-                                </div>
-                                <div class="form-text" id="eviHelp">Click or drop files in the box.</div>
-                                <div id="previews" class="d-flex flex-wrap gap-2 mt-2"></div>
-                                <div class="text-danger small"><span asp-validation-for="EvidenciaFotografica"></span></div>
-                            </div>
+    <!-- STEP 3: 5W2H -->
+    <section class="step d-none" data-step="3">
+        <fieldset class="card shadow-sm border-0 mb-4">
+            <legend class="card-header bg-primary text-white m-0 py-2 px-3">D2 Problem Description (5W2H)</legend>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input asp-for="QueP" class="form-control" placeholder="What problem was detected?" />
+                            <label asp-for="QueP">What problem was detected?</label>
                         </div>
-                    </div>
-                </fieldset>
-            </div>
+                        <div class="text-danger small"><span asp-validation-for="QueP"></span></div>
 
-            <!-- TAB: 5W2H -->
-            <div class="tab-pane fade" id="tab-5w2h" role="tabpanel" tabindex="0">
-                <fieldset class="card shadow-sm border-0 mb-4">
-                    <legend class="card-header bg-primary text-white m-0 py-2 px-3">D2 Problem Description (5W2H)</legend>
-                    <div class="card-body">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input asp-for="QueP" class="form-control" placeholder="What problem was detected?" />
-                                    <label asp-for="QueP">What problem was detected?</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="QueP"></span></div>
-
-                                <div class="form-floating mt-3">
-                                    <input asp-for="PorqueP" class="form-control" placeholder="Why is it a problem?" />
-                                    <label asp-for="PorqueP">Why is it a problem?</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="PorqueP"></span></div>
-
-                                <div class="form-floating mt-3">
-                                    <input asp-for="DondeP" class="form-control" placeholder="Where was the problem detected?" />
-                                    <label asp-for="DondeP">Where was the problem detected?</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="DondeP"></span></div>
-
-                                <div class="form-floating mt-3">
-                                    <input asp-for="CuandoP" class="form-control" type="date" placeholder="When" />
-                                    <label asp-for="CuandoP">When was the problem detected?</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="CuandoP"></span></div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input asp-for="QuienP" class="form-control" placeholder="Who detected the problem?" />
-                                    <label asp-for="QuienP">Who detected the problem?</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="QuienP"></span></div>
-
-                                <div class="form-floating mt-3">
-                                    <input asp-for="ComoP" class="form-control" placeholder="How was it detected?" />
-                                    <label asp-for="ComoP">How was the problem detected?</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="ComoP"></span></div>
-
-                                <div class="form-floating mt-3">
-                                    <input asp-for="CuantosP" class="form-control" inputmode="numeric" pattern="[0-9]*" placeholder="How many pieces?" />
-                                    <label asp-for="CuantosP">How many pieces were detected?</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="CuantosP"></span></div>
-
-                                <div class="form-floating mt-3">
-                                    <input asp-for="Mileage" class="form-control" inputmode="numeric" placeholder="Mileage" />
-                                    <label asp-for="Mileage">Mileage</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="Mileage"></span></div>
-
-                                <div class="form-floating mt-3">
-                                    <input asp-for="InvestigationReport" class="form-control" placeholder="Investigation Report" />
-                                    <label asp-for="InvestigationReport">Investigation Report</label>
-                                </div>
-                                <div class="text-danger small"><span asp-validation-for="InvestigationReport"></span></div>
-                            </div>
+                        <div class="form-floating mt-3">
+                            <input asp-for="PorqueP" class="form-control" placeholder="Why is it a problem?" />
+                            <label asp-for="PorqueP">Why is it a problem?</label>
                         </div>
-                    </div>
-                </fieldset>
-            </div>
+                        <div class="text-danger small"><span asp-validation-for="PorqueP"></span></div>
 
-            <!-- TAB: D3 Containment -->
-            <div class="tab-pane fade" id="tab-d3" role="tabpanel" tabindex="0">
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0"><i class="fas fa-shield-alt me-2"></i>D3 Containment</h5>
-                        <div class="d-flex gap-2">
-                            <!-- antes: btn btn-sm btn-light -->
-                            <button type="button" id="add-group-btn" class="btn btn-sm btn-outline-light rounded-pill">
-                                <i class="fas fa-plus me-1"></i> Add group
-                            </button>
-                            <!-- antes: badge bg-light text-dark -->
-                            <span class="badge bg-white bg-opacity-25 text-white" id="groupCount">0 items</span>
+                        <div class="form-floating mt-3">
+                            <input asp-for="DondeP" class="form-control" placeholder="Where was the problem detected?" />
+                            <label asp-for="DondeP">Where was the problem detected?</label>
                         </div>
+                        <div class="text-danger small"><span asp-validation-for="DondeP"></span></div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="CuandoP" class="form-control" type="date" placeholder="When" />
+                            <label asp-for="CuandoP">When was the problem detected?</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="CuandoP"></span></div>
                     </div>
-                    <div class="card-body">
-                        <div id="dynamic-fields" class="vstack gap-3"></div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input asp-for="QuienP" class="form-control" placeholder="Who detected the problem?" />
+                            <label asp-for="QuienP">Who detected the problem?</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="QuienP"></span></div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="ComoP" class="form-control" placeholder="How was it detected?" />
+                            <label asp-for="ComoP">How was the problem detected?</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="ComoP"></span></div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="CuantosP" class="form-control" inputmode="numeric" pattern="[0-9]*" placeholder="How many pieces?" />
+                            <label asp-for="CuantosP">How many pieces were detected?</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="CuantosP"></span></div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="Mileage" class="form-control" inputmode="numeric" placeholder="Mileage" />
+                            <label asp-for="Mileage">Mileage</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="Mileage"></span></div>
+
+                        <div class="form-floating mt-3">
+                            <input asp-for="InvestigationReport" class="form-control" placeholder="Investigation Report" />
+                            <label asp-for="InvestigationReport">Investigation Report</label>
+                        </div>
+                        <div class="text-danger small"><span asp-validation-for="InvestigationReport"></span></div>
                     </div>
                 </div>
             </div>
+        </fieldset>
+    </section>
 
-        </div><!--/tab-content-->
-    </form>
-</div><!--/container-->
+    <!-- STEP 4: D3 Containment -->
+    <section class="step d-none" data-step="4">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-shield-alt me-2"></i>D3 Containment</h5>
+                <div class="d-flex gap-2">
+                    <button type="button" id="add-group-btn" class="btn btn-sm btn-outline-light rounded-pill">
+                        <i class="fas fa-plus me-1"></i> Add group
+                    </button>
+                    <span class="badge bg-white bg-opacity-25 text-white" id="groupCount">0 items</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="dynamic-fields" class="vstack gap-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 5: Review -->
+    <section class="step d-none" data-step="5">
+        <div class="card shadow-sm">
+            <div class="card-header bg-dark text-white"><strong>Review</strong></div>
+            <div class="card-body">
+                <div id="reviewList" class="vstack gap-2 small"></div>
+                <div class="alert alert-info mt-3">
+                    <i class="fa fa-info-circle me-1"></i>
+                    Revisa la informaciÃ³n. Si algo falta, vuelve al paso correspondiente.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Controles del wizard -->
+    <div class="d-flex justify-content-between align-items-center gap-2 mt-3">
+        <button type="button" class="btn btn-outline-secondary rounded-pill" id="btnPrev">
+            <i class="fa fa-arrow-left me-1"></i> Back
+        </button>
+        <div class="d-flex gap-2">
+            <button type="button" class="btn btn-outline-primary rounded-pill" id="btnSaveDraft">
+                <i class="fa fa-save me-1"></i> Save draft
+            </button>
+            <button type="button" class="btn btn-primary rounded-pill" id="btnNext">
+                Next <i class="fa fa-arrow-right ms-1"></i>
+            </button>
+            <button type="submit" class="btn btn-success rounded-pill d-none" id="btnFinish">
+                <span class="spinner-border spinner-border-sm me-1 d-none" id="btnSpinner"></span>
+                Create Report
+            </button>
+        </div>
+    </div>
+</form>
+
 <!-- Offcanvas Summary -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="summaryCanvas" aria-labelledby="summaryLabel">
     <div class="offcanvas-header">
@@ -351,11 +383,11 @@
     </div>
     <div class="offcanvas-body small">
         <div class="vstack gap-2">
-            <div><span class="text-muted">Claim:</span> <span id="sum-claim" class="fw-semibold">—</span></div>
-            <div><span class="text-muted">Customer:</span> <span id="sum-customer">—</span></div>
-            <div><span class="text-muted">Part #:</span> <span id="sum-part">—</span></div>
-            <div><span class="text-muted">Title:</span> <span id="sum-title">—</span></div>
-            <div><span class="text-muted">Line:</span> <span id="sum-line">—</span></div>
+            <div><span class="text-muted">Claim:</span> <span id="sum-claim" class="fw-semibold">â€”</span></div>
+            <div><span class="text-muted">Customer:</span> <span id="sum-customer">â€”</span></div>
+            <div><span class="text-muted">Part #:</span> <span id="sum-part">â€”</span></div>
+            <div><span class="text-muted">Title:</span> <span id="sum-title">â€”</span></div>
+            <div><span class="text-muted">Line:</span> <span id="sum-line">â€”</span></div>
         </div>
     </div>
 </div>
@@ -457,6 +489,30 @@
             outline: 2px solid var(--color-primary);
             outline-offset: 2px;
         }
+
+        /* Wizard */
+        .step-link.active {
+            border-color: var(--color-primary);
+            background: #f3f8ff;
+        }
+
+        .step-link .step-state.done::before {
+            content: "âœ”";
+            color: #198754;
+            margin-right: .25rem;
+        }
+
+        .step-link .step-state.error {
+            color: #dc3545;
+        }
+
+        .step {
+            scroll-margin-top: 90px;
+        }
+
+        .is-invalid + .invalid-feedback {
+            display: block;
+        }
     </style>
 }
 
@@ -467,7 +523,7 @@
     <script>
         (() => {
           const form = document.getElementById('carForm');
-          const btnSubmit = document.getElementById('btnSubmit');
+          const btnSubmit = document.getElementById('btnFinish'); // <- ahora usamos el botÃ³n final del wizard
           const btnSpinner = document.getElementById('btnSpinner');
 
           // ===== Unsaved changes warning =====
@@ -495,7 +551,7 @@
           map.forEach(m=>{
             const el = $(m.src), out = $(m.tgt);
             if(!el||!out) return;
-            const update=()=> out.textContent = el.value || '—';
+            const update=()=> out.textContent = el.value || 'â€”';
             el.addEventListener('input', update); el.addEventListener('change', update); update();
           });
 
@@ -506,7 +562,7 @@
           let debounceT; let aborter;
           customerSelect?.addEventListener('change', () => {
             const customer = customerSelect.value;
-            displayField.value = customer ? 'Generating…' : ''; numericField.value = '';
+            displayField.value = customer ? 'Generatingâ€¦' : ''; numericField.value = '';
             clearTimeout(debounceT);
             if (aborter) aborter.abort();
             if (!customer) return;
@@ -585,24 +641,158 @@
           // ===== Tooltips =====
           document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
 
-          // ===== Contador de descripción =====
+          // ===== Contador de descripciÃ³n =====
           (function(){
             const t=document.getElementById('txtDesc'), c=document.getElementById('descCount');
             if(t&&c){ const u=()=>c.textContent=t.value.length; t.addEventListener('input',u); u(); }
           })();
 
-          // ===== Guardar borrador (solo ejemplo front) =====
-          document.getElementById('btnSaveDraft')?.addEventListener('click', ()=>{
-            // Aquí puedes hacer POST a una acción Draft si la tienes.
-            // Por ahora solo marca no-dirty y muestra toast simple:
-            dirty = false;
+          // ===== Guardar borrador (simple front) =====
+          function showSavedToast(){
             const toast = document.createElement('div');
             toast.className='toast align-items-center text-bg-success border-0 position-fixed bottom-0 end-0 m-3';
             toast.role='alert'; toast.innerHTML=`<div class="d-flex"><div class="toast-body">Draft saved locally.</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div>`;
             document.body.appendChild(toast);
             new bootstrap.Toast(toast, { delay: 2000 }).show();
+          }
+          document.getElementById('btnSaveDraft')?.addEventListener('click', ()=>{ dirty=false; showSavedToast(); });
+          document.getElementById('btnSaveDraftTop')?.addEventListener('click', ()=>{ dirty=false; showSavedToast(); });
+        })();
+    </script>
+
+    <!-- Script del Wizard -->
+    <script>
+        (() => {
+          const form = document.getElementById('carForm');
+          const steps = [...document.querySelectorAll('.step')].sort((a,b)=>a.dataset.step - b.dataset.step);
+          const links = [...document.querySelectorAll('.step-link')].sort((a,b)=>a.dataset.step - b.dataset.step);
+          const btnPrev = document.getElementById('btnPrev');
+          const btnNext = document.getElementById('btnNext');
+          const btnFinish = document.getElementById('btnFinish');
+          const progressBar = document.getElementById('progressBar');
+          const progressPct = document.getElementById('progressPct');
+          const reviewList = document.getElementById('reviewList');
+          const globalErrors = document.getElementById('globalErrors');
+          let current = 1;
+
+          // Campos requeridos por paso
+          const requiredByStep = {
+            1: ['#customer-select','[name="Tipo"]'],
+            2: ['[name="Fecha"]','[name="TituloProblema"]','[name="NumParteAfectado"]'],
+            3: [],
+            4: [],
+            5: []
+          };
+
+          const showStep = (n) => {
+            steps.forEach(s => s.classList.toggle('d-none', s.dataset.step != n));
+            links.forEach(l => l.classList.toggle('active', l.dataset.step == n));
+            btnPrev.disabled = (n === 1);
+            btnNext.classList.toggle('d-none', n === steps.length);
+            btnFinish.classList.toggle('d-none', n !== steps.length);
+            updateProgress();
+            if (n === steps.length) buildReview();
+            globalErrors?.classList.add('d-none');
+            current = n;
+            const first = steps[n-1].querySelector('input,select,textarea');
+            first?.focus({ preventScroll:true });
+          };
+
+          const updateProgress = () => {
+            const done = links.filter(l => l.querySelector('.step-state')?.classList.contains('done')).length;
+            const pct = Math.round(((current-1) + (done ? 0.25 : 0)) / (steps.length-1) * 100);
+            progressBar.style.width = pct + '%';
+            progressPct.textContent = pct;
+          };
+
+          const validateStep = (n) => {
+            steps[n-1].querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+            steps[n-1].querySelectorAll('.invalid-feedback').forEach(el => el.remove());
+            let ok = true;
+            (requiredByStep[n] ?? []).forEach(sel => {
+              const el = steps[n-1].querySelector(sel);
+              if (!el) return;
+              const val = (el.type === 'checkbox' || el.type === 'radio') ? el.checked : (el.value ?? '').trim();
+              if (!val) {
+                ok = false;
+                el.classList.add('is-invalid');
+                const fb = document.createElement('div');
+                fb.className = 'invalid-feedback';
+                fb.textContent = 'This field is required.';
+                el.insertAdjacentElement('afterend', fb);
+              }
+            });
+            if (!ok) {
+              const firstInvalid = steps[n-1].querySelector('.is-invalid');
+              firstInvalid?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              firstInvalid?.focus({ preventScroll: true });
+            }
+            setStepState(n, ok ? 'done' : 'error');
+            return ok;
+          };
+
+          const setStepState = (n, state) => {
+            const link = links[n-1];
+            const badge = link.querySelector('.step-state');
+            badge.className = 'ms-2 small text-muted step-state';
+            if (state === 'done')      { badge.classList.add('done');  badge.textContent = 'Completed'; }
+            else if (state === 'error'){ badge.classList.add('error'); badge.textContent = 'Missing fields'; }
+            else                       { badge.textContent = ''; }
+            updateProgress();
+          };
+
+          const buildReview = () => {
+            if (!reviewList) return;
+            reviewList.innerHTML = '';
+            const pairs = [
+              ['Claim', document.getElementById('claim-display')?.value],
+              ['Customer', document.getElementById('customer-select')?.value],
+              ['Type', document.querySelector('[name="Tipo"]')?.value],
+              ['Date', document.querySelector('[name="Fecha"]')?.value],
+              ['Problem Title', document.querySelector('[name="TituloProblema"]')?.value],
+              ['Business Unit', document.querySelector('[name="Linea"]')?.value],
+              ['Part #', document.querySelector('[name="NumParteAfectado"]')?.value]
+            ];
+            pairs.forEach(([k,v])=>{
+              const row = document.createElement('div');
+              row.innerHTML = `<span class="text-muted">${k}:</span> <strong>${v || 'â€”'}</strong>`;
+              reviewList.appendChild(row);
+            });
+          };
+
+          // NavegaciÃ³n
+          btnNext?.addEventListener('click', () => {
+            if (!validateStep(current)) return;
+            showStep(Math.min(current + 1, steps.length));
+          });
+          btnPrev?.addEventListener('click', () => showStep(Math.max(current - 1, 1)));
+          links.forEach(l => {
+            l.addEventListener('click', () => {
+              const target = parseInt(l.dataset.step,10);
+              if (target < current) { showStep(target); return; }
+              if (target === current) return;
+              if (!validateStep(current)) return;
+              showStep(target);
+            });
           });
 
+          // ValidaciÃ³n total al enviar
+          form?.addEventListener('submit', (e) => {
+            let allOk = true;
+            for (let n=1; n<=steps.length-1; n++) {
+              const ok = validateStep(n);
+              if (!ok && allOk) showStep(n);
+              allOk = allOk && ok;
+            }
+            if (!allOk) {
+              e.preventDefault(); e.stopPropagation();
+              globalErrors.classList.remove('d-none');
+              globalErrors.textContent = 'Please complete the required fields before submitting.';
+            }
+          }, true);
+
+          // Init
+          showStep(1);
         })();
     </script>
 }

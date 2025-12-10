@@ -9,34 +9,10 @@
             Controlador para gestionar la autenticación de usuarios.
             </summary>
         </member>
-        <member name="M:RSQR.Controllers.AccountController.#ctor(RSQR.Services.ActiveDirectoryService)">
-            <summary>
-            Constructor del controlador AccountController.
-            </summary>
-            <param name="adService">Servicio de Active Directory para autenticación.</param>
-        </member>
-        <member name="M:RSQR.Controllers.AccountController.Login">
-            <summary>
-            Muestra la vista de inicio de sesión.
-            </summary>
-            <returns>La vista de inicio de sesión.</returns>
-        </member>
         <member name="M:RSQR.Controllers.AccountController.Login(System.String,System.String)">
             <summary>
             Procesa el formulario de inicio de sesión.
             </summary>
-            <param name="username">Nombre de usuario.</param>
-            <param name="password">Contraseña del usuario.</param>
-            <returns>
-            Redirige al usuario a la página de inicio si la autenticación es exitosa.
-            Muestra un mensaje de error en la vista de inicio de sesión si la autenticación falla.
-            </returns>
-        </member>
-        <member name="M:RSQR.Controllers.AccountController.Logout">
-            <summary>
-            Cierra la sesión del usuario actual.
-            </summary>
-            <returns>Redirige al usuario a la vista de inicio de sesión.</returns>
         </member>
         <member name="T:RSQR.Controllers.HomeController">
             <summary>
@@ -188,40 +164,16 @@
             se bloquee y se use para inicializar el contexto.
             </remarks>
         </member>
-        <member name="T:RSQR.Migrations.newContainment">
+        <member name="T:RSQR.Migrations.MakeCincoMNullable">
             <inheritdoc />
         </member>
-        <member name="M:RSQR.Migrations.newContainment.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:RSQR.Migrations.MakeCincoMNullable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:RSQR.Migrations.newContainment.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:RSQR.Migrations.MakeCincoMNullable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:RSQR.Migrations.newContainment.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:RSQR.Migrations.d4d5fields">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.d4d5fields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.d4d5fields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.d4d5fields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:RSQR.Migrations.thirdStepData">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.thirdStepData.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.thirdStepData.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:RSQR.Migrations.thirdStepData.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:RSQR.Migrations.MakeCincoMNullable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:RSQR.Models.ConsecutivoArchivo">
@@ -331,120 +283,6 @@
             Esta propiedad calculada se usa para controlar condicionalmente la visualización
             del ID de solicitud en las vistas de error.
             </remarks>
-        </member>
-        <member name="T:RSQR.Models.PpmReport">
-            <summary>
-            Representa un reporte PPM (Parts Per Million) para el control de calidad y gestión de reclamos de clientes.
-            </summary>
-            <remarks>
-            Este modelo almacena información detallada sobre problemas de calidad reportados por clientes,
-            incluyendo investigación, responsabilidad y métricas de impacto.
-            </remarks>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.Id">
-            <summary>
-            Identificador único del reporte en la base de datos.
-            </summary>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.Fecha">
-            <summary>
-            Fecha de creación del reporte.
-            </summary>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.Linea">
-            <summary>
-            Línea de producción o área relacionada con el problema.
-            </summary>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.Customer">
-            <summary>
-            Nombre del cliente que reporta el problema.
-            </summary>
-            <remarks>
-            Campo obligatorio con longitud máxima de 100 caracteres.
-            </remarks>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.CustomerClaimNumber">
-            <summary>
-            Número de reclamo asignado por el cliente.
-            </summary>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.MotherFactory">
-            <summary>
-            Fábrica de origen del producto con problema.
-            </summary>
-            <remarks>
-            Longitud máxima de 100 caracteres.
-            </remarks>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.NumParteAfectado">
-            <summary>
-            Número de parte afectado (opcional).
-            </summary>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.CustomerPartNumber">
-            <summary>
-            Número de parte según el cliente.
-            </summary>
-            <remarks>
-            Longitud máxima de 100 caracteres.
-            </remarks>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.CuantosP">
-            <summary>
-            Cantidad de partes afectadas (opcional).
-            </summary>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.Lote">
-            <summary>
-            Lote o batch del producto con problema (opcional).
-            </summary>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.Tipo">
-            <summary>
-            Tipo de reporte según la clasificación interna.
-            </summary>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.Mileage">
-            <summary>
-            Kilometraje o horas de uso (para productos en servicio).
-            </summary>
-            <remarks>
-            Debe ser un valor positivo.
-            </remarks>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.TituloProblema">
-            <summary>
-            Título descriptivo del problema (opcional).
-            </summary>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.InvestigationReport">
-            <summary>
-            Reporte detallado de la investigación del problema.
-            </summary>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.DateOfClose">
-            <summary>
-            Fecha de cierre del reporte (opcional).
-            </summary>
-            <remarks>
-            Solo se completa cuando el caso está resuelto.
-            </remarks>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.ImpactoPPM">
-            <summary>
-            Indica si el problema impacta en las métricas PPM de la organización.
-            </summary>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.Comentarios">
-            <summary>
-            Comentarios adicionales sobre el caso (opcional).
-            </summary>
-        </member>
-        <member name="P:RSQR.Models.PpmReport.Responsabilidad">
-            <summary>
-            Determina la responsabilidad asignada por el análisis de calidad.
-            </summary>
         </member>
         <member name="T:RSQR.Models.TipoReporte">
             <summary>
@@ -877,16 +715,6 @@
             </summary>
             <returns>Objeto JSON con el valor PPM y la fecha de referencia.</returns>
         </member>
-        <member name="M:PPMController.GetPpmAnioFiscal">
-            <summary>
-            Obtiene el PPM acumulado para el año fiscal en curso.
-            </summary>
-            <remarks>
-            El año fiscal se considera desde el 1 de abril hasta el 31 de marzo.
-            Si la fecha actual es anterior al fin del año fiscal, se usa la fecha actual como límite.
-            </remarks>
-            <returns>Objeto JSON con el PPM y el rango de fechas del año fiscal.</returns>
-        </member>
         <member name="M:PPMController.ObtenerTotalCajasOracle(System.String,System.String,System.String)">
             <summary>
             Obtiene el total de cajas enviadas desde Oracle para una descripción o grupo de descripciones en un rango de fechas.
@@ -896,7 +724,7 @@
             <param name="fechaFin">Fecha final en formato <c>dd-MMM-yy</c>.</param>
             <returns>Total de cajas enviadas.</returns>
         </member>
-        <member name="M:PPMController.ObtenerSumaCuantosPSqlServer(System.String)">
+        <member name="M:PPMController.ObtenerSumaCuantosPSqlServer(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
             <summary>
             Obtiene la cantidad de piezas defectuosas desde SQL Server para una descripción.
             </summary>

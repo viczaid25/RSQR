@@ -596,12 +596,6 @@ C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\scopedcss\projectbundle
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\staticwebassets\msbuild.RSQR.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\staticwebassets\msbuild.RSQR.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\staticwebassets\msbuild.build.RSQR.props
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.RSQR.props
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.RSQR.props
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.csproj.Up2Date
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.dll
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\refint\RSQR.dll
@@ -609,4 +603,8 @@ C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.xml
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.pdb
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\RSQR.genruntimeconfig.cache
 C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\ref\RSQR.dll
-C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\dm45207\source\repos\RSQR\RSQR\obj\Debug\net8.0\staticwebassets.build.json.cache

@@ -136,11 +136,11 @@ const ReportEditManager = {
         });
 
         document.addEventListener('click', (e) => {
-            if (e.target.classList.contains(removeClass)) {
-                const row = e.target.closest(`.${sectionId}-dynamic-field-group`);
-                if (row && confirm('Are you sure you want to remove this item?')) {
-                    row.remove();
-                }
+            const btn = e.target.closest('.' + removeClass);
+            if (!btn) return;
+            const row = btn.closest(`.${sectionId}-dynamic-field-group`);
+            if (row && confirm('Are you sure you want to remove this item?')) {
+                row.remove();
             }
         });
     },
@@ -855,16 +855,7 @@ const ReportEditManager = {
 };
 
 // Inicialización cuando el DOM esté listo
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    setTimeout(() => {
-        if (window.reportEditInitialData) {
-            ReportEditManager.init(window.reportEditInitialData);
-        }
-    }, 1);
-} else {
-    document.addEventListener('DOMContentLoaded', function () {
-        if (window.reportEditInitialData) {
-            ReportEditManager.init(window.reportEditInitialData);
-        }
-    });
-}
+document.addEventListener('DOMContentLoaded', function () {
+  // Inicializa SIEMPRE; usa {} si no te pasaron índices desde Razor
+  ReportEditManager.init(window.reportEditInitialData || {});
+});

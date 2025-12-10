@@ -255,7 +255,10 @@ namespace RSQR.Migrations
             modelBuilder.Entity("RSQR.Models.PpmReport", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Comentarios")
                         .HasColumnType("nvarchar(max)");
@@ -303,6 +306,9 @@ namespace RSQR.Migrations
                     b.Property<string>("NumParteAfectado")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ReporteId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Responsabilidad")
                         .HasColumnType("int");
 
@@ -313,6 +319,9 @@ namespace RSQR.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ReporteId")
+                        .IsUnique();
 
                     b.ToTable("qcPpmReport", (string)null);
                 });
@@ -334,7 +343,7 @@ namespace RSQR.Migrations
                     b.Property<string>("Approval")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CincoM")
+                    b.Property<int?>("CincoM")
                         .HasColumnType("int");
 
                     b.Property<string>("Comentarios")
@@ -838,11 +847,13 @@ namespace RSQR.Migrations
 
             modelBuilder.Entity("RSQR.Models.PpmReport", b =>
                 {
-                    b.HasOne("RSQR.Models.Reporte", null)
+                    b.HasOne("RSQR.Models.Reporte", "Reporte")
                         .WithOne("PpmReport")
-                        .HasForeignKey("RSQR.Models.PpmReport", "Id")
+                        .HasForeignKey("RSQR.Models.PpmReport", "ReporteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Reporte");
                 });
 
             modelBuilder.Entity("RSQR.Models.Reporte", b =>
